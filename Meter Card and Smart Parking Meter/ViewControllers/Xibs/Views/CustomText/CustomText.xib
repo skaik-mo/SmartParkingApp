@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+            <connections>
+                <outlet property="cameraButton" destination="nqy-4g-oc2" id="SkM-ek-Hd4"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="NEW-Y6-CRu"/>
+                <outlet property="lineView" destination="fxa-OQ-OQr" id="Gmz-Uy-dhu"/>
+                <outlet property="textField" destination="oJM-AQ-15W" id="d4U-rU-MC7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="324" height="45"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7dM-7j-Pqz">
+                    <rect key="frame" x="0.0" y="0.0" width="324" height="45"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-IE-HCa">
+                            <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJM-AQ-15W">
+                                    <rect key="frame" x="0.0" y="0.0" width="279" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="000000"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingLeftCustom">
+                                            <real key="value" value="15"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="setGrayBackground:" destination="-1" eventType="editingDidEnd" id="dbU-ia-uHh"/>
+                                        <action selector="setGreenBackground:" destination="-1" eventType="editingDidBegin" id="Oof-qC-Vb8"/>
+                                    </connections>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqy-4g-oc2">
+                                    <rect key="frame" x="279" y="0.0" width="30" height="44"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="6Zv-8m-6Jm"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="ic_camera"/>
+                                </button>
+                            </subviews>
+                            <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="15"/>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxa-OQ-OQr">
+                            <rect key="frame" x="0.0" y="44" width="324" height="1"/>
+                            <color key="backgroundColor" name="EFEFEF"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="xeM-2F-577"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="FAFAFA"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7dM-7j-Pqz" secondAttribute="trailing" id="0gP-mk-a0c"/>
+                <constraint firstItem="7dM-7j-Pqz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8Vl-yk-9FI"/>
+                <constraint firstAttribute="bottom" secondItem="7dM-7j-Pqz" secondAttribute="bottom" id="YKS-ox-yfH"/>
+                <constraint firstItem="7dM-7j-Pqz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oi6-bF-whm"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-494.20289855072468" y="-305.35714285714283"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_camera" width="25" height="20"/>
+        <namedColor name="000000">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="EFEFEF">
+            <color red="0.93725490570068359" green="0.93725490570068359" blue="0.93725490570068359" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="FAFAFA">
+            <color red="0.98039215803146362" green="0.98039215803146362" blue="0.98039215803146362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParkingInfo" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+            <connections>
+                <outlet property="addressLabel" destination="AcV-Tr-cj4" id="LkJ-7j-Zdz"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="8df-5p-MuR"/>
+                <outlet property="distanceLabel" destination="D8B-ZZ-XCf" id="vau-Qf-BXE"/>
+                <outlet property="parkingImage" destination="wNh-bE-nus" id="gdF-No-yTd"/>
+                <outlet property="parkingNameLabel" destination="bHS-bX-ZfA" id="k3R-fw-Rjm"/>
+                <outlet property="perHourLabel" destination="6cD-0c-qtn" id="bQ3-oD-d9i"/>
+                <outlet property="rating1" destination="bSf-PN-fja" id="uek-B9-LV6"/>
+                <outlet property="rating2" destination="rV0-9C-zrE" id="SWN-pr-Nkz"/>
+                <outlet property="rating3" destination="4mZ-va-vxN" id="Nji-86-x6X"/>
+                <outlet property="rating4" destination="jqD-G6-5NP" id="74Z-aJ-H90"/>
+                <outlet property="rating5" destination="pQQ-Ye-R6S" id="bHi-UJ-VE2"/>
+                <outlet property="ratingLabel" destination="LlS-jU-4FB" id="hX8-Yg-vV6"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="336" height="140"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="6zL-SV-1X8">
+                    <rect key="frame" x="0.0" y="0.0" width="336" height="140"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oS0-wi-s93">
+                            <rect key="frame" x="15" y="14" width="306" height="68"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="wNh-bE-nus">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="wNh-bE-nus" secondAttribute="height" multiplier="1:1" id="IzL-8I-O4x"/>
+                                        <constraint firstAttribute="height" constant="40" id="jnI-hM-y01"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="20"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </imageView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="9Kl-yF-bEw">
+                                    <rect key="frame" x="56" y="0.0" width="250" height="68"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bSS-Vs-lm9">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="15"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Parking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHS-bX-ZfA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="116" height="15"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                                    <color key="textColor" name="000000"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8B-ZZ-XCf">
+                                                    <rect key="frame" x="198.5" y="0.0" width="51.5" height="15"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                                    <color key="textColor" name="000000"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="lwj-Ka-bhR">
+                                            <rect key="frame" x="0.0" y="19" width="250" height="49"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Iel-Ie-703">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="10"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fJI-69-vtn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="10"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSf-PN-fja">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
+                                                                    <color key="backgroundColor" name="3FBF66"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="bSf-PN-fja" secondAttribute="height" multiplier="1:1" id="ALl-xN-kIw"/>
+                                                                        <constraint firstAttribute="height" constant="10" id="KIV-ho-KfB"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rV0-9C-zrE">
+                                                                    <rect key="frame" x="14" y="0.0" width="10" height="10"/>
+                                                                    <color key="backgroundColor" name="3FBF66"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4mZ-va-vxN">
+                                                                    <rect key="frame" x="28" y="0.0" width="10" height="10"/>
+                                                                    <color key="backgroundColor" name="3FBF66"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqD-G6-5NP">
+                                                                    <rect key="frame" x="42" y="0.0" width="10" height="10"/>
+                                                                    <color key="backgroundColor" name="3FBF66"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQQ-Ye-R6S">
+                                                                    <rect key="frame" x="56" y="0.0" width="10" height="10"/>
+                                                                    <color key="backgroundColor" name="3FBF66"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.2/5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LlS-jU-4FB">
+                                                            <rect key="frame" x="74" y="0.0" width="176" height="10"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                                                            <color key="textColor" name="929292"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="address xsdc" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AcV-Tr-cj4">
+                                                    <rect key="frame" x="0.0" y="17" width="250" height="32"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                    <color key="textColor" name="929292"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="6oG-Qi-ht6">
+                            <rect key="frame" x="15" y="89" width="306" height="35"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Park Booking 500$ Per Hour" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cD-0c-qtn">
+                                    <rect key="frame" x="0.0" y="0.0" width="186" height="35"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                    <color key="textColor" name="000000"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4h-IA-EFu">
+                                    <rect key="frame" x="203" y="0.0" width="103" height="35"/>
+                                    <color key="backgroundColor" red="0.89803922176361084" green="0.89803922176361084" blue="0.89803922176361084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="UBj-N2-AL4"/>
+                                        <constraint firstAttribute="width" constant="103" id="dq3-b8-c5L"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Book now">
+                                        <color key="titleColor" name="000000"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="bookNowAction:" destination="-1" eventType="touchUpInside" id="rVk-lg-rD2"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="14" leading="15" bottom="16" trailing="15"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="17"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="6zL-SV-1X8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GvL-dU-ooY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6zL-SV-1X8" secondAttribute="bottom" id="hWx-0x-CZr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6zL-SV-1X8" secondAttribute="trailing" id="jrj-Ph-adz"/>
+                <constraint firstItem="6zL-SV-1X8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pPO-CU-8Au"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-494.20289855072468" y="-305.35714285714283"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_image" width="335" height="160"/>
+        <namedColor name="000000">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="3FBF66">
+            <color red="0.24705880880355835" green="0.74901962280273438" blue="0.40000003576278687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="929292">
+            <color red="0.57254904508590698" green="0.57254904508590698" blue="0.57254904508590698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

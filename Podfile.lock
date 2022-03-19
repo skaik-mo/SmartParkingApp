@@ -1,0 +1,32 @@
+PODS:
+  - GoogleMaps (6.0.1):
+    - GoogleMaps/Maps (= 6.0.1)
+  - GoogleMaps/Base (6.0.1)
+  - GoogleMaps/Maps (6.0.1):
+    - GoogleMaps/Base
+  - GooglePlaces (6.0.0)
+  - IQKeyboardManagerSwift (6.5.4)
+  - JTAppleCalendar (7.1.0)
+
+DEPENDENCIES:
+  - GoogleMaps (= 6.0.1)
+  - GooglePlaces (= 6.0.0)
+  - IQKeyboardManagerSwift (= 6.5.4)
+  - JTAppleCalendar (= 7.1)
+
+SPEC REPOS:
+  trunk:
+    - GoogleMaps
+    - GooglePlaces
+    - IQKeyboardManagerSwift
+    - JTAppleCalendar
+
+SPEC CHECKSUMS:
+  GoogleMaps: c213fc2334b7374144cede914da779b99be0ab74
+  GooglePlaces: c97d96ae68594acb64035c9ca9f26fbfc1d23af1
+  IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
+  JTAppleCalendar: 60cb4e6de41c8e204fa0e182b98b531debdc9443
+
+PODFILE CHECKSUM: 8f9aa78e086254619ae1e53b5efef47c02c9c6bc
+
+COCOAPODS: 1.11.2

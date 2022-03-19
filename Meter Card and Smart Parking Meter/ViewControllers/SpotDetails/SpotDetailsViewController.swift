@@ -1,0 +1,242 @@
+//  Skaik_mo
+//
+//  SpotDetailsViewController.swift
+//  Meter Card and Smart Parking Meter
+//
+//  Created by Mohammed Skaik on 15/03/2022.
+//
+
+import UIKit
+import JTAppleCalendar
+import GoogleMaps
+
+class SpotDetailsViewController: UIViewController {
+
+    @IBOutlet weak var parkingImage: UIImageView!
+    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var rating1: UIView!
+    @IBOutlet weak var rating2: UIView!
+    @IBOutlet weak var rating3: UIView!
+    @IBOutlet weak var rating4: UIView!
+    @IBOutlet weak var rating5: UIView!
+
+    @IBOutlet weak var calenderCollectionView: JTAppleCalendarView!
+
+    @IBOutlet weak var numberOfParking: NumberOfParking!
+
+    @IBOutlet weak var titleParkingLabel: UILabel!
+    @IBOutlet var monthTitle: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var pricePerHourLabel: UILabel!
+
+    var parking: Parking?
+
+    var selectedDates: [String] = [
+        "2022-03-01",
+        "2022-03-02",
+        "2022-03-03",
+        "2022-03-04",
+        "2022-03-05",
+        "2022-03-06"
+    ]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+        localized()
+        setupData()
+        fetchData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self._isHideNavigation = false
+        self._setTitleBackBarButton()
+    }
+
+    @IBAction func previousMonthAction(_ sender: Any) {
+//            calenderCollectionView.moveSection(_currentSection, toSection: _currentSection - 1)
+        guard let _currentSection = self.calenderCollectionView.currentSection(), 0 < _currentSection else { return }
+        moveSection(index: -1)
+    }
+
+    @IBAction func nextMonthAction(_ sender: Any) {
+        guard let _currentSection = self.calenderCollectionView.currentSection(), _currentSection < self.calenderCollectionView.numberOfSections - 1 else { return }
+        moveSection(index: 1)
+    }
+
+}
+
+extension SpotDetailsViewController {
+
+    func setupView() {
+        self.title = "Spot Details"
+
+        GoogleMapManager.initLoction(parkingLocation: parking, mapView: mapView)
+        setInfoParking()
+        numberOfParking.typeParkingView = .border
+        numberOfParking.title.text = "Available Spot"
+
+        setCalenderCollectionView()
+
+    }
+
+    func localized() {
+
+    }
+
+    func setupData() {
+
+    }
+
+    func fetchData() {
+
+    }
+
+}
+
+
+extension SpotDetailsViewController {
+    func setInfoParking() {
+
+        guard let _parking = self.parking else { return }
+        setParkingImage(parking: _parking)
+        setInfo(parking: _parking)
+        setDistance(parking: _parking)
+        setRating(parking: _parking)
+
+    }
+
+    private func setParkingImage(parking: Parking) {
+        if let _image = parking.image {
+            self.parkingImage.image = _image
+            return
+        }
+        // if no image set default image
+    }
+
+    private func setInfo(parking: Parking) {
+        if let _name = parking.name, let _pricePerHour = parking.pricePerHour {
+            self.titleParkingLabel.text = _name
+            self.pricePerHourLabel.text = "\(_pricePerHour._toString)$ Per Hour"
+        }
+    }
+
+    private func setDistance(parking: Parking) {
+        if let _latitude = parking.latitude, let _longitude = parking.longitude {
+            let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)
+            let distance = GoogleMapManager.getDistance(toLocation: toLocation)
+            self.distanceLabel.text = "\(distance._toString(number: 2))km Nearby"
+        }
+    }
+
+    private func setRating(parking: Parking) {
+        if let _rating = parking.rating {
+            self.ratingLabel.text = "\(_rating._toString)/5"
+            setRatingViews(rating: Int(round(_rating)))
+            return
+        }
+        // if no rating set zero
+        setRatingViews(rating: 0)
+    }
+
+    private func setRatingViews(rating: Int) {
+        let ratingViews = [self.rating1, self.rating2, self.rating3, self.rating4, self.rating5]
+        if rating == 0 {
+            ratingViews.forEach { rating in
+                rating?.backgroundColor = "DAD9E2"._hexColor
+            }
+        } else {
+            for index in 0..<ratingViews.count {
+                if index < rating {
+                    ratingViews[index]?.backgroundColor = "3FBF66"._hexColor
+                } else {
+                    ratingViews[index]?.backgroundColor = "DAD9E2"._hexColor
+                }
+            }
+
+        }
+    }
+
+}
+
+extension SpotDetailsViewController {
+    func setCalenderCollectionView() {
+        self.calenderCollectionView._registerCell = DateCell.self
+        calenderCollectionView.scrollDirection = .horizontal
+        calenderCollectionView.scrollingMode = .stopAtEachCalendarFrame
+        calenderCollectionView.showsHorizontalScrollIndicator = false
+
+//        self.setTitleCalender(date: selectedDates.first?._toDate)
+//        calenderCollectionView.scrollToSegment(.next)      // Scrolls to next
+//        calenderCollectionView.scrollToSegment(.previous)  // Scrolls to previous
+//        calenderCollectionView.scrollToSegment(.start)     // Scrolls to start of calendar
+//        calenderCollectionView.scrollToSegment(.e nd)       // Scrolls to end of calendar
+
+//        calenderCollectionView.isRangeSelectionUsed = true
+//        calenderCollectionView.allowsMultipleSelection = true
+    }
+
+    func setTitleCalender(date: Date?) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let _date = date, let _stringData = formatter.date(from: _date._stringData) else { return }
+
+        let currentCalendar = Calendar.current
+        let monthFormatter = DateFormatter()
+        let year = currentCalendar.component(.year, from: _stringData)
+        let month = currentCalendar.component(.month, from: _date)
+        let monthName = monthFormatter.monthSymbols[month - 1]
+        self.monthTitle.text = "\(monthName) \(year)"
+    }
+
+    func moveSection(index: Int) {
+        let visibleItems: NSArray = self.calenderCollectionView.indexPathsForVisibleItems as NSArray
+        let currentItem = visibleItems.object(at: 0) as? IndexPath
+        if let _currentSection = currentItem?.section {
+            let nextSection: IndexPath = IndexPath(item: 0, section: _currentSection + index)
+            self.calenderCollectionView.scrollToItem(at: nextSection, at: .right, animated: true)
+        }
+//        self.calendarDidScroll(calenderCollectionView)
+    }
+
+}
+
+extension SpotDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
+
+    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+
+        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: DateCell._id, for: indexPath) as! DateCell
+        cell.index = indexPath.row
+        cell.cellState = cellState
+        cell.selectedDates = selectedDates
+        cell.configerCell()
+//        self.calendar(calendar, didScrollToDateSegmentWith: calendar.visibleDates())
+//        self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
+        self.calendarDidScroll(calenderCollectionView)
+
+        return cell
+    }
+
+    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy MM dd"
+        let endDate = Date()
+
+        if let _startDate = formatter.date(from: "2022 01 01") {
+            let startDate = _startDate
+            return ConfigurationParameters(startDate: startDate, endDate: endDate)
+        }
+        return ConfigurationParameters(startDate: endDate, endDate: endDate)
+    }
+
+    func calendarDidScroll(_ calendar: JTAppleCalendarView) {
+        setTitleCalender(date: calendar.visibleDates().monthDates.last?.date)
+    }
+
+    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+    }
+
+}

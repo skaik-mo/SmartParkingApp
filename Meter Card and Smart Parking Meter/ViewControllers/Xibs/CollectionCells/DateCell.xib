@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DateCell" id="gTV-IL-0wX" customClass="DateCell" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="dKS-Na-PEG">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqb-Hl-qIY">
+                                <rect key="frame" x="0.0" y="2" width="25" height="46"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAB-uG-vpv">
+                                <rect key="frame" x="25" y="2" width="25" height="46"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <directionalEdgeInsets key="directionalLayoutMargins" top="2" leading="0.0" bottom="2" trailing="0.0"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="17"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WDR-7w-HOv">
+                        <rect key="frame" x="5" y="5" width="40" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aK7-N5-tqh">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="929292"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.64313725490196072" green="0.8784313725490196" blue="0.71764705882352942" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="aK7-N5-tqh" firstAttribute="leading" secondItem="WDR-7w-HOv" secondAttribute="leading" id="5zJ-rW-fCe"/>
+                            <constraint firstAttribute="bottom" secondItem="aK7-N5-tqh" secondAttribute="bottom" id="B97-fF-uB9"/>
+                            <constraint firstAttribute="trailing" secondItem="aK7-N5-tqh" secondAttribute="trailing" id="IfD-5J-pP1"/>
+                            <constraint firstAttribute="height" constant="40" id="XRr-E2-b8V"/>
+                            <constraint firstItem="aK7-N5-tqh" firstAttribute="top" secondItem="WDR-7w-HOv" secondAttribute="top" id="cjb-Jx-G7S"/>
+                            <constraint firstAttribute="width" secondItem="WDR-7w-HOv" secondAttribute="height" multiplier="1:1" id="srv-90-aPx"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dKS-Na-PEG" secondAttribute="trailing" id="6ah-YT-PN7"/>
+                <constraint firstItem="WDR-7w-HOv" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="B0L-yX-Qq4"/>
+                <constraint firstAttribute="bottom" secondItem="dKS-Na-PEG" secondAttribute="bottom" id="J1f-K6-sVR"/>
+                <constraint firstItem="WDR-7w-HOv" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="NoW-xo-fTn"/>
+                <constraint firstItem="dKS-Na-PEG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aB6-OE-Lwv"/>
+                <constraint firstItem="dKS-Na-PEG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sPH-rI-IRT"/>
+            </constraints>
+            <connections>
+                <outlet property="centerView" destination="WDR-7w-HOv" id="sgK-Gj-NzU"/>
+                <outlet property="dateLabel" destination="aK7-N5-tqh" id="hbj-LJ-ax3"/>
+                <outlet property="leftView" destination="wqb-Hl-qIY" id="Ydq-ln-eqX"/>
+                <outlet property="rightView" destination="nAB-uG-vpv" id="RLx-HC-y5f"/>
+            </connections>
+            <point key="canvasLocation" x="-358" y="-4"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="929292">
+            <color red="0.57254904508590698" green="0.57254904508590698" blue="0.57254904508590698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
