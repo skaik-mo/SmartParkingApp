@@ -33,7 +33,7 @@ class GoogleMapManager {
             setMarker(mapView: mapView, parkingLocation: location, icon: "ic_parking"._toImage)
         }
 
-//        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { timer in
+//        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
         currentLocation(mapView: mapView, locationManager: locationManager)
 //        }
 //        moveCamera(mapView: mapView, parkingLocation: parkingLocations.first)
@@ -41,7 +41,7 @@ class GoogleMapManager {
 
     static func initLoction(parkingLocation: Parking?, mapView: GMSMapView) {
         setMarker(mapView: mapView, parkingLocation: parkingLocation, icon: "ic_parking"._toImage)
-        moveCamera(mapView: mapView, parkingLocation: parkingLocation)
+        moveCamera(mapView: mapView, parkingLocation: parkingLocation, zoom: 16)
     }
 
     static func currentLocation(mapView: GMSMapView, locationManager: CLLocationManager?) {
@@ -54,10 +54,10 @@ class GoogleMapManager {
         moveCamera(mapView: mapView, parkingLocation: currentLocation)
     }
 
-    static func moveCamera(mapView: GMSMapView, parkingLocation: Parking?) {
+    static func moveCamera(mapView: GMSMapView, parkingLocation: Parking?, zoom: Float = 14) {
         guard let _parkingLocation = parkingLocation, let _latitude = _parkingLocation.latitude, let _longitude = _parkingLocation.longitude else { return }
 
-        let camera = GMSCameraPosition.camera(withLatitude: _latitude, longitude: _longitude, zoom: 17.0)
+        let camera = GMSCameraPosition.camera(withLatitude: _latitude, longitude: _longitude, zoom: zoom)
         mapView.camera = camera
     }
 

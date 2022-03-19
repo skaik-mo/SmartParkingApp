@@ -169,14 +169,10 @@ extension SpotDetailsViewController {
         calenderCollectionView.scrollingMode = .stopAtEachCalendarFrame
         calenderCollectionView.showsHorizontalScrollIndicator = false
 
-//        self.setTitleCalender(date: selectedDates.first?._toDate)
-//        calenderCollectionView.scrollToSegment(.next)      // Scrolls to next
-//        calenderCollectionView.scrollToSegment(.previous)  // Scrolls to previous
-//        calenderCollectionView.scrollToSegment(.start)     // Scrolls to start of calendar
-//        calenderCollectionView.scrollToSegment(.e nd)       // Scrolls to end of calendar
-
-//        calenderCollectionView.isRangeSelectionUsed = true
-//        calenderCollectionView.allowsMultipleSelection = true
+        // Is this method correct to use ??!
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            self.moveSection(index: self.calenderCollectionView.numberOfSections - 1)
+        }
     }
 
     func setTitleCalender(date: Date?) {
@@ -199,7 +195,6 @@ extension SpotDetailsViewController {
             let nextSection: IndexPath = IndexPath(item: 0, section: _currentSection + index)
             self.calenderCollectionView.scrollToItem(at: nextSection, at: .right, animated: true)
         }
-//        self.calendarDidScroll(calenderCollectionView)
     }
 
 }
