@@ -32,6 +32,11 @@ class FiltersViewController: UIViewController {
     @IBAction func searchAction(_ sender: Any) {
     }
     
+    @IBAction func dismissViewAction(_ sender: Any) {
+        self._dismissTopToBottom()
+        self._dismissVC()
+    }
+    
 
 }
 

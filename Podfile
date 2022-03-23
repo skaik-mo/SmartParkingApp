@@ -10,7 +10,6 @@ pod 'IQKeyboardManagerSwift', '6.5.4'
 pod 'GoogleMaps', '6.0.1'
 #pod 'GooglePlaces', '6.0.0'
 pod 'JTAppleCalendar', '7.1'
-#pod 'MMBAlertsPickers'
-pod 'HCSStarRatingView', '~> 1.5'
+pod 'Cosmos', '23.0'
 
 end

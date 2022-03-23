@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import HCSStarRatingView
+import Cosmos
 
 class RatingViewController: UIViewController {
 
-    @IBOutlet weak var ratingView: HCSStarRatingView!
+    @IBOutlet weak var ratingView: CosmosView!
     
     @IBOutlet weak var greenButton: GreenButton!
     
@@ -32,11 +32,10 @@ class RatingViewController: UIViewController {
 extension RatingViewController {
 
     func setupView() {
-//        self.ratingView.allowsHalfStars = true
-//        self.ratingView.accurateHalfStars = true
-        
+        ratingView.settings.fillMode = .full
+
         self.greenButton.handleButton = {
-            debugPrint("Rating: \(self.ratingView.value)")
+            debugPrint("Rating: \(self.ratingView.rating)")
             self._dismissVC()
         }
     }

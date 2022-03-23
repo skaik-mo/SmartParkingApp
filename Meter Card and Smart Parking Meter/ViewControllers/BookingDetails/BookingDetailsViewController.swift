@@ -68,6 +68,9 @@ extension BookingDetailsViewController {
         self.selectTime.title.text = "Time"
         self.selectTime.isHiddenIcons = true
 
+        self.greenButton.handleButton = {
+            self._pop()
+        }
       
     }
 

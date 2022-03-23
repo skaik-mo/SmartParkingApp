@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 extension UIStoryboard {
-    static let _mainStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
     
     func instantiateVC(withIdentifier identifier: String) -> UIViewController? {
          if let identifiersList = self.value(forKey: "identifierToNibNameMap") as? [String: Any] {

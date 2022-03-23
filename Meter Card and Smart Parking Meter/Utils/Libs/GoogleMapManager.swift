@@ -17,7 +17,9 @@ class GoogleMapManager {
     static func initLoctionManager(locationManager: CLLocationManager?, mapView: GMSMapView) {
         guard let _locationManager = locationManager else { return }
         _locationManager.requestWhenInUseAuthorization()
-
+        
+        mapView.clear()
+        
         self.parkingLocations = [
             Parking.init(title: "Prospect Garden", image: "demo"._toImage, rating: 0, pricePerHour: 11, latitude: 51.5125, longitude: -0.1395),
             Parking.init(title: "City Square Gardens", image: "ic_image"._toImage, rating: 1.1, pricePerHour: 22.2, latitude: 51.5127, longitude: -0.135),
@@ -43,10 +45,9 @@ class GoogleMapManager {
         moveCamera(mapView: mapView, parkingLocation: parkingLocation, zoom: 16)
     }
 
-    static func currentLocation(mapView: GMSMapView, locationManager: CLLocationManager?) {
+    private static func currentLocation(mapView: GMSMapView, locationManager: CLLocationManager?) {
 
         guard let _locationManager = locationManager else { return }
-
         let currentLocation = Parking.init(title: "Current Location", latitude: _locationManager.location?.coordinate.latitude, longitude: _locationManager.location?.coordinate.longitude)
 
         setMarker(mapView: mapView, parkingLocation: currentLocation, icon: "ic_currentMarker"._toImage)
@@ -76,8 +77,8 @@ class GoogleMapManager {
     }
 
     static func getDistance(toLocation: CLLocation) -> Double {
-        let vc = HomeViewController._storyborad as? HomeViewController
-        let fromLocation = vc?.locationManager.location
+        let vc: HomeViewController = HomeViewController.instantiateVC(storyboard: HomeViewController()._userStoryboard)
+        let fromLocation = vc.locationManager.location
         if let _fromLocation = fromLocation {
             let distance = _fromLocation.distance(from: toLocation) / 1000
 //            print(String(format: "The distance to my buddy is %.01fkm", distance))

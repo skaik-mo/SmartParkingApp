@@ -40,16 +40,19 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func filtersAction(_ sender: Any) {
-        FiltersViewController._presentVC()
+        self._presentTopToBottom()
+        let vc: FiltersViewController = FiltersViewController.instantiateVC(storyboard: self._userStoryboard)
+        vc._presentVC()
 
     }
     @IBAction func currentLocationAction(_ sender: Any) {
-        GoogleMapManager.currentLocation(mapView: mapView, locationManager: locationManager)
-//        AlertViewController._presentVC()
+//        GoogleMapManager.currentLocation(mapView: mapView, locationManager: locationManager)
+        GoogleMapManager.initLoctionManager(locationManager: locationManager, mapView: mapView)
     }
     
     @IBAction func profileAction(_ sender: Any) {
-        ProfileViewController._push()
+        let vc: ProfileViewController = ProfileViewController.instantiateVC(storyboard: self._authStoryboard)
+        vc._push()
     }
     
 
@@ -92,12 +95,13 @@ extension HomeViewController: GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard marker.position.latitude != locationManager.location?.coordinate.latitude,
+              marker.position.latitude != locationManager.location?.coordinate.latitude else { return false}
         
         GoogleMapManager.parkingLocations.forEach { parking in
             if marker.position.latitude == parking.latitude, marker.position.longitude == parking.longitude, marker.title == parking.name {
                 self.parkingInfo.parking = parking
                 self.parkingInfo.setUpView()
-                return
             }
         }
         self.isShowParkingInfo = true

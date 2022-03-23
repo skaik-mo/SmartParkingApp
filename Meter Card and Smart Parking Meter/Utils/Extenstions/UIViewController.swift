@@ -8,32 +8,18 @@
 import Foundation
 import UIKit
 
+//    class func _push22<T: UIViewController>(_ storyboard: UIStoryboard? = nil, _ handle: ((_ viewController: T) -> Void)? = nil) {
+//        guard let vc = storyboard?.instantiateVC(withIdentifier: self._id) as? T else {
+//            fatalError("Couldn't find UIViewController for \(self._id), make sure the view controller is created")
+//        }
+//
+//        handle?((storyboard?.instantiateVC(withIdentifier: self._id) as? T)!)
+//        AppDelegate.shared?.rootNavigationController?.pushViewController(vc, animated: true)
+//    }
+
+//**********************<< Transfers Shortcuts >>**********************
 extension UIViewController {
-
-    class var _storyborad: UIViewController {
-        if let vc = UIStoryboard._mainStoryboard.instantiateVC(withIdentifier: self._id) {
-            return vc
-        }
-        return UIViewController()
-    }
-
-    var _screenHeight: CGFloat {
-        return UIScreen.main.bounds.height
-    }
-
-    var _screenWidth: CGFloat {
-        return UIScreen.main.bounds.width
-    }
-
-    var _isHideNavigation: Bool {
-        set {
-            self.navigationController?.setNavigationBarHidden(newValue, animated: true)
-        }
-        get {
-            return self.navigationController?.isNavigationBarHidden ?? false
-        }
-    }
-
+    
     var _topMostViewController: UIViewController? {
         if let navigationController = self as? UINavigationController {
             return navigationController.topViewController?._topMostViewController
@@ -53,51 +39,73 @@ extension UIViewController {
             return self
         }
     }
-
-    func _getStatusBarHeight() -> CGFloat {
-        var statusBarHeight: CGFloat = 0
-        if #available(iOS 13.0, *) {
-            let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
-            statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
-        } else {
-            statusBarHeight = UIApplication.shared.statusBarFrame.height
+    
+    class func instantiateVC<T: UIViewController>(storyboard: UIStoryboard) -> T {
+        guard let vc = storyboard.instantiateVC(withIdentifier: self._id) as? T else {
+            fatalError("Couldn't find UIViewController for \(self._id), make sure the view controller is created")
         }
-        return statusBarHeight
+        return vc
+
     }
 
-    func _setTitleBackBarButton() {
-        navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        navigationController?.navigationBar.tintColor = "000000"._hexColor
-    }
-    
-    class func _push(_ handle: ((_ viewController: UIViewController) -> Void)? = nil) {
-        let vc = Self._storyborad
-        handle?(vc)
-        AppDelegate.shared?.rootNavigationController?.pushViewController(vc, animated: true)
-    }
-    
-    class func _rootPush() {
-        AppDelegate.shared?.rootNavigationController?.setViewControllers([Self._storyborad], animated: true)
+    func _rootPush() {
+        AppDelegate.shared?.rootNavigationController?.setViewControllers([self], animated: true)
     }
 
-    class func _presentVC(_ handle: ((_ viewController: UIViewController) -> Void)? = nil) {
-        let vc = Self._storyborad
-        handle?(vc)
-        AppDelegate.shared?.rootNavigationController?.present(vc, animated: true, completion: nil)
-    }
-    
-    func _pop() {
-        AppDelegate.shared?.rootNavigationController?.popViewController(animated: true)
+    func _push() {
+        AppDelegate.shared?.rootNavigationController?.pushViewController(self, animated: true)
     }
 
     func _presentVC() {
         AppDelegate.shared?.rootNavigationController?.present(self, animated: true, completion: nil)
     }
 
+    func _pop() {
+        AppDelegate.shared?.rootNavigationController?.popViewController(animated: true)
+    }
+
     func _dismissVC() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func _presentTopToBottom() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromBottom
+        view.window!.layer.add(transition, forKey: kCATransition)
+    }
 
+    func _dismissTopToBottom() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromTop
+        view.window!.layer.add(transition, forKey: kCATransition)
+    }
+    
+    @IBAction func _popViewController(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func _popViewControllerWithoutAnimated(_ sender: Any) {
+        self.navigationController?.popViewController(animated: false)
+    }
+
+    @IBAction func _dismissViewController(_ sender: Any) {
+        self._dismissVC()
+    }
+
+    @IBAction func _dismissViewControllerWithoutAnimated(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+
+}
+
+//**********************<< Alerts Shortcuts >>**********************
+extension UIViewController {
     func _showAlertOKAndCancel(title: String?, message: String?) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         let okayAction = UIAlertAction.init(title: "OK", style: .default) { action in
@@ -159,21 +167,41 @@ extension UIViewController {
         alert.addAction(cancelAction)
         alert._presentVC()
     }
+}
 
-    @IBAction func _popViewController(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+extension UIViewController {
+
+    var _screenHeight: CGFloat {
+        return UIScreen.main.bounds.height
     }
 
-    @IBAction func _popViewControllerWithoutAnimated(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+    var _screenWidth: CGFloat {
+        return UIScreen.main.bounds.width
     }
 
-    @IBAction func _dismissViewController(_ sender: Any) {
-        self._dismissVC()
+    var _isHideNavigation: Bool {
+        set {
+            self.navigationController?.setNavigationBarHidden(newValue, animated: true)
+        }
+        get {
+            return self.navigationController?.isNavigationBarHidden ?? false
+        }
+    }
+    
+    func _setTitleBackBarButton() {
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = "000000"._hexColor
     }
 
-    @IBAction func _dismissViewControllerWithoutAnimated(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+    func _getStatusBarHeight() -> CGFloat {
+        var statusBarHeight: CGFloat = 0
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+            statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        } else {
+            statusBarHeight = UIApplication.shared.statusBarFrame.height
+        }
+        return statusBarHeight
     }
 
 //    public static func _isEmailValid(emailAddress:String) -> Bool {

@@ -50,7 +50,8 @@ extension MainNavigationController {
 extension MainNavigationController {
 
     func setRoot() {
-        GoSignInOrUpViewController._rootPush()
+        let vc: GoSignInOrUpViewController = GoSignInOrUpViewController.instantiateVC(storyboard: self._authStoryboard)
+        vc._rootPush()
     }
 
     func setProperties() {
@@ -73,7 +74,7 @@ extension MainNavigationController {
         self.navigationBar.standardAppearance = appearance
         self.navigationBar.scrollEdgeAppearance = appearance
     }
-    
+
 }
 
 //
@@ -92,4 +93,4 @@ extension MainNavigationController {
 //    }
 //    return nil
 //  }
-//} 
+//}

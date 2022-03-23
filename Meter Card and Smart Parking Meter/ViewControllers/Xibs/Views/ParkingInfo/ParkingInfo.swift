@@ -14,7 +14,7 @@ class ParkingInfo: UIView {
     @IBOutlet weak var contentView: UIView!
 
     @IBOutlet weak var ratingView: Rating!
-    
+
     @IBOutlet weak var parkingImage: UIImageView!
 
     @IBOutlet weak var distanceLabel: UILabel!
@@ -47,10 +47,9 @@ class ParkingInfo: UIView {
     }
 
     @IBAction func bookNowAction(_ sender: Any) {
-        SpotDetailsViewController._push { viewController in
-            let vc = viewController as? SpotDetailsViewController
-            vc?.parking = self.parking
-        }
+        let vc: SpotDetailsViewController = SpotDetailsViewController.instantiateVC(storyboard: self._userStoryboard)
+        vc.parking = self.parking
+        vc._push()
 
     }
 
@@ -89,6 +88,6 @@ extension ParkingInfo {
         }
     }
 
-   
+
 
 }

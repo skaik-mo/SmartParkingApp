@@ -51,7 +51,8 @@ class SpotDetailsViewController: UIViewController {
     }
 
     @IBAction func setRatingAction(_ sender: Any) {
-        RatingViewController._presentVC()
+        let vc: RatingViewController = RatingViewController.instantiateVC(storyboard: self._userStoryboard)
+        vc._presentVC()
     }
     
     @IBAction func previousMonthAction(_ sender: Any) {
@@ -66,10 +67,9 @@ class SpotDetailsViewController: UIViewController {
     }
 
     @IBAction func bookNowAction(_ sender: Any) {
-        SubmitBookingViewController._presentVC { viewController in
-            let vc = viewController as? SubmitBookingViewController
-            vc?.parking = self.parking
-        }
+        let vc: SubmitBookingViewController = SubmitBookingViewController.instantiateVC(storyboard: self._userStoryboard)
+        vc.parking = self.parking
+        vc._presentVC()
     }
 
 }

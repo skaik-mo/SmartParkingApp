@@ -25,6 +25,9 @@
 		E77353C627EB80AD0065D34B /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77353C527EB80AD0065D34B /* DatePickerViewController.swift */; };
 		E77353C827EB82BB0065D34B /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77353C727EB82BB0065D34B /* UIAlertController+Extensions.swift */; };
 		E77353CA27EB842C0065D34B /* UIViewEXForDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77353C927EB842C0065D34B /* UIViewEXForDatePicker.swift */; };
+		E77353CD27EBB0CC0065D34B /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77353CC27EBB0CC0065D34B /* Auth.storyboard */; };
+		E77353CF27EBB6680065D34B /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77353CE27EBB6680065D34B /* User.storyboard */; };
+		E77353D127EBB68B0065D34B /* Business.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77353D027EBB68B0065D34B /* Business.storyboard */; };
 		E77F5FCD27E07E60009B1AA2 /*  ParkingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */; };
 		E77F5FD027E08F16009B1AA2 /* SpotDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */; };
 		E77F5FD427E09ED2009B1AA2 /* ParkingOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */; };
@@ -97,6 +100,9 @@
 		E77353C527EB80AD0065D34B /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		E77353C727EB82BB0065D34B /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		E77353C927EB842C0065D34B /* UIViewEXForDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewEXForDatePicker.swift; sourceTree = "<group>"; };
+		E77353CC27EBB0CC0065D34B /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		E77353CE27EBB6680065D34B /* User.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
+		E77353D027EBB68B0065D34B /* Business.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Business.storyboard; sourceTree = "<group>"; };
 		E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ParkingLocation.swift"; sourceTree = "<group>"; };
 		E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailsViewController.swift; sourceTree = "<group>"; };
 		E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingOwner.swift; sourceTree = "<group>"; };
@@ -420,8 +426,11 @@
 		E7BFE00027D600F700F80180 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				E7BFDFF027D6003800F80180 /* Main.storyboard */,
 				E7BFDFF527D6003800F80180 /* LaunchScreen.storyboard */,
+				E7BFDFF027D6003800F80180 /* Main.storyboard */,
+				E77353CC27EBB0CC0065D34B /* Auth.storyboard */,
+				E77353CE27EBB6680065D34B /* User.storyboard */,
+				E77353D027EBB68B0065D34B /* Business.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -660,17 +669,20 @@
 				E7CF568B27E9AFE3001997CA /* MessageTableViewCell.xib in Resources */,
 				E7F1FD9A27E9FF4200FE55E7 /* Rating.xib in Resources */,
 				E7BCC99D27E4C48400C35AE2 /* ParkingInfo.xib in Resources */,
+				E77353CD27EBB0CC0065D34B /* Auth.storyboard in Resources */,
 				E722DFDA27EB1BEF00CD2C60 /* BookingTableViewCell.xib in Resources */,
 				E7BFDFF727D6003800F80180 /* LaunchScreen.storyboard in Resources */,
 				E7F1FD9527E9D32300FE55E7 /* FavoriteTableViewCell.xib in Resources */,
 				E7BFDFF427D6003800F80180 /* Assets.xcassets in Resources */,
 				E708599A27DF4588000FCE7B /* SelectDateOrTime.xib in Resources */,
 				E7BFDFF227D6003800F80180 /* Main.storyboard in Resources */,
+				E77353D127EBB68B0065D34B /* Business.storyboard in Resources */,
 				E79A75B727E8DC7E005AAC92 /* ProfileButton.xib in Resources */,
 				E7BFE02027D6122E00F80180 /* GreenButton.xib in Resources */,
 				E7BFE02F27D6320200F80180 /* CustomText.xib in Resources */,
 				E77F5FDA27E0A214009B1AA2 /* NumberOfParking.xib in Resources */,
 				E77F5FE127E0AC9C009B1AA2 /* DateCell.xib in Resources */,
+				E77353CF27EBB6680065D34B /* User.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,9 +956,10 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Meter Card and Smart Parking Meter/SupprorttingFiles/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to see your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Auth;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -975,9 +988,10 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Meter Card and Smart Parking Meter/SupprorttingFiles/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to see your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = Auth;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

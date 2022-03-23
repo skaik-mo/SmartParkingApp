@@ -20,6 +20,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var plateNumberText: CustomText!
     @IBOutlet weak var drivingLicenseText: CustomText!
     
+    var user = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -33,7 +35,8 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func goHomeScreenAction(_ sender: Any) {
-        HomeViewController._rootPush()
+        let vc: HomeViewController = HomeViewController.instantiateVC(storyboard: self._userStoryboard)
+        vc._rootPush()
     }
     
 }

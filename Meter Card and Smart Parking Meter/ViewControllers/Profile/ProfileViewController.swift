@@ -40,7 +40,8 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func editProfileAction(_ sender: Any) {
-        EditProfileViewController._push()
+        let vc: EditProfileViewController = EditProfileViewController.instantiateVC(storyboard: self._authStoryboard)
+        vc._push()
     }
 
 }
@@ -51,24 +52,26 @@ extension ProfileViewController {
         self.title = "My Profile"
 
         self.messageButton.handleButton = {
-            TableViewController._push { viewController in
-                let vc = viewController as? TableViewController
-                vc?.typeView = .Messages
-            }
+            let vc: TableViewController = TableViewController.instantiateVC(storyboard: self._userStoryboard)
+            vc.typeView = .Messages
+            vc._push()
         }
+        
         self.favoritesButton.handleButton = {
-            TableViewController._push { viewController in
-                let vc = viewController as? TableViewController
-                vc?.typeView = .Favorites
-            }        }
-        self.myBookingsButton.handleButton = {
-            TableViewController._push { viewController in
-                let vc = viewController as? TableViewController
-                vc?.typeView = .Bookings
-            }
+            let vc: TableViewController = TableViewController.instantiateVC(storyboard: self._userStoryboard)
+            vc.typeView = .Favorites
+            vc._push()
         }
+        
+        self.myBookingsButton.handleButton = {
+            let vc: TableViewController = TableViewController.instantiateVC(storyboard: self._userStoryboard)
+            vc.typeView = .Bookings
+            vc._push()
+        }
+        
         self.changePasswordButton.handleButton = {
-            PasswordViewController._push()
+            let vc: PasswordViewController = PasswordViewController.instantiateVC(storyboard: self._authStoryboard)
+            vc._push()
         }
     }
 
