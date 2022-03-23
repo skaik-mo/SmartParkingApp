@@ -79,7 +79,7 @@ extension SpotDetailsViewController {
     func setupView() {
         self.title = "Spot Details"
 
-        GoogleMapManager.initLoction(parkingLocation: parking, mapView: mapView)
+        GoogleMapManager.initParkingLoction(parkingLocation: parking, mapView: mapView)
         setInfoParking()
         numberOfParking.typeParkingView = .border
         numberOfParking.title.text = "Available Spot"

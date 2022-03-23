@@ -27,7 +27,7 @@ class GoogleMapManager {
             Parking.init(title: "My Parking", image: "demo"._toImage, rating: 4.5, pricePerHour: 90, latitude: 51.5068, longitude: -0.1338)
         ]
 
-        mapView.isMyLocationEnabled = true
+//        mapView.isMyLocationEnabled = true
 
         self.parkingLocations.forEach { location in
             setMarker(mapView: mapView, parkingLocation: location, icon: "ic_parking"._toImage)
@@ -36,10 +36,9 @@ class GoogleMapManager {
 //        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { timer in
         currentLocation(mapView: mapView, locationManager: locationManager)
 //        }
-//        moveCamera(mapView: mapView, parkingLocation: parkingLocations.first)
     }
 
-    static func initLoction(parkingLocation: Parking?, mapView: GMSMapView) {
+    static func initParkingLoction(parkingLocation: Parking?, mapView: GMSMapView) {
         setMarker(mapView: mapView, parkingLocation: parkingLocation, icon: "ic_parking"._toImage)
         moveCamera(mapView: mapView, parkingLocation: parkingLocation, zoom: 16)
     }
@@ -50,7 +49,7 @@ class GoogleMapManager {
 
         let currentLocation = Parking.init(title: "Current Location", latitude: _locationManager.location?.coordinate.latitude, longitude: _locationManager.location?.coordinate.longitude)
 
-        setMarker(mapView: mapView, parkingLocation: currentLocation)
+        setMarker(mapView: mapView, parkingLocation: currentLocation, icon: "ic_currentMarker"._toImage)
         moveCamera(mapView: mapView, parkingLocation: currentLocation)
     }
 

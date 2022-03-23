@@ -49,7 +49,7 @@ extension BookingDetailsViewController {
     func setupView() {
         self.title = "Booking Details"
         
-        GoogleMapManager.initLoction(parkingLocation: parking, mapView: mapView)
+        GoogleMapManager.initParkingLoction(parkingLocation: parking, mapView: mapView)
         
         self.ratingView.setUpRating(parking: parking, space: 12)
         
