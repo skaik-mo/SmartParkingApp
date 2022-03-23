@@ -22,6 +22,9 @@
 		E758B45427DF7345008931AD /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = E758B45327DF7345008931AD /* Float.swift */; };
 		E76627C527E85ECF00848233 /* AlertPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76627C427E85ECF00848233 /* AlertPicker.swift */; };
 		E76627C727E885E600848233 /* SubmitBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76627C627E885E600848233 /* SubmitBookingViewController.swift */; };
+		E77353C627EB80AD0065D34B /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77353C527EB80AD0065D34B /* DatePickerViewController.swift */; };
+		E77353C827EB82BB0065D34B /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77353C727EB82BB0065D34B /* UIAlertController+Extensions.swift */; };
+		E77353CA27EB842C0065D34B /* UIViewEXForDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77353C927EB842C0065D34B /* UIViewEXForDatePicker.swift */; };
 		E77F5FCD27E07E60009B1AA2 /*  ParkingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */; };
 		E77F5FD027E08F16009B1AA2 /* SpotDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */; };
 		E77F5FD427E09ED2009B1AA2 /* ParkingOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */; };
@@ -91,6 +94,9 @@
 		E758B45327DF7345008931AD /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		E76627C427E85ECF00848233 /* AlertPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPicker.swift; sourceTree = "<group>"; };
 		E76627C627E885E600848233 /* SubmitBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitBookingViewController.swift; sourceTree = "<group>"; };
+		E77353C527EB80AD0065D34B /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		E77353C727EB82BB0065D34B /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
+		E77353C927EB842C0065D34B /* UIViewEXForDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewEXForDatePicker.swift; sourceTree = "<group>"; };
 		E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ParkingLocation.swift"; sourceTree = "<group>"; };
 		E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailsViewController.swift; sourceTree = "<group>"; };
 		E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingOwner.swift; sourceTree = "<group>"; };
@@ -255,6 +261,25 @@
 				E76627C627E885E600848233 /* SubmitBookingViewController.swift */,
 			);
 			path = SubmitBooking;
+			sourceTree = "<group>";
+		};
+		E77353C427EB801D0065D34B /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				E7B5F9C927DFF65000FA5476 /* GoogleMapManager.swift */,
+				E77353CB27EB845C0065D34B /*  AlertsAndPickers */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		E77353CB27EB845C0065D34B /*  AlertsAndPickers */ = {
+			isa = PBXGroup;
+			children = (
+				E77353C727EB82BB0065D34B /* UIAlertController+Extensions.swift */,
+				E77353C527EB80AD0065D34B /* DatePickerViewController.swift */,
+				E77353C927EB842C0065D34B /* UIViewEXForDatePicker.swift */,
+			);
+			path = " AlertsAndPickers";
 			sourceTree = "<group>";
 		};
 		E77F5FCB27E07DED009B1AA2 /* Models */ = {
@@ -430,7 +455,7 @@
 			children = (
 				E7B5F9C627DFAA0300FA5476 /* Designable */,
 				E7BFE00327D6013B00F80180 /* Extenstions */,
-				E7B5F9C927DFF65000FA5476 /* GoogleMapManager.swift */,
+				E77353C427EB801D0065D34B /* Libs */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -729,6 +754,7 @@
 				E722DFE127EB282800CD2C60 /* EditProfileViewController.swift in Sources */,
 				E73CFBCA27E8A4DA000D03FE /* AlertViewController.swift in Sources */,
 				E7A1847527DC314400D0921E /* HomeViewController.swift in Sources */,
+				E77353CA27EB842C0065D34B /* UIViewEXForDatePicker.swift in Sources */,
 				E77F5FCD27E07E60009B1AA2 /*  ParkingLocation.swift in Sources */,
 				E7BFE00827D6022500F80180 /* UIStoryboard.swift in Sources */,
 				E7CF569227E9B361001997CA /* UITableView.swift in Sources */,
@@ -745,6 +771,7 @@
 				E7BFE01A27D6110200F80180 /* GoSignInOrUpViewController.swift in Sources */,
 				E722DFD927EB1BEF00CD2C60 /* BookingTableViewCell.swift in Sources */,
 				E722DFDE27EB24FD00CD2C60 /* PasswordViewController.swift in Sources */,
+				E77353C827EB82BB0065D34B /* UIAlertController+Extensions.swift in Sources */,
 				E77F5FE327E0AFFD009B1AA2 /* UICollectionView.swift in Sources */,
 				E7CF568A27E9AFE3001997CA /* MessageTableViewCell.swift in Sources */,
 				E758B45427DF7345008931AD /* Float.swift in Sources */,
@@ -752,6 +779,7 @@
 				E7B7EBC227D8B7DE00E8665C /* ForgotPasswordViewController.swift in Sources */,
 				E77F5FD927E0A214009B1AA2 /* NumberOfParking.swift in Sources */,
 				E77F5FD027E08F16009B1AA2 /* SpotDetailsViewController.swift in Sources */,
+				E77353C627EB80AD0065D34B /* DatePickerViewController.swift in Sources */,
 				E77F5FD427E09ED2009B1AA2 /* ParkingOwner.swift in Sources */,
 				E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */,
 				E7BFE01427D604E800F80180 /* UIButton.swift in Sources */,
