@@ -65,39 +65,29 @@ extension UIViewController {
         return statusBarHeight
     }
 
+    func _setTitleBackBarButton() {
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = "000000"._hexColor
+    }
+    
     class func _push(_ handle: ((_ viewController: UIViewController) -> Void)? = nil) {
         let vc = Self._storyborad
         handle?(vc)
         AppDelegate.shared?.rootNavigationController?.pushViewController(vc, animated: true)
     }
-
-//    func pushVC(vc:UIViewController) {
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
-
-//    func _push() {
-//        AppDelegate.shared?.rootNavigationController?.pushViewController(Self._storyborad, animated: true)
-//    }
-//
-//    func _pop() {
-//        AppDelegate.shared?.rootNavigationController?.popViewController(animated: true)
-//    }
-//
-//    func _rootPush() {
-//        AppDelegate.shared?.rootNavigationController?.setViewControllers([self], animated: true)
-//    }
-
-    func _setTitleBackBarButton() {
-        navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.tintColor = "000000"._hexColor
-    }
-
+    
     class func _rootPush() {
         AppDelegate.shared?.rootNavigationController?.setViewControllers([Self._storyborad], animated: true)
     }
 
-    class func _presentVC() {
-        AppDelegate.shared?.rootNavigationController?.present(Self._storyborad, animated: true, completion: nil)
+    class func _presentVC(_ handle: ((_ viewController: UIViewController) -> Void)? = nil) {
+        let vc = Self._storyborad
+        handle?(vc)
+        AppDelegate.shared?.rootNavigationController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func _pop() {
+        AppDelegate.shared?.rootNavigationController?.popViewController(animated: true)
     }
 
     func _presentVC() {

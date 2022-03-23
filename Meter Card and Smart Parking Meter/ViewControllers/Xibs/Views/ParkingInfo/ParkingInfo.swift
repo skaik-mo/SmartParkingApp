@@ -13,17 +13,11 @@ class ParkingInfo: UIView {
 
     @IBOutlet weak var contentView: UIView!
 
-    @IBOutlet weak var rating1: UIView!
-    @IBOutlet weak var rating2: UIView!
-    @IBOutlet weak var rating3: UIView!
-    @IBOutlet weak var rating4: UIView!
-    @IBOutlet weak var rating5: UIView!
-
+    @IBOutlet weak var ratingView: Rating!
+    
     @IBOutlet weak var parkingImage: UIImageView!
 
-    @IBOutlet weak var parkingNameLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var perHourLabel: UILabel!
 
@@ -33,13 +27,11 @@ class ParkingInfo: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureXib()
-//        setUpView()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configureXib()
-//        setUpView()
     }
 
     private func configureXib() {
@@ -66,13 +58,12 @@ class ParkingInfo: UIView {
 
 extension ParkingInfo {
     func setUpView() {
-        
+        self.ratingView.setUpRating(parking: parking, isWithDistance: false)
         guard let _parking = self.parking else { return }
         setParkingImage(parking: _parking)
         setInfo(parking: _parking)
         setDistance(parking: _parking)
-        setRating(parking: _parking)
-        
+
     }
 
     private func setParkingImage(parking: Parking) {
@@ -84,8 +75,7 @@ extension ParkingInfo {
     }
 
     private func setInfo(parking: Parking) {
-        if let _name = parking.name,  let _pricePerHour = parking.pricePerHour {
-            self.parkingNameLabel.text = _name
+        if let _pricePerHour = parking.pricePerHour {
             self.perHourLabel.text = "Park Booking \(_pricePerHour._toString)$ Per Hour"
             self.addressLabel.text = parking.address == nil ? "No Address" : parking.address
         }
@@ -99,32 +89,6 @@ extension ParkingInfo {
         }
     }
 
-    private func setRating(parking: Parking) {
-        if let _rating = parking.rating {
-            self.ratingLabel.text = "\(_rating._toString)/5"
-            setRatingViews(rating: Int(round(_rating)))
-            return
-        }
-        // if no rating set zero
-        setRatingViews(rating: 0)
-    }
-
-    private func setRatingViews(rating: Int) {
-        let ratingViews = [self.rating1, self.rating2, self.rating3, self.rating4, self.rating5]
-        if rating == 0 {
-            ratingViews.forEach { rating in
-                rating?.backgroundColor = "DAD9E2"._hexColor
-            }
-        } else {
-            for index in 0..<ratingViews.count {
-                if index < rating {
-                ratingViews[index]?.backgroundColor = "3FBF66"._hexColor
-                } else {
-                    ratingViews[index]?.backgroundColor = "DAD9E2"._hexColor
-                }
-            }
-            
-        }
-    }
+   
 
 }

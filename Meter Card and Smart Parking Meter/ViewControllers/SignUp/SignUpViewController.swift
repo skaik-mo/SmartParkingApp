@@ -46,7 +46,7 @@ extension SignUpViewController {
         self.emailText.keyboardType = .emailAddress
         self.passwordText.isPassword = true
         self.confirmPasswordText.isPassword = true
-        self.plateNumberText.keyboardType = .numberPad
+        self.plateNumberText.keyboardType = .phonePad
         self.drivingLicenseText.showCameraIcon = true
 
         

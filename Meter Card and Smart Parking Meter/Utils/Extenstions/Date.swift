@@ -23,4 +23,11 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func _getTime() -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.init(identifier: .gregorian)
+        formatter.dateFormat = "HH:mm a"
+        return formatter.string(from: self)
+    }
+    
 }

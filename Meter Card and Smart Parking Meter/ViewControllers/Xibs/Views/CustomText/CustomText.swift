@@ -50,7 +50,7 @@ class CustomText: UIView {
             self.cameraButton.isHidden = !newValue
         }
         get {
-            return true
+            return false
         }
     }
 

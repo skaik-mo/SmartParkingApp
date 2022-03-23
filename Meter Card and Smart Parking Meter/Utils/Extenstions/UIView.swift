@@ -9,70 +9,70 @@ import Foundation
 import UIKit
 
 extension UIView {
-    
+
     @IBInspectable var cornerRadius: CGFloat {
-        set{
+        set {
             self.layer.cornerRadius = newValue
         }
-        get{
+        get {
             return self.layer.cornerRadius
         }
     }
-    
+
     @IBInspectable var borderColor: UIColor {
-        set{
+        set {
             self.layer.borderColor = newValue.cgColor
         }
-        get{
+        get {
             return .gray
         }
     }
-    
+
     @IBInspectable var borderWidth: CGFloat {
-        set{
+        set {
             self.layer.borderWidth = newValue
         }
-        get{
+        get {
             return self.layer.borderWidth
         }
     }
-    
+
     @IBInspectable var shadowColor: UIColor {
-        set{
+        set {
             self.layer.shadowColor = newValue.cgColor
         }
-        get{
+        get {
             return .gray
-            
+
         }
     }
-    
+
     @IBInspectable var shadowOffset: CGSize {
-        set{
+        set {
             self.layer.shadowOffset = newValue
         }
-        get{
+        get {
             return self.layer.shadowOffset
         }
     }
-    
+
     @IBInspectable var shadowRadius: CGFloat {
-        set{
+        set {
             self.layer.shadowRadius = newValue
         }
-        get{
+        get {
             return self.layer.shadowRadius
         }
     }
     @IBInspectable var shadowOpacity: Float {
-        set{
+        set {
             self.layer.shadowOpacity = newValue
         }
-        get{
+        get {
             return self.layer.shadowOpacity
         }
     }
-    
+
     var toImage: UIImage? {
         UIGraphicsBeginImageContext(self.frame.size)
         guard let context = UIGraphicsGetCurrentContext() else {
@@ -83,15 +83,25 @@ extension UIView {
         UIGraphicsEndImageContext()
         return image
     }
-    
+
     func _roundCorners(corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.frame = bounds
         mask.path = path.cgPath
         layer.mask = mask
+        layer.masksToBounds = true
     }
 
-    
+    func _dismissView() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self._dismiss))
+        tap.cancelsTouchesInView = false
+        self.addGestureRecognizer(tap)
+    }
+
+    @objc private func _dismiss() {
+        AppDelegate.shared?.rootNavigationController?.topViewController?._dismissVC()
+    }
+
 }
 

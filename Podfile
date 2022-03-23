@@ -8,7 +8,9 @@ target 'Meter Card and Smart Parking Meter' do
   # Pods for Meter Card and Smart Parking Meter
 pod 'IQKeyboardManagerSwift', '6.5.4'
 pod 'GoogleMaps', '6.0.1'
-pod 'GooglePlaces', '6.0.0'
+#pod 'GooglePlaces', '6.0.0'
 pod 'JTAppleCalendar', '7.1'
+pod 'MMBAlertsPickers'
+pod 'HCSStarRatingView', '~> 1.5'
 
 end

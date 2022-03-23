@@ -4,29 +4,33 @@ PODS:
   - GoogleMaps/Base (6.0.1)
   - GoogleMaps/Maps (6.0.1):
     - GoogleMaps/Base
-  - GooglePlaces (6.0.0)
+  - HCSStarRatingView (1.5)
   - IQKeyboardManagerSwift (6.5.4)
   - JTAppleCalendar (7.1.0)
+  - MMBAlertsPickers (1.1.93)
 
 DEPENDENCIES:
   - GoogleMaps (= 6.0.1)
-  - GooglePlaces (= 6.0.0)
+  - HCSStarRatingView (~> 1.5)
   - IQKeyboardManagerSwift (= 6.5.4)
   - JTAppleCalendar (= 7.1)
+  - MMBAlertsPickers
 
 SPEC REPOS:
   trunk:
     - GoogleMaps
-    - GooglePlaces
+    - HCSStarRatingView
     - IQKeyboardManagerSwift
     - JTAppleCalendar
+    - MMBAlertsPickers
 
 SPEC CHECKSUMS:
   GoogleMaps: c213fc2334b7374144cede914da779b99be0ab74
-  GooglePlaces: c97d96ae68594acb64035c9ca9f26fbfc1d23af1
+  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   JTAppleCalendar: 60cb4e6de41c8e204fa0e182b98b531debdc9443
+  MMBAlertsPickers: d52d288114c7dad4e4f1282fb2b1f1189ccc117a
 
-PODFILE CHECKSUM: 8f9aa78e086254619ae1e53b5efef47c02c9c6bc
+PODFILE CHECKSUM: 23dfe9022d2b95c92ba59bcaaa9c03073533ef72
 
 COCOAPODS: 1.11.2

@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import GooglePlaces
 
 class HomeViewController: UIViewController {
 
@@ -36,6 +35,8 @@ class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
+
     }
 
     @IBAction func filtersAction(_ sender: Any) {
@@ -44,7 +45,13 @@ class HomeViewController: UIViewController {
     }
     @IBAction func currentLocationAction(_ sender: Any) {
         GoogleMapManager.currentLocation(mapView: mapView, locationManager: locationManager)
+//        AlertViewController._presentVC()
     }
+    
+    @IBAction func profileAction(_ sender: Any) {
+        ProfileViewController._push()
+    }
+    
 
 }
 

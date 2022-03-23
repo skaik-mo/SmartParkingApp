@@ -8,6 +8,8 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
 
+    let appearance = UINavigationBarAppearance()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -46,7 +48,7 @@ extension MainNavigationController {
 }
 
 extension MainNavigationController {
-    
+
     func setRoot() {
         GoSignInOrUpViewController._rootPush()
     }
@@ -54,16 +56,40 @@ extension MainNavigationController {
     func setProperties() {
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: "000000"._hexColor, NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .regular)]
 
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
         appearance.titleTextAttributes = titleTextAttributes
-        self.navigationBar.standardAppearance = appearance
-        self.navigationBar.scrollEdgeAppearance = appearance
+        setTransparentNavigation()
         self.navigationBar.titleTextAttributes = titleTextAttributes
-
     }
 
+    func setTransparentNavigation() {
+        appearance.configureWithTransparentBackground()
+        self.navigationBar.standardAppearance = appearance
+        self.navigationBar.scrollEdgeAppearance = appearance
+
+    }
+    func setWhiteNavigation() {
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        self.navigationBar.standardAppearance = appearance
+        self.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
 }
 
-
-
+//
+//extension UIView {
+// var hairlineImageView: UIImageView? {
+//    return hairlineImageView(in: self)
+//}
+//
+//fileprivate func hairlineImageView(in view: UIView) -> UIImageView? {
+//    if let imageView = view as? UIImageView, imageView.bounds.height <= 1.0 {
+//        return imageView
+//    }
+//
+//    for subview in view.subviews {
+//        if let imageView = self.hairlineImageView(in: subview) { return imageView }
+//    }
+//    return nil
+//  }
+//} 
