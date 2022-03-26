@@ -14,6 +14,8 @@ class NumberOfParking: UIView {
 
     @IBOutlet weak var title: UILabel!
 
+    @IBOutlet weak var button: UIButton!
+    
     @IBOutlet weak var p1Button: UIButton!
     @IBOutlet weak var p2Button: UIButton!
     @IBOutlet weak var p3Button: UIButton!
@@ -26,6 +28,7 @@ class NumberOfParking: UIView {
     enum TypeParkingView {
         case border
         case fill
+        case grayWithBorder
     }
 
     var typeParkingView: TypeParkingView = .border {
@@ -91,15 +94,22 @@ class NumberOfParking: UIView {
 extension NumberOfParking {
 
     private func switchTypeParkingView() {
-        if self.typeParkingView == .border {
+        
+        switch self.typeParkingView {
+        case .border:
             setBorderColor(color: "3FBF66"._hexColor)
-            setBackgroundColor(color: .clear)
+            setBackgroundColor(backgroundColor: .clear, tintColor: .black)
             setEnable(isEnable: false)
-        } else {
+        case .fill:
             setBorderColor(color: .clear)
-            setBackgroundColor(color: "E5E5E5"._hexColor)
+            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor:  .black)
             setEnable(isEnable: true)
+        case .grayWithBorder:
+            setBorderColor(color: "ECECEC"._hexColor)
+            setBackgroundColor(backgroundColor: .clear, tintColor: "929292"._hexColor)
+            setEnable(isEnable: false)
         }
+        
     }
 
     private func setBorderColor(color: UIColor) {
@@ -113,32 +123,32 @@ extension NumberOfParking {
 
     }
 
-    private func setBackgroundColor(color: UIColor) {
-        self.p1Button.backgroundColor = color
-        self.p1Button.tintColor = .black
+    private func setBackgroundColor(backgroundColor: UIColor, tintColor: UIColor) {
+        self.p1Button.backgroundColor = backgroundColor
+        self.p1Button.tintColor = tintColor
 
-        self.p2Button.backgroundColor = color
-        self.p2Button.tintColor = .black
+        self.p2Button.backgroundColor = backgroundColor
+        self.p2Button.tintColor = tintColor
 
-        self.p3Button.backgroundColor = color
-        self.p3Button.tintColor = .black
+        self.p3Button.backgroundColor = backgroundColor
+        self.p3Button.tintColor = tintColor
 
-        self.p4Button.backgroundColor = color
-        self.p4Button.tintColor = .black
+        self.p4Button.backgroundColor = backgroundColor
+        self.p4Button.tintColor = tintColor
 
-        self.p5Button.backgroundColor = color
-        self.p5Button.tintColor = .black
+        self.p5Button.backgroundColor = backgroundColor
+        self.p5Button.tintColor = tintColor
 
-        self.p6Button.backgroundColor = color
-        self.p6Button.tintColor = .black
+        self.p6Button.backgroundColor = backgroundColor
+        self.p6Button.tintColor = tintColor
 
-        self.p7Button.backgroundColor = color
-        self.p7Button.tintColor = .black
+        self.p7Button.backgroundColor = backgroundColor
+        self.p7Button.tintColor = tintColor
     }
 
     func selectedAction(button: UIButton) {
         if typeParkingView == .fill {
-            setBackgroundColor(color: "E5E5E5"._hexColor)
+            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor: .black )
             button.backgroundColor = "3FBF66"._hexColor
             button.tintColor = .white
         }

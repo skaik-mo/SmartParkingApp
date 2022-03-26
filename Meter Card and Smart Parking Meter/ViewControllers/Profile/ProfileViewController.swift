@@ -21,6 +21,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var myBookingsButton: ProfileButton!
     @IBOutlet weak var changePasswordButton: ProfileButton!
 
+    var typeAuth: TypeAuht = .User
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -40,7 +42,7 @@ class ProfileViewController: UIViewController {
     }
 
     @IBAction func editProfileAction(_ sender: Any) {
-        let vc: EditProfileViewController = EditProfileViewController.instantiateVC(storyboard: self._authStoryboard)
+        let vc: EditProfileViewController = EditProfileViewController._instantiateVC(storyboard: self._authStoryboard)
         vc._push()
     }
 
@@ -51,26 +53,16 @@ extension ProfileViewController {
     func setupView() {
         self.title = "My Profile"
 
+        switchAuth()
+        
         self.messageButton.handleButton = {
-            let vc: TableViewController = TableViewController.instantiateVC(storyboard: self._userStoryboard)
+            let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
             vc.typeView = .Messages
             vc._push()
         }
         
-        self.favoritesButton.handleButton = {
-            let vc: TableViewController = TableViewController.instantiateVC(storyboard: self._userStoryboard)
-            vc.typeView = .Favorites
-            vc._push()
-        }
-        
-        self.myBookingsButton.handleButton = {
-            let vc: TableViewController = TableViewController.instantiateVC(storyboard: self._userStoryboard)
-            vc.typeView = .Bookings
-            vc._push()
-        }
-        
         self.changePasswordButton.handleButton = {
-            let vc: PasswordViewController = PasswordViewController.instantiateVC(storyboard: self._authStoryboard)
+            let vc: PasswordViewController = PasswordViewController._instantiateVC(storyboard: self._authStoryboard)
             vc._push()
         }
     }
@@ -89,3 +81,36 @@ extension ProfileViewController {
 
 }
 
+extension ProfileViewController {
+
+    private func switchAuth() {
+        switch self.typeAuth {
+        case .User:
+            self.favoritesButton.isHidden = false
+            self.favoritesButton.handleButton = {
+                let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
+                vc.typeView = .Favorites
+                vc._push()
+            }
+            
+            self.myBookingsButton.titleLabel.text = "My Bookings"
+            self.myBookingsButton.handleButton = {
+                // My Bookings Action
+                debugPrint("My Bookings Action")
+                let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
+                vc.typeView = .Bookings
+                vc._push()
+            }
+        case .Business:
+            self.favoritesButton.isHidden = true
+            self.myBookingsButton.titleLabel.text = "My Park"
+            self.myBookingsButton.handleButton = {
+                // My Park Action
+                debugPrint("My Park Action")
+                let vc: MyParkingsViewController = MyParkingsViewController._instantiateVC(storyboard: self._businessStoryboard)
+                vc._push()
+            }
+        }
+    }
+    
+}

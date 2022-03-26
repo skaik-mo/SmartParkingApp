@@ -17,5 +17,10 @@ extension UICollectionView {
                 return UICollectionViewCell.self
             }
         }
-    
+    func _dequeueReusableCell<T: UICollectionViewCell>(withClass name: T.Type = T.self, for indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: name._id, for: indexPath) as? T else {
+            fatalError("Couldn't find UICollectionViewCell for \(name._id), make sure the cell is registered with collection view")
+         }
+         return cell
+     }
 }

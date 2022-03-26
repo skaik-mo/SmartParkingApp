@@ -10,6 +10,8 @@ import UIKit
 
 class HomeBusinessViewController: UIViewController {
 
+    @IBOutlet weak var homeTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -20,14 +22,22 @@ class HomeBusinessViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
     }
 
+    @IBAction func profileAction(_ sender: Any) {
+        let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._authStoryboard)
+        vc.typeAuth = .Business
+        vc._push()
+    }
 }
 
 extension HomeBusinessViewController {
 
     func setupView() {
-
+        self.title = "Home"
+        
+        setUpTable()
     }
 
     func localized() {
@@ -44,3 +54,26 @@ extension HomeBusinessViewController {
 
 }
 
+extension HomeBusinessViewController: UITableViewDelegate, UITableViewDataSource {
+    private func setUpTable() {
+        self.homeTableView._registerCell = HomeTableViewCell.self
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: HomeTableViewCell = self.homeTableView._dequeueReusableCell(for: indexPath)
+        cell.configerCell()
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc: BookingDetailsViewController = BookingDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
+        vc.typeAuth = .Business
+        vc._push()
+    }
+    
+
+}

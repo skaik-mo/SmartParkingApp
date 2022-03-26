@@ -40,7 +40,7 @@ extension UIViewController {
         }
     }
     
-    class func instantiateVC<T: UIViewController>(storyboard: UIStoryboard) -> T {
+    class func _instantiateVC<T: UIViewController>(storyboard: UIStoryboard) -> T {
         guard let vc = storyboard.instantiateVC(withIdentifier: self._id) as? T else {
             fatalError("Couldn't find UIViewController for \(self._id), make sure the view controller is created")
         }

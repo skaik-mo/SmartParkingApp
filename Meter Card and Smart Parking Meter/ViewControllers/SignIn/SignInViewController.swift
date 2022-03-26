@@ -28,18 +28,18 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func goForgotPasswordAction(_ sender: Any) {
-        let vc: ForgotPasswordViewController = ForgotPasswordViewController.instantiateVC(storyboard: self._authStoryboard)
+        let vc: ForgotPasswordViewController = ForgotPasswordViewController._instantiateVC(storyboard: self._authStoryboard)
         vc._push()
     }
 
     @IBAction func goSignUpAction(_ sender: Any) {
-        let vc: SignUpViewController = SignUpViewController.instantiateVC(storyboard: self._authStoryboard)
+        let vc: SignUpViewController = SignUpViewController._instantiateVC(storyboard: self._authStoryboard)
         vc._push()
 
     }
 
     @IBAction func goHomeScreenAction(_ sender: Any) {
-        let vc: HomeViewController = HomeViewController.instantiateVC(storyboard: self._userStoryboard)
+        let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
         vc._rootPush()
     }
 

@@ -23,6 +23,15 @@ class GreenButton: UIView {
         }
     }
     
+    var corner: CGFloat {
+        set{
+            self.greenButton.layer.cornerRadius = newValue
+        }
+        get {
+            return self.greenButton.layer.cornerRadius
+        }
+    }
+    
     var handleButton: (() -> Void)?
 
     

@@ -10,13 +10,16 @@ import UIKit
 
 class ParkingCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var parkingImage: UIImageView!
+    
+    @IBOutlet weak var ratingView: Rating!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
     func configerCell() {
-        
+        self.ratingView.setUpRating(parking: nil, isWithDistance: false, space: 4)
     }
     
 }

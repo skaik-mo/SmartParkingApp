@@ -47,7 +47,7 @@ class ParkingInfo: UIView {
     }
 
     @IBAction func bookNowAction(_ sender: Any) {
-        let vc: SpotDetailsViewController = SpotDetailsViewController.instantiateVC(storyboard: self._userStoryboard)
+        let vc: SpotDetailsViewController = SpotDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
         vc.parking = self.parking
         vc._push()
 

@@ -50,7 +50,7 @@ extension MainNavigationController {
 extension MainNavigationController {
 
     func setRoot() {
-        let vc: GoSignInOrUpViewController = GoSignInOrUpViewController.instantiateVC(storyboard: self._authStoryboard)
+        let vc: GoSignInOrUpViewController = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
         vc._rootPush()
     }
 

@@ -41,7 +41,7 @@ class HomeUserViewController: UIViewController {
 
     @IBAction func filtersAction(_ sender: Any) {
         self._presentTopToBottom()
-        let vc: FiltersViewController = FiltersViewController.instantiateVC(storyboard: self._userStoryboard)
+        let vc: FiltersViewController = FiltersViewController._instantiateVC(storyboard: self._userStoryboard)
         vc._presentVC()
 
     }
@@ -51,7 +51,8 @@ class HomeUserViewController: UIViewController {
     }
     
     @IBAction func profileAction(_ sender: Any) {
-        let vc: ProfileViewController = ProfileViewController.instantiateVC(storyboard: self._authStoryboard)
+        let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._authStoryboard)
+        vc.typeAuth = .User
         vc._push()
     }
     

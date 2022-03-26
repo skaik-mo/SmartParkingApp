@@ -104,7 +104,8 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.typeView == .Bookings {
             let cell = tableView.cellForRow(at: indexPath) as? BookingTableViewCell
-            let vc: BookingDetailsViewController = BookingDetailsViewController.instantiateVC(storyboard: self._userStoryboard)
+            let vc: BookingDetailsViewController = BookingDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
+            vc.typeAuth = .User
             vc.parking = cell?.parking
             vc._push()
         }

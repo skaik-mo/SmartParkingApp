@@ -77,7 +77,7 @@ class GoogleMapManager {
     }
 
     static func getDistance(toLocation: CLLocation) -> Double {
-        let vc: HomeViewController = HomeViewController.instantiateVC(storyboard: HomeViewController()._userStoryboard)
+        let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: HomeUserViewController()._userStoryboard)
         let fromLocation = vc.locationManager.location
         if let _fromLocation = fromLocation {
             let distance = _fromLocation.distance(from: toLocation) / 1000
