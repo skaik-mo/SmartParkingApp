@@ -1,6 +1,6 @@
 //  Skaik_mo
 //
-//  HomeViewController.swift
+//  HomeUserViewController.swift
 //  Meter Card and Smart Parking Meter
 //
 //  Created by Mohammed Skaik on 12/03/2022.
@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class HomeViewController: UIViewController {
+class HomeUserViewController: UIViewController {
 
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController {
+extension HomeUserViewController {
 
     func setupView() {
         self.title = "Home"
@@ -87,7 +87,7 @@ extension HomeViewController {
 
 }
 
-extension HomeViewController: GMSMapViewDelegate {
+extension HomeUserViewController: GMSMapViewDelegate {
 
     func setUpMap() {
         mapView.delegate = self
