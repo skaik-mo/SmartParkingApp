@@ -12,6 +12,11 @@
 		E708599127DF3EE8000FCE7B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708599027DF3EE8000FCE7B /* FiltersViewController.swift */; };
 		E708599927DF4588000FCE7B /* SelectDateOrTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708599727DF4588000FCE7B /* SelectDateOrTime.swift */; };
 		E708599A27DF4588000FCE7B /* SelectDateOrTime.xib in Resources */ = {isa = PBXBuildFile; fileRef = E708599827DF4588000FCE7B /* SelectDateOrTime.xib */; };
+		E720808227F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720808027F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift */; };
+		E720808327F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E720808127F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib */; };
+		E720808627F1C5C300CBB775 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720808527F1C5C300CBB775 /* MessageViewController.swift */; };
+		E720808A27F1CDC900CBB775 /* SenderMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720808827F1CDC900CBB775 /* SenderMessageTableViewCell.swift */; };
+		E720808B27F1CDC900CBB775 /* SenderMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E720808927F1CDC900CBB775 /* SenderMessageTableViewCell.xib */; };
 		E722DFD927EB1BEF00CD2C60 /* BookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E722DFD727EB1BEF00CD2C60 /* BookingTableViewCell.swift */; };
 		E722DFDA27EB1BEF00CD2C60 /* BookingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E722DFD827EB1BEF00CD2C60 /* BookingTableViewCell.xib */; };
 		E722DFDE27EB24FD00CD2C60 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E722DFDD27EB24FD00CD2C60 /* PasswordViewController.swift */; };
@@ -78,6 +83,7 @@
 		E7CF568D27E9B16D001997CA /* UIKitHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF568C27E9B16D001997CA /* UIKitHelpers.swift */; };
 		E7CF569027E9B22B001997CA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF568F27E9B22B001997CA /* TableViewController.swift */; };
 		E7CF569227E9B361001997CA /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF569127E9B361001997CA /* UITableView.swift */; };
+		E7D3E33527F2EB1500851BEB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D3E33427F2EB1500851BEB /* Message.swift */; };
 		E7E8CE0027E12DC700BA1C9C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E8CDFF27E12DC700BA1C9C /* Date.swift */; };
 		E7F1FD9427E9D32300FE55E7 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F1FD9227E9D32300FE55E7 /* FavoriteTableViewCell.swift */; };
 		E7F1FD9527E9D32300FE55E7 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1FD9327E9D32300FE55E7 /* FavoriteTableViewCell.xib */; };
@@ -93,6 +99,11 @@
 		E708599027DF3EE8000FCE7B /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		E708599727DF4588000FCE7B /* SelectDateOrTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateOrTime.swift; sourceTree = "<group>"; };
 		E708599827DF4588000FCE7B /* SelectDateOrTime.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateOrTime.xib; sourceTree = "<group>"; };
+		E720808027F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverMessageTableViewCell.swift; sourceTree = "<group>"; };
+		E720808127F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverMessageTableViewCell.xib; sourceTree = "<group>"; };
+		E720808527F1C5C300CBB775 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		E720808827F1CDC900CBB775 /* SenderMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderMessageTableViewCell.swift; sourceTree = "<group>"; };
+		E720808927F1CDC900CBB775 /* SenderMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderMessageTableViewCell.xib; sourceTree = "<group>"; };
 		E722DFD727EB1BEF00CD2C60 /* BookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingTableViewCell.swift; sourceTree = "<group>"; };
 		E722DFD827EB1BEF00CD2C60 /* BookingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookingTableViewCell.xib; sourceTree = "<group>"; };
 		E722DFDD27EB24FD00CD2C60 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +172,7 @@
 		E7CF568C27E9B16D001997CA /* UIKitHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitHelpers.swift; sourceTree = "<group>"; };
 		E7CF568F27E9B22B001997CA /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		E7CF569127E9B361001997CA /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		E7D3E33427F2EB1500851BEB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E7E8CDFF27E12DC700BA1C9C /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		E7F1FD9227E9D32300FE55E7 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		E7F1FD9327E9D32300FE55E7 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
@@ -222,6 +234,32 @@
 				E708599827DF4588000FCE7B /* SelectDateOrTime.xib */,
 			);
 			path = SelectDateOrTime;
+			sourceTree = "<group>";
+		};
+		E720807E27F1ADA100CBB775 /* ReceiverMessage */ = {
+			isa = PBXGroup;
+			children = (
+				E720808027F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift */,
+				E720808127F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib */,
+			);
+			path = ReceiverMessage;
+			sourceTree = "<group>";
+		};
+		E720807F27F1ADB100CBB775 /* SenderMessage */ = {
+			isa = PBXGroup;
+			children = (
+				E720808827F1CDC900CBB775 /* SenderMessageTableViewCell.swift */,
+				E720808927F1CDC900CBB775 /* SenderMessageTableViewCell.xib */,
+			);
+			path = SenderMessage;
+			sourceTree = "<group>";
+		};
+		E720808427F1C59000CBB775 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				E720808527F1C5C300CBB775 /* MessageViewController.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		E722DFD027EB1BAB00CD2C60 /* Booking */ = {
@@ -312,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */,
+				E7D3E33427F2EB1500851BEB /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -468,6 +507,7 @@
 			children = (
 				E7BFE01727D610E700F80180 /* Xibs */,
 				E7BFE00B27D6034600F80180 /* MainNavigationViewController.swift */,
+				E720808427F1C59000CBB775 /* Message */,
 				E73710FE27EF571200D6FAC4 /* AddParking */,
 				E7F56B8727EE4BDD00CAAF6B /* MyParkings */,
 				E7C0C90527EE09A600C83AAE /* HomeBusiness */,
@@ -618,6 +658,8 @@
 		E7CF568727E9AFBC001997CA /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
+				E720807F27F1ADB100CBB775 /* SenderMessage */,
+				E720807E27F1ADA100CBB775 /* ReceiverMessage */,
 				E7BF3A8427EE04F300FBB17F /* Home */,
 				E722DFD027EB1BAB00CD2C60 /* Booking */,
 				E7F1FD8F27E9D2D400FE55E7 /* Favorite */,
@@ -738,7 +780,9 @@
 				E77353CD27EBB0CC0065D34B /* Auth.storyboard in Resources */,
 				E722DFDA27EB1BEF00CD2C60 /* BookingTableViewCell.xib in Resources */,
 				E7BFDFF727D6003800F80180 /* LaunchScreen.storyboard in Resources */,
+				E720808327F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib in Resources */,
 				E7F1FD9527E9D32300FE55E7 /* FavoriteTableViewCell.xib in Resources */,
+				E720808B27F1CDC900CBB775 /* SenderMessageTableViewCell.xib in Resources */,
 				E7BFDFF427D6003800F80180 /* Assets.xcassets in Resources */,
 				E708599A27DF4588000FCE7B /* SelectDateOrTime.xib in Resources */,
 				E77353D127EBB68B0065D34B /* Business.storyboard in Resources */,
@@ -859,20 +903,24 @@
 				E7F56B8927EE4C0100CAAF6B /* MyParkingsViewController.swift in Sources */,
 				E758B45427DF7345008931AD /* Float.swift in Sources */,
 				E7C0C90B27EE3CDE00C83AAE /* ParkingCollectionViewCell.swift in Sources */,
+				E720808627F1C5C300CBB775 /* MessageViewController.swift in Sources */,
 				E7BFE00E27D6043100F80180 /* UIColor.swift in Sources */,
 				E7B7EBC227D8B7DE00E8665C /* ForgotPasswordViewController.swift in Sources */,
 				E77F5FD927E0A214009B1AA2 /* NumberOfParking.swift in Sources */,
 				E77F5FD027E08F16009B1AA2 /* SpotDetailsViewController.swift in Sources */,
 				E77353C627EB80AD0065D34B /* DatePickerViewController.swift in Sources */,
+				E720808A27F1CDC900CBB775 /* SenderMessageTableViewCell.swift in Sources */,
 				E77F5FD427E09ED2009B1AA2 /* ParkingOwner.swift in Sources */,
 				E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */,
 				E7BFE01427D604E800F80180 /* UIButton.swift in Sources */,
+				E720808227F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift in Sources */,
 				E7BFE00A27D6026200F80180 /* UIResponder.swift in Sources */,
 				E7F1FD9927E9FF4200FE55E7 /* Rating.swift in Sources */,
 				E7CF569027E9B22B001997CA /* TableViewController.swift in Sources */,
 				E77F5FE027E0AC9C009B1AA2 /* DateCell.swift in Sources */,
 				E7BFDFED27D6003800F80180 /* SceneDelegate.swift in Sources */,
 				E7B5F9CA27DFF65000FA5476 /* GoogleMapManager.swift in Sources */,
+				E7D3E33527F2EB1500851BEB /* Message.swift in Sources */,
 				E7B5F9C827DFAA2100FA5476 /* ThumbTextSlider.swift in Sources */,
 				E7BFE02E27D6320200F80180 /* CustomText.swift in Sources */,
 			);

@@ -35,6 +35,7 @@ class GoSignInOrUpViewController: UIViewController {
 extension GoSignInOrUpViewController {
 
     func setupView() {
+        self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             let vc: SignInViewController = SignInViewController._instantiateVC(storyboard: self._authStoryboard)
             vc._push()

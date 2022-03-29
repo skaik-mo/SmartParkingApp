@@ -18,6 +18,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParkingInfo" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
             <connections>
                 <outlet property="addressLabel" destination="AcV-Tr-cj4" id="LkJ-7j-Zdz"/>
+                <outlet property="bookNowButton" destination="KzM-6W-T9u" id="juy-Ao-wuo"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="8df-5p-MuR"/>
                 <outlet property="distanceLabel" destination="D8B-ZZ-XCf" id="vau-Qf-BXE"/>
                 <outlet property="parkingImage" destination="wNh-bE-nus" id="gdF-No-yTd"/>
@@ -99,27 +100,17 @@
                                     <color key="textColor" name="000000"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4h-IA-EFu">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KzM-6W-T9u" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                     <rect key="frame" x="203" y="0.0" width="103" height="35"/>
-                                    <color key="backgroundColor" red="0.89803922176361084" green="0.89803922176361084" blue="0.89803922176361084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="UBj-N2-AL4"/>
-                                        <constraint firstAttribute="width" constant="103" id="dq3-b8-c5L"/>
+                                        <constraint firstAttribute="height" constant="35" id="dPq-jb-7Nb"/>
+                                        <constraint firstAttribute="width" constant="103" id="p68-gF-70z"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="Book now">
-                                        <color key="titleColor" name="000000"/>
-                                    </state>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="8"/>
-                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Book now"/>
                                     </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="bookNowAction:" destination="-1" eventType="touchUpInside" id="rVk-lg-rD2"/>
-                                    </connections>
-                                </button>
+                                </view>
                             </subviews>
                         </stackView>
                     </subviews>

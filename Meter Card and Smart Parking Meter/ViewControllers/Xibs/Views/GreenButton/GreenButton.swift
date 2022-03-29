@@ -23,17 +23,20 @@ class GreenButton: UIView {
         }
     }
     
-    var corner: CGFloat {
-        set{
-            self.greenButton.layer.cornerRadius = newValue
-        }
-        get {
-            return self.greenButton.layer.cornerRadius
+    enum TypeButton {
+        case greenButton
+        case redButton
+        case grayButton
+        case grayButtonWithBorder
+    }
+    
+    private var typeButton: TypeButton = .greenButton {
+        didSet {
+            setUpButton()
         }
     }
     
     var handleButton: (() -> Void)?
-
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,4 +65,37 @@ class GreenButton: UIView {
         self.handleButton?()
     }
     
+}
+
+extension GreenButton {
+    
+    func setUp(typeButton: TypeButton, corner: CGFloat = 10) {
+        self.typeButton = typeButton
+        self.greenButton.layer.cornerRadius = corner
+    }
+    
+    private func setUpButton() {
+        switch self.typeButton {
+        case .greenButton:
+            self.greenButton.backgroundColor = "3FBF66"._hexColor
+            self.greenButton.setTitleColor(.white, for: .normal)
+            self.greenButton.layer.borderWidth = 0
+            self.greenButton.layer.borderColor = UIColor.clear.cgColor
+        case .redButton:
+            self.greenButton.backgroundColor = "D0021B"._hexColor
+            self.greenButton.setTitleColor(.white, for: .normal)
+            self.greenButton.layer.borderWidth = 0
+            self.greenButton.layer.borderColor = UIColor.clear.cgColor
+        case .grayButtonWithBorder:
+            self.greenButton.backgroundColor = "FAFAFA"._hexColor
+            self.greenButton.setTitleColor(.black, for: .normal)
+            self.greenButton.layer.borderWidth = 1
+            self.greenButton.layer.borderColor = "E2E2E2"._hexColor.cgColor
+        case .grayButton:
+            self.greenButton.backgroundColor = "E5E5E5"._hexColor
+            self.greenButton.setTitleColor(.black, for: .normal)
+            self.greenButton.layer.borderWidth = 0
+            self.greenButton.layer.borderColor = UIColor.clear.cgColor
+        }
+    }
 }

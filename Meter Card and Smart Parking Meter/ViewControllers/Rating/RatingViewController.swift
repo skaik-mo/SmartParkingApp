@@ -34,6 +34,7 @@ extension RatingViewController {
     func setupView() {
         ratingView.settings.fillMode = .full
 
+        self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             debugPrint("Rating: \(self.ratingView.rating)")
             self._dismissVC()

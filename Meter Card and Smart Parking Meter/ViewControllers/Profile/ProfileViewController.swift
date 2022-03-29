@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var favoritesButton: ProfileButton!
     @IBOutlet weak var myBookingsButton: ProfileButton!
     @IBOutlet weak var changePasswordButton: ProfileButton!
+    
+    @IBOutlet weak var editProfileButton: GreenButton!
 
     var typeAuth: TypeAuht = .User
     
@@ -41,11 +43,6 @@ class ProfileViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
 
-    @IBAction func editProfileAction(_ sender: Any) {
-        let vc: EditProfileViewController = EditProfileViewController._instantiateVC(storyboard: self._authStoryboard)
-        vc._push()
-    }
-
 }
 
 extension ProfileViewController {
@@ -54,6 +51,12 @@ extension ProfileViewController {
         self.title = "My Profile"
 
         switchAuth()
+        
+        self.editProfileButton.setUp(typeButton: .greenButton, corner: 22.5)
+        self.editProfileButton.handleButton = {
+            let vc: EditProfileViewController = EditProfileViewController._instantiateVC(storyboard: self._authStoryboard)
+            vc._push()
+        }
         
         self.messageButton.handleButton = {
             let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)

@@ -769,26 +769,17 @@ to reset you password</string>
                                                         <rect key="frame" x="87" y="131.5" width="240" height="23.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDg-ht-G3r">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlC-zU-gye" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                         <rect key="frame" x="122" y="155" width="170" height="45"/>
-                                                        <color key="backgroundColor" name="3FBF66"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="45" id="L6w-BH-i7b"/>
-                                                            <constraint firstAttribute="width" constant="170" id="rNT-aL-jFY"/>
+                                                            <constraint firstAttribute="width" constant="170" id="D3M-Ie-gDU"/>
+                                                            <constraint firstAttribute="height" constant="45" id="XAf-S1-Ugx"/>
                                                         </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Edit Profile">
-                                                            <color key="titleColor" name="FFFFFF"/>
-                                                        </state>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="22"/>
-                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Edit Profile"/>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="editProfileAction:" destination="dbP-6I-Ug6" eventType="touchUpInside" id="hLG-CD-DwM"/>
-                                                        </connections>
-                                                    </button>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coA-FR-dFq">
                                                         <rect key="frame" x="87" y="200" width="240" height="49.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -842,11 +833,11 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-j5-Hsa">
-                                        <rect key="frame" x="0.0" y="524.5" width="414" height="180"/>
+                                        <rect key="frame" x="0.0" y="524.5" width="414" height="217.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGM-7k-HZv">
-                                        <rect key="frame" x="0.0" y="704.5" width="414" height="69.5"/>
+                                        <rect key="frame" x="0.0" y="742" width="414" height="32"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Log out">
@@ -873,6 +864,7 @@ to reset you password</string>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="changePasswordButton" destination="Uar-x2-fRW" id="TEM-UC-kiH"/>
+                        <outlet property="editProfileButton" destination="hlC-zU-gye" id="n86-7n-Von"/>
                         <outlet property="emailLabel" destination="S7g-BE-Dai" id="jlc-it-LCH"/>
                         <outlet property="favoritesButton" destination="BMq-KW-IVM" id="hpJ-1M-Waa"/>
                         <outlet property="messageButton" destination="lrm-f8-cN4" id="8z3-KL-URc"/>
@@ -1067,6 +1059,106 @@ to reset you password</string>
             </objects>
             <point key="canvasLocation" x="7790" y="96"/>
         </scene>
+        <!--Message View Controller-->
+        <scene sceneID="weD-HZ-OpR">
+            <objects>
+                <viewController storyboardIdentifier="MessageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yzq-14-t4b" customClass="MessageViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Byr-Gk-Sry">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gny-fV-nPe">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="POu-Vx-0uE">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="yzq-14-t4b" id="btO-d9-l55"/>
+                                            <outlet property="delegate" destination="yzq-14-t4b" id="XQv-TQ-jAd"/>
+                                        </connections>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1En-6R-h0a">
+                                        <rect key="frame" x="0.0" y="768" width="414" height="50"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="xG4-5y-YVa">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC6-80-Ra0">
+                                                        <rect key="frame" x="12" y="0.0" width="44" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="44" id="9lp-U9-64u"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="ic_camera2"/>
+                                                        <connections>
+                                                            <action selector="imageAction:" destination="yzq-14-t4b" eventType="touchUpInside" id="kYM-zn-9R5"/>
+                                                        </connections>
+                                                    </button>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write a message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7e-7l-uHv">
+                                                        <rect key="frame" x="68" y="0.0" width="278" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fez-vX-fe6">
+                                                        <rect key="frame" x="358" y="0.0" width="44" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="44" id="ugH-qO-l1P"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="ic_send"/>
+                                                        <connections>
+                                                            <action selector="sendAction:" destination="yzq-14-t4b" eventType="touchUpInside" id="G3H-2c-QtN"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="12" bottom="0.0" trailing="12"/>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="2YY-pb-Yzv"/>
+                                            <constraint firstAttribute="trailing" secondItem="xG4-5y-YVa" secondAttribute="trailing" id="OK8-an-8uq"/>
+                                            <constraint firstItem="xG4-5y-YVa" firstAttribute="leading" secondItem="1En-6R-h0a" secondAttribute="leading" id="dAc-ES-CQ4"/>
+                                            <constraint firstAttribute="bottom" secondItem="xG4-5y-YVa" secondAttribute="bottom" id="gvh-DT-7Yu"/>
+                                            <constraint firstItem="xG4-5y-YVa" firstAttribute="top" secondItem="1En-6R-h0a" secondAttribute="top" id="wSL-dv-XpQ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="-5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.69999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" red="0.92941176470588238" green="0.94901960784313721" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FOm-0k-bMB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FOm-0k-bMB" firstAttribute="trailing" secondItem="gny-fV-nPe" secondAttribute="trailing" id="17x-xq-Iug"/>
+                            <constraint firstItem="FOm-0k-bMB" firstAttribute="bottom" secondItem="gny-fV-nPe" secondAttribute="bottom" id="90V-ro-6i2"/>
+                            <constraint firstItem="gny-fV-nPe" firstAttribute="leading" secondItem="FOm-0k-bMB" secondAttribute="leading" id="cwa-gH-hCS"/>
+                            <constraint firstItem="gny-fV-nPe" firstAttribute="top" secondItem="FOm-0k-bMB" secondAttribute="top" id="mko-qb-lgL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="messageTextField" destination="l7e-7l-uHv" id="kT0-bY-101"/>
+                        <outlet property="tableView" destination="POu-Vx-0uE" id="cfr-4L-f2j"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cca-dZ-I9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8594" y="96"/>
+        </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="PrE-xp-lyN">
             <objects>
@@ -1089,9 +1181,11 @@ to reset you password</string>
         <image name="demo" width="1280" height="1280"/>
         <image name="ic_apple" width="52" height="52"/>
         <image name="ic_backButton" width="28" height="28"/>
+        <image name="ic_camera2" width="21" height="19"/>
         <image name="ic_facebook" width="52" height="52"/>
         <image name="ic_next" width="70" height="70"/>
         <image name="ic_placeholderPerson " width="95" height="95"/>
+        <image name="ic_send" width="30" height="28"/>
         <image name="logo" width="84" height="101"/>
         <namedColor name="000000">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -20,6 +20,8 @@ class ParkingInfo: UIView {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var perHourLabel: UILabel!
+    
+    @IBOutlet weak var bookNowButton: GreenButton!
 
 
     var parking: Parking?
@@ -46,17 +48,17 @@ class ParkingInfo: UIView {
         contentView.layoutIfNeeded()
     }
 
-    @IBAction func bookNowAction(_ sender: Any) {
-        let vc: SpotDetailsViewController = SpotDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
-        vc.parking = self.parking
-        vc._push()
-
-    }
-
 }
 
 extension ParkingInfo {
     func setUpView() {
+        self.bookNowButton.setUp(typeButton: .grayButton, corner: 8)
+        self.bookNowButton.handleButton = {
+            let vc: SpotDetailsViewController = SpotDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
+            vc.parking = self.parking
+            vc._push()
+        }
+        
         self.ratingView.setUpRating(parking: parking, isWithDistance: false)
         guard let _parking = self.parking else { return }
         setParkingImage(parking: _parking)

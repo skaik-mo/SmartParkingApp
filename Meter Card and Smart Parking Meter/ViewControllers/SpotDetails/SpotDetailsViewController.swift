@@ -23,6 +23,8 @@ class SpotDetailsViewController: UIViewController {
     @IBOutlet weak var pricePerHourLabel: UILabel!
 
     @IBOutlet weak var ratingView: Rating!
+    
+    @IBOutlet weak var bookNowButton: GreenButton!
 
     var parking: Parking?
 
@@ -66,12 +68,6 @@ class SpotDetailsViewController: UIViewController {
         moveSection(index: 1)
     }
 
-    @IBAction func bookNowAction(_ sender: Any) {
-        let vc: SubmitBookingViewController = SubmitBookingViewController._instantiateVC(storyboard: self._userStoryboard)
-        vc.parking = self.parking
-        vc._presentVC()
-    }
-
 }
 
 extension SpotDetailsViewController {
@@ -85,7 +81,13 @@ extension SpotDetailsViewController {
         numberOfParking.title.text = "Available Spot"
         self.ratingView.setUpRating(parking: parking, space: 12)
         setCalenderCollectionView()
-
+        
+        self.bookNowButton.setUp(typeButton: .grayButton, corner: 8)
+        self.bookNowButton.handleButton = {
+            let vc: SubmitBookingViewController = SubmitBookingViewController._instantiateVC(storyboard: self._userStoryboard)
+            vc.parking = self.parking
+            vc._presentVC()
+        }
     }
 
     func localized() {

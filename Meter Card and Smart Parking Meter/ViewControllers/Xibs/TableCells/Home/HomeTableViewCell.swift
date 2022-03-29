@@ -45,10 +45,12 @@ extension HomeTableViewCell {
         
         self.isClicked = false
         
+        self.rejectButton.setUp(typeButton: .redButton, corner: 9)
         self.rejectButton.handleButton = {
             self.setTitleClicked(parkingStatus: "Rejected", statusColor: self.rejectButton.greenButton.backgroundColor)
             self.isClicked = true
         }
+        self.acceptButton.setUp(typeButton: .greenButton, corner: 9)
         self.acceptButton.handleButton = {
             self.setTitleClicked(parkingStatus: "Accepted", statusColor: self.acceptButton.greenButton.backgroundColor)
             self.isClicked = true
@@ -64,12 +66,12 @@ extension HomeTableViewCell {
         switch self.isClicked {
         case true:
             self.parkingStatusLabel.alpha = 1
-            self.rejectButton.greenButton.alpha = 0
-            self.acceptButton.greenButton.alpha = 0
+            self.rejectButton.alpha = 0
+            self.acceptButton.alpha = 0
         case false:
             self.parkingStatusLabel.alpha = 0
-            self.rejectButton.greenButton.alpha = 1
-            self.acceptButton.greenButton.alpha = 1
+            self.rejectButton.alpha = 1
+            self.acceptButton.alpha = 1
         }
     }
     

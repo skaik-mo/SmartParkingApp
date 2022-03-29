@@ -90,9 +90,6 @@ extension BookingDetailsViewController {
 extension BookingDetailsViewController {
 
     private func switchAuth() {
-        self.rejectButton.corner = 5
-        self.cancelOrAcceptButton.corner = 5
-
         switch self.typeAuth {
         case .User:
             self.title = "Booking Details"
@@ -100,7 +97,7 @@ extension BookingDetailsViewController {
             
             self.rejectButton.isHidden = true
 
-            self.cancelOrAcceptButton.corner = 10
+            self.cancelOrAcceptButton.setUp(typeButton: .greenButton, corner: 10)
             self.cancelOrAcceptButton.greenButton.setTitle("Cancel", for: .normal)
 
             self.cancelOrAcceptButton.handleButton = {
@@ -114,14 +111,13 @@ extension BookingDetailsViewController {
             self.parkingStatusLabel.isHidden = true
 
             self.rejectButton.isHidden = false
-            self.rejectButton.greenButton.backgroundColor = "D0021B"._hexColor
-
+            self.rejectButton.setUp(typeButton: .redButton, corner: 5)
             self.rejectButton.handleButton = {
                 // Reject Action
                 debugPrint("Reject Action")
             }
 
-            self.cancelOrAcceptButton.corner = 5
+            self.cancelOrAcceptButton.setUp(typeButton: .greenButton, corner: 8)
             self.cancelOrAcceptButton.greenButton.setTitle("Accept", for: .normal)
 
             self.cancelOrAcceptButton.handleButton = {

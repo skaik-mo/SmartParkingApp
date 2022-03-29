@@ -26,7 +26,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PPy-b6-PjL">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWR-et-1Ng">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWR-et-1Ng">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gK5-Bd-0ju">
@@ -164,7 +164,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n8Z-M0-PV6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fZ4-eE-ZC2">
                     <connections>
-                        <action selector="_dismissViewController:" destination="PSa-IO-zHg" id="Eso-wd-fYu"/>
+                        <action selector="dismissViewAction:" destination="PSa-IO-zHg" id="sY2-9J-9WC"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -706,26 +706,17 @@
                                                         <color key="textColor" name="3FBF66"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWO-OH-Kfg">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdw-8S-ZMb" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                         <rect key="frame" x="235" y="6" width="120" height="40"/>
-                                                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="Mng-Ie-V6h"/>
-                                                            <constraint firstAttribute="width" secondItem="JWO-OH-Kfg" secondAttribute="height" multiplier="3:1" id="pnC-P8-yem"/>
+                                                            <constraint firstAttribute="width" secondItem="gdw-8S-ZMb" secondAttribute="height" multiplier="3:1" id="caY-YF-gE5"/>
+                                                            <constraint firstAttribute="height" constant="40" id="yK3-K9-XNI"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
-                                                        <color key="tintColor" name="000000"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Book now"/>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="8"/>
-                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Book now"/>
                                                         </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="bookNowAction:" destination="mPQ-Xn-p3J" eventType="touchUpInside" id="i8M-vO-Lbr"/>
-                                                        </connections>
-                                                    </button>
+                                                    </view>
                                                 </subviews>
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="20" bottom="0.0" trailing="20"/>
                                                 <userDefinedRuntimeAttributes>
@@ -789,6 +780,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <size key="freeformSize" width="375" height="1270"/>
                     <connections>
+                        <outlet property="bookNowButton" destination="gdw-8S-ZMb" id="kNR-5D-eOm"/>
                         <outlet property="calenderCollectionView" destination="LGz-zM-JUz" id="sHc-sb-RYQ"/>
                         <outlet property="mapView" destination="VgV-0x-UNX" id="6vf-CW-HRd"/>
                         <outlet property="monthTitle" destination="HXj-8d-6SU" id="fO8-ei-acu"/>

@@ -39,6 +39,7 @@ extension PasswordViewController {
         self.newPasswordView.isPassword = true
         self.repeatPasswordView.isPassword = true
         
+        self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             debugPrint("Save")
         }

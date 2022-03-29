@@ -84,13 +84,50 @@ extension UIView {
         return image
     }
 
-    func _roundCorners(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.frame = bounds
-        mask.path = path.cgPath
-        layer.mask = mask
-        layer.masksToBounds = true
+//    func _roundCorners(corners: UIRectCorner, radius: CGFloat) {
+//        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        let mask = CAShapeLayer()
+//        mask.frame = bounds
+//        mask.path = path.cgPath
+//        layer.mask = mask
+//        layer.masksToBounds = false
+//    }
+
+    func _roundCorners(isTopLeft: Bool = false, isTopRight: Bool = false, isBottomLeft: Bool = false, isBottomRight: Bool = false, radius: CGFloat) {
+        var corners: CACornerMask = []
+
+
+        var isTopLeftCorner: Bool = isTopLeft
+        var isTopRightCorner: Bool = isTopRight
+        var isBottomLeftCorner: Bool = isBottomLeft
+        var isBottomRightCorner: Bool = isBottomRight
+
+        if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
+            let tl = isTopLeftCorner
+            let tr = isTopRightCorner
+            let bl = isBottomLeftCorner
+            let br = isBottomRightCorner
+
+            isTopLeftCorner = tr
+            isTopRightCorner = tl
+            isBottomLeftCorner = br
+            isBottomRightCorner = bl
+        }
+        if isTopLeftCorner {
+            corners.insert(.layerMinXMinYCorner)
+        }
+
+        if isTopRightCorner {
+            corners.insert(.layerMaxXMinYCorner)
+        }
+        if isBottomLeftCorner {
+            corners.insert(.layerMinXMaxYCorner)
+        }
+        if isBottomRightCorner {
+            corners.insert(.layerMaxXMaxYCorner)
+        }
+        layer.cornerRadius = radius
+        layer.maskedCorners = corners
     }
 
     func _dismissView() {

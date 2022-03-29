@@ -10,8 +10,6 @@ import UIKit
 
 class EditProfileViewController: UIViewController {
     
-    
-
     @IBOutlet weak var nameText: CustomText!
     @IBOutlet weak var emailText: CustomText!
     @IBOutlet weak var plateNumberText: CustomText!
@@ -44,6 +42,10 @@ extension EditProfileViewController {
         self.plateNumberText.keyboardType = .phonePad
         self.drivingLicenseText.showCameraIcon = true
 
+        self.greenButton.setUp(typeButton: .greenButton)
+        self.greenButton.handleButton = {
+            
+        }
         
     }
 

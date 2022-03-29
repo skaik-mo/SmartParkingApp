@@ -29,6 +29,7 @@ class AlertViewController: UIViewController {
 extension AlertViewController {
 
     func setupView() {
+        self.greenButton.setUp(typeButton: .greenButton)
         greenButton.handleButton = {
             self._dismissVC()
         }

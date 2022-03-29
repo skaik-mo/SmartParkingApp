@@ -103,33 +103,19 @@ extension SignUpViewController {
     private func switchTypeAuth() {
         switch self.typeAyth {
         case .User:
-            self.userButton.greenButton.backgroundColor = "3FBF66"._hexColor
-            self.businessButton.greenButton.backgroundColor = "FAFAFA"._hexColor
-
-            self.userButton.greenButton.setTitleColor(.white, for: .normal)
-            self.businessButton.greenButton.setTitleColor(.black, for: .normal)
-
-            self.userButton.layer.borderWidth = 0
-            self.userButton.layer.borderColor = UIColor.clear.cgColor
-            self.businessButton.layer.borderWidth = 1
-            self.businessButton.layer.borderColor = "E2E2E2"._hexColor.cgColor
-
+            self.userButton.setUp(typeButton: .greenButton)
+            
+            self.businessButton.setUp(typeButton: .grayButtonWithBorder)
+            
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
                 self.drivingLicenseText.alpha = 1
                 self.subView.isHidden = false
             })
         case .Business:
-            self.userButton.greenButton.backgroundColor = "FAFAFA"._hexColor
-            self.businessButton.greenButton.backgroundColor = "3FBF66"._hexColor
-
-            self.userButton.greenButton.setTitleColor(.black, for: .normal)
-            self.businessButton.greenButton.setTitleColor(.white, for: .normal)
-
-            self.userButton.layer.borderWidth = 1
-            self.userButton.layer.borderColor = "E2E2E2"._hexColor.cgColor
-            self.businessButton.layer.borderWidth = 0
-            self.businessButton.layer.borderColor = UIColor.clear.cgColor
-
+            self.userButton.setUp(typeButton: .grayButtonWithBorder)
+            
+            self.businessButton.setUp(typeButton: .greenButton)
+            
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
                 self.drivingLicenseText.alpha = 0
                 self.subView.isHidden = true

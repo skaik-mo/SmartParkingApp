@@ -56,6 +56,7 @@ extension SubmitBookingViewController {
         self.selectTime.fromImageView.isHidden = true
         self.selectTime.toImageView.isHidden = true
 
+        self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
 
         }

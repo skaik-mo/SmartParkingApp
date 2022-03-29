@@ -81,8 +81,8 @@ class DateCell: JTAppleCell {
     }
 
     private func setCornerRadius(letfCorner: CGFloat, rightCorner: CGFloat) {
-        leftView._roundCorners(corners: [.topLeft, .bottomLeft], radius: letfCorner)
-        rightView._roundCorners(corners: [.topRight, .bottomRight], radius: rightCorner)
+        leftView._roundCorners(isTopLeft: true, isBottomLeft: true, radius: letfCorner)
+        rightView._roundCorners(isTopRight: true, isBottomRight: true, radius: rightCorner)
     }
 
     private func setColorViews(leftColor: UIColor, rightColor: UIColor, centerColor: UIColor, textColor: UIColor) {

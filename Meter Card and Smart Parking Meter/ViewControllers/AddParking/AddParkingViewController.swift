@@ -68,12 +68,12 @@ extension AddParkingViewController {
         numberOfParking.button.isHidden = false
         numberOfParking.title.text = "Spots"
 
+        self.hourButton.setUp(typeButton: .greenButton, corner: 6)
         self.hourButton.handleButton = {
             debugPrint("hourButton")
         }
         
-        self.perdayButton.greenButton.backgroundColor = "F6F6F9"._hexColor
-        self.perdayButton.greenButton.setTitleColor(.black, for: .normal)
+        self.perdayButton.setUp(typeButton: .grayButton, corner: 6)
         self.perdayButton.handleButton = {
             debugPrint("perdayButton")
         }

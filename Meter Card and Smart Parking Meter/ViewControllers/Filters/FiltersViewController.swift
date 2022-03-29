@@ -30,6 +30,7 @@ class FiltersViewController: UIViewController {
     }
     
     @IBAction func searchAction(_ sender: Any) {
+    
     }
     
     @IBAction func dismissViewAction(_ sender: Any) {
@@ -45,8 +46,7 @@ extension FiltersViewController {
     func setupView() {
         self.title = "Filters"
         
-        self.topView._roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10)
-        
+        self.topView._roundCorners(isBottomLeft: true, isBottomRight: true, radius: 5)
         self.selectDate.selectionType = .date
         self.selectTime.selectionType = .time
         

@@ -19,7 +19,7 @@ import UIKit
 
 //**********************<< Transfers Shortcuts >>**********************
 extension UIViewController {
-    
+
     var _topMostViewController: UIViewController? {
         if let navigationController = self as? UINavigationController {
             return navigationController.topViewController?._topMostViewController
@@ -39,7 +39,7 @@ extension UIViewController {
             return self
         }
     }
-    
+
     class func _instantiateVC<T: UIViewController>(storyboard: UIStoryboard) -> T {
         guard let vc = storyboard.instantiateVC(withIdentifier: self._id) as? T else {
             fatalError("Couldn't find UIViewController for \(self._id), make sure the view controller is created")
@@ -67,14 +67,14 @@ extension UIViewController {
     func _dismissVC() {
         self.dismiss(animated: true, completion: nil)
     }
-    
+
     func _presentTopToBottom() {
         let transition = CATransition()
         transition.duration = 0.5
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         transition.type = CATransitionType.push
         transition.subtype = CATransitionSubtype.fromBottom
-        view.window!.layer.add(transition, forKey: kCATransition)
+        view.window?.layer.add(transition, forKey: kCATransition)
     }
 
     func _dismissTopToBottom() {
@@ -85,7 +85,7 @@ extension UIViewController {
         transition.subtype = CATransitionSubtype.fromTop
         view.window!.layer.add(transition, forKey: kCATransition)
     }
-    
+
     @IBAction func _popViewController(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -187,7 +187,7 @@ extension UIViewController {
             return self.navigationController?.isNavigationBarHidden ?? false
         }
     }
-    
+
     func _setTitleBackBarButton() {
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = "000000"._hexColor

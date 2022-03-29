@@ -34,6 +34,7 @@ extension ForgotPasswordViewController {
         self.title = ""
         self.emailText.keyboardType = .emailAddress
         
+        self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             debugPrint("Send")
         }
