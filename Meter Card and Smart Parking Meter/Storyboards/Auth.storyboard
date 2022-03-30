@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Uud-Jw-h7h">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -20,23 +20,23 @@
             <objects>
                 <viewController storyboardIdentifier="SignInViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qzb-Fy-7tE" customClass="SignInViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PZt-pi-CBo" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5f4-wj-ca5">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ygb-7B-yjh">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_signin" translatesAutoresizingMaskIntoConstraints="NO" id="Qm9-8j-A0T">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="x5l-Vc-7fQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-2e-tAs">
-                                                        <rect key="frame" x="0.0" y="114" width="414" height="101"/>
+                                                        <rect key="frame" x="0.0" y="90" width="375" height="101"/>
                                                     </imageView>
                                                 </subviews>
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="41" trailing="0.0"/>
@@ -55,23 +55,23 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jQD-vd-Juu">
-                                        <rect key="frame" x="0.0" y="256" width="414" height="640"/>
+                                        <rect key="frame" x="0.0" y="232" width="375" height="580"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lum-EO-tYM">
-                                                <rect key="frame" x="20" y="0.0" width="374" height="49.5"/>
+                                                <rect key="frame" x="20" y="0.0" width="335" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="ddB-6e-TlM">
-                                                <rect key="frame" x="20" y="49.5" width="374" height="51"/>
+                                                <rect key="frame" x="20" y="45" width="335" height="51"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRf-3I-lol">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="24.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="24.666666666666668"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in to continue." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mM-We-vY9">
-                                                        <rect key="frame" x="0.0" y="33.5" width="374" height="17.5"/>
+                                                        <rect key="frame" x="0.0" y="33.666666666666686" width="335" height="17.333333333333329"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                         <color key="textColor" name="929292"/>
                                                         <nil key="highlightedColor"/>
@@ -79,11 +79,11 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4f-v5-wK6">
-                                                <rect key="frame" x="20" y="100.5" width="374" height="43"/>
+                                                <rect key="frame" x="20" y="96" width="335" height="39"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2f-qa-H4A" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="143.5" width="374" height="45"/>
+                                                <rect key="frame" x="20" y="135" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="cna-lT-1Ml"/>
@@ -93,11 +93,11 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIH-PU-28C">
-                                                <rect key="frame" x="20" y="188.5" width="374" height="43"/>
+                                                <rect key="frame" x="20" y="180" width="335" height="39"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U28-gi-qmC" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="231.5" width="374" height="45"/>
+                                                <rect key="frame" x="20" y="219" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="XV4-b2-hRs"/>
@@ -107,11 +107,11 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6o-tI-1Q2">
-                                                <rect key="frame" x="20" y="276.5" width="374" height="51"/>
+                                                <rect key="frame" x="20" y="264" width="335" height="46"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8L-sD-eSW">
-                                                <rect key="frame" x="20" y="327.5" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="310" width="335" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="lE6-Zc-g43"/>
                                                 </constraints>
@@ -125,18 +125,18 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAl-ds-gp6">
-                                                <rect key="frame" x="20" y="357.5" width="374" height="52"/>
+                                                <rect key="frame" x="20" y="340" width="335" height="47"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FgE-7v-V1J">
-                                                <rect key="frame" x="20" y="409.5" width="374" height="70"/>
+                                                <rect key="frame" x="20" y="387" width="335" height="70"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Udo-th-aMp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="51" height="70"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="46" height="70"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Wbb-cY-0o1">
-                                                        <rect key="frame" x="51" y="0.0" width="264.5" height="70"/>
+                                                        <rect key="frame" x="46" y="0.0" width="236" height="70"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="8kt-yY-GHY">
                                                                 <rect key="frame" x="0.0" y="0.0" width="121" height="70"/>
@@ -154,7 +154,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEj-S4-m2R">
-                                                                <rect key="frame" x="194.5" y="0.0" width="70" height="70"/>
+                                                                <rect key="frame" x="166" y="0.0" width="70" height="70"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="bEj-S4-m2R" secondAttribute="height" multiplier="1:1" id="Sxb-Il-ZY1"/>
                                                                     <constraint firstAttribute="height" constant="70" id="fSC-a8-Qlo"/>
@@ -168,20 +168,20 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OD1-YC-Stm">
-                                                        <rect key="frame" x="315.5" y="0.0" width="58.5" height="70"/>
+                                                        <rect key="frame" x="282" y="0.0" width="53" height="70"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NzR-dx-IBp">
-                                                <rect key="frame" x="20" y="479.5" width="374" height="97.5"/>
+                                                <rect key="frame" x="20" y="457" width="335" height="63"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="5" id="JYj-5Y-Zuc"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrB-CQ-xzo">
-                                                <rect key="frame" x="20" y="577" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="520" width="335" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="HF8-Hv-bST"/>
                                                 </constraints>
@@ -195,7 +195,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqL-zq-1cl">
-                                                <rect key="frame" x="20" y="607" width="374" height="33"/>
+                                                <rect key="frame" x="20" y="550" width="335" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -225,7 +225,7 @@
                     <navigationItem key="navigationItem" id="GMj-Ha-Y5r">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="haB-Ss-otw">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2zG-7V-44n">
-                                <rect key="frame" x="20" y="8" width="28" height="28"/>
+                                <rect key="frame" x="16" y="8" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_backButton"/>
@@ -251,27 +251,27 @@
             <objects>
                 <viewController storyboardIdentifier="GoSignInOrUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="X8K-8W-R7D" customClass="GoSignInOrUpViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e9V-9o-puE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_Sign in_or_up" translatesAutoresizingMaskIntoConstraints="NO" id="KJR-uk-Btg">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kcS-Xu-lrM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrH-0A-5Se">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="107"/>
+                                        <rect key="frame" x="20" y="0.0" width="335" height="97"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="5JY-DM-9Bc">
-                                        <rect key="frame" x="20" y="107" width="374" height="155.5"/>
+                                        <rect key="frame" x="20" y="97" width="335" height="89.333333333333314"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="AMV-ZW-Vwh">
-                                                <rect key="frame" x="145" y="0.0" width="84" height="101"/>
+                                                <rect key="frame" x="125.66666666666666" y="0.0" width="84" height="34.666666666666664"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCR-4e-hBE">
-                                                <rect key="frame" x="57" y="114" width="260.5" height="41.5"/>
+                                                <rect key="frame" x="37.333333333333343" y="47.666666666666657" width="260.66666666666663" height="41.666666666666657"/>
                                                 <string key="text">Meter Card and Smart Parking
 Meter</string>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
@@ -281,17 +281,17 @@ Meter</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xKe-dw-7gY">
-                                        <rect key="frame" x="20" y="262.5" width="374" height="390.5"/>
+                                        <rect key="frame" x="20" y="186.33333333333334" width="335" height="390.33333333333326"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="236-s1-izE">
-                                        <rect key="frame" x="20" y="653" width="374" height="163.5"/>
+                                        <rect key="frame" x="20" y="576.66666666666663" width="335" height="163.33333333333337"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="5Ym-1F-zhY">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="115.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="115.33333333333333"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtC-Gc-3Uy">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="62.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="62.333333333333336"/>
                                                         <string key="text">Lorem ipsum dolor sit amet,
 consectetur
 adipiscing elit, sed do eiusmod</string>
@@ -300,7 +300,7 @@ adipiscing elit, sed do eiusmod</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iv-WC-CKZ" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="68.5" width="374" height="47"/>
+                                                        <rect key="frame" x="0.0" y="68.333333333333371" width="335" height="47"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="a5l-Kz-Kfa"/>
@@ -312,7 +312,7 @@ adipiscing elit, sed do eiusmod</string>
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bo7-TH-S3C">
-                                                <rect key="frame" x="0.0" y="133.5" width="374" height="30"/>
+                                                <rect key="frame" x="0.0" y="133.33333333333337" width="335" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="GOi-qp-rN9"/>
                                                 </constraints>
@@ -328,7 +328,7 @@ adipiscing elit, sed do eiusmod</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYW-cj-PD6">
-                                        <rect key="frame" x="20" y="816.5" width="374" height="79.5"/>
+                                        <rect key="frame" x="20" y="740" width="335" height="72"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -364,23 +364,23 @@ adipiscing elit, sed do eiusmod</string>
             <objects>
                 <viewController storyboardIdentifier="ForgotPasswordViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dx7-Cv-hbc" customClass="ForgotPasswordViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fTJ-Fi-h7F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="syn-Q0-QG9">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="509.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="476.66666666666669"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q5o-kN-VbF">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_signin" translatesAutoresizingMaskIntoConstraints="NO" id="jxf-yh-AZQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="0e3-6Y-bV1">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="256"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YzH-oO-jub">
-                                                        <rect key="frame" x="0.0" y="114" width="414" height="101"/>
+                                                        <rect key="frame" x="0.0" y="90" width="375" height="101"/>
                                                     </imageView>
                                                 </subviews>
                                                 <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="41" trailing="0.0"/>
@@ -399,23 +399,23 @@ adipiscing elit, sed do eiusmod</string>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="opc-Bs-3xa">
-                                        <rect key="frame" x="0.0" y="256" width="414" height="253.5"/>
+                                        <rect key="frame" x="0.0" y="232" width="375" height="244.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sZ-NG-2Ry">
-                                                <rect key="frame" x="20" y="0.0" width="374" height="30"/>
+                                                <rect key="frame" x="20" y="0.0" width="335" height="27"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x0Y-cO-x42">
-                                                <rect key="frame" x="20" y="30" width="374" height="66.5"/>
+                                                <rect key="frame" x="20" y="27" width="335" height="66.666666666666671"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAF-zo-gyI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="24.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="24.666666666666668"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                                         <color key="textColor" name="000000"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5k-5K-7bT">
-                                                        <rect key="frame" x="0.0" y="34.5" width="374" height="32"/>
+                                                        <rect key="frame" x="0.0" y="34.666666666666686" width="335" height="32"/>
                                                         <string key="text">We'll send you an email with a link 
 to reset you password</string>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
@@ -425,11 +425,11 @@ to reset you password</string>
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMT-zM-hfa">
-                                                <rect key="frame" x="20" y="96.5" width="374" height="25"/>
+                                                <rect key="frame" x="20" y="93.666666666666686" width="335" height="23"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzQ-rH-xGl" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="121.5" width="374" height="45"/>
+                                                <rect key="frame" x="20" y="116.66666666666669" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="0Dq-nN-UBX"/>
@@ -439,11 +439,11 @@ to reset you password</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xim-KO-jdp">
-                                                <rect key="frame" x="20" y="166.5" width="374" height="42"/>
+                                                <rect key="frame" x="20" y="161.66666666666669" width="335" height="38"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fR1-wX-9QP" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="208.5" width="374" height="45"/>
+                                                <rect key="frame" x="20" y="199.66666666666669" width="335" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="AXv-rc-yE4"/>
@@ -474,7 +474,7 @@ to reset you password</string>
                     <navigationItem key="navigationItem" id="nKC-3Q-Lar">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="Tpe-Sm-Vgi">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Gfc-J2-6UE">
-                                <rect key="frame" x="20" y="8" width="28" height="28"/>
+                                <rect key="frame" x="16" y="8" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_backButton"/>
@@ -499,27 +499,27 @@ to reset you password</string>
             <objects>
                 <viewController storyboardIdentifier="SignUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="F1g-y9-FQm" customClass="SignUpViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cOR-vd-U5n" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T8i-qL-gFN">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4r-I4-CGu">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="23"/>
+                                        <rect key="frame" x="20" y="0.0" width="335" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="SUc-qs-ZFV">
-                                        <rect key="frame" x="20" y="23" width="374" height="49"/>
+                                        <rect key="frame" x="20" y="21" width="335" height="49"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xz-cR-E8K">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="24.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="24.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                                 <color key="textColor" name="000000"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0w-CE-2yr">
-                                                <rect key="frame" x="0.0" y="31.5" width="374" height="17.5"/>
+                                                <rect key="frame" x="0.0" y="31.666666666666657" width="335" height="17.333333333333329"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" name="929292"/>
                                                 <nil key="highlightedColor"/>
@@ -527,14 +527,14 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EXX-uB-hDB">
-                                        <rect key="frame" x="20" y="72" width="374" height="34.5"/>
+                                        <rect key="frame" x="20" y="70" width="335" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AM1-w9-K4d">
-                                        <rect key="frame" x="20" y="106.5" width="374" height="53"/>
+                                        <rect key="frame" x="20" y="101" width="335" height="48"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rU8-zW-GTd" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="179.5" height="53"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="48"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="User"/>
@@ -544,7 +544,7 @@ to reset you password</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUM-eF-Fci" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="194.5" y="0.0" width="179.5" height="53"/>
+                                                <rect key="frame" x="175" y="0.0" width="160" height="48"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Business"/>
@@ -556,69 +556,69 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUc-Ge-fby">
-                                        <rect key="frame" x="20" y="159.5" width="374" height="23"/>
+                                        <rect key="frame" x="20" y="149" width="335" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Myr-TQ-sMJ">
-                                        <rect key="frame" x="20" y="182.5" width="374" height="419.5"/>
+                                        <rect key="frame" x="20" y="170" width="335" height="380"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nv4-9g-2iV" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Name"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M64-68-qKh">
-                                                <rect key="frame" x="0.0" y="49.5" width="374" height="24.5"/>
+                                                <rect key="frame" x="0.0" y="45" width="335" height="22"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78U-pJ-oQR" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="74" width="374" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="67" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Na-MM-Fwx">
-                                                <rect key="frame" x="0.0" y="123.5" width="374" height="24.5"/>
+                                                <rect key="frame" x="0.0" y="112" width="335" height="22"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FAc-Ka-Mjq" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="148" width="374" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="134" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CSa-C6-oed">
-                                                <rect key="frame" x="0.0" y="197.5" width="374" height="24.5"/>
+                                                <rect key="frame" x="0.0" y="179" width="335" height="22"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RYc-wS-y7M" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="222" width="374" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="201" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Confirm Password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LbC-LX-M30">
-                                                <rect key="frame" x="0.0" y="271.5" width="374" height="24"/>
+                                                <rect key="frame" x="0.0" y="246" width="335" height="22"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxp-20-jfI" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="295.5" width="374" height="50"/>
+                                                <rect key="frame" x="0.0" y="268" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Plate Number"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJk-gD-gN6">
-                                                <rect key="frame" x="0.0" y="345.5" width="374" height="24"/>
+                                                <rect key="frame" x="0.0" y="313" width="335" height="22"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nk8-J9-SRa" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="369.5" width="374" height="50"/>
+                                                <rect key="frame" x="0.0" y="335" width="335" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Driving License"/>
@@ -638,14 +638,14 @@ to reset you password</string>
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JaD-h1-YXW">
-                                        <rect key="frame" x="20" y="602" width="374" height="49.5"/>
+                                        <rect key="frame" x="20" y="550" width="335" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dIN-q1-sLY">
-                                        <rect key="frame" x="20" y="651.5" width="374" height="106.5"/>
+                                        <rect key="frame" x="20" y="595" width="335" height="79"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meh-pM-l0p">
-                                                <rect key="frame" x="152" y="0.0" width="70" height="106.5"/>
+                                                <rect key="frame" x="132.66666666666666" y="0.0" width="70" height="79"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="ic_next"/>
                                                 <connections>
@@ -655,7 +655,7 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ut7-Cq-eVc">
-                                        <rect key="frame" x="20" y="758" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="674" width="335" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -683,7 +683,7 @@ to reset you password</string>
                     <navigationItem key="navigationItem" id="FOC-Ht-fsU">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="MRS-Dc-QzU">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cGJ-CP-S6y">
-                                <rect key="frame" x="20" y="8" width="28" height="28"/>
+                                <rect key="frame" x="16" y="8" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_backButton"/>
@@ -715,27 +715,27 @@ to reset you password</string>
             <objects>
                 <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dbP-6I-Ug6" customClass="ProfileViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="88m-8h-LBG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aqr-p1-qxL">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWg-Th-Wtg">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="249.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3r6-JO-606">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="249.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8w-SY-Oat">
-                                                        <rect key="frame" x="87" y="0.0" width="240" height="27.5"/>
+                                                        <rect key="frame" x="67.666666666666686" y="0.0" width="240" height="25"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="JQY-nv-L9x">
-                                                        <rect key="frame" x="122.5" y="27.5" width="169" height="104"/>
+                                                        <rect key="frame" x="103" y="25.000000000000007" width="169" height="103.66666666666669"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demo" translatesAutoresizingMaskIntoConstraints="NO" id="1Zu-WU-omC">
-                                                                <rect key="frame" x="59.5" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="59.666666666666657" y="0.0" width="50" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="1Zu-WU-omC" secondAttribute="height" multiplier="1:1" id="r0b-MG-wYN"/>
                                                                     <constraint firstAttribute="height" constant="50" id="rHd-bk-0Yo"/>
@@ -747,16 +747,16 @@ to reset you password</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="39u-C0-zGe">
-                                                                <rect key="frame" x="0.0" y="62" width="169" height="42"/>
+                                                                <rect key="frame" x="0.0" y="62" width="169" height="41.666666666666657"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking owner name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFt-op-YJ6">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="169" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="169" height="19.666666666666668"/>
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                                                         <color key="textColor" name="000000"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email......" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7g-BE-Dai">
-                                                                        <rect key="frame" x="0.0" y="26" width="169" height="16"/>
+                                                                        <rect key="frame" x="0.0" y="25.666666666666657" width="169" height="16"/>
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                                         <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -766,11 +766,11 @@ to reset you password</string>
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pj8-Rw-aL2">
-                                                        <rect key="frame" x="87" y="131.5" width="240" height="23.5"/>
+                                                        <rect key="frame" x="67.666666666666686" y="128.66666666666666" width="240" height="15"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlC-zU-gye" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                        <rect key="frame" x="122" y="155" width="170" height="45"/>
+                                                        <rect key="frame" x="102.66666666666669" y="143.66666666666666" width="170" height="45"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="170" id="D3M-Ie-gDU"/>
@@ -781,7 +781,7 @@ to reset you password</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coA-FR-dFq">
-                                                        <rect key="frame" x="87" y="200" width="240" height="49.5"/>
+                                                        <rect key="frame" x="67.666666666666686" y="188.66666666666669" width="240" height="41.333333333333343"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
@@ -796,35 +796,35 @@ to reset you password</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWe-4u-pA6">
-                                        <rect key="frame" x="0.0" y="249.5" width="414" height="24"/>
+                                        <rect key="frame" x="0.0" y="230" width="375" height="22"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uyx-HE-scA">
-                                        <rect key="frame" x="0.0" y="273.5" width="414" height="251"/>
+                                        <rect key="frame" x="0.0" y="252" width="375" height="230"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lrm-f8-cN4" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Messages"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMq-KW-IVM" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="65.5" width="414" height="55"/>
+                                                <rect key="frame" x="0.0" y="60" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Favorites"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfP-Dh-4ej" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="130.5" width="414" height="55"/>
+                                                <rect key="frame" x="0.0" y="120" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="My Bookings"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uar-x2-fRW" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="195.5" width="414" height="55.5"/>
+                                                <rect key="frame" x="0.0" y="180" width="375" height="50"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Change Password"/>
@@ -833,11 +833,11 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-j5-Hsa">
-                                        <rect key="frame" x="0.0" y="524.5" width="414" height="217.5"/>
+                                        <rect key="frame" x="0.0" y="482" width="375" height="176"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGM-7k-HZv">
-                                        <rect key="frame" x="0.0" y="742" width="414" height="32"/>
+                                        <rect key="frame" x="0.0" y="658" width="375" height="32"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Log out">
@@ -850,14 +850,14 @@ to reset you password</string>
                         <viewLayoutGuide key="safeArea" id="2OZ-rO-KIW"/>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nWg-Th-Wtg" firstAttribute="height" secondItem="88m-8h-LBG" secondAttribute="height" multiplier="226/812" id="0nF-g0-9v2"/>
+                            <constraint firstItem="nWg-Th-Wtg" firstAttribute="height" secondItem="88m-8h-LBG" secondAttribute="height" multiplier="230/812" id="0nF-g0-9v2"/>
                             <constraint firstItem="2OZ-rO-KIW" firstAttribute="bottom" secondItem="aqr-p1-qxL" secondAttribute="bottom" id="AeH-Fe-njn"/>
                             <constraint firstItem="aqr-p1-qxL" firstAttribute="top" secondItem="2OZ-rO-KIW" secondAttribute="top" id="Afi-IV-d7T"/>
                             <constraint firstItem="aqr-p1-qxL" firstAttribute="leading" secondItem="2OZ-rO-KIW" secondAttribute="leading" id="HFH-et-8Qw"/>
-                            <constraint firstItem="Pj8-Rw-aL2" firstAttribute="height" secondItem="88m-8h-LBG" secondAttribute="height" multiplier="21/812" id="LZR-b5-OWu"/>
                             <constraint firstItem="cWe-4u-pA6" firstAttribute="height" secondItem="88m-8h-LBG" secondAttribute="height" multiplier="22/812" id="RzW-pA-gdc"/>
                             <constraint firstItem="lrm-f8-cN4" firstAttribute="height" secondItem="88m-8h-LBG" secondAttribute="height" multiplier="50/812" id="SbV-3Z-07p"/>
                             <constraint firstItem="2OZ-rO-KIW" firstAttribute="trailing" secondItem="aqr-p1-qxL" secondAttribute="trailing" id="kxw-YR-F8V"/>
+                            <constraint firstItem="Pj8-Rw-aL2" firstAttribute="height" secondItem="88m-8h-LBG" secondAttribute="height" multiplier="15/812" id="tNX-8X-X55"/>
                             <constraint firstItem="F8w-SY-Oat" firstAttribute="height" secondItem="88m-8h-LBG" secondAttribute="height" multiplier="25/812" id="xfS-oz-oJn"/>
                         </constraints>
                     </view>
@@ -882,17 +882,17 @@ to reset you password</string>
             <objects>
                 <viewController storyboardIdentifier="EditProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GH4-pG-gZk" customClass="EditProfileViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="42v-PP-nO4" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="A9d-e2-UuC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="523"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="519"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TPX-VP-sNv">
-                                        <rect key="frame" x="20" y="36" width="374" height="130"/>
+                                        <rect key="frame" x="20" y="36" width="335" height="130"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson " translatesAutoresizingMaskIntoConstraints="NO" id="BAd-tF-342">
-                                                <rect key="frame" x="140" y="0.0" width="94" height="94"/>
+                                                <rect key="frame" x="120.66666666666666" y="0.0" width="94" height="94"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="BAd-tF-342" secondAttribute="height" multiplier="1:1" id="2FU-WZ-ong"/>
                                                     <constraint firstAttribute="height" constant="94" id="VDa-JR-SLx"/>
@@ -907,10 +907,10 @@ to reset you password</string>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="36" trailing="0.0"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="d8H-Gv-nPs">
-                                        <rect key="frame" x="20" y="166" width="374" height="267"/>
+                                        <rect key="frame" x="20" y="166" width="335" height="267"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVA-bd-6Xw" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="erG-zY-c8a"/>
@@ -920,21 +920,21 @@ to reset you password</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWQ-J8-LUs" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="74" width="374" height="45"/>
+                                                <rect key="frame" x="0.0" y="74" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JU8-Kp-ubb" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="148" width="374" height="45"/>
+                                                <rect key="frame" x="0.0" y="148" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Plate Number"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ai-5T-inU" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="222" width="374" height="45"/>
+                                                <rect key="frame" x="0.0" y="222" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Driving License"/>
@@ -943,11 +943,11 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OeU-hI-4EM">
-                                        <rect key="frame" x="20" y="433" width="374" height="43"/>
+                                        <rect key="frame" x="20" y="433" width="335" height="39"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-oc-343" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="476" width="374" height="47"/>
+                                        <rect key="frame" x="20" y="472" width="335" height="47"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="XNT-Qy-jHU"/>
@@ -986,17 +986,17 @@ to reset you password</string>
             <objects>
                 <viewController storyboardIdentifier="PasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g6T-Z6-jBg" customClass="PasswordViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fXx-fk-Z3o" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yiO-79-aSn">
-                                <rect key="frame" x="0.0" y="44" width="414" height="311"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="307"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="feU-up-HdA">
-                                        <rect key="frame" x="20" y="28" width="374" height="193"/>
+                                        <rect key="frame" x="20" y="28" width="335" height="193"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aml-CT-4aI" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="y0h-f7-ZNF"/>
@@ -1006,14 +1006,14 @@ to reset you password</string>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSc-Fc-XMY" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="74" width="374" height="45"/>
+                                                <rect key="frame" x="0.0" y="74" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="New password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFz-Ws-DdU" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="148" width="374" height="45"/>
+                                                <rect key="frame" x="0.0" y="148" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Repeat password"/>
@@ -1022,11 +1022,11 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcB-8K-NXw">
-                                        <rect key="frame" x="20" y="221" width="374" height="43"/>
+                                        <rect key="frame" x="20" y="221" width="335" height="39"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnD-gx-GOd" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="264" width="374" height="47"/>
+                                        <rect key="frame" x="20" y="260" width="335" height="47"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="fwY-yp-fbU"/>
@@ -1064,14 +1064,14 @@ to reset you password</string>
             <objects>
                 <viewController storyboardIdentifier="MessageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yzq-14-t4b" customClass="MessageViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Byr-Gk-Sry">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gny-fV-nPe">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="POu-Vx-0uE">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="684"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="dataSource" destination="yzq-14-t4b" id="btO-d9-l55"/>
@@ -1079,10 +1079,10 @@ to reset you password</string>
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1En-6R-h0a">
-                                        <rect key="frame" x="0.0" y="768" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="684" width="375" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="xG4-5y-YVa">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eC6-80-Ra0">
                                                         <rect key="frame" x="12" y="0.0" width="44" height="50"/>
@@ -1096,12 +1096,12 @@ to reset you password</string>
                                                         </connections>
                                                     </button>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write a message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7e-7l-uHv">
-                                                        <rect key="frame" x="68" y="0.0" width="278" height="50"/>
+                                                        <rect key="frame" x="68" y="0.0" width="239" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fez-vX-fe6">
-                                                        <rect key="frame" x="358" y="0.0" width="44" height="50"/>
+                                                        <rect key="frame" x="319" y="0.0" width="44" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="44" id="ugH-qO-l1P"/>
                                                         </constraints>
@@ -1145,12 +1145,13 @@ to reset you password</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FOm-0k-bMB" firstAttribute="trailing" secondItem="gny-fV-nPe" secondAttribute="trailing" id="17x-xq-Iug"/>
-                            <constraint firstItem="FOm-0k-bMB" firstAttribute="bottom" secondItem="gny-fV-nPe" secondAttribute="bottom" id="90V-ro-6i2"/>
+                            <constraint firstItem="gny-fV-nPe" firstAttribute="bottom" secondItem="FOm-0k-bMB" secondAttribute="bottom" id="afg-rY-3gN"/>
                             <constraint firstItem="gny-fV-nPe" firstAttribute="leading" secondItem="FOm-0k-bMB" secondAttribute="leading" id="cwa-gH-hCS"/>
                             <constraint firstItem="gny-fV-nPe" firstAttribute="top" secondItem="FOm-0k-bMB" secondAttribute="top" id="mko-qb-lgL"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="afg-rY-3gN" id="TMp-MF-zXp"/>
                         <outlet property="messageTextField" destination="l7e-7l-uHv" id="kT0-bY-101"/>
                         <outlet property="tableView" destination="POu-Vx-0uE" id="cfr-4L-f2j"/>
                     </connections>
@@ -1165,7 +1166,7 @@ to reset you password</string>
                 <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Uud-Jw-h7h" customClass="MainNavigationController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lUJ-jc-aRM">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

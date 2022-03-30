@@ -171,6 +171,14 @@ extension UIViewController {
 
 extension UIViewController {
 
+    var _getStatusBarHeightBottom: CGFloat? {
+        return UIApplication.shared.keyWindow?.safeAreaInsets.bottom
+    }
+
+    var _getStatusBarHeightTop: CGFloat? {
+        return UIApplication.shared.keyWindow?.safeAreaInsets.top
+    }
+
     var _screenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
@@ -193,15 +201,37 @@ extension UIViewController {
         navigationController?.navigationBar.tintColor = "000000"._hexColor
     }
 
-    func _getStatusBarHeight() -> CGFloat {
-        var statusBarHeight: CGFloat = 0
-        if #available(iOS 13.0, *) {
-            let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
-            statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+    func _addKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(_keyboardNotifications(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_keyboardNotifications(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(_keyboardNotifications(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    func _removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func _keyboardNotifications(notification: NSNotification) {
+
+        guard let keyBoardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        debugPrint(" *********************************** ")
+        if notification.name == UIResponder.keyboardWillChangeFrameNotification || notification.name == UIResponder.keyboardWillShowNotification {
+            if let statusBar = self._getStatusBarHeightBottom, view.frame.origin.y == 0 {
+                self.view.frame.origin.y = statusBar - keyBoardFrame.height
+                debugPrint("view \(self.view.frame.origin.y) keyBoardFrame \(keyBoardFrame.height) statusBar \(statusBar)")
+                return
+            }
+            debugPrint(" \(self.view.frame.origin.y)  \(keyBoardFrame.height) ")
+            self.view.frame.origin.y = -keyBoardFrame.height
         } else {
-            statusBarHeight = UIApplication.shared.statusBarFrame.height
+
+            self.view.frame.origin.y = 0
         }
-        return statusBarHeight
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
 
 //    public static func _isEmailValid(emailAddress:String) -> Bool {

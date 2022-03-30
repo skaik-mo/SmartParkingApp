@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         IQKeyboardManager.shared.enable = true
-//        IQKeyboardManager.shared.enableDebugging = true
         IQKeyboardManager.shared.layoutIfNeededOnUpdate = true
 
         GMSServices.provideAPIKey("AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc")
@@ -47,4 +46,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
 

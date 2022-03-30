@@ -33,7 +33,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="118.5" height="77"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8V-6d-MlY">
-                                                <rect key="frame" x="13" y="15" width="75.5" height="48"/>
+                                                <rect key="frame" x="13" y="15" width="92.5" height="48"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                 <color key="textColor" name="FFFFFF"/>
@@ -41,7 +41,7 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" name="3FBF66"/>
-                                        <directionalEdgeInsets key="directionalLayoutMargins" top="15" leading="13" bottom="14" trailing="30"/>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="15" leading="13" bottom="14" trailing="13"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>

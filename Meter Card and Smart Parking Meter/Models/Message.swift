@@ -12,12 +12,12 @@ class Message {
     var id: String?
     var message: String?
     var isSender: Bool?
-    var time: Date?
+    var time: Date
     
     init(message: String?, isSender: Bool?, time: Date?) {
         self.id = UUID().uuidString
         self.message = message
         self.isSender = isSender
-        self.time = time
+        self.time = time ?? Date()
     }
 }
