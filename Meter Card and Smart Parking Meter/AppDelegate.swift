@@ -7,8 +7,9 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import Firebase
 import GoogleMaps
-//import GooglePlaces
+import FBSDKCoreKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,12 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var rootNavigationController: MainNavigationController?
 
+    var window: UIWindow?
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.layoutIfNeededOnUpdate = true
+
+        FirebaseApp.configure()
+
+        self.setUpFacebook(application, didFinishLaunchingWithOptions: launchOptions)
 
         GMSServices.provideAPIKey("AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc")
 //        GMSPlacesClient.provideAPIKey("AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc")
@@ -44,7 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
 }
 
+// setUp Facebook
+extension AppDelegate {
+
+    private func setUpFacebook(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+
+        ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+
+    }
+
+}
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>620628814335-blv0vj2iu243b93eboc5ku2ob97cg9fq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.620628814335-blv0vj2iu243b93eboc5ku2ob97cg9fq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>620628814335</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>skaik-mo.Meter-Card-and-Smart-Parking-Meter</string>
+	<key>PROJECT_ID</key>
+	<string>parking-meter-343901</string>
+	<key>STORAGE_BUCKET</key>
+	<string>parking-meter-343901.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:620628814335:ios:b67e56eb3fadab9e651fca</string>
+	<key>DATABASE_URL</key>
+	<string>https://parking-meter-343901-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

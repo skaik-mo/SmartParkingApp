@@ -26,12 +26,12 @@ extension String {
         return  NSLocalizedString(self, comment: "")
     }
     
-    var _removeWhiteSpace_: String {
+    var _removeWhiteSpace: String {
         return self.replacingOccurrences(of: " ", with: "")
     }
     
     var _isValidValue: Bool {
-        return !self._removeWhiteSpace_.isEmpty
+        return !self._removeWhiteSpace.isEmpty
     }
     
     var _toDate: Date? {

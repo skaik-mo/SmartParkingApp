@@ -106,16 +106,10 @@ extension UIViewController {
 
 //**********************<< Alerts Shortcuts >>**********************
 extension UIViewController {
-    func _showAlertOKAndCancel(title: String?, message: String?) {
+    func _showAlertOKWithTitle(title: String?, message: String?) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        let okayAction = UIAlertAction.init(title: "OK", style: .default) { action in
-            debugPrint("Okay aciton is pressed")
-        }
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { action in
-            debugPrint("Cancel aciton is pressed")
-        }
+        let okayAction = UIAlertAction.init(title: "OK", style: .default)
         alert.addAction(okayAction)
-        alert.addAction(cancelAction)
         alert._presentVC()
     }
 
@@ -129,7 +123,7 @@ extension UIViewController {
 
     func _showErrorAlertWithTitle(title: String?, message: String?) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-        let okayAction = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+        let okayAction = UIAlertAction.init(title: "OK", style: .destructive, handler: nil)
 
         alert.addAction(okayAction)
         alert._presentVC()
@@ -137,7 +131,7 @@ extension UIViewController {
 
     func _showErrorAlert(message: String?) {
         let alert = UIAlertController.init(title: "Error", message: message, preferredStyle: .alert)
-        let okayAction = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+        let okayAction = UIAlertAction.init(title: "OK", style: .destructive, handler: nil)
 
         alert.addAction(okayAction)
         alert._presentVC()

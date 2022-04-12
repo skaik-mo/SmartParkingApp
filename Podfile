@@ -13,4 +13,14 @@ pod 'JTAppleCalendar', '7.1'
 pod 'Cosmos', '23.0'
 pod 'CHTCollectionViewWaterfallLayout'
 
+pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
+pod 'Firebase/Storage'
+
+pod 'FBSDKLoginKit'
+
+pod 'SVProgressHUD'
+pod 'SDWebImage', '5.0'
+
 end

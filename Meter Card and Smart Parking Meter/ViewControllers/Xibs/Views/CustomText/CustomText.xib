@@ -17,6 +17,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
             <connections>
                 <outlet property="cameraButton" destination="nqy-4g-oc2" id="SkM-ek-Hd4"/>
+                <outlet property="cameraImage" destination="fMe-eV-OZm" id="4Ag-wx-WBW"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="NEW-Y6-CRu"/>
                 <outlet property="lineView" destination="fxa-OQ-OQr" id="Gmz-Uy-dhu"/>
                 <outlet property="textField" destination="oJM-AQ-15W" id="d4U-rU-MC7"/>
@@ -34,7 +35,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJM-AQ-15W">
-                                    <rect key="frame" x="0.0" y="0.0" width="279" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="284" height="44"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="textColor" name="000000"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
@@ -49,15 +50,9 @@
                                         <action selector="setGreenBackground:" destination="-1" eventType="editingDidBegin" id="Oof-qC-Vb8"/>
                                     </connections>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqy-4g-oc2">
-                                    <rect key="frame" x="279" y="0.0" width="30" height="44"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="6Zv-8m-6Jm"/>
-                                    </constraints>
-                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="ic_camera"/>
-                                </button>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_camera" translatesAutoresizingMaskIntoConstraints="NO" id="fMe-eV-OZm">
+                                    <rect key="frame" x="284" y="0.0" width="25" height="44"/>
+                                </imageView>
                             </subviews>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="15"/>
                         </stackView>
@@ -70,12 +65,24 @@
                         </view>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqy-4g-oc2">
+                    <rect key="frame" x="0.0" y="0.0" width="324" height="45"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <connections>
+                        <action selector="addImageAction:" destination="-1" eventType="touchUpInside" id="t48-Uv-hvq"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" name="FAFAFA"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="7dM-7j-Pqz" secondAttribute="trailing" id="0gP-mk-a0c"/>
+                <constraint firstAttribute="trailing" secondItem="nqy-4g-oc2" secondAttribute="trailing" id="5kK-Oi-4KJ"/>
                 <constraint firstItem="7dM-7j-Pqz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8Vl-yk-9FI"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="nqy-4g-oc2" secondAttribute="bottom" id="9iI-zB-GE9"/>
+                <constraint firstItem="nqy-4g-oc2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Cs0-lW-8Zk"/>
+                <constraint firstItem="nqy-4g-oc2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="V8P-mb-9m4"/>
                 <constraint firstAttribute="bottom" secondItem="7dM-7j-Pqz" secondAttribute="bottom" id="YKS-ox-yfH"/>
                 <constraint firstItem="7dM-7j-Pqz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oi6-bF-whm"/>
             </constraints>

@@ -12,17 +12,19 @@ class HomeBusinessViewController: UIViewController {
 
     @IBOutlet weak var homeTableView: UITableView!
     
+    @IBOutlet weak var authImage: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         localized()
         setupData()
-        fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
+        setImage()
     }
 
     @IBAction func profileAction(_ sender: Any) {
@@ -48,8 +50,8 @@ extension HomeBusinessViewController {
 
     }
 
-    func fetchData() {
-
+    func setImage() {
+        AuthManager.shared.setImage(authImage: self.authImage)
     }
 
 }

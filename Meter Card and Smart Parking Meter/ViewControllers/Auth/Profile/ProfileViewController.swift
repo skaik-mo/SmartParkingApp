@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var parkingOwnerImage: UIImageView!
+    @IBOutlet weak var authImage: UIImageView!
 
     @IBOutlet weak var ownerNameLabel: UILabel!
 
@@ -30,26 +30,30 @@ class ProfileViewController: UIViewController {
         setupView()
         localized()
         setupData()
-        fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
         self._setTitleBackBarButton()
+        setupData()
+        setImage()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
 
+    @IBAction func logoutAction(_ sender: Any) {
+       logout()
+    }
 }
 
 extension ProfileViewController {
 
     func setupView() {
         self.title = "My Profile"
-
+        
         switchAuth()
         
         self.editProfileButton.setUp(typeButton: .greenButton, corner: 22.5)
@@ -75,11 +79,13 @@ extension ProfileViewController {
     }
 
     func setupData() {
-
+            let auth = AuthManager.shared.getLocalAuth()
+            self.ownerNameLabel.text = auth.name
+            self.emailLabel.text = auth.email
     }
 
-    func fetchData() {
-
+    func setImage() {
+        AuthManager.shared.setImage(authImage: self.authImage)
     }
 
 }
@@ -112,6 +118,17 @@ extension ProfileViewController {
                 debugPrint("My Park Action")
                 let vc: MyParkingsViewController = MyParkingsViewController._instantiateVC(storyboard: self._businessStoryboard)
                 vc._push()
+            }
+        }
+    }
+    
+    private func logout() {
+        AuthManager.shared.logout { error in
+            if let _error = error {
+                self._showErrorAlert(message: _error.localizedDescription)
+            } else {
+                let vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
+                vc._rootPush()
             }
         }
     }

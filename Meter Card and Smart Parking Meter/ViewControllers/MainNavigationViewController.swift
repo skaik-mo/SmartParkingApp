@@ -50,7 +50,15 @@ extension MainNavigationController {
 extension MainNavigationController {
 
     func setRoot() {
-        let vc: GoSignInOrUpViewController = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
+        let vc: UIViewController
+        switch AuthManager.shared.getLocalAuth().typeAuth {
+        case .User:
+            vc = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
+        case .Business:
+            vc = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
+        case .none:
+            vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
+        }
         vc._rootPush()
     }
 

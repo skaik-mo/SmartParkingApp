@@ -1,17 +1,16 @@
 //  Skaik_mo
 //
-//  ForgotPasswordViewController.swift
+//  GoSignInOrUpViewController.swift
 //  Meter Card and Smart Parking Meter
 //
-//  Created by Mohammed Skaik on 09/03/2022.
+//  Created by Mohammed Skaik on 07/03/2022.
 //
 
 import UIKit
+import FirebaseAuth
 
-class ForgotPasswordViewController: UIViewController {
+class GoSignInOrUpViewController: UIViewController {
 
-    @IBOutlet weak var emailText: CustomText!
-    
     @IBOutlet weak var greenButton: GreenButton!
     
     override func viewDidLoad() {
@@ -25,19 +24,25 @@ class ForgotPasswordViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    @IBAction func goSignUpAction(_ sender: Any) {
+        let vc: SignUpViewController = SignUpViewController._instantiateVC(storyboard: self._authStoryboard)
+        vc._push()
+    }
+    
 
 }
 
-extension ForgotPasswordViewController {
+extension GoSignInOrUpViewController {
 
     func setupView() {
-        self.title = ""
-        self.emailText.keyboardType = .emailAddress
-        
+        AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
-            debugPrint("Send")
+            let vc: SignInViewController = SignInViewController._instantiateVC(storyboard: self._authStoryboard)
+            vc._push()
         }
+        
     }
 
     func localized() {

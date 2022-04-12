@@ -145,11 +145,17 @@
                                                                         <rect key="frame" x="0.0" y="9" width="52" height="52"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" image="ic_facebook"/>
+                                                                        <connections>
+                                                                            <action selector="loginByFacebook:" destination="qzb-Fy-7tE" eventType="touchUpInside" id="L8U-H9-ZA5"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0c-J9-ApE">
                                                                         <rect key="frame" x="69" y="9" width="52" height="52"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <state key="normal" image="ic_apple"/>
+                                                                        <connections>
+                                                                            <action selector="loginByApple:" destination="qzb-Fy-7tE" eventType="touchUpInside" id="04m-Zf-J3e"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
@@ -238,6 +244,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="emailText" destination="J2f-qa-H4A" id="uF0-yU-2Zc"/>
+                        <outlet property="goHomeButton" destination="bEj-S4-m2R" id="KIz-e5-PYt"/>
                         <outlet property="passwordText" destination="U28-gi-qmC" id="hGs-L3-inj"/>
                         <outlet property="signUpButton" destination="rrB-CQ-xzo" id="eCv-Lr-xLp"/>
                     </connections>
@@ -699,6 +706,7 @@ to reset you password</string>
                         <outlet property="confirmPasswordText" destination="RYc-wS-y7M" id="D9g-SK-B5h"/>
                         <outlet property="drivingLicenseText" destination="Nk8-J9-SRa" id="Shg-Nd-ElB"/>
                         <outlet property="emailText" destination="78U-pJ-oQR" id="Fud-a8-bo3"/>
+                        <outlet property="goHomeButton" destination="meh-pM-l0p" id="6oZ-XJ-P7g"/>
                         <outlet property="nameText" destination="Nv4-9g-2iV" id="NSk-va-uZM"/>
                         <outlet property="passwordText" destination="FAc-Ka-Mjq" id="VOX-8p-jFe"/>
                         <outlet property="plateNumberText" destination="Gxp-20-jfI" id="eRx-zd-nxK"/>
@@ -734,7 +742,7 @@ to reset you password</string>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="JQY-nv-L9x">
                                                         <rect key="frame" x="103" y="25.000000000000007" width="169" height="103.66666666666669"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demo" translatesAutoresizingMaskIntoConstraints="NO" id="1Zu-WU-omC">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demo" translatesAutoresizingMaskIntoConstraints="NO" id="1Zu-WU-omC">
                                                                 <rect key="frame" x="59.666666666666657" y="0.0" width="50" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="1Zu-WU-omC" secondAttribute="height" multiplier="1:1" id="r0b-MG-wYN"/>
@@ -833,16 +841,22 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5KU-j5-Hsa">
-                                        <rect key="frame" x="0.0" y="482" width="375" height="176"/>
+                                        <rect key="frame" x="0.0" y="482" width="375" height="173"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGM-7k-HZv">
-                                        <rect key="frame" x="0.0" y="658" width="375" height="32"/>
+                                        <rect key="frame" x="0.0" y="655" width="375" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="luB-Ez-LOn"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Log out">
                                             <color key="titleColor" name="3FBF66"/>
                                         </state>
+                                        <connections>
+                                            <action selector="logoutAction:" destination="dbP-6I-Ug6" eventType="touchUpInside" id="gpR-ks-Vdw"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -863,6 +877,7 @@ to reset you password</string>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="authImage" destination="1Zu-WU-omC" id="oYR-DT-T5X"/>
                         <outlet property="changePasswordButton" destination="Uar-x2-fRW" id="TEM-UC-kiH"/>
                         <outlet property="editProfileButton" destination="hlC-zU-gye" id="n86-7n-Von"/>
                         <outlet property="emailLabel" destination="S7g-BE-Dai" id="jlc-it-LCH"/>
@@ -870,7 +885,6 @@ to reset you password</string>
                         <outlet property="messageButton" destination="lrm-f8-cN4" id="8z3-KL-URc"/>
                         <outlet property="myBookingsButton" destination="qfP-Dh-4ej" id="SBd-9w-siq"/>
                         <outlet property="ownerNameLabel" destination="hFt-op-YJ6" id="PdO-z9-XJB"/>
-                        <outlet property="parkingOwnerImage" destination="1Zu-WU-omC" id="4XE-bc-tEI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aeI-eL-59B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -891,7 +905,7 @@ to reset you password</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TPX-VP-sNv">
                                         <rect key="frame" x="20" y="36" width="335" height="130"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson " translatesAutoresizingMaskIntoConstraints="NO" id="BAd-tF-342">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="BAd-tF-342">
                                                 <rect key="frame" x="120.66666666666666" y="0.0" width="94" height="94"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="BAd-tF-342" secondAttribute="height" multiplier="1:1" id="2FU-WZ-ong"/>
@@ -970,6 +984,7 @@ to reset you password</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="authImage" destination="BAd-tF-342" id="MU9-0M-pph"/>
                         <outlet property="drivingLicenseText" destination="7ai-5T-inU" id="LT2-zm-Oja"/>
                         <outlet property="emailText" destination="GWQ-J8-LUs" id="koF-7I-h0G"/>
                         <outlet property="greenButton" destination="8UY-oc-343" id="0ec-4r-jvK"/>
@@ -1185,7 +1200,7 @@ to reset you password</string>
         <image name="ic_camera2" width="21" height="19"/>
         <image name="ic_facebook" width="52" height="52"/>
         <image name="ic_next" width="70" height="70"/>
-        <image name="ic_placeholderPerson " width="95" height="95"/>
+        <image name="ic_placeholderPerson" width="95" height="95"/>
         <image name="ic_send" width="30" height="28"/>
         <image name="logo" width="84" height="101"/>
         <namedColor name="000000">

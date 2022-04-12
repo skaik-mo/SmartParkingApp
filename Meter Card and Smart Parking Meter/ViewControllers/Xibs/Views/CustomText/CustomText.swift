@@ -17,6 +17,7 @@ class CustomText: UIView {
     @IBOutlet weak var lineView: UIView!
     
     @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var cameraImage: UIImageView!
     
     @IBInspectable var placeholder: String? {
         set {
@@ -48,11 +49,28 @@ class CustomText: UIView {
     var showCameraIcon: Bool {
         set {
             self.cameraButton.isHidden = !newValue
+            self.cameraImage.isHidden = !newValue
+            self.textField.isEnabled = !newValue
         }
         get {
             return false
         }
     }
+    
+    var text: String {
+        set{
+            self.textField.text = newValue
+        }
+        get{
+            var value = ""
+            if let _text = self.textField.text {
+                value = _text._removeWhiteSpace
+            }
+            return value
+        }
+    }
+
+    var handleAddImage: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -81,6 +99,7 @@ class CustomText: UIView {
     private func setUpView(){
         textField._placeholderColor = "000000"._hexColor
         self.cameraButton.isHidden = true
+        self.cameraImage.isHidden = true
         
     }
     
@@ -93,5 +112,10 @@ class CustomText: UIView {
         self.contentView.backgroundColor = "FAFAFA"._hexColor
         self.lineView.backgroundColor = "EFEFEF"._hexColor
   }
+    
+    
+    @IBAction func addImageAction(_ sender: Any) {
+        handleAddImage?()
+    }
     
 }
