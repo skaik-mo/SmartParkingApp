@@ -454,6 +454,7 @@ PODS:
   - GoogleMaps/Base (6.0.1)
   - GoogleMaps/Maps (6.0.1):
     - GoogleMaps/Base
+  - GooglePlaces (6.0.0)
   - GoogleUtilities/AppDelegateSwizzler (7.7.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -501,6 +502,9 @@ PODS:
   - IQKeyboardManagerSwift (6.5.4)
   - JTAppleCalendar (7.1.0)
   - leveldb-library (1.22.1)
+  - MMBGoogleLocationPicker (0.0.5):
+    - GoogleMaps
+    - GooglePlaces
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -523,6 +527,7 @@ DEPENDENCIES:
   - GoogleMaps (= 6.0.1)
   - IQKeyboardManagerSwift (= 6.5.4)
   - JTAppleCalendar (= 7.1)
+  - MMBGoogleLocationPicker
   - SDWebImage (= 5.0)
   - SVProgressHUD
 
@@ -547,6 +552,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleMaps
+    - GooglePlaces
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -554,6 +560,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - JTAppleCalendar
     - leveldb-library
+    - MMBGoogleLocationPicker
     - nanopb
     - PromisesObjC
     - SDWebImage
@@ -579,6 +586,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: aa3cb422fab2b05d2efac543a5720d1a85b9dea5
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleMaps: c213fc2334b7374144cede914da779b99be0ab74
+  GooglePlaces: c97d96ae68594acb64035c9ca9f26fbfc1d23af1
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
@@ -586,11 +594,12 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   JTAppleCalendar: 60cb4e6de41c8e204fa0e182b98b531debdc9443
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  MMBGoogleLocationPicker: b8b188fa8171bc15ca1b89d11b5d38cf97dc9090
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SDWebImage: 5de80a0302de9e377e62f47d2fa1304efff0e55f
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 4d908082bf618dc661b6eabfb04683d8a5e903c0
+PODFILE CHECKSUM: 9fbb7fd3162fa1f84ee1f42c124442a1b0cfbe59
 
 COCOAPODS: 1.11.2

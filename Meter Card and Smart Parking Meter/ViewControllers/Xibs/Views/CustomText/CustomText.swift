@@ -15,10 +15,10 @@ class CustomText: UIView {
     @IBOutlet weak var textField: UITextField!
 
     @IBOutlet weak var lineView: UIView!
-    
+
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var cameraImage: UIImageView!
-    
+
     @IBInspectable var placeholder: String? {
         set {
             self.textField.placeholder = newValue
@@ -36,7 +36,7 @@ class CustomText: UIView {
             return .default
         }
     }
-    
+
     var isPassword: Bool {
         set {
             self.textField.isSecureTextEntry = newValue
@@ -45,7 +45,7 @@ class CustomText: UIView {
             return false
         }
     }
-    
+
     var showCameraIcon: Bool {
         set {
             self.cameraButton.isHidden = !newValue
@@ -56,17 +56,19 @@ class CustomText: UIView {
             return false
         }
     }
-    
+
     var text: String {
-        set{
+        set {
             self.textField.text = newValue
         }
-        get{
-            var value = ""
-            if let _text = self.textField.text {
-                value = _text._removeWhiteSpace
-            }
-            return value
+        get {
+            return self.textField._getText
+        }
+    }
+
+    var isSelectedText = false {
+        didSet {
+            switchColor()
         }
     }
 
@@ -95,27 +97,44 @@ class CustomText: UIView {
         contentView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         contentView.layoutIfNeeded()
     }
-    
-    private func setUpView(){
+
+    private func setUpView() {
         textField._placeholderColor = "000000"._hexColor
         self.cameraButton.isHidden = true
         self.cameraImage.isHidden = true
-        
+
+    }
+
+    private func switchColor() {
+        switch self.isSelectedText{
+        case true:
+            fieldSelected()
+        case false:
+            fieldUnselected()
+        }
     }
     
-    @IBAction func setGreenBackground(_ sender: Any) {
+    private func fieldSelected() {
         self.contentView.backgroundColor = "EFFFF4"._hexColor
         self.lineView.backgroundColor = "3FBF66"._hexColor
     }
-    
-    @IBAction func setGrayBackground(_ sender: Any) {
+
+    private func fieldUnselected() {
         self.contentView.backgroundColor = "FAFAFA"._hexColor
         self.lineView.backgroundColor = "EFEFEF"._hexColor
-  }
-    
-    
+    }
+
+    @IBAction func setGreenBackground(_ sender: Any) {
+        self.isSelectedText = true
+    }
+
+    @IBAction func setGrayBackground(_ sender: Any) {
+        self.isSelectedText = false
+    }
+
+
     @IBAction func addImageAction(_ sender: Any) {
         handleAddImage?()
     }
-    
+
 }

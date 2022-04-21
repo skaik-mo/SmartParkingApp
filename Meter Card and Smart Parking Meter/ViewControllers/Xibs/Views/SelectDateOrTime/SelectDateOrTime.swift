@@ -30,11 +30,35 @@ class SelectDateOrTime: UIView {
             setUpView()
         }
     }
-    
+
     var isHiddenIcons: Bool = false {
         didSet {
             setIcons()
         }
+    }
+
+    var fromText: String {
+        var value = ""
+        if let _text = self.fromLabel.text {
+            if _text.lowercased().contains("from") {
+                value = ""
+            } else {
+                value = _text._removeWhiteSpace
+            }
+        }
+        return value
+    }
+
+    var toText: String {
+        var value = ""
+        if let _text = self.toLabel.text {
+            if _text.lowercased().contains("to") {
+                value = ""
+            } else {
+                value = _text._removeWhiteSpace
+            }
+        }
+        return value
     }
 
     override init(frame: CGRect) {
@@ -89,7 +113,7 @@ extension SelectDateOrTime {
         self.toImageView.isHidden = self.isHiddenIcons
         self.fromImageView.isHidden = self.isHiddenIcons
     }
-    
+
     func setUpView() {
         if selectionType == .date {
             setDate()
@@ -113,16 +137,26 @@ extension SelectDateOrTime {
 
     private func showDateOrTime(handle: @escaping (_ value: String?) -> Void) {
         let alert = UIAlertController(style: .actionSheet, title: "Select \(selectionType.self)")
+        let date = Date()._add(months: 1)
+        
         if self.selectionType == .date {
-            alert.addDatePicker(mode: .date, date: Date(), minimumDate: "2022-01-01"._toDate, maximumDate: Date()) { date in
+            alert.addDatePicker(mode: .date, date: Date(), minimumDate: "2022-01-01"._toDate, maximumDate: date) { date in
                 handle(date._stringData)
             }
         } else {
-            alert.addDatePicker(mode: .time, date: Date(), minimumDate: "2022-01-01"._toDate, maximumDate: Date()) { time in
+            alert.addDatePicker(mode: .time, date: Date(), minimumDate: "2022-01-01"._toDate, maximumDate: date) { time in
                 handle(time._getTime())
             }
         }
         alert.addAction(title: "OK", style: .cancel)
         alert._show()
     }
+
+    func isEmptyFields() -> (status: Bool, errorMessage: String?) {
+        if fromText._isValidValue, toText._isValidValue {
+            return (false, nil)
+        }
+        return (true, "Enter \(selectionType) fields")
+    }
+
 }

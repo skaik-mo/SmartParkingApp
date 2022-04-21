@@ -20,13 +20,14 @@ class HomeUserViewController: UIViewController {
 
     @IBOutlet weak var parkingInfo: ParkingInfo!
 
-    var locationManager = CLLocationManager()
-
     var isShowParkingInfo = false {
         didSet {
             self.switchComponents()
         }
     }
+
+    var locationManager = CLLocationManager()
+    var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,11 @@ class HomeUserViewController: UIViewController {
 
     @IBAction func profileAction(_ sender: Any) {
         let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._authStoryboard)
-        vc.typeAuth = .User
+        vc.auth = auth
+        vc.backAuth = { auth in
+            self.auth = auth
+            self.setImage()
+        }
         vc._push()
     }
 
@@ -79,7 +84,7 @@ extension HomeUserViewController {
     }
 
     func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage)
+        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
     }
 
     func switchComponents() {

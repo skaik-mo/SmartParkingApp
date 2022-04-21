@@ -44,4 +44,12 @@ extension UITextField {
         }
     }
 
+    var _getText: String {
+        var value = ""
+        if let _text = self.text {
+            value = _text._removeWhiteSpace
+        }
+        return value
+    }
+
 }

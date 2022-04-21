@@ -27,7 +27,7 @@ extension String {
     }
     
     var _removeWhiteSpace: String {
-        return self.replacingOccurrences(of: " ", with: "")
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     var _isValidValue: Bool {

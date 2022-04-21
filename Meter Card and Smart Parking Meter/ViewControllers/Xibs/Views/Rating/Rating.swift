@@ -50,7 +50,7 @@ class Rating: UIView {
 
 extension Rating {
 
-    func setUpRating(parking: Parking?, isWithDistance: Bool = true, space spaceBetweenComponents: CGFloat = 6) {
+    func setUpRating(parking: ParkingModel?, isWithDistance: Bool = true, space spaceBetweenComponents: CGFloat = 6) {
         self.heightView.constant = spaceBetweenComponents
         setParkingName(name: parking?.name)
         setRating(rating: parking?.rating)
@@ -73,7 +73,7 @@ extension Rating {
         self.ratingLabel.text = "\(value)/5"
     }
 
-    private func setDistance(parking: Parking?, isWithDistance: Bool) {
+    private func setDistance(parking: ParkingModel?, isWithDistance: Bool) {
         if let _latitude = parking?.latitude, let _longitude = parking?.longitude, isWithDistance {
             self.middleView.isHidden = false
             let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)

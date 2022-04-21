@@ -15,7 +15,7 @@ class FavoriteTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ratingView: Rating!
     
-    var parking: Parking?
+    var parking: ParkingModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()

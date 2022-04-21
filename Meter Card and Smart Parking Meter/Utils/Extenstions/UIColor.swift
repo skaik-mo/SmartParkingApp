@@ -12,7 +12,7 @@ extension UIColor {
     
     convenience init(hexString: String) {
         
-        var hexColor: String = hexString.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        var hexColor: String = hexString._removeWhiteSpace.uppercased()
         
         if (hexColor.hasPrefix("#")) {
             hexColor.remove(at: hexColor.startIndex)

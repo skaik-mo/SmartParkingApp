@@ -243,7 +243,9 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="AppleButton" destination="O0c-J9-ApE" id="x3V-Lp-Akd"/>
                         <outlet property="emailText" destination="J2f-qa-H4A" id="uF0-yU-2Zc"/>
+                        <outlet property="facebookButton" destination="EUl-Vh-Xu2" id="If9-7A-9vh"/>
                         <outlet property="goHomeButton" destination="bEj-S4-m2R" id="KIz-e5-PYt"/>
                         <outlet property="passwordText" destination="U28-gi-qmC" id="hGs-L3-inj"/>
                         <outlet property="signUpButton" destination="rrB-CQ-xzo" id="eCv-Lr-xLp"/>
@@ -566,7 +568,7 @@ to reset you password</string>
                                         <rect key="frame" x="20" y="149" width="335" height="21"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Myr-TQ-sMJ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="Myr-TQ-sMJ">
                                         <rect key="frame" x="20" y="170" width="335" height="380"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nv4-9g-2iV" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
@@ -576,20 +578,12 @@ to reset you password</string>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Name"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M64-68-qKh">
-                                                <rect key="frame" x="0.0" y="45" width="335" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78U-pJ-oQR" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="67" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
                                                 </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Na-MM-Fwx">
-                                                <rect key="frame" x="0.0" y="112" width="335" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FAc-Ka-Mjq" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="134" width="335" height="45"/>
@@ -598,10 +592,6 @@ to reset you password</string>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CSa-C6-oed">
-                                                <rect key="frame" x="0.0" y="179" width="335" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RYc-wS-y7M" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="201" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -609,20 +599,12 @@ to reset you password</string>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Confirm Password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LbC-LX-M30">
-                                                <rect key="frame" x="0.0" y="246" width="335" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gxp-20-jfI" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="268" width="335" height="45"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Plate Number"/>
                                                 </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJk-gD-gN6">
-                                                <rect key="frame" x="0.0" y="313" width="335" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nk8-J9-SRa" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="335" width="335" height="45"/>
@@ -633,23 +615,19 @@ to reset you password</string>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="4Na-MM-Fwx" firstAttribute="height" secondItem="M64-68-qKh" secondAttribute="height" id="2WA-uP-I4K"/>
-                                            <constraint firstItem="YJk-gD-gN6" firstAttribute="height" secondItem="M64-68-qKh" secondAttribute="height" id="DHk-3V-fEg"/>
                                             <constraint firstItem="78U-pJ-oQR" firstAttribute="height" secondItem="Nv4-9g-2iV" secondAttribute="height" id="ORg-0l-fg0"/>
                                             <constraint firstItem="Nk8-J9-SRa" firstAttribute="height" secondItem="Nv4-9g-2iV" secondAttribute="height" id="UCP-nl-cWP"/>
-                                            <constraint firstItem="LbC-LX-M30" firstAttribute="height" secondItem="M64-68-qKh" secondAttribute="height" id="X0l-H2-5JX"/>
                                             <constraint firstItem="Gxp-20-jfI" firstAttribute="height" secondItem="Nv4-9g-2iV" secondAttribute="height" id="Ydd-4f-gjO"/>
                                             <constraint firstItem="RYc-wS-y7M" firstAttribute="height" secondItem="Nv4-9g-2iV" secondAttribute="height" id="bye-iw-yTa"/>
-                                            <constraint firstItem="CSa-C6-oed" firstAttribute="height" secondItem="M64-68-qKh" secondAttribute="height" id="qo3-SE-MbK"/>
                                             <constraint firstItem="FAc-Ka-Mjq" firstAttribute="height" secondItem="Nv4-9g-2iV" secondAttribute="height" id="sU3-Sd-sCV"/>
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JaD-h1-YXW">
-                                        <rect key="frame" x="20" y="550" width="335" height="45"/>
+                                        <rect key="frame" x="20" y="550" width="335" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dIN-q1-sLY">
-                                        <rect key="frame" x="20" y="595" width="335" height="79"/>
+                                        <rect key="frame" x="20" y="600" width="335" height="79"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meh-pM-l0p">
                                                 <rect key="frame" x="132.66666666666666" y="0.0" width="70" height="79"/>
@@ -662,7 +640,7 @@ to reset you password</string>
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ut7-Cq-eVc">
-                                        <rect key="frame" x="20" y="674" width="335" height="50"/>
+                                        <rect key="frame" x="20" y="679" width="335" height="45"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
@@ -676,11 +654,10 @@ to reset you password</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rU8-zW-GTd" firstAttribute="height" secondItem="cOR-vd-U5n" secondAttribute="height" multiplier="48/812" id="0br-Cp-CHH"/>
-                            <constraint firstItem="M64-68-qKh" firstAttribute="height" secondItem="cOR-vd-U5n" secondAttribute="height" multiplier="22/812" id="0pp-Ie-WQf"/>
                             <constraint firstItem="EXX-uB-hDB" firstAttribute="height" secondItem="cOR-vd-U5n" secondAttribute="height" multiplier="31/812" id="7me-C6-KQ7"/>
-                            <constraint firstItem="JaD-h1-YXW" firstAttribute="height" secondItem="cOR-vd-U5n" secondAttribute="height" multiplier="45/812" id="NbC-vj-aWa"/>
                             <constraint firstItem="T8i-qL-gFN" firstAttribute="trailing" secondItem="W6K-8o-KKj" secondAttribute="trailing" id="POa-Cw-v1j"/>
                             <constraint firstItem="Nv4-9g-2iV" firstAttribute="height" secondItem="cOR-vd-U5n" secondAttribute="height" multiplier="45/812" id="TOl-By-Bs0"/>
+                            <constraint firstItem="ut7-Cq-eVc" firstAttribute="height" secondItem="cOR-vd-U5n" secondAttribute="height" multiplier="45/812" id="cSA-v1-PRq"/>
                             <constraint firstItem="T8i-qL-gFN" firstAttribute="top" secondItem="W6K-8o-KKj" secondAttribute="top" id="u5f-DK-Jlz"/>
                             <constraint firstAttribute="bottom" secondItem="T8i-qL-gFN" secondAttribute="bottom" id="vav-r4-Uj6"/>
                             <constraint firstItem="K4r-I4-CGu" firstAttribute="height" secondItem="cOR-vd-U5n" secondAttribute="height" multiplier="21/812" id="vce-Tt-9yQ"/>
@@ -702,15 +679,17 @@ to reset you password</string>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="accountLabel" destination="8xz-cR-E8K" id="fDs-hR-yoR"/>
+                        <outlet property="backButton" destination="cGJ-CP-S6y" id="tfz-Z6-7Iw"/>
                         <outlet property="businessButton" destination="WUM-eF-Fci" id="67T-xW-WU2"/>
                         <outlet property="confirmPasswordText" destination="RYc-wS-y7M" id="D9g-SK-B5h"/>
+                        <outlet property="descriptionLabel" destination="F0w-CE-2yr" id="Pl6-vh-TFs"/>
                         <outlet property="drivingLicenseText" destination="Nk8-J9-SRa" id="Shg-Nd-ElB"/>
                         <outlet property="emailText" destination="78U-pJ-oQR" id="Fud-a8-bo3"/>
                         <outlet property="goHomeButton" destination="meh-pM-l0p" id="6oZ-XJ-P7g"/>
                         <outlet property="nameText" destination="Nv4-9g-2iV" id="NSk-va-uZM"/>
                         <outlet property="passwordText" destination="FAc-Ka-Mjq" id="VOX-8p-jFe"/>
                         <outlet property="plateNumberText" destination="Gxp-20-jfI" id="eRx-zd-nxK"/>
-                        <outlet property="subView" destination="YJk-gD-gN6" id="roI-Js-Iru"/>
                         <outlet property="userButton" destination="rU8-zW-GTd" id="iZH-4T-dWU"/>
                     </connections>
                 </viewController>
@@ -905,18 +884,43 @@ to reset you password</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TPX-VP-sNv">
                                         <rect key="frame" x="20" y="36" width="335" height="130"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="BAd-tF-342">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jTf-e2-ec1">
                                                 <rect key="frame" x="120.66666666666666" y="0.0" width="94" height="94"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpK-zP-LdA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="addAuthImageAction:" destination="GH4-pG-gZk" eventType="touchUpInside" id="WeH-7Z-qhH"/>
+                                                        </connections>
+                                                    </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="BAd-tF-342">
+                                                        <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="BAd-tF-342" secondAttribute="height" multiplier="1:1" id="2FU-WZ-ong"/>
+                                                            <constraint firstAttribute="height" constant="94" id="VDa-JR-SLx"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="47"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="BAd-tF-342" secondAttribute="height" multiplier="1:1" id="2FU-WZ-ong"/>
-                                                    <constraint firstAttribute="height" constant="94" id="VDa-JR-SLx"/>
+                                                    <constraint firstItem="dpK-zP-LdA" firstAttribute="leading" secondItem="jTf-e2-ec1" secondAttribute="leading" id="4zT-s8-7OS"/>
+                                                    <constraint firstItem="BAd-tF-342" firstAttribute="leading" secondItem="jTf-e2-ec1" secondAttribute="leading" id="57s-bA-VMJ"/>
+                                                    <constraint firstAttribute="width" secondItem="jTf-e2-ec1" secondAttribute="height" multiplier="1:1" id="9eu-ng-Vnx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="BAd-tF-342" secondAttribute="trailing" id="CA3-LN-zf9"/>
+                                                    <constraint firstAttribute="height" constant="94" id="SNR-ZF-J2e"/>
+                                                    <constraint firstAttribute="bottom" secondItem="dpK-zP-LdA" secondAttribute="bottom" id="cTY-Rq-wVH"/>
+                                                    <constraint firstItem="dpK-zP-LdA" firstAttribute="top" secondItem="jTf-e2-ec1" secondAttribute="top" id="drS-qD-9cI"/>
+                                                    <constraint firstItem="BAd-tF-342" firstAttribute="top" secondItem="jTf-e2-ec1" secondAttribute="top" id="kXN-r2-Ozq"/>
+                                                    <constraint firstAttribute="trailing" secondItem="dpK-zP-LdA" secondAttribute="trailing" id="ovg-tv-VkY"/>
+                                                    <constraint firstAttribute="bottom" secondItem="BAd-tF-342" secondAttribute="bottom" id="vcE-fo-hdY"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="47"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
+                                            </view>
                                         </subviews>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="36" trailing="0.0"/>
                                     </stackView>

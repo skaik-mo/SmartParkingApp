@@ -16,7 +16,7 @@ class BookingTableViewCell: UITableViewCell {
     @IBOutlet weak var parkingAddressLabel: UILabel!
     @IBOutlet weak var parkingPriceLabel: UILabel!
 
-    var parking: Parking?
+    var parking: ParkingModel?
 
     enum TypeParkingStatus: String {
         case pending = "616161"
@@ -32,7 +32,7 @@ class BookingTableViewCell: UITableViewCell {
     }
 
     func configerCell() {
-        parking = Parking.init(title: "dc", image: nil, rating: 3.3, pricePerHour: 10, latitude: 1.222, longitude: 34.33)
+        parking = ParkingModel.init(name: "dc", imageURL: nil, rating: 3.3, price: "10", latitude: 1.222, longitude: 34.33)
         if let _parking = self.parking {
             self.parkingNameLabel.text = _parking.name
             setInfo(parking: _parking)
@@ -44,9 +44,9 @@ class BookingTableViewCell: UITableViewCell {
 }
 
 extension BookingTableViewCell {
-    private func setInfo(parking: Parking) {
-        if let _pricePerHour = parking.pricePerHour, let address = parking.address {
-            self.parkingPriceLabel.text = "\(_pricePerHour._toString)$"
+    private func setInfo(parking: ParkingModel) {
+        if let _price = parking.price, let address = parking.address {
+            self.parkingPriceLabel.text = "\(_price)$"
             self.parkingAddressLabel.text = address
             return
         }

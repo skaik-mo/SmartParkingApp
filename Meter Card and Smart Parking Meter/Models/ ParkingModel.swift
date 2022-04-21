@@ -1,5 +1,5 @@
 //
-//   ParkingLocation.swift
+//   ParkingModel.swift
 //  Meter Card and Smart Parking Meter
 //
 //  Created by Mohammed Skaik on 15/03/2022.
@@ -9,23 +9,47 @@ import Foundation
 import UIKit
 import GoogleMaps
 
-class Parking {
+class ParkingModel {
     var id: String?
     var name: String?
-    var image: UIImage?
+    var imageURL: String?
+    var fromDate: String?
+    var toDate: String?
+    var fromTime: String?
+    var toTime: String?
+    var price: String?
+    var spots: [Int]?
     var rating: Double?
     var address: String?
-    var pricePerHour: Double?
     var latitude: Double?
     var longitude: Double?
 
-    init(title: String?, image: UIImage? = nil, rating: Double? = nil, pricePerHour: Double? = nil, latitude: Double?, longitude: Double?) {
+//    init(id: String?, name: String?, image: UIImage?, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: Double?, spots: [Int]?, rating: Double? = nil, address: String?, latitude: Double?, longitude: Double?) {
+//
+//    }
 
+    init(name: String?, imageURL: String? = nil, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: [Int]?, rating: Double? = nil, address: String? = nil, latitude: Double? = nil, longitude: Double? = nil) {
         self.id = UUID().uuidString
-        self.name = title
-        self.image = image
+        self.name = name
+        self.imageURL = imageURL
+        self.fromDate = fromDate
+        self.toDate = toDate
+        self.fromTime = fromTime
+        self.toTime = toTime
+        self.price = price
+        self.spots = spots
         self.rating = rating
-        self.pricePerHour = pricePerHour
+        self.address = address
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+
+    init(name: String?, imageURL: String? = nil, rating: Double? = nil, price: String? = nil, latitude: Double?, longitude: Double?) {
+        self.id = UUID().uuidString
+        self.name = name
+        self.imageURL = imageURL
+        self.rating = rating
+        self.price = price
         self.latitude = latitude
         self.longitude = longitude
 
@@ -36,10 +60,29 @@ class Parking {
         }
 
     }
+    
+    func getDictionary() -> [String: Any] {
+        let dictionary: [String: Any?] = [
+//            "id": self.id,
+            "name": self.name,
+            "imageURL": self.imageURL,
+            "fromDate": self.fromDate,
+            "toDate": self.toDate,
+            "fromTime": self.fromTime,
+            "toTime": self.toTime,
+            "price": self.price,
+            "spots": self.spots,
+            "rating": self.rating,
+            "address": self.address,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+        ]
+        return dictionary as [String: Any]
+    }
 
     func setParkingImage(parkingImage: UIImageView) {
-        if let _image = self.image {
-            parkingImage.image = _image
+        if let _image = self.imageURL {
+            parkingImage.image = _image._toImage
             return
         }
         // if no image set default image

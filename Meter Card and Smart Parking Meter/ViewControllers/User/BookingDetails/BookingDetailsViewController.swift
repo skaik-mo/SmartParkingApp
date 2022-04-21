@@ -28,8 +28,8 @@ class BookingDetailsViewController: UIViewController {
     @IBOutlet weak var cancelOrAcceptButton: GreenButton!
     @IBOutlet weak var rejectButton: GreenButton!
 
-    var parking: Parking?
-    var typeAuth: TypeAuht = .User
+    var parking: ParkingModel?
+    var typeAuth: TypeAuth = .User
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
 
     @IBOutlet weak var userButton: GreenButton!
     @IBOutlet weak var businessButton: GreenButton!
@@ -20,22 +23,30 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var confirmPasswordText: CustomText!
     @IBOutlet weak var plateNumberText: CustomText!
     @IBOutlet weak var drivingLicenseText: CustomText!
-    @IBOutlet weak var subView: UIView!
-    
+//    @IBOutlet weak var subView: UIView!
+
     @IBOutlet weak var goHomeButton: UIButton!
+
+    @IBOutlet weak var backButton: UIButton!
 
     var isEnableButton: Bool = true {
         didSet {
             self.goHomeButton.isEnabled = self.isEnableButton
         }
     }
-    
+
+    var isCompletingInfo: Bool = false {
+        didSet {
+            self.CompletingInfo()
+        }
+    }
+    var auth: AuthModel?
+
     var data: Data?
-    var authImage: UIImage?
-    
+
     var imagePicker = UIImagePickerController()
 
-    var typeAuth: TypeAuht = .User {
+    var typeAuth: TypeAuth = .User {
         didSet {
             switchTypeAuth()
         }
@@ -105,56 +116,77 @@ extension SignUpViewController {
     private func switchTypeAuth() {
         switch self.typeAuth {
         case .User:
+            self.plateNumberText.placeholder = "Plate Number"
             self.userButton.setUp(typeButton: .greenButton)
 
             self.businessButton.setUp(typeButton: .grayButtonWithBorder)
 
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
                 self.drivingLicenseText.alpha = 1
-                self.subView.isHidden = false
+//                self.subView.isHidden = false
             })
         case .Business:
+            self.plateNumberText.placeholder = "Mobile Number"
             self.userButton.setUp(typeButton: .grayButtonWithBorder)
 
             self.businessButton.setUp(typeButton: .greenButton)
 
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
                 self.drivingLicenseText.alpha = 0
-                self.subView.isHidden = true
+//                self.subView.isHidden = true
 
             })
         }
     }
 
+    private func CompletingInfo() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.accountLabel.text = "Complete information"
+            self.descriptionLabel.text = ""
+            self.nameText.isHidden = self.isCompletingInfo
+            self.emailText.isHidden = self.isCompletingInfo
+            self.passwordText.isHidden = self.isCompletingInfo
+            self.confirmPasswordText.isHidden = self.isCompletingInfo
+            self.backButton.isHidden = self.isCompletingInfo
+        }
+    }
+
+}
+
+extension SignUpViewController {
+
     private func checkData() -> Bool {
-        if !self.nameText.text._isValidValue {
-            self._showErrorAlert(message: "Enter name")
-            return false
-        }
-        if !self.emailText.text._isValidValue {
-            self._showErrorAlert(message: "Enter email")
-            return false
-        }
-        if !self.passwordText.text._isValidValue {
-            self._showErrorAlert(message: "Enter password")
-            return false
-        }
-        if !self.confirmPasswordText.text._isValidValue {
-            self._showErrorAlert(message: "Enter confirm password")
-            return false
-        }
-        if passwordText.text != confirmPasswordText.text {
-            self._showErrorAlert(message: "Password and confirmation do not match")
-            return false
+        if !self.isCompletingInfo {
+            if !self.nameText.text._isValidValue {
+                self._showErrorAlert(message: "Enter name")
+                return false
+            }
+            if !self.emailText.text._isValidValue {
+                self._showErrorAlert(message: "Enter email")
+                return false
+            }
+            if !self.passwordText.text._isValidValue {
+                self._showErrorAlert(message: "Enter password")
+                return false
+            }
+            if !self.confirmPasswordText.text._isValidValue {
+                self._showErrorAlert(message: "Enter confirm password")
+                return false
+            }
+            if passwordText.text != confirmPasswordText.text {
+                self._showErrorAlert(message: "Password and confirmation do not match")
+                return false
+            }
         }
         if !self.plateNumberText.text._isValidValue {
-            self._showErrorAlert(message: "Enter plate number")
+            let field = self.typeAuth == .User ? "plate number" : "mobile number"
+            self._showErrorAlert(message: "Enter \(field)")
             return false
         }
-//        if !self.drivingLicenseText.text._isValidValue {
-//            debugPrint("sdv")
-//         return false
-//        }
+        if !self.drivingLicenseText.isSelectedText, self.typeAuth == .User {
+            self._showErrorAlert(message: "Enter driving license")
+            return false
+        }
         return true
 
     }
@@ -169,31 +201,52 @@ extension SignUpViewController {
 
     private func getAuth() -> AuthModel? {
         guard self.checkData() else { return nil }
+        if self.isCompletingInfo, let _auth = auth {
+            _auth.typeAuth = self.typeAuth
+            _auth.plateNumber = self.plateNumberText.text
+            return _auth
+        }
         return .init(name: nameText.text, email: emailText.text, password: passwordText.text, plateNumber: plateNumberText.text, typeAuth: typeAuth)
     }
 
-    private func goHome() {
+    private func goHome(auth: AuthModel) {
         switch self.typeAuth {
         case .User:
             let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
+            vc.auth = auth
             vc._rootPush()
         case .Business:
             let vc: HomeBusinessViewController = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
+            vc.auth = auth
             vc._rootPush()
         }
     }
 
     private func signUp() {
-        guard let auth = getAuth() else { return }
+        guard let _auth = getAuth() else { return }
         isEnableButton = false
-        AuthManager.shared.signUpByEmail(auth: auth, data: data) { auth, message in
-            self.isEnableButton = true
-            if let _ = auth {
+        SVProgressHUD.show()
+        if self.isCompletingInfo {
+            AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: data) { error in
+                if let _error = error {
+                    self._showErrorAlert(message: _error.localizedDescription)
+                } else {
                 self.clearData()
-                self.goHome()
-                return
+                self.goHome(auth: _auth)
+                }
+                SVProgressHUD.dismiss()
+                self.isEnableButton = true
             }
-            self._showErrorAlert(message: message)
+        } else {
+            AuthManager.shared.signUpByEmail(auth: _auth, data: data) { auth, message in
+                if let _auth = auth {
+                    self.clearData()
+                    self.goHome(auth: _auth)
+                } else {
+                self._showErrorAlert(message: message)
+                }
+                self.isEnableButton = true
+            }
         }
     }
 
@@ -213,8 +266,11 @@ extension SignUpViewController: UINavigationControllerDelegate, UIImagePickerCon
         self.dismiss(animated: true, completion: { () -> Void in
 
         })
-        self.authImage =  info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.data = authImage?.pngData()
+        let drivingLicenseImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        if let _data = drivingLicenseImage?.pngData() {
+            self.drivingLicenseText.isSelectedText = true
+            self.data = _data
+        }
     }
 
 }

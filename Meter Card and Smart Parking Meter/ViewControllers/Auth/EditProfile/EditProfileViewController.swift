@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class EditProfileViewController: UIViewController {
 
@@ -19,9 +20,31 @@ class EditProfileViewController: UIViewController {
 
     @IBOutlet weak var greenButton: GreenButton!
 
-    let auth = AuthManager.shared.getLocalAuth()
+    var isEnableButton: Bool = true {
+        didSet {
+            self.greenButton.greenButton.isEnabled = self.isEnableButton
+        }
+    }
 
-    var data: Data?
+    var typeAuth: TypeAuth = .User {
+        didSet {
+            switchTypeAuth()
+        }
+    }
+
+    var isLoginBySocial: Bool = false {
+        didSet {
+            loginBySocial()
+        }
+    }
+
+    var auth: AuthModel?
+
+    var backAuth: ((_ auth: AuthModel?) -> Void)?
+
+    var isAuthImage: Bool?
+    var dataAuth: Data?
+    var dataDrivingLicense: Data?
 
     var imagePicker = UIImagePickerController()
 
@@ -38,6 +61,10 @@ class EditProfileViewController: UIViewController {
         setImage()
     }
 
+    @IBAction func addAuthImageAction(_ sender: Any) {
+        self.addImage(isAuthImage: true)
+    }
+
 }
 
 extension EditProfileViewController {
@@ -45,11 +72,25 @@ extension EditProfileViewController {
     func setupView() {
         self.title = "Edit Profile"
 
+
+
+        if let _typeAuth = self.auth?.typeAuth {
+            self.typeAuth = _typeAuth
+        }
+
+        if let _isLoginBySocial = self.auth?.isLoginBySocial {
+            self.isLoginBySocial = _isLoginBySocial
+        }
+
         self.emailText.keyboardType = .emailAddress
         self.plateNumberText.keyboardType = .phonePad
+
+        if let _ = auth?.urlLicense {
+            self.drivingLicenseText.isSelectedText = true
+        }
         self.drivingLicenseText.showCameraIcon = true
         self.drivingLicenseText.handleAddImage = {
-            self.addImage()
+            self.addImage(isAuthImage: false)
         }
 
         self.greenButton.setUp(typeButton: .greenButton)
@@ -64,7 +105,7 @@ extension EditProfileViewController {
     }
 
     func setupData() {
-        if let _name = auth.name, let _email = auth.email, let _plateNumber = auth.plateNumber {
+        if let _name = auth?.name, let _email = auth?.email, let _plateNumber = auth?.plateNumber {
             self.nameText.text = _name
             self.emailText.text = _email
             self.plateNumberText.text = _plateNumber
@@ -72,7 +113,23 @@ extension EditProfileViewController {
     }
 
     func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage)
+        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
+    }
+
+    private func switchTypeAuth() {
+        switch self.typeAuth {
+        case .User:
+            self.plateNumberText.placeholder = "Plate Number"
+            self.drivingLicenseText.isHidden = false
+        case .Business:
+            self.plateNumberText.placeholder = "Mobile Number"
+            self.drivingLicenseText.isHidden = true
+        }
+    }
+
+    private func loginBySocial() {
+        self.nameText.isUserInteractionEnabled = !self.isLoginBySocial
+        self.emailText.isUserInteractionEnabled = !self.isLoginBySocial
     }
 
 }
@@ -95,27 +152,21 @@ extension EditProfileViewController {
         return true
     }
 
-//    private func clearData() {
-//        self.nameText.text = ""
-//        self.emailText.text = ""
-//        self.plateNumberText.text = ""
-//    }
-
-    private func getAuth() -> Bool {
-        guard self.checkData() else { return false }
-        self.auth.name = self.nameText.text
-        self.auth.email = self.emailText.text
-        self.auth.plateNumber = self.plateNumberText.text
-        return true
+    private func getAuth() -> AuthModel? {
+        guard self.checkData() else { return nil }
+        return .init(id: auth?.id, name: self.nameText.text, email: self.emailText.text, password: auth?.password, plateNumber: self.plateNumberText.text, typeAuth: auth?.typeAuth, urlImage: auth?.urlImage, urlLicense: auth?.urlLicense, isLoginBySocial: self.isLoginBySocial)
     }
 
     private func save() {
-        guard self.getAuth() else { return }
-        AuthManager.shared.setAuth(auth: self.auth, data: self.data) { error in
+        guard let _auth = self.getAuth() else { return }
+        self.isEnableButton = false
+        AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: self.dataDrivingLicense, dataAuth: self.dataAuth) { error in
+            self.isEnableButton = true
             if let _error = error {
                 self._showErrorAlert(message: _error.localizedDescription)
                 return
             }
+            self.backAuth?(_auth)
             self._showAlertOKWithTitle(title: "Successful", message: "Your changes have been successfully saved!")
         }
     }
@@ -124,7 +175,8 @@ extension EditProfileViewController {
 
 extension EditProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    func addImage() {
+    func addImage(isAuthImage: Bool) {
+        self.isAuthImage = isAuthImage
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
             imagePicker.delegate = self
             imagePicker.allowsEditing = false
@@ -133,12 +185,17 @@ extension EditProfileViewController: UINavigationControllerDelegate, UIImagePick
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        self.dismiss(animated: true, completion: { () -> Void in
-
-        })
+        self._dismissVC()
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.authImage.image = image
-        self.data = image?.pngData()
+        if let _data = image?.pngData() {
+            if self.isAuthImage == true {
+                self.authImage.image = image
+                self.dataAuth = _data
+            } else {
+                self.drivingLicenseText.isSelectedText = true
+                self.dataDrivingLicense = _data
+            }
+        }
     }
 
 }

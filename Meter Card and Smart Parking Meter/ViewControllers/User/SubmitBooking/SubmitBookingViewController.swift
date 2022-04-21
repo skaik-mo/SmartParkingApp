@@ -19,7 +19,7 @@ class SubmitBookingViewController: UIViewController {
 
     @IBOutlet weak var greenButton: GreenButton!
 
-    var parking: Parking?
+    var parking: ParkingModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +39,8 @@ extension SubmitBookingViewController {
 
     func setupView() {
         var price = ""
-        if let _price = parking?.pricePerHour {
-            price = "(\(_price._toString)$)"
+        if let _price = parking?.price {
+            price = "(\(_price)$)"
         }
         self.titleLabel.text = "Memorial Park \(price)"
 

@@ -50,16 +50,20 @@ extension MainNavigationController {
 extension MainNavigationController {
 
     func setRoot() {
-        let vc: UIViewController
-        switch AuthManager.shared.getLocalAuth().typeAuth {
+        let auth = AuthManager.shared.getLocalAuth()
+        switch auth.typeAuth {
         case .User:
-            vc = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
+            let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
+            vc.auth = auth
+            vc._rootPush()
         case .Business:
-            vc = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
+            let vc: HomeBusinessViewController = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
+            vc.auth = auth
+            vc._rootPush()
         case .none:
-            vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
+            let vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
+            vc._rootPush()
         }
-        vc._rootPush()
     }
 
     func setProperties() {

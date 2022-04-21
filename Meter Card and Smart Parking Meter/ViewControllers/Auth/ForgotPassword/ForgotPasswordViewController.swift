@@ -36,7 +36,7 @@ extension ForgotPasswordViewController {
         
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
-            self.signIn()
+            self.resetPassword()
         }
     }
 
@@ -76,7 +76,7 @@ extension ForgotPasswordViewController {
         self._pop()
     }
 
-    private func signIn() {
+    private func resetPassword() {
         guard let email = getEmail() else { return }
         AuthManager.shared.resetPassword(email: email) { error in
             if let _error = error {

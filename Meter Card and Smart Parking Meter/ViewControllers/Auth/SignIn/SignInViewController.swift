@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SignInViewController: UIViewController {
 
@@ -16,16 +17,14 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordText: CustomText!
 
     @IBOutlet weak var goHomeButton: UIButton!
+    @IBOutlet weak var AppleButton: UIButton!
+    @IBOutlet weak var facebookButton: UIButton!
 
     var isEnableButton: Bool = true {
         didSet {
             self.goHomeButton.isEnabled = self.isEnableButton
-        }
-    }
-
-    var typeAuth: TypeAuht? = .none {
-        didSet {
-            self.goHome()
+            self.AppleButton.isEnabled = self.isEnableButton
+            self.facebookButton.isEnabled = self.isEnableButton
         }
     }
 
@@ -112,13 +111,15 @@ extension SignInViewController {
         return .init(email: emailText.text, password: passwordText.text)
     }
 
-    private func goHome() {
-        switch self.typeAuth {
+    private func goHome(auth: AuthModel) {
+        switch auth.typeAuth {
         case .User:
             let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
+            vc.auth = auth
             vc._rootPush()
         case .Business:
             let vc: HomeBusinessViewController = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
+            vc.auth = auth
             vc._rootPush()
         case .none:
             break
@@ -129,21 +130,31 @@ extension SignInViewController {
         guard let auth = getAuth() else { return }
         self.isEnableButton = false
         AuthManager.shared.signInByEmail(auth: auth) { auth, message in
-            self.isEnableButton = true
             if let _auth = auth {
                 self.clearData()
-                self.typeAuth = _auth.typeAuth
-                return
+                self.goHome(auth: _auth)
+            } else {
+                self._showErrorAlert(message: message)
             }
-            self._showErrorAlert(message: message)
+            self.isEnableButton = true
+
         }
     }
 
     private func loginByFacebook() {
-        AuthManager.shared.signInByFacebook(vc: self) { auth, message in
+        self.isEnableButton = false
+        AuthManager.shared.signInByFacebook(vc: self) { auth, isRegister, message in
             if let _auth = auth {
                 self.clearData()
-                self.typeAuth = _auth.typeAuth
+                if let _isRegister = isRegister, _isRegister {
+                    self.isEnableButton = true
+                    let vc: SignUpViewController = SignUpViewController._instantiateVC(storyboard: self._authStoryboard)
+                    vc.isCompletingInfo = true
+                    vc.auth = _auth
+                    vc._rootPush()
+                } else {
+                    self.goHome(auth: _auth)
+                }
                 return
             }
             self._showErrorAlert(message: message)

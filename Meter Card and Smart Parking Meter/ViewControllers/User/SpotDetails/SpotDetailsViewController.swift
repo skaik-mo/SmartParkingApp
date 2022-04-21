@@ -26,7 +26,7 @@ class SpotDetailsViewController: UIViewController {
     
     @IBOutlet weak var bookNowButton: GreenButton!
 
-    var parking: Parking?
+    var parking: ParkingModel?
 
     var selectedDates: [String] = [
         "2022-03-01",
@@ -111,10 +111,10 @@ extension SpotDetailsViewController {
         setInfo(parking: parking)
     }
 
-    private func setInfo(parking: Parking?) {
+    private func setInfo(parking: ParkingModel?) {
         var price = ""
-        if let _pricePerHour = parking?.pricePerHour {
-            price = "\(_pricePerHour._toString)$ Per Hour"
+        if let _price = parking?.price {
+            price = "\(_price)$ Per Hour"
         }
         self.pricePerHourLabel.text = price
     }

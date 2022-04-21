@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		844F384CEE74F6CE736E0888 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAE60F456883E3347357305 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework */; };
 		E7000E7627EB498C0034A412 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7000E7527EB498C0034A412 /* RatingViewController.swift */; };
 		E708599127DF3EE8000FCE7B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708599027DF3EE8000FCE7B /* FiltersViewController.swift */; };
 		E708599927DF4588000FCE7B /* SelectDateOrTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708599727DF4588000FCE7B /* SelectDateOrTime.swift */; };
@@ -37,7 +36,7 @@
 		E774641C2800CB3A0009EDAB /* Integer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774641B2800CB3A0009EDAB /* Integer.swift */; };
 		E776E24A27F8727100693300 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776E24927F8727100693300 /* AuthManager.swift */; };
 		E776E24C27F87DBC00693300 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776E24B27F87DBC00693300 /* AuthModel.swift */; };
-		E77F5FCD27E07E60009B1AA2 /*  ParkingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */; };
+		E77F5FCD27E07E60009B1AA2 /*  ParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCC27E07E60009B1AA2 /*  ParkingModel.swift */; };
 		E77F5FD027E08F16009B1AA2 /* SpotDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */; };
 		E77F5FD427E09ED2009B1AA2 /* ParkingOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */; };
 		E77F5FD527E09ED2009B1AA2 /* ParkingOwner.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77F5FD327E09ED2009B1AA2 /* ParkingOwner.xib */; };
@@ -46,6 +45,8 @@
 		E77F5FE027E0AC9C009B1AA2 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FDE27E0AC9B009B1AA2 /* DateCell.swift */; };
 		E77F5FE127E0AC9C009B1AA2 /* DateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77F5FDF27E0AC9B009B1AA2 /* DateCell.xib */; };
 		E77F5FE327E0AFFD009B1AA2 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FE227E0AFFD009B1AA2 /* UICollectionView.swift */; };
+		E780C1112806E3930044E955 /* ParkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E780C1102806E3930044E955 /* ParkingManager.swift */; };
+		E780C1152806F13C0044E955 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */; };
 		E79A75B627E8DC7E005AAC92 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79A75B427E8DC7E005AAC92 /* ProfileButton.swift */; };
 		E79A75B727E8DC7E005AAC92 /* ProfileButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = E79A75B527E8DC7E005AAC92 /* ProfileButton.xib */; };
 		E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A1846F27DA057A00D0921E /* SignUpViewController.swift */; };
@@ -81,6 +82,7 @@
 		E7C0C90727EE09D000C83AAE /* HomeBusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0C90627EE09D000C83AAE /* HomeBusinessViewController.swift */; };
 		E7C0C90B27EE3CDE00C83AAE /* ParkingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0C90927EE3CDE00C83AAE /* ParkingCollectionViewCell.swift */; };
 		E7C0C90C27EE3CDE00C83AAE /* ParkingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C0C90A27EE3CDE00C83AAE /* ParkingCollectionViewCell.xib */; };
+		E7C43C56280FB97800C62638 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAE60F456883E3347357305 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework */; };
 		E7CF568A27E9AFE3001997CA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF568827E9AFE3001997CA /* MessageTableViewCell.swift */; };
 		E7CF568B27E9AFE3001997CA /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CF568927E9AFE3001997CA /* MessageTableViewCell.xib */; };
 		E7CF568D27E9B16D001997CA /* UIKitHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF568C27E9B16D001997CA /* UIKitHelpers.swift */; };
@@ -93,6 +95,7 @@
 		E7F1FD9527E9D32300FE55E7 /* FavoriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1FD9327E9D32300FE55E7 /* FavoriteTableViewCell.xib */; };
 		E7F1FD9927E9FF4200FE55E7 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F1FD9727E9FF4200FE55E7 /* Rating.swift */; };
 		E7F1FD9A27E9FF4200FE55E7 /* Rating.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1FD9827E9FF4200FE55E7 /* Rating.xib */; };
+		E7F3601E2810BA2300853938 /* SVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3601D2810BA2300853938 /* SVProgress.swift */; };
 		E7F56B8927EE4C0100CAAF6B /* MyParkingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F56B8827EE4C0100CAAF6B /* MyParkingsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -143,7 +146,7 @@
 		E774641B2800CB3A0009EDAB /* Integer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Integer.swift; sourceTree = "<group>"; };
 		E776E24927F8727100693300 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		E776E24B27F87DBC00693300 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
-		E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ParkingLocation.swift"; sourceTree = "<group>"; };
+		E77F5FCC27E07E60009B1AA2 /*  ParkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ParkingModel.swift"; sourceTree = "<group>"; };
 		E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailsViewController.swift; sourceTree = "<group>"; };
 		E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingOwner.swift; sourceTree = "<group>"; };
 		E77F5FD327E09ED2009B1AA2 /* ParkingOwner.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParkingOwner.xib; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 		E77F5FDE27E0AC9B009B1AA2 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		E77F5FDF27E0AC9B009B1AA2 /* DateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCell.xib; sourceTree = "<group>"; };
 		E77F5FE227E0AFFD009B1AA2 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		E780C1102806E3930044E955 /* ParkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingManager.swift; sourceTree = "<group>"; };
+		E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		E79A75B427E8DC7E005AAC92 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		E79A75B527E8DC7E005AAC92 /* ProfileButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileButton.xib; sourceTree = "<group>"; };
 		E7A1846F27DA057A00D0921E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +206,7 @@
 		E7F1FD9327E9D32300FE55E7 /* FavoriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteTableViewCell.xib; sourceTree = "<group>"; };
 		E7F1FD9727E9FF4200FE55E7 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		E7F1FD9827E9FF4200FE55E7 /* Rating.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Rating.xib; sourceTree = "<group>"; };
+		E7F3601D2810BA2300853938 /* SVProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVProgress.swift; sourceTree = "<group>"; };
 		E7F56B8827EE4C0100CAAF6B /* MyParkingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyParkingsViewController.swift; sourceTree = "<group>"; };
 		F1D6C47B7A75B38B7EEC2380 /* Pods-Meter Card and Smart Parking Meter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meter Card and Smart Parking Meter.release.xcconfig"; path = "Target Support Files/Pods-Meter Card and Smart Parking Meter/Pods-Meter Card and Smart Parking Meter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,7 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				844F384CEE74F6CE736E0888 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework in Frameworks */,
+				E7C43C56280FB97800C62638 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +404,8 @@
 			isa = PBXGroup;
 			children = (
 				E776E24927F8727100693300 /* AuthManager.swift */,
+				E780C1102806E3930044E955 /* ParkingManager.swift */,
+				E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -406,7 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				E776E24B27F87DBC00693300 /* AuthModel.swift */,
-				E77F5FCC27E07E60009B1AA2 /*  ParkingLocation.swift */,
+				E77F5FCC27E07E60009B1AA2 /*  ParkingModel.swift */,
 				E7D3E33427F2EB1500851BEB /* Message.swift */,
 			);
 			path = Models;
@@ -587,6 +595,7 @@
 		E7BFE00327D6013B00F80180 /* Extenstions */ = {
 			isa = PBXGroup;
 			children = (
+				E7F3601D2810BA2300853938 /* SVProgress.swift */,
 				E7BFE00527D6017C00F80180 /* UIViewController.swift */,
 				E7BFE03027D639B500F80180 /* UITextField.swift */,
 				E7BFE01127D6049A00F80180 /* UIView.swift */,
@@ -934,6 +943,7 @@
 				E737110027EF572500D6FAC4 /* AddParkingViewController.swift in Sources */,
 				E7BFE01227D6049A00F80180 /* UIView.swift in Sources */,
 				E76627C727E885E600848233 /* SubmitBookingViewController.swift in Sources */,
+				E7F3601E2810BA2300853938 /* SVProgress.swift in Sources */,
 				E7CF568D27E9B16D001997CA /* UIKitHelpers.swift in Sources */,
 				E7BFE01F27D6122E00F80180 /* GreenButton.swift in Sources */,
 				E73CFBCD27E8A6A1000D03FE /* ProfileViewController.swift in Sources */,
@@ -944,13 +954,14 @@
 				E73CFBCA27E8A4DA000D03FE /* AlertViewController.swift in Sources */,
 				E7A1847527DC314400D0921E /* HomeUserViewController.swift in Sources */,
 				E77353CA27EB842C0065D34B /* UIViewEXForDatePicker.swift in Sources */,
-				E77F5FCD27E07E60009B1AA2 /*  ParkingLocation.swift in Sources */,
+				E77F5FCD27E07E60009B1AA2 /*  ParkingModel.swift in Sources */,
 				E776E24C27F87DBC00693300 /* AuthModel.swift in Sources */,
 				E7BFE00827D6022500F80180 /* UIStoryboard.swift in Sources */,
 				E7CF569227E9B361001997CA /* UITableView.swift in Sources */,
 				E708599127DF3EE8000FCE7B /* FiltersViewController.swift in Sources */,
 				E722DFE427EB2D7700CD2C60 /* BookingDetailsViewController.swift in Sources */,
 				E7BFE01027D6046600F80180 /* String.swift in Sources */,
+				E780C1152806F13C0044E955 /* FirebaseStorageManager.swift in Sources */,
 				E79A75B627E8DC7E005AAC92 /* ProfileButton.swift in Sources */,
 				E7BFDFEB27D6003800F80180 /* AppDelegate.swift in Sources */,
 				E7F1FD9427E9D32300FE55E7 /* FavoriteTableViewCell.swift in Sources */,
@@ -979,6 +990,7 @@
 				E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */,
 				E7BFE01427D604E800F80180 /* UIButton.swift in Sources */,
 				E720808227F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift in Sources */,
+				E780C1112806E3930044E955 /* ParkingManager.swift in Sources */,
 				E7BFE00A27D6026200F80180 /* UIResponder.swift in Sources */,
 				E7F1FD9927E9FF4200FE55E7 /* Rating.swift in Sources */,
 				E7CF569027E9B22B001997CA /* TableViewController.swift in Sources */,
@@ -1135,10 +1147,13 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Meter Card and Smart Parking Meter/SupprorttingFiles/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to camera";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to see your location";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Auth;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1169,10 +1184,13 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Meter Card and Smart Parking Meter/SupprorttingFiles/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to camera";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to see your location";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Auth;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -21,7 +21,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="324" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -55,10 +55,10 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="vGH-2P-fdk" secondAttribute="trailing" id="NeN-Wo-FXq"/>
+                <constraint firstAttribute="trailing" secondItem="vGH-2P-fdk" secondAttribute="trailing" id="NeN-Wo-FXq"/>
                 <constraint firstItem="vGH-2P-fdk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="P4G-Nf-AVF"/>
-                <constraint firstItem="vGH-2P-fdk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ZtL-sf-Hqt"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="vGH-2P-fdk" secondAttribute="bottom" id="dvm-wj-4XJ"/>
+                <constraint firstItem="vGH-2P-fdk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZtL-sf-Hqt"/>
+                <constraint firstAttribute="bottom" secondItem="vGH-2P-fdk" secondAttribute="bottom" id="dvm-wj-4XJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <userDefinedRuntimeAttributes>

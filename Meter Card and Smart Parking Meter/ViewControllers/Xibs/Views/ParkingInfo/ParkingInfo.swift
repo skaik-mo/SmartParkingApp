@@ -24,7 +24,7 @@ class ParkingInfo: UIView {
     @IBOutlet weak var bookNowButton: GreenButton!
 
 
-    var parking: Parking?
+    var parking: ParkingModel?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -67,22 +67,22 @@ extension ParkingInfo {
 
     }
 
-    private func setParkingImage(parking: Parking) {
-        if let _image = parking.image {
-            self.parkingImage.image = _image
+    private func setParkingImage(parking: ParkingModel) {
+        if let _image = parking.imageURL {
+            self.parkingImage.image = _image._toImage
             return
         }
         // if no image set default image
     }
 
-    private func setInfo(parking: Parking) {
-        if let _pricePerHour = parking.pricePerHour {
-            self.perHourLabel.text = "Park Booking \(_pricePerHour._toString)$ Per Hour"
+    private func setInfo(parking: ParkingModel) {
+        if let _price = parking.price {
+            self.perHourLabel.text = "Park Booking \(_price)$ Per Hour"
             self.addressLabel.text = parking.address == nil ? "No Address" : parking.address
         }
     }
 
-    private func setDistance(parking: Parking) {
+    private func setDistance(parking: ParkingModel) {
         if let _latitude = parking.latitude, let _longitude = parking.longitude {
             let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)
             let distance = GoogleMapManager.getDistance(toLocation: toLocation)

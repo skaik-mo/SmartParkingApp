@@ -16,6 +16,9 @@ class PasswordViewController: UIViewController {
 
     @IBOutlet weak var greenButton: GreenButton!
     
+    var auth: AuthModel?
+    var backAuth: ((_ auth: AuthModel?) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -83,6 +86,10 @@ extension PasswordViewController {
             self._showErrorAlert(message: "The new password is the same as the old password")
             return false
         }
+        if let _password = self.auth?.password, _password != currentPasswordView.text {
+            self._showErrorAlert(message: "The current password is incorrect")
+            return false
+        }
         return true
     }
 
@@ -92,13 +99,21 @@ extension PasswordViewController {
         self.repeatPasswordView.text = ""
     }
     
+    private func getAuth() -> AuthModel? {
+        guard let _auth = auth, self.checkData() else { return nil}
+        _auth.password = self.newPasswordView.text
+        return _auth
+    }
+    
     private func save() {
-        guard self.checkData() else { return }
-        AuthManager.shared.updatePassword(oldPassword: currentPasswordView.text, newPassword: newPasswordView.text) { error in
+        guard let _auth = self.getAuth() else { return }
+        AuthManager.shared.updatePassword(auth: _auth) { error in
             if let _error = error {
                 self._showErrorAlert(message: _error.localizedDescription)
                 return
             }
+            self.clearData()
+            self.backAuth?(self.auth)
             self._showAlertOKWithTitle(title: "Successful", message: "Your changes have been successfully saved!")
             
         }

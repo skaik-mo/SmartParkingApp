@@ -16,11 +16,11 @@ extension Int {
         return Double(self)
     }
     
-    var getTypeAuth: TypeAuht {
+    var getTypeAuth: TypeAuth {
         if self == 0 {
-            return TypeAuht.User
+            return TypeAuth.User
         }
-        return TypeAuht.Business
+        return TypeAuth.Business
     }
 }
 

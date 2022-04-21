@@ -11,8 +11,10 @@ import UIKit
 class HomeBusinessViewController: UIViewController {
 
     @IBOutlet weak var homeTableView: UITableView!
-    
+
     @IBOutlet weak var authImage: UIImageView!
+
+    var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,11 @@ class HomeBusinessViewController: UIViewController {
 
     @IBAction func profileAction(_ sender: Any) {
         let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._authStoryboard)
-        vc.typeAuth = .Business
+        vc.auth = auth
+        vc.backAuth = { auth in
+            self.auth = auth
+            self.setImage()
+        }
         vc._push()
     }
 }
@@ -38,7 +44,7 @@ extension HomeBusinessViewController {
 
     func setupView() {
         self.title = "Home"
-        
+
         setUpTable()
     }
 
@@ -51,7 +57,7 @@ extension HomeBusinessViewController {
     }
 
     func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage)
+        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
     }
 
 }
@@ -63,19 +69,19 @@ extension HomeBusinessViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: HomeTableViewCell = self.homeTableView._dequeueReusableCell(for: indexPath)
         cell.configerCell()
         cell.selectionStyle = .none
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc: BookingDetailsViewController = BookingDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
         vc.typeAuth = .Business
         vc._push()
     }
-    
+
 
 }

@@ -20,16 +20,21 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var favoritesButton: ProfileButton!
     @IBOutlet weak var myBookingsButton: ProfileButton!
     @IBOutlet weak var changePasswordButton: ProfileButton!
-    
+
     @IBOutlet weak var editProfileButton: GreenButton!
 
-    var typeAuth: TypeAuht = .User
-    
+    var typeAuth: TypeAuth = .User {
+        didSet {
+//            switchAuth()
+        }
+    }
+    var auth: AuthModel?
+    var backAuth: ((_ auth: AuthModel?) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         localized()
-        setupData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,15 +42,15 @@ class ProfileViewController: UIViewController {
         AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
         self._setTitleBackBarButton()
         setupData()
-        setImage()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        backAuth?(auth)
     }
 
     @IBAction func logoutAction(_ sender: Any) {
-       logout()
+        logout()
     }
 }
 
@@ -53,23 +58,38 @@ extension ProfileViewController {
 
     func setupView() {
         self.title = "My Profile"
-        
-        switchAuth()
+
+        if let _typeAuht = auth?.typeAuth {
+            self.typeAuth = _typeAuht
+        }
         
         self.editProfileButton.setUp(typeButton: .greenButton, corner: 22.5)
         self.editProfileButton.handleButton = {
             let vc: EditProfileViewController = EditProfileViewController._instantiateVC(storyboard: self._authStoryboard)
+            vc.auth = self.auth
+            vc.backAuth = { getAuth in
+                self.auth = getAuth
+                self.setupData()
+            }
             vc._push()
         }
-        
+
         self.messageButton.handleButton = {
             let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
             vc.typeView = .Messages
             vc._push()
         }
-        
+
+        if let _isLoginBySocial = self.auth?.isLoginBySocial {
+            self.changePasswordButton.isHidden = _isLoginBySocial
+        }
         self.changePasswordButton.handleButton = {
             let vc: PasswordViewController = PasswordViewController._instantiateVC(storyboard: self._authStoryboard)
+            vc.auth = self.auth
+            vc.backAuth = { getAuth in
+                self.auth = getAuth
+//                self.setupData()
+            }
             vc._push()
         }
     }
@@ -79,13 +99,14 @@ extension ProfileViewController {
     }
 
     func setupData() {
-            let auth = AuthManager.shared.getLocalAuth()
-            self.ownerNameLabel.text = auth.name
-            self.emailLabel.text = auth.email
+        setImage()
+        guard let _auth = self.auth else { return }
+        self.ownerNameLabel.text = _auth.name
+        self.emailLabel.text = _auth.email
     }
 
     func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage)
+        AuthManager.shared.setImage(authImage: self.authImage, urlImage: self.auth?.urlImage)
     }
 
 }
@@ -101,7 +122,7 @@ extension ProfileViewController {
                 vc.typeView = .Favorites
                 vc._push()
             }
-            
+
             self.myBookingsButton.titleLabel.text = "My Bookings"
             self.myBookingsButton.handleButton = {
                 // My Bookings Action
@@ -111,7 +132,7 @@ extension ProfileViewController {
                 vc._push()
             }
         case .Business:
-            self.favoritesButton.isHidden = true
+//            self.favoritesButton.isHidden = true
             self.myBookingsButton.titleLabel.text = "My Park"
             self.myBookingsButton.handleButton = {
                 // My Park Action
@@ -121,7 +142,7 @@ extension ProfileViewController {
             }
         }
     }
-    
+
     private func logout() {
         AuthManager.shared.logout { error in
             if let _error = error {
@@ -132,5 +153,5 @@ extension ProfileViewController {
             }
         }
     }
-    
+
 }
