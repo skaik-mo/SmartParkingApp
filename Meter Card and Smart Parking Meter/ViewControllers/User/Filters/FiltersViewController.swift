@@ -17,6 +17,8 @@ class FiltersViewController: UIViewController {
     
     @IBOutlet weak var topView: UIView!
     
+    var completionHandler: ((FilterModel?) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -30,7 +32,10 @@ class FiltersViewController: UIViewController {
     }
     
     @IBAction func searchAction(_ sender: Any) {
-    
+        debugPrint("slider: \(slider.value._toDouble) || Date from \(selectDate.fromText) , to \(selectDate.toText) || Time from \(selectTime.fromText) , to \(selectTime.toText)")
+        let filter = FilterModel.init(distance: slider.value._toDouble, fromDate: self.selectDate.fromText, toDate: self.selectDate.toText, fromTime: self.selectTime.fromText, toTime: self.selectTime.toText)
+        self.completionHandler?(filter)
+        self._dismissVC()
     }
     
     @IBAction func dismissViewAction(_ sender: Any) {

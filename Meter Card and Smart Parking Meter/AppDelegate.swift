@@ -9,6 +9,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import Firebase
 import GoogleMaps
+//import GooglePlaces
 import FBSDKCoreKit
 
 @main
@@ -31,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.setUpFacebook(application, didFinishLaunchingWithOptions: launchOptions)
 
-        GMSServices.provideAPIKey("AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc")
-//        GMSPlacesClient.provideAPIKey("AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc")
+        GMSServices.provideAPIKey(GoogleMapManager.API_KEY)
+//        GMSPlacesClient.provideAPIKey(GoogleMapManager.API_KEY)
 
         return true
     }

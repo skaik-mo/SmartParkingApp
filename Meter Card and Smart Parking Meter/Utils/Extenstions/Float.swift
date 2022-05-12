@@ -10,7 +10,10 @@ import Foundation
 extension Float {
     
     var _toString: String {
-        return String(format:"%.0f", self)
+        return String(format:"%.2f", self)
     }
     
+    var _toDouble: Double {
+        return Double(self)
+    }
 }

@@ -9,12 +9,13 @@ import Foundation
 
 extension Date {
     var _stringData: String {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.init(identifier: .gregorian)
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: self)
+        return self._string(dataFormat: "yyyy-MM-dd")
     }
 
+    var _stringTime: String {
+        return self._string(dataFormat: "h:mm a")
+    }
+    
     func _string(dataFormat: String, timeZone: String = TimeZone.current.identifier) -> String {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.init(identifier: .gregorian)
@@ -22,12 +23,19 @@ extension Date {
         formatter.timeZone = TimeZone.init(identifier: timeZone)
         return formatter.string(from: self)
     }
+    
+    // if Date A is Before Date B
+    func _isBefore(date: Date) -> Bool {
+        return self.compare(date) == .orderedAscending
+    }
 
-    func _getTime() -> String {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.init(identifier: .gregorian)
-        formatter.dateFormat = "h:mm a"
-        return formatter.string(from: self)
+    // if Date A is After Date B
+    func _isAfter(date: Date) -> Bool {
+        return self.compare(date) == .orderedDescending
+    }
+    
+    func _isSame(date: Date) -> Bool {
+        return self.compare(date) == .orderedSame
     }
 
     /// Returns a Date with the specified amount of components added to the one it is called with

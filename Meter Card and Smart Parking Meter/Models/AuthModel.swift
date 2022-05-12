@@ -23,8 +23,9 @@ class AuthModel {
     var urlImage: String?
     var urlLicense: String?
     var isLoginBySocial: Bool = false
+    var favouritedParkingsIDs: [String]
     
-    init(id: String? = nil, name: String? = nil, email: String?, password: String? = nil, plateNumber: String? = nil, typeAuth: TypeAuth? = .none, urlImage: String? = nil, urlLicense: String? = nil, isLoginBySocial: Bool = false) {
+    init(id: String? = nil, name: String? = nil, email: String?, password: String? = nil, plateNumber: String? = nil, typeAuth: TypeAuth? = .none, urlImage: String? = nil, urlLicense: String? = nil, isLoginBySocial: Bool = false, favouritedParkingsIDs: [String] = []) {
         self.id = id
         self.name = name
         self.email = email
@@ -34,6 +35,7 @@ class AuthModel {
         self.urlImage = urlImage
         self.urlLicense = urlLicense
         self.isLoginBySocial = isLoginBySocial
+        self.favouritedParkingsIDs = favouritedParkingsIDs
     }
 
     init?(id: String?, password: String? = nil, dictionary: [String: Any]?) {
@@ -46,6 +48,7 @@ class AuthModel {
         self.typeAuth = _dictionary["typeAuth"] as? Int == 0 ? .User : .Business
         self.urlImage = _dictionary["urlImage"] as? String
         self.urlLicense = _dictionary["urlLicense"] as? String
+        self.favouritedParkingsIDs = _dictionary["favouritedParkingsIDs"] as? [String] ?? []
     }
 
     func getDictionary() -> [String: Any] {
@@ -58,6 +61,7 @@ class AuthModel {
             "typeAuth": self.typeAuth?.rawValue,
             "urlImage": self.urlImage,
             "urlLicense": self.urlLicense,
+            "favouritedParkingsIDs": self.favouritedParkingsIDs,
         ]
         return dictionary as [String: Any]
     }

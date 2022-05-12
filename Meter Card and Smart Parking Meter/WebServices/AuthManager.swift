@@ -18,7 +18,8 @@ import FirebaseStorage
 
 typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool?, _ message: String?) -> Void)?
 typealias ResultHandler = ((_ auth: AuthModel?, _ message: String?) -> Void)?
-typealias FailureHandler = ((_ error: Error?) -> Void)?
+typealias ResultAllAuthHandler = ((_ users: [AuthModel], _ message: String?) -> Void)?
+typealias FailureHandler = ((_ errorMessage: String?) -> Void)?
 
 class AuthManager {
 
@@ -33,9 +34,10 @@ class AuthManager {
     private let passwordKey = "Password"
     private let typeAuthKey = "TypeAuth"
     private let plateNumberKey = "PlateNumber"
-    private let urlImage = "URLImage"
-    private let urlLicense = "URLLicense"
-    private let isLoginBySocial = "IsLoginBySocial"
+    private let urlImageKey = "URLImage"
+    private let urlLicenseKey = "URLLicense"
+    private let isLoginBySocialKey = "IsLoginBySocial"
+    private let favouritedParkingsIDsKey = "FavouritedParkingsIDs"
 
     private let loginManager = LoginManager()
 
@@ -56,10 +58,10 @@ class AuthManager {
             }
             auth.id = authResult?.user.uid
 
-            self.setAuth(auth: auth, dataDrivingLicense: data) { error in
-                if let _error = error {
+            self.setAuth(auth: auth, dataDrivingLicense: data) { errorMessage in
+                if let _errorMessage = errorMessage {
                     // here should deleted user from Authentication and re-sign up again
-                    result?(nil, _error.localizedDescription)
+                    result?(nil, errorMessage)
                     return
                 }
                 result?(auth, nil)
@@ -99,7 +101,7 @@ class AuthManager {
             clearLocalAuth()
             failure?(nil)
         } catch let error as NSError {
-            failure?(error)
+            failure?(error.localizedDescription)
         }
     }
 
@@ -109,7 +111,7 @@ class AuthManager {
         let credential = EmailAuthProvider.credential(withEmail: _email, password: _password)
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { auth, error in
             if let _error = error {
-                failure?(_error)
+                failure?(_error.localizedDescription)
                 return
             }
             failure?(nil)
@@ -128,7 +130,7 @@ class AuthManager {
             Auth.auth().currentUser?.updatePassword(to: password) { error in
                 SVProgressHUD.dismiss()
                 if let _error = error {
-                    failure?(_error)
+                    failure?(_error.localizedDescription)
                     return
                 }
                 self.saveAuth(auth: auth)
@@ -142,7 +144,7 @@ class AuthManager {
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             SVProgressHUD.dismiss()
             if let _error = error {
-                failure?(_error)
+                failure?(_error.localizedDescription)
                 return
             }
             failure?(nil)
@@ -159,7 +161,7 @@ class AuthManager {
             }
             Auth.auth().currentUser?.updateEmail(to: _email) { error in
                 if let _error = error {
-                    failure?(_error)
+                    failure?(_error.localizedDescription)
                     return
                 }
                 failure?(nil)
@@ -175,7 +177,7 @@ extension AuthManager {
     // Add Or Update Auth
     func setAuth(auth: AuthModel, dataDrivingLicense: Data?, dataAuth: Data? = nil, failure: FailureHandler) {
         guard let _usersFireStoreReference = self.usersFireStoreReference, let _id = auth.id, let _name = auth.name else { return }
-        
+
         SVProgressHUD.showSVProgress()
         var data: [String: Data?] = [:]
         let authPath = "Auth/\(_id)/AuthImage/\(_name).jpg"
@@ -205,7 +207,7 @@ extension AuthManager {
                 _usersFireStoreReference.document(_id).setData(auth.getDictionary()) { error in
                     SVProgressHUD.dismiss()
                     if let _error = error {
-                        failure?(_error)
+                        failure?(_error.localizedDescription)
                         return
                     }
                     // Added Auth
@@ -216,7 +218,7 @@ extension AuthManager {
         }
     }
 
-    private func getAuth(id: String?, password: String? = nil, result: ResultHandler) {
+    func getAuth(id: String?, password: String? = nil, result: ResultHandler) {
         guard let _usersFireStoreReference = self.usersFireStoreReference, let _id = id else { return }
         _usersFireStoreReference.document(_id).getDocument { snapshot, error in
             if let _error = error {
@@ -234,6 +236,48 @@ extension AuthManager {
         }
     }
 
+    func getAllAuth(result: ResultAllAuthHandler) {
+        guard let _usersFireStoreReference = self.usersFireStoreReference else { return }
+        _usersFireStoreReference.getDocuments { snapshot, error in
+            if let _error = error {
+                result?([], _error.localizedDescription)
+                return
+            }
+            var users: [AuthModel] = []
+
+            for auth in snapshot!.documents {
+                if let _auth = AuthModel.init(id: auth.documentID, dictionary: auth.data()) {
+                    users.append(_auth)
+                }
+            }
+            result?(users, nil)
+        }
+    }
+
+    func setFavourite(parkingID id: String?, isFavourite: Bool?, failure: FailureHandler) {
+        guard let _id = id, let _isFavourite = isFavourite else { return }
+        let auth = self.getLocalAuth()
+        if let index = auth.favouritedParkingsIDs.firstIndex(of: _id), !_isFavourite {
+            auth.favouritedParkingsIDs.remove(at: index)
+        } else {
+            auth.favouritedParkingsIDs.append(_id)
+        }
+        setAuth(auth: auth, dataDrivingLicense: nil, dataAuth: nil) { error in
+            if let _error = error {
+                failure?(_error)
+                return
+            }
+            failure?(nil)
+        }
+    }
+
+    func getFavourite(parkingID id: String?) -> Bool {
+        guard let _id = id else { return false }
+        let auth = self.getLocalAuth()
+        return auth.favouritedParkingsIDs.contains(_id)
+
+    }
+
 }
 
 // MARK: - SetImage
@@ -243,15 +287,9 @@ extension AuthManager {
         var image = ""
         if let _urlImage = urlImage {
             image = _urlImage
-
         }
-        debugPrint("setImage \(image)")
-//        else if let _urlImage = AuthManager.shared.getLocalAuth().urlImage {
-//            image = _urlImage
-//
-//        }
         let url = URL.init(string: image)
-        authImage.sd_setImage(with: url, placeholderImage: UIImage.init(named: "ic_placeholderPerson"))
+        authImage.sd_setImage(with: url, placeholderImage: UIImage.init(named: "ic_placeholderPerson"), options: .queryMemoryData, completed: nil)
     }
 
 }
@@ -266,9 +304,10 @@ extension AuthManager {
         UserDefaults.standard.set(auth.password, forKey: self.passwordKey)
         UserDefaults.standard.set(auth.typeAuth?.rawValue, forKey: self.typeAuthKey)
         UserDefaults.standard.set(auth.plateNumber, forKey: self.plateNumberKey)
-        UserDefaults.standard.set(auth.urlImage, forKey: self.urlImage)
-        UserDefaults.standard.set(auth.urlLicense, forKey: self.urlLicense)
-        UserDefaults.standard.set(auth.isLoginBySocial, forKey: self.isLoginBySocial)
+        UserDefaults.standard.set(auth.urlImage, forKey: self.urlImageKey)
+        UserDefaults.standard.set(auth.urlLicense, forKey: self.urlLicenseKey)
+        UserDefaults.standard.set(auth.isLoginBySocial, forKey: self.isLoginBySocialKey)
+        UserDefaults.standard.set(auth.favouritedParkingsIDs, forKey: self.favouritedParkingsIDsKey)
         UserDefaults.standard.synchronize()
     }
 
@@ -285,15 +324,16 @@ extension AuthManager {
         let password = UserDefaults.standard.string(forKey: self.passwordKey)
         let typeAuth = UserDefaults.standard.value(forKey: self.typeAuthKey) as? Int
         let plateNumber = UserDefaults.standard.string(forKey: self.plateNumberKey)
-        let urlImage = UserDefaults.standard.string(forKey: self.urlImage)
-        let urlLicense = UserDefaults.standard.string(forKey: self.urlLicense)
+        let urlImage = UserDefaults.standard.string(forKey: self.urlImageKey)
+        let urlLicense = UserDefaults.standard.string(forKey: self.urlLicenseKey)
+        let favouritedParkingsIDs = UserDefaults.standard.value(forKey: self.favouritedParkingsIDsKey) as? [String]
         var isLoginBySocial = false
 
-        if let _isLoginBySocial = UserDefaults.standard.value(forKey: self.isLoginBySocial) as? Bool {
+        if let _isLoginBySocial = UserDefaults.standard.value(forKey: self.isLoginBySocialKey) as? Bool {
             isLoginBySocial = _isLoginBySocial
         }
 
-        return AuthModel.init(id: id, name: name, email: email, password: password, plateNumber: plateNumber, typeAuth: typeAuth?.getTypeAuth, urlImage: urlImage, urlLicense: urlLicense, isLoginBySocial: isLoginBySocial)
+        return AuthModel.init(id: id, name: name, email: email, password: password, plateNumber: plateNumber, typeAuth: typeAuth?.getTypeAuth, urlImage: urlImage, urlLicense: urlLicense, isLoginBySocial: isLoginBySocial, favouritedParkingsIDs: favouritedParkingsIDs ?? [])
     }
 
 }

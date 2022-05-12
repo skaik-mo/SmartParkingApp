@@ -11,6 +11,8 @@
 		E708599127DF3EE8000FCE7B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708599027DF3EE8000FCE7B /* FiltersViewController.swift */; };
 		E708599927DF4588000FCE7B /* SelectDateOrTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E708599727DF4588000FCE7B /* SelectDateOrTime.swift */; };
 		E708599A27DF4588000FCE7B /* SelectDateOrTime.xib in Resources */ = {isa = PBXBuildFile; fileRef = E708599827DF4588000FCE7B /* SelectDateOrTime.xib */; };
+		E71A6356282BDA8300EAD474 /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A6355282BDA8300EAD474 /* RatingModel.swift */; };
+		E71A6358282BDEAC00EAD474 /* RatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A6357282BDEAC00EAD474 /* RatingManager.swift */; };
 		E720808227F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720808027F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift */; };
 		E720808327F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E720808127F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib */; };
 		E720808627F1C5C300CBB775 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720808527F1C5C300CBB775 /* MessageViewController.swift */; };
@@ -25,6 +27,7 @@
 		E73CFBCA27E8A4DA000D03FE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73CFBC927E8A4DA000D03FE /* AlertViewController.swift */; };
 		E73CFBCD27E8A6A1000D03FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73CFBCC27E8A6A1000D03FE /* ProfileViewController.swift */; };
 		E758B45427DF7345008931AD /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = E758B45327DF7345008931AD /* Float.swift */; };
+		E75DD5562819215B006FD688 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75DD5552819215B006FD688 /* AddLocationViewController.swift */; };
 		E76627C527E85ECF00848233 /* AlertPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76627C427E85ECF00848233 /* AlertPicker.swift */; };
 		E76627C727E885E600848233 /* SubmitBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76627C627E885E600848233 /* SubmitBookingViewController.swift */; };
 		E77353C627EB80AD0065D34B /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77353C527EB80AD0065D34B /* DatePickerViewController.swift */; };
@@ -36,7 +39,7 @@
 		E774641C2800CB3A0009EDAB /* Integer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774641B2800CB3A0009EDAB /* Integer.swift */; };
 		E776E24A27F8727100693300 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776E24927F8727100693300 /* AuthManager.swift */; };
 		E776E24C27F87DBC00693300 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776E24B27F87DBC00693300 /* AuthModel.swift */; };
-		E77F5FCD27E07E60009B1AA2 /*  ParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCC27E07E60009B1AA2 /*  ParkingModel.swift */; };
+		E77F5FCD27E07E60009B1AA2 /* ParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCC27E07E60009B1AA2 /* ParkingModel.swift */; };
 		E77F5FD027E08F16009B1AA2 /* SpotDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */; };
 		E77F5FD427E09ED2009B1AA2 /* ParkingOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */; };
 		E77F5FD527E09ED2009B1AA2 /* ParkingOwner.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77F5FD327E09ED2009B1AA2 /* ParkingOwner.xib */; };
@@ -49,6 +52,9 @@
 		E780C1152806F13C0044E955 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */; };
 		E79A75B627E8DC7E005AAC92 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79A75B427E8DC7E005AAC92 /* ProfileButton.swift */; };
 		E79A75B727E8DC7E005AAC92 /* ProfileButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = E79A75B527E8DC7E005AAC92 /* ProfileButton.xib */; };
+		E79EA15E2822D9250018B596 /* BookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79EA15D2822D9250018B596 /* BookingModel.swift */; };
+		E79EA1602822DBFA0018B596 /* BookingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79EA15F2822DBFA0018B596 /* BookingManager.swift */; };
+		E79EA1622822E52F0018B596 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79EA1612822E52F0018B596 /* Helper.swift */; };
 		E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A1846F27DA057A00D0921E /* SignUpViewController.swift */; };
 		E7A1847527DC314400D0921E /* HomeUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A1847427DC314400D0921E /* HomeUserViewController.swift */; };
 		E7B5F9C827DFAA2100FA5476 /* ThumbTextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F9C727DFAA2100FA5476 /* ThumbTextSlider.swift */; };
@@ -97,6 +103,7 @@
 		E7F1FD9A27E9FF4200FE55E7 /* Rating.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1FD9827E9FF4200FE55E7 /* Rating.xib */; };
 		E7F3601E2810BA2300853938 /* SVProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3601D2810BA2300853938 /* SVProgress.swift */; };
 		E7F56B8927EE4C0100CAAF6B /* MyParkingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F56B8827EE4C0100CAAF6B /* MyParkingsViewController.swift */; };
+		E7F60E5628214D51009AC1A6 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F60E5528214D51009AC1A6 /* FilterModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -121,6 +128,8 @@
 		E708599727DF4588000FCE7B /* SelectDateOrTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateOrTime.swift; sourceTree = "<group>"; };
 		E708599827DF4588000FCE7B /* SelectDateOrTime.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateOrTime.xib; sourceTree = "<group>"; };
 		E70907D22805C40600FA9EFE /* Meter Card and Smart Parking Meter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Meter Card and Smart Parking Meter.entitlements"; sourceTree = "<group>"; };
+		E71A6355282BDA8300EAD474 /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
+		E71A6357282BDEAC00EAD474 /* RatingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingManager.swift; sourceTree = "<group>"; };
 		E720808027F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverMessageTableViewCell.swift; sourceTree = "<group>"; };
 		E720808127F1ADF600CBB775 /* ReceiverMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverMessageTableViewCell.xib; sourceTree = "<group>"; };
 		E720808527F1C5C300CBB775 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +144,7 @@
 		E73CFBC927E8A4DA000D03FE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		E73CFBCC27E8A6A1000D03FE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E758B45327DF7345008931AD /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		E75DD5552819215B006FD688 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		E76627C427E85ECF00848233 /* AlertPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPicker.swift; sourceTree = "<group>"; };
 		E76627C627E885E600848233 /* SubmitBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitBookingViewController.swift; sourceTree = "<group>"; };
 		E77353C527EB80AD0065D34B /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +156,7 @@
 		E774641B2800CB3A0009EDAB /* Integer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Integer.swift; sourceTree = "<group>"; };
 		E776E24927F8727100693300 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		E776E24B27F87DBC00693300 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
-		E77F5FCC27E07E60009B1AA2 /*  ParkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ParkingModel.swift"; sourceTree = "<group>"; };
+		E77F5FCC27E07E60009B1AA2 /* ParkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingModel.swift; sourceTree = "<group>"; };
 		E77F5FCF27E08F16009B1AA2 /* SpotDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailsViewController.swift; sourceTree = "<group>"; };
 		E77F5FD227E09ED2009B1AA2 /* ParkingOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingOwner.swift; sourceTree = "<group>"; };
 		E77F5FD327E09ED2009B1AA2 /* ParkingOwner.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParkingOwner.xib; sourceTree = "<group>"; };
@@ -159,6 +169,9 @@
 		E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		E79A75B427E8DC7E005AAC92 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		E79A75B527E8DC7E005AAC92 /* ProfileButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileButton.xib; sourceTree = "<group>"; };
+		E79EA15D2822D9250018B596 /* BookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingModel.swift; sourceTree = "<group>"; };
+		E79EA15F2822DBFA0018B596 /* BookingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingManager.swift; sourceTree = "<group>"; };
+		E79EA1612822E52F0018B596 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E7A1846F27DA057A00D0921E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E7A1847427DC314400D0921E /* HomeUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUserViewController.swift; sourceTree = "<group>"; };
 		E7B5F9C727DFAA2100FA5476 /* ThumbTextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbTextSlider.swift; sourceTree = "<group>"; };
@@ -208,6 +221,7 @@
 		E7F1FD9827E9FF4200FE55E7 /* Rating.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Rating.xib; sourceTree = "<group>"; };
 		E7F3601D2810BA2300853938 /* SVProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SVProgress.swift; sourceTree = "<group>"; };
 		E7F56B8827EE4C0100CAAF6B /* MyParkingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyParkingsViewController.swift; sourceTree = "<group>"; };
+		E7F60E5528214D51009AC1A6 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		F1D6C47B7A75B38B7EEC2380 /* Pods-Meter Card and Smart Parking Meter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meter Card and Smart Parking Meter.release.xcconfig"; path = "Target Support Files/Pods-Meter Card and Smart Parking Meter/Pods-Meter Card and Smart Parking Meter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,6 +300,7 @@
 				E7C0C90527EE09A600C83AAE /* HomeBusiness */,
 				E7F56B8727EE4BDD00CAAF6B /* MyParkings */,
 				E73710FE27EF571200D6FAC4 /* AddParking */,
+				E75DD55428192115006FD688 /* AddLocation */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -373,6 +388,14 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		E75DD55428192115006FD688 /* AddLocation */ = {
+			isa = PBXGroup;
+			children = (
+				E75DD5552819215B006FD688 /* AddLocationViewController.swift */,
+			);
+			path = AddLocation;
+			sourceTree = "<group>";
+		};
 		E76627C827E8860100848233 /* SubmitBooking */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,7 +407,7 @@
 		E77353C427EB801D0065D34B /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				E7B5F9C927DFF65000FA5476 /* GoogleMapManager.swift */,
+				E79EA1612822E52F0018B596 /* Helper.swift */,
 				E77353CB27EB845C0065D34B /*  AlertsAndPickers */,
 			);
 			path = Libs;
@@ -403,9 +426,12 @@
 		E776E24827F8721B00693300 /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
+				E7B5F9C927DFF65000FA5476 /* GoogleMapManager.swift */,
 				E776E24927F8727100693300 /* AuthManager.swift */,
 				E780C1102806E3930044E955 /* ParkingManager.swift */,
 				E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */,
+				E79EA15F2822DBFA0018B596 /* BookingManager.swift */,
+				E71A6357282BDEAC00EAD474 /* RatingManager.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -414,8 +440,11 @@
 			isa = PBXGroup;
 			children = (
 				E776E24B27F87DBC00693300 /* AuthModel.swift */,
-				E77F5FCC27E07E60009B1AA2 /*  ParkingModel.swift */,
+				E77F5FCC27E07E60009B1AA2 /* ParkingModel.swift */,
 				E7D3E33427F2EB1500851BEB /* Message.swift */,
+				E7F60E5528214D51009AC1A6 /* FilterModel.swift */,
+				E79EA15D2822D9250018B596 /* BookingModel.swift */,
+				E71A6355282BDA8300EAD474 /* RatingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -940,7 +969,9 @@
 				E7E8CE0027E12DC700BA1C9C /* Date.swift in Sources */,
 				E7BF3A8727EE051D00FBB17F /* HomeTableViewCell.swift in Sources */,
 				E7BCC99F27E4E1E500C35AE2 /* Double.swift in Sources */,
+				E71A6358282BDEAC00EAD474 /* RatingManager.swift in Sources */,
 				E737110027EF572500D6FAC4 /* AddParkingViewController.swift in Sources */,
+				E7F60E5628214D51009AC1A6 /* FilterModel.swift in Sources */,
 				E7BFE01227D6049A00F80180 /* UIView.swift in Sources */,
 				E76627C727E885E600848233 /* SubmitBookingViewController.swift in Sources */,
 				E7F3601E2810BA2300853938 /* SVProgress.swift in Sources */,
@@ -954,7 +985,7 @@
 				E73CFBCA27E8A4DA000D03FE /* AlertViewController.swift in Sources */,
 				E7A1847527DC314400D0921E /* HomeUserViewController.swift in Sources */,
 				E77353CA27EB842C0065D34B /* UIViewEXForDatePicker.swift in Sources */,
-				E77F5FCD27E07E60009B1AA2 /*  ParkingModel.swift in Sources */,
+				E77F5FCD27E07E60009B1AA2 /* ParkingModel.swift in Sources */,
 				E776E24C27F87DBC00693300 /* AuthModel.swift in Sources */,
 				E7BFE00827D6022500F80180 /* UIStoryboard.swift in Sources */,
 				E7CF569227E9B361001997CA /* UITableView.swift in Sources */,
@@ -971,6 +1002,7 @@
 				E7BCC99C27E4C48400C35AE2 /* ParkingInfo.swift in Sources */,
 				E7BFE01A27D6110200F80180 /* GoSignInOrUpViewController.swift in Sources */,
 				E722DFD927EB1BEF00CD2C60 /* BookingTableViewCell.swift in Sources */,
+				E79EA15E2822D9250018B596 /* BookingModel.swift in Sources */,
 				E722DFDE27EB24FD00CD2C60 /* PasswordViewController.swift in Sources */,
 				E77353C827EB82BB0065D34B /* UIAlertController+Extensions.swift in Sources */,
 				E77F5FE327E0AFFD009B1AA2 /* UICollectionView.swift in Sources */,
@@ -986,18 +1018,22 @@
 				E77F5FD027E08F16009B1AA2 /* SpotDetailsViewController.swift in Sources */,
 				E77353C627EB80AD0065D34B /* DatePickerViewController.swift in Sources */,
 				E720808A27F1CDC900CBB775 /* SenderMessageTableViewCell.swift in Sources */,
+				E75DD5562819215B006FD688 /* AddLocationViewController.swift in Sources */,
 				E77F5FD427E09ED2009B1AA2 /* ParkingOwner.swift in Sources */,
 				E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */,
 				E7BFE01427D604E800F80180 /* UIButton.swift in Sources */,
 				E720808227F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift in Sources */,
 				E780C1112806E3930044E955 /* ParkingManager.swift in Sources */,
+				E71A6356282BDA8300EAD474 /* RatingModel.swift in Sources */,
 				E7BFE00A27D6026200F80180 /* UIResponder.swift in Sources */,
 				E7F1FD9927E9FF4200FE55E7 /* Rating.swift in Sources */,
 				E7CF569027E9B22B001997CA /* TableViewController.swift in Sources */,
+				E79EA1602822DBFA0018B596 /* BookingManager.swift in Sources */,
 				E77F5FE027E0AC9C009B1AA2 /* DateCell.swift in Sources */,
 				E7BFDFED27D6003800F80180 /* SceneDelegate.swift in Sources */,
 				E7B5F9CA27DFF65000FA5476 /* GoogleMapManager.swift in Sources */,
 				E7D3E33527F2EB1500851BEB /* Message.swift in Sources */,
+				E79EA1622822E52F0018B596 /* Helper.swift in Sources */,
 				E7B5F9C827DFAA2100FA5476 /* ThumbTextSlider.swift in Sources */,
 				E7BFE02E27D6320200F80180 /* CustomText.swift in Sources */,
 			);

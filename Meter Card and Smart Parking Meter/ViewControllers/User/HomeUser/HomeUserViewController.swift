@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import SDWebImage
 
 class HomeUserViewController: UIViewController {
 
@@ -33,24 +32,28 @@ class HomeUserViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         localized()
-        setupData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.isShowParkingInfo = false
         AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
         setImage()
+        setUpMap()
+        showAlertExpiryTime()
     }
 
     @IBAction func filtersAction(_ sender: Any) {
         self._presentTopToBottom()
         let vc: FiltersViewController = FiltersViewController._instantiateVC(storyboard: self._userStoryboard)
+        vc.completionHandler = { filter in
+            self.setUpMap(filter: filter)
+        }
         vc._presentVC()
 
     }
     @IBAction func currentLocationAction(_ sender: Any) {
-//        GoogleMapManager.currentLocation(mapView: mapView, locationManager: locationManager)
-        GoogleMapManager.initLoctionManager(locationManager: locationManager, mapView: mapView)
+        GoogleMapManager.setLocations(locationManager: self.locationManager, mapView: self.mapView)
     }
 
     @IBAction func profileAction(_ sender: Any) {
@@ -70,8 +73,6 @@ extension HomeUserViewController {
 
     func setupView() {
         self.title = "Home"
-        setUpMap()
-
         switchComponents()
     }
 
@@ -79,8 +80,15 @@ extension HomeUserViewController {
 
     }
 
-    func setupData() {
-
+    func showAlertExpiryTime() {
+        let expiryTime = 15
+        
+        BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
+            if let _getExpiryTime = getExpiryTime , (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
+                let vc: AlertViewController = AlertViewController._instantiateVC(storyboard: self._userStoryboard)
+                vc._presentVC()
+            }
+        }
     }
 
     func setImage() {
@@ -97,19 +105,19 @@ extension HomeUserViewController {
 
 extension HomeUserViewController: GMSMapViewDelegate {
 
-    func setUpMap() {
+    func setUpMap(filter: FilterModel? = nil) {
         mapView.delegate = self
-        GoogleMapManager.initLoctionManager(locationManager: locationManager, mapView: mapView)
+        debugPrint("distance: \(filter?.distance) || Date from \(filter?.fromDate) , to \(filter?.toDate) || Time from \(filter?.fromTime) , to \(filter?.toTime)")
+        GoogleMapManager.initLoctionManager(locationManager: locationManager, mapView: mapView, filter: filter)
     }
 
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         guard marker.position.latitude != locationManager.location?.coordinate.latitude,
             marker.position.latitude != locationManager.location?.coordinate.latitude else { return false }
 
-        GoogleMapManager.parkingLocations.forEach { parking in
+        GoogleMapManager.parkings.forEach { parking in
             if marker.position.latitude == parking.latitude, marker.position.longitude == parking.longitude, marker.title == parking.name {
-                self.parkingInfo.parking = parking
-                self.parkingInfo.setUpView()
+                self.parkingInfo.setUpView(parking: parking, auth: self.auth)
             }
         }
         self.isShowParkingInfo = true

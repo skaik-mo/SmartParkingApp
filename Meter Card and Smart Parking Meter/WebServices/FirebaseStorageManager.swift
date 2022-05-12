@@ -52,7 +52,7 @@ class FirebaseStorageManager {
 //                    debugPrint(progress)
 //                    SVProgressHUD.showProgress(progress)
 //                })
-            }
+            } 
         }
     }
 

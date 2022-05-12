@@ -12,9 +12,12 @@ import Cosmos
 class RatingViewController: UIViewController {
 
     @IBOutlet weak var ratingView: CosmosView!
-    
+
     @IBOutlet weak var greenButton: GreenButton!
-    
+
+    var parking: ParkingModel?
+    var auth: AuthModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -36,8 +39,7 @@ extension RatingViewController {
 
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
-            debugPrint("Rating: \(self.ratingView.rating)")
-            self._dismissVC()
+            self.addRating()
         }
     }
 
@@ -55,3 +57,30 @@ extension RatingViewController {
 
 }
 
+extension RatingViewController {
+
+    private func checkData() -> Bool {
+        if (!(self.auth?.id?._isValidValue ?? false) || !(self.parking?.id?._isValidValue ?? false)) {
+            self._showErrorAlert(message: "error")
+            return false
+        }
+        return true
+    }
+
+    private func getRating() -> RatingModel? {
+        guard checkData() else { return nil }
+        return .init(userID: self.auth?.id, parkingID: self.parking?.id, rating: self.ratingView.rating)
+    }
+
+    private func addRating() {
+        guard let _rating = getRating() else { return }
+        RatingManager.shared.setParking(rating: _rating, parking: self.parking) { errorMessage in
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
+                return
+            }
+            self._dismissVC()
+        }
+    }
+
+}

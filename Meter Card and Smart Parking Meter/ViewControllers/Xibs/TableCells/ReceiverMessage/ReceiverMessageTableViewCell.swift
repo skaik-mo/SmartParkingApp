@@ -27,7 +27,7 @@ class ReceiverMessageTableViewCell: UITableViewCell {
         
         if let _message = self.message?.message, let time = self.message?.time{
             self.messageLabel.text = _message
-            self.timeLabel.text = time._getTime()
+            self.timeLabel.text = time._stringTime
         }
     }
 

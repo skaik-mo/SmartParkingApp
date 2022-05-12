@@ -13,69 +13,99 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var customerImage: UIImageView!
     @IBOutlet weak var customerNameLabel: UILabel!
     @IBOutlet weak var parkingNameLabel: UILabel!
-    
+
     @IBOutlet weak var stackView: UIStackView!
-    
+
     @IBOutlet weak var rejectButton: GreenButton!
     @IBOutlet weak var acceptButton: GreenButton!
-    
+
     @IBOutlet weak var parkingPriceLabel: UILabel!
-    
+
     @IBOutlet weak var parkingStatusLabel: UILabel!
     var isClicked = false {
-        didSet{
+        didSet {
             setClicked()
         }
     }
-    
+
+    var parking: ParkingModel?
+    var booking: BookingModel?
+    var user: AuthModel?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     func configerCell() {
+        AuthManager.shared.setImage(authImage: customerImage, urlImage: self.user?.urlImage)
+        if let _booking = self.booking, let _parking = self.parking, let _price = _parking.price, let _user = user {
+            self.customerNameLabel.text = _user.name
+            self.parkingNameLabel.text = _parking.name
+            self.parkingPriceLabel.text = "$\(_price)"
+            setTitleClicked(status: _booking.status)
+        }
         setUpView()
     }
-    
+
 }
 
 extension HomeTableViewCell {
     private func setUpView() {
         self.rejectButton.greenButton.backgroundColor = "D0021B"._hexColor
-        
-        self.isClicked = false
-        
+
+        if let status = self.booking?.status {
+            self.isClicked = status.rawValue == 0 ? false : true
+        }
+
         self.rejectButton.setUp(typeButton: .redButton, corner: 9)
+        self.rejectButton.greenButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 12)
         self.rejectButton.handleButton = {
-            self.setTitleClicked(parkingStatus: "Rejected", statusColor: self.rejectButton.greenButton.backgroundColor)
+            self.setTitleClicked(status: .Rejected)
             self.isClicked = true
+            self.setStatus(status: .Rejected)
         }
         self.acceptButton.setUp(typeButton: .greenButton, corner: 9)
+        self.acceptButton.greenButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 12)
+        self.acceptButton.greenButton.backgroundColor = "0D9F67"._hexColor
         self.acceptButton.handleButton = {
-            self.setTitleClicked(parkingStatus: "Accepted", statusColor: self.acceptButton.greenButton.backgroundColor)
+            self.setTitleClicked(status: .Accepted)
             self.isClicked = true
+            self.setStatus(status: .Accepted)
         }
     }
-    
-    private func setTitleClicked(parkingStatus: String = "", statusColor: UIColor? = .clear) {
-        self.parkingStatusLabel.text = parkingStatus
-        self.parkingStatusLabel.textColor = statusColor
+
+    private func setTitleClicked(status: BookinsStatus) {
+        self.parkingStatusLabel.text = status.getStringStatus().text
+        self.parkingStatusLabel.textColor = status.getStringStatus().color
     }
-    
+
     private func setClicked() {
         switch self.isClicked {
         case true:
-            self.parkingStatusLabel.alpha = 1
-            self.rejectButton.alpha = 0
-            self.acceptButton.alpha = 0
+            self.parkingStatusLabel.isHidden = false
+            self.rejectButton.isHidden = true
+            self.acceptButton.isHidden = true
         case false:
-            self.parkingStatusLabel.alpha = 0
-            self.rejectButton.alpha = 1
-            self.acceptButton.alpha = 1
+            self.parkingStatusLabel.isHidden = true
+            self.rejectButton.isHidden = false
+            self.acceptButton.isHidden = false
         }
     }
-    
-    
+
+    private func setStatus(status: BookinsStatus) {
+        if let _booking = self.booking, _booking.status != status {
+            _booking.status = status
+            BookingManager.shared.setBooking(newBooking: _booking) { errorMessage in
+                if let _errorMessage = errorMessage {
+                    if let vc = AppDelegate.shared?._topVC as? HomeBusinessViewController {
+                        vc._showErrorAlert(message: _errorMessage)
+                    }
+                }
+            }
+        }
+    }
+
 //    private func setClicked() {
 //        UIView.animate(withDuration: 0.5) {
 //            switch self.isClicked {
@@ -90,5 +120,5 @@ extension HomeTableViewCell {
 //            }
 //        }
 //    }
-    
+
 }

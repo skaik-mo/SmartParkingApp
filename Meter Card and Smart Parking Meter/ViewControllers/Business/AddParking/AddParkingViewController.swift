@@ -8,10 +8,9 @@
 
 import UIKit
 import GoogleMaps
-import MMBGoogleLocationPicker
 
 class AddParkingViewController: UIViewController {
-    
+
     @IBOutlet weak var mapView: GMSMapView!
 
     @IBOutlet weak var parkingNameText: UITextField!
@@ -27,19 +26,27 @@ class AddParkingViewController: UIViewController {
     @IBOutlet weak var perdayButton: GreenButton!
 
     @IBOutlet weak var priceText: UITextField!
-    
-    var isSelectedPriceHour: Bool = true {
+
+    @IBOutlet weak var parkLicenseText: CustomText!
+
+    private var coordinate: CLLocationCoordinate2D?
+
+    var isPerDay: Bool = false {
         didSet {
             self.switchButtons()
         }
     }
-    
+
     var locationManager = CLLocationManager()
 
     var imagePicker = UIImagePickerController()
-    var dataImage: Data?
+    var dataParking: Data?
+    var dataParkLicense: Data?
+    var isParkingImage: Bool?
 
-    
+    var auth: AuthModel?
+    var completionHandler: ((ParkingModel) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -51,53 +58,40 @@ class AddParkingViewController: UIViewController {
         super.viewWillAppear(animated)
         self._setTitleBackBarButton()
     }
-    
+
     @IBAction func addPhotosAction(_ sender: Any) {
         debugPrint("addPhotosAction")
-        self.addImage()
+        self.addImage(isParkingImage: true)
     }
-    
+
     @IBAction func addParkingAction(_ sender: Any) {
         self.save()
     }
-    
+
     @IBAction func goToSelectLoactionAction(_ sender: Any) {
         debugPrint("goToSelectLoactionAction")
-
-//        LocationPicker.GMSServicesKey = GoogleMapManager.API_KEY
-//        LocationPicker.GMSPlacesClientKey = GoogleMapManager.API_KEY
-//        let locationPicker = LocationPicker.shared
-//        locationPicker.pickCompletion = { (pickedLocationItem) in
-//            if let coordinate = pickedLocationItem.coordinate {
-//                debugPrint("Picked location is (latitude: \(coordinate.latitude), longitude: \(coordinate.longitude))")
-//                GoogleMapManager.currentLocation(mapView: self.mapView, coordinate: coordinate, icon: "ic_pointLoaction"._toImage)
-//            }
-//        }
-//        locationPicker.addBarButtons()
-//        // Call this method to add a done and a cancel button to navigation bar and set navigation bar background.
-//        let navigationController = UINavigationController(rootViewController: locationPicker)
-//        navigationController.navigationBar.isTranslucent = false
-//        navigationController.navigationBar.tintColor = .white
-//        navigationController.navigationBar.barTintColor = .black
-//        navigationController.view.backgroundColor = .black
-//        navigationController.viewControllers.first?.view.backgroundColor = .black
-//        present(navigationController, animated: true, completion: nil)
-        
+        let vc: AddLocationViewController = AddLocationViewController._instantiateVC(storyboard: self._businessStoryboard)
+        vc.handler = { coordinate in
+            debugPrint("lat: \(coordinate?.latitude) || long: \(coordinate?.longitude)")
+            self.coordinate = coordinate
+        }
+        vc._push()
     }
-    
-    
-    
+
+
+
 }
 
 extension AddParkingViewController {
 
     func setupView() {
         self.title = "Add new Parking"
-        
+
+        locationManager.requestWhenInUseAuthorization()
         GoogleMapManager.currentLocation(mapView: self.mapView, coordinate: self.locationManager.location?.coordinate, icon: "ic_pointLoaction"._toImage)
-        
+
         self.parkingNameText._placeholderColor = .black
-        
+
         self.selectDate.selectionType = .date
         self.selectDate.title.text = "Availability:"
         self.selectDate.title.textColor = .black
@@ -113,20 +107,25 @@ extension AddParkingViewController {
         self.selectTime.fromLabel.text = "Time From"
 
         numberOfParking.typeParkingView = .grayWithBorder
-        numberOfParking.button.isHidden = false
+        numberOfParking.numberOfParkingText.isHidden = false
         numberOfParking.title.text = "Spots"
 
-        self.isSelectedPriceHour = true
-        
+        self.isPerDay = false
+
+        self.parkLicenseText.showCameraIcon = true
+        self.parkLicenseText.handleAddImage = {
+            self.addImage(isParkingImage: false)
+        }
+
         self.hourButton.handleButton = {
             debugPrint("hourButton")
-            self.isSelectedPriceHour = true
+            self.isPerDay = false
 
         }
-        
+
         self.perdayButton.handleButton = {
             debugPrint("perdayButton")
-            self.isSelectedPriceHour = false
+            self.isPerDay = true
         }
     }
 
@@ -139,13 +138,13 @@ extension AddParkingViewController {
     }
 
     func switchButtons() {
-        if self.isSelectedPriceHour {
-            self.hourButton.setUp(typeButton: .greenButton, corner: 6)
-            self.perdayButton.setUp(typeButton: .grayButton, corner: 6)
+        if self.isPerDay {
+            self.perdayButton.setUp(typeButton: .greenButton, corner: 6)
+            self.hourButton.setUp(typeButton: .grayButton, corner: 6)
             return
         }
-        self.perdayButton.setUp(typeButton: .greenButton, corner: 6)
-        self.hourButton.setUp(typeButton: .grayButton, corner: 6)
+        self.hourButton.setUp(typeButton: .greenButton, corner: 6)
+        self.perdayButton.setUp(typeButton: .grayButton, corner: 6)
 
     }
 
@@ -161,7 +160,7 @@ extension AddParkingViewController {
             self._showErrorAlert(message: "Enter parking name")
             return false
         }
-        if self.dataImage == nil {
+        if self.dataParking == nil {
             self._showErrorAlert(message: "Enter parking image")
             return false
         }
@@ -177,35 +176,51 @@ extension AddParkingViewController {
             self._showErrorAlert(message: "Enter price")
             return false
         }
+        if coordinate == nil {
+            self._showErrorAlert(message: "Click on map and add location")
+            return false
+        }
+        if let message = self.numberOfParking.checkNumberOfParkig() {
+            self._showErrorAlert(message: message)
+            return false
+        }
+        if self.dataParkLicense == nil {
+            self._showErrorAlert(message: "Enter park license")
+            return false
+        }
+        if !(self.auth?.id?._isValidValue ?? false), !(self.auth?.name?._isValidValue ?? false), !(self.auth?.plateNumber?._isValidValue ?? false) {
+            self._showErrorAlert(message: "You must log out and try to log in again")
+            return false
+        }
         return true
     }
 
-//    private func clearData() {
-//    }
-
     private func getParking() -> ParkingModel? {
         guard self.checkData() else { return nil }
-        
-        return .init(name: self.parkingNameText._getText, fromDate: self.selectDate.fromText, toDate: selectDate.toText, fromTime: selectTime.fromText, toTime: selectTime.toText, price: priceText._getText, spots: nil, latitude: nil, longitude: nil)
+
+        return .init(uid: self.auth?.id, name: self.parkingNameText._getText, fromDate: self.selectDate.fromText, toDate: selectDate.toText, fromTime: selectTime.fromText, toTime: selectTime.toText, price: priceText._getText, spots: self.numberOfParking.numberOfParkingText._getText._toInteger, latitude: self.coordinate?.latitude, longitude: self.coordinate?.longitude, isPerDay: self.isPerDay)
     }
 
     private func save() {
         guard let _parking = self.getParking() else { return }
-        ParkingManager.shared.setParking(parking: _parking, data: self.dataImage) { error in
-            if let _error = error {
-                self._showErrorAlert(message: _error.localizedDescription)
+        ParkingManager.shared.setParking(parking: _parking, dataParking: self.dataParking, dataParkLicense: self.dataParkLicense) { errorMessage in
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
                 return
             }
             debugPrint("added Parking")
+            self.completionHandler?(_parking)
+            self._pop()
         }
-     
+
     }
 
 }
 
 extension AddParkingViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    func addImage() {
+    func addImage(isParkingImage: Bool) {
+        self.isParkingImage = isParkingImage
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
             imagePicker.delegate = self
             imagePicker.allowsEditing = false
@@ -214,11 +229,17 @@ extension AddParkingViewController: UINavigationControllerDelegate, UIImagePicke
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        
         self._dismissVC()
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.parkingImage.image = image
-        self.dataImage = image?.pngData()
+        if let _data = image?.pngData() {
+            if self.isParkingImage == true {
+                self.parkingImage.image = image
+                self.dataParking = _data
+            } else {
+                self.parkLicenseText.isSelectedText = true
+                self.dataParkLicense = _data
+            }
+        }
     }
 
 }

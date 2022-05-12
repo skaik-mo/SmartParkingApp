@@ -37,7 +37,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oS0-wi-s93">
                             <rect key="frame" x="15" y="14" width="306" height="68"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="wNh-bE-nus">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderParking" translatesAutoresizingMaskIntoConstraints="NO" id="wNh-bE-nus">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="wNh-bE-nus" secondAttribute="height" multiplier="1:1" id="IzL-8I-O4x"/>
@@ -136,7 +136,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_image" width="1005" height="480"/>
+        <image name="placeholderParking" width="1170" height="570"/>
         <namedColor name="000000">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

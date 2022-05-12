@@ -109,12 +109,12 @@ class SelectDateOrTime: UIView {
 }
 
 extension SelectDateOrTime {
-    func setIcons() {
+    private func setIcons() {
         self.toImageView.isHidden = self.isHiddenIcons
         self.fromImageView.isHidden = self.isHiddenIcons
     }
 
-    func setUpView() {
+    private func setUpView() {
         if selectionType == .date {
             setDate()
             return
@@ -122,13 +122,13 @@ extension SelectDateOrTime {
         setTime()
     }
 
-    func setDate() {
+    private func setDate() {
         self.title.text = "Select the appropriate date"
         fromImageView.image = "ic_calendar"._toImage
         toImageView.image = "ic_calendar"._toImage
     }
 
-    func setTime() {
+    private func setTime() {
         self.title.text = "Select the appropriate Time"
         fromImageView.image = "ic_clock"._toImage
         toImageView.image = "ic_clock"._toImage
@@ -137,26 +137,58 @@ extension SelectDateOrTime {
 
     private func showDateOrTime(handle: @escaping (_ value: String?) -> Void) {
         let alert = UIAlertController(style: .actionSheet, title: "Select \(selectionType.self)")
-        let date = Date()._add(months: 1)
+        let date = Date()._add(months: 2)
         
         if self.selectionType == .date {
-            alert.addDatePicker(mode: .date, date: Date(), minimumDate: "2022-01-01"._toDate, maximumDate: date) { date in
+            alert.addDatePicker(mode: .date, date: Date(), minimumDate: Date(), maximumDate: date) { date in
                 handle(date._stringData)
             }
         } else {
-            alert.addDatePicker(mode: .time, date: Date(), minimumDate: "2022-01-01"._toDate, maximumDate: date) { time in
-                handle(time._getTime())
+            alert.addDatePicker(mode: .time, date: Date(), minimumDate: Date()._add(days: -1), maximumDate: date) { time in
+                handle(time._stringTime)
             }
         }
         alert.addAction(title: "OK", style: .cancel)
         alert._show()
     }
 
+    private func checkDateOrTime() -> (status: Bool, errorMessage: String?) {
+        switch self.selectionType {
+        case .date:
+            if let from = self.fromText._toDate, let to = self.toText._toDate {
+                if from._isSame(date: to) || from._isBefore(date: to) {
+                    return (false, nil)
+                }
+            }
+            return (true, "The final date must be greater than or equal to the initial date.")
+        case .time:
+            if let from = self.fromText._toTime, let to = self.toText._toTime {
+                if from._isBefore(date: to) {
+                    return (false, nil)
+                }
+            }
+            return (true, "The final time must be greater than to the initial time.")
+        }
+    }
+    
     func isEmptyFields() -> (status: Bool, errorMessage: String?) {
         if fromText._isValidValue, toText._isValidValue {
-            return (false, nil)
+            return checkDateOrTime()
         }
         return (true, "Enter \(selectionType) fields")
+    }
+
+    func setData(from: String?, to: String?) {
+        guard let _from = from, let _to = to else { return }
+        self.fromLabel.text = _from
+        self.toLabel.text = _to
+        setEnable(isEnable: false)
+        
+    }
+    
+    private func setEnable(isEnable: Bool) {
+        self.fromImageView.isUserInteractionEnabled = isEnable
+        self.toImageView.isUserInteractionEnabled = isEnable
     }
 
 }

@@ -17,25 +17,21 @@ class BookingTableViewCell: UITableViewCell {
     @IBOutlet weak var parkingPriceLabel: UILabel!
 
     var parking: ParkingModel?
+    var booking: BookingModel?
 
-    enum TypeParkingStatus: String {
-        case pending = "616161"
-        case rejected = "D6243A"
-        case accepted = "0D9F67"
-    }
-    
-    var typeParkingStatus: TypeParkingStatus = .pending
-    
+    var typeBookingStatus: BookinsStatus = .Pending
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
     func configerCell() {
-        parking = ParkingModel.init(name: "dc", imageURL: nil, rating: 3.3, price: "10", latitude: 1.222, longitude: 34.33)
-        if let _parking = self.parking {
+        if let _parking = self.parking, let _status = self.booking?.status {
             self.parkingNameLabel.text = _parking.name
             setInfo(parking: _parking)
+
+            self.typeBookingStatus = _status
             setParkingStatus()
         }
     }
@@ -46,24 +42,29 @@ class BookingTableViewCell: UITableViewCell {
 extension BookingTableViewCell {
     private func setInfo(parking: ParkingModel) {
         if let _price = parking.price, let address = parking.address {
-            self.parkingPriceLabel.text = "\(_price)$"
+            self.parkingPriceLabel.text = "$\(_price)"
             self.parkingAddressLabel.text = address
             return
         }
         self.parkingPriceLabel.text = ""
         self.parkingAddressLabel.text = "No Address"
     }
-    
+
     private func setParkingStatus() {
-        self.parkingStatusLabel.textColor = self.typeParkingStatus.rawValue._hexColor
-        switch self.typeParkingStatus {
-        case .pending:
+        switch self.typeBookingStatus {
+        case .Completed:
+            self.parkingStatusLabel.text = "Completed"
+            self.parkingStatusLabel.textColor = "616161"._hexColor
+        case .Pending:
             self.parkingStatusLabel.text = "Pending"
-        case .rejected:
-            self.parkingStatusLabel.text = "Rejected"
-        case .accepted:
+            self.parkingStatusLabel.textColor = "616161"._hexColor
+        case .Accepted:
             self.parkingStatusLabel.text = "Accepted"
+            self.parkingStatusLabel.textColor = "0D9F67"._hexColor
+        case .Rejected:
+            self.parkingStatusLabel.text = "Rejected"
+            self.parkingStatusLabel.textColor = "D6243A"._hexColor
         }
-        
+
     }
 }

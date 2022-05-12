@@ -227,9 +227,9 @@ extension SignUpViewController {
         isEnableButton = false
         SVProgressHUD.show()
         if self.isCompletingInfo {
-            AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: data) { error in
-                if let _error = error {
-                    self._showErrorAlert(message: _error.localizedDescription)
+            AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: data) { errorMessage in
+                if let _errorMessage = errorMessage {
+                    self._showErrorAlert(message: _errorMessage)
                 } else {
                 self.clearData()
                 self.goHome(auth: _auth)

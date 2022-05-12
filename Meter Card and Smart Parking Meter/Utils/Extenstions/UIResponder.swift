@@ -29,4 +29,8 @@ extension UIResponder {
         return UIStoryboard.init(name: "Business", bundle: nil)
     }
     
+    var _topVC: UIViewController? {
+        return AppDelegate.shared?.rootNavigationController?.topViewController
+    }
+    
 }

@@ -86,7 +86,7 @@ extension PasswordViewController {
             self._showErrorAlert(message: "The new password is the same as the old password")
             return false
         }
-        if let _password = self.auth?.password, _password != currentPasswordView.text {
+        if self.auth?.password != currentPasswordView.text {
             self._showErrorAlert(message: "The current password is incorrect")
             return false
         }
@@ -107,9 +107,9 @@ extension PasswordViewController {
     
     private func save() {
         guard let _auth = self.getAuth() else { return }
-        AuthManager.shared.updatePassword(auth: _auth) { error in
-            if let _error = error {
-                self._showErrorAlert(message: _error.localizedDescription)
+        AuthManager.shared.updatePassword(auth: _auth) { errorMessage in
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
                 return
             }
             self.clearData()

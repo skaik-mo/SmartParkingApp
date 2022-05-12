@@ -23,9 +23,6 @@ class ParkingInfo: UIView {
     
     @IBOutlet weak var bookNowButton: GreenButton!
 
-
-    var parking: ParkingModel?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureXib()
@@ -51,16 +48,18 @@ class ParkingInfo: UIView {
 }
 
 extension ParkingInfo {
-    func setUpView() {
+    func setUpView(parking: ParkingModel?, auth: AuthModel?) {
+        ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
         self.bookNowButton.setUp(typeButton: .grayButton, corner: 8)
         self.bookNowButton.handleButton = {
             let vc: SpotDetailsViewController = SpotDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
-            vc.parking = self.parking
+            vc.parking = parking
+            vc.auth = auth
             vc._push()
         }
         
         self.ratingView.setUpRating(parking: parking, isWithDistance: false)
-        guard let _parking = self.parking else { return }
+        guard let _parking = parking else { return }
         setParkingImage(parking: _parking)
         setInfo(parking: _parking)
         setDistance(parking: _parking)
@@ -68,7 +67,7 @@ extension ParkingInfo {
     }
 
     private func setParkingImage(parking: ParkingModel) {
-        if let _image = parking.imageURL {
+        if let _image = parking.parkingImageURL {
             self.parkingImage.image = _image._toImage
             return
         }
@@ -77,7 +76,7 @@ extension ParkingInfo {
 
     private func setInfo(parking: ParkingModel) {
         if let _price = parking.price {
-            self.perHourLabel.text = "Park Booking \(_price)$ Per Hour"
+            self.perHourLabel.text = "Park Booking \(_price)$ Per \(parking.isPerDay ?? false ? "Day" : "Hour")"
             self.addressLabel.text = parking.address == nil ? "No Address" : parking.address
         }
     }

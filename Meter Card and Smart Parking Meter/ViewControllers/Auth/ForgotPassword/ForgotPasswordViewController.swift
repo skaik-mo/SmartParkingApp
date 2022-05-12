@@ -78,9 +78,9 @@ extension ForgotPasswordViewController {
 
     private func resetPassword() {
         guard let email = getEmail() else { return }
-        AuthManager.shared.resetPassword(email: email) { error in
-            if let _error = error {
-                self._showErrorAlert(message: _error.localizedDescription)
+        AuthManager.shared.resetPassword(email: email) { errorMessage in
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
             } else {
                 self.clearData()
                 self._showAlert(title: "Your password reset email has been sent!", message: "We have sent a password reset email to your email address:\n\(email).\nPlease check your inbox to continue.") {

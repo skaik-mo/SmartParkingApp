@@ -12,22 +12,20 @@ import GoogleMaps
 class FavoriteTableViewCell: UITableViewCell {
 
     @IBOutlet weak var parkingImage: UIImageView!
-    
+
     @IBOutlet weak var ratingView: Rating!
-    
+
     var parking: ParkingModel?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     func configerCell() {
 //        parking = Parking.init(title: "dc", image: nil, rating: 3.3, pricePerHour: nil, latitude: 1.222, longitude: 34.33)
-        if let _parking = parking {
-            _parking.setParkingImage(parkingImage: self.parkingImage)
-        }
+        ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
         self.ratingView.setUpRating(parking: parking, space: 9)
     }
-    
+
 }

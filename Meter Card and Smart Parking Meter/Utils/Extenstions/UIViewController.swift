@@ -134,7 +134,8 @@ extension UIViewController {
         let okayAction = UIAlertAction.init(title: "OK", style: .destructive, handler: nil)
 
         alert.addAction(okayAction)
-        alert._presentVC()
+//        alert._presentVC()
+        self.present(alert, animated: true, completion: nil)
     }
 
     func _showAlert(title: String?, message: String?, buttonAction1: @escaping (() -> Void)) {
@@ -206,6 +207,20 @@ extension UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    func _sizeOfImageAt(url: URL) -> CGSize? {
+        // with CGImageSource we avoid loading the whole image into memory
+        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return nil }
+
+        let propertiesOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, propertiesOptions) as? [CFString: Any] else { return nil }
+
+        if let width = properties[kCGImagePropertyPixelWidth] as? CGFloat, let height = properties[kCGImagePropertyPixelHeight] as? CGFloat {
+            return CGSize(width: (width * 2), height: (height * 2))
+        } else {
+            return nil
+        }
+    }
 
     @objc func _keyboardNotifications(notification: NSNotification) {
 
@@ -227,7 +242,21 @@ extension UIViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
+    func dates(from fromDate: String, to toDate: String) -> [String] {
+        guard let _fromDate = fromDate._toDate, let _toDate = toDate._toDate else { return [] }
+        var dates: [String] = []
+        var date = _fromDate
 
+        while date <= _toDate {
+            dates.append(date._stringData)
+            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: date) else { break }
+            date = newDate
+        }
+        return dates
+    }
+
+    
 //    public static func _isEmailValid(emailAddress:String) -> Bool {
 //        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 //

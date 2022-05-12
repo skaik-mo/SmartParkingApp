@@ -14,8 +14,10 @@ class NumberOfParking: UIView {
 
     @IBOutlet weak var title: UILabel!
 
-    @IBOutlet weak var button: UIButton!
-    
+    @IBOutlet weak var numberOfParkingText: UITextField!
+
+    @IBOutlet weak var numberOfParkingStack: UIStackView!
+
     @IBOutlet weak var p1Button: UIButton!
     @IBOutlet weak var p2Button: UIButton!
     @IBOutlet weak var p3Button: UIButton!
@@ -24,6 +26,7 @@ class NumberOfParking: UIView {
     @IBOutlet weak var p6Button: UIButton!
     @IBOutlet weak var p7Button: UIButton!
 
+    var selectedSpot: Int?
 
     enum TypeParkingView {
         case border
@@ -62,39 +65,63 @@ class NumberOfParking: UIView {
 
     @IBAction func p1Action(_ sender: UIButton) {
         selectedAction(button: sender)
+        selectedSpot = 1
     }
 
     @IBAction func p2Action(_ sender: UIButton) {
         selectedAction(button: sender)
+        selectedSpot = 2
     }
 
     @IBAction func p3Action(_ sender: UIButton) {
         selectedAction(button: sender)
+        selectedSpot = 3
     }
 
     @IBAction func p4Action(_ sender: UIButton) {
         selectedAction(button: sender)
+        selectedSpot = 4
     }
 
     @IBAction func p5Action(_ sender: UIButton) {
         selectedAction(button: sender)
+        selectedSpot = 5
     }
 
     @IBAction func p6Action(_ sender: UIButton) {
         selectedAction(button: sender)
+        selectedSpot = 6
     }
 
     @IBAction func p7Action(_ sender: UIButton) {
         selectedAction(button: sender)
+        selectedSpot = 7
     }
 
+    @IBAction func addSpotParking(_ sender: Any) {
+//        self.numberOfParking()
+    }
 
 }
 
 extension NumberOfParking {
 
+//    private func numberOfParking() {
+//        let count = self.numberOfParkingText._getText._toInteger ?? 0
+//        if count != 0 {
+//            for i in 1..<count {
+//                let bu = UIButton.init(frame: self.p1Button.frame)
+//                bu.setTitle("P\(i + 1)", for: .normal)
+//                bu.backgroundColor = .yellow
+//                numberOfParkingStack.addArrangedSubview(bu)
+//                self.numberOfParkingStack.distribution = UIStackView.Distribution.fillEqually
+//
+//            }
+//        }
+//    }
+
     private func switchTypeParkingView() {
-        
+
         switch self.typeParkingView {
         case .border:
             setBorderColor(color: "3FBF66"._hexColor)
@@ -102,14 +129,14 @@ extension NumberOfParking {
             setEnable(isEnable: false)
         case .fill:
             setBorderColor(color: .clear)
-            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor:  .black)
+            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor: .black)
             setEnable(isEnable: true)
         case .grayWithBorder:
             setBorderColor(color: "ECECEC"._hexColor)
             setBackgroundColor(backgroundColor: .clear, tintColor: "929292"._hexColor)
             setEnable(isEnable: false)
         }
-        
+
     }
 
     private func setBorderColor(color: UIColor) {
@@ -146,15 +173,49 @@ extension NumberOfParking {
         self.p7Button.tintColor = tintColor
     }
 
-    func selectedAction(button: UIButton) {
+    private func selectedAction(button: UIButton) {
         if typeParkingView == .fill {
-            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor: .black )
+            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor: .black)
             button.backgroundColor = "3FBF66"._hexColor
             button.tintColor = .white
         }
     }
 
-    func setEnable(isEnable: Bool) {
+    func selectedSpot(spot: Int?) {
+        guard let _spot = spot else { return }
+        if spot == 1 {
+            selectedAction(button: self.p1Button)
+        } else if spot == 2 {
+            selectedAction(button: self.p2Button)
+
+        } else if spot == 3 {
+            selectedAction(button: self.p3Button)
+
+        } else if spot == 4 {
+            selectedAction(button: self.p4Button)
+
+        } else if spot == 5 {
+            selectedAction(button: self.p5Button)
+
+        } else if spot == 6 {
+            selectedAction(button: self.p6Button)
+
+        } else if spot == 7 {
+            selectedAction(button: self.p7Button)
+        }
+        self.setEnable(isEnable: false)
+    }
+
+    func checkNumberOfParkig() -> String? {
+        if !self.numberOfParkingText.isHidden {
+            if self.numberOfParkingText._getText._toInteger ?? 0 <= 0 {
+                return "Enter the number of spots"
+            }
+        }
+        return nil
+    }
+
+    private func setEnable(isEnable: Bool) {
         p1Button.isUserInteractionEnabled = isEnable
         p2Button.isUserInteractionEnabled = isEnable
         p3Button.isUserInteractionEnabled = isEnable

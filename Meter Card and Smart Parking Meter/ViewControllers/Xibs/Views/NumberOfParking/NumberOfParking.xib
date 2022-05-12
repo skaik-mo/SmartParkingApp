@@ -17,8 +17,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumberOfParking" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
             <connections>
-                <outlet property="button" destination="8uY-sF-eim" id="lqn-lm-KI4"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="dUM-yC-09i"/>
+                <outlet property="numberOfParkingStack" destination="EPJ-aO-mfK" id="gd7-9Z-eun"/>
+                <outlet property="numberOfParkingText" destination="0hf-hI-Dqd" id="WQi-eM-Y8J"/>
                 <outlet property="p1Button" destination="rQz-bn-5sQ" id="vhp-zX-Ki7"/>
                 <outlet property="p2Button" destination="6js-XE-2sv" id="6ic-sD-1Mx"/>
                 <outlet property="p3Button" destination="rKO-4b-xi5" id="3pw-hH-BTV"/>
@@ -46,31 +47,19 @@
                                     <color key="textColor" name="000000"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uY-sF-eim">
+                                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hf-hI-Dqd">
                                     <rect key="frame" x="0.0" y="1" width="40" height="40"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="8uY-sF-eim" secondAttribute="height" multiplier="1:1" id="fFt-0i-EAn"/>
-                                        <constraint firstAttribute="height" constant="40" id="xJE-0h-DZv"/>
+                                        <constraint firstAttribute="width" constant="40" id="IC3-MI-qtQ"/>
+                                        <constraint firstAttribute="width" secondItem="0hf-hI-Dqd" secondAttribute="height" multiplier="1:1" id="RN0-EU-IxL"/>
                                     </constraints>
+                                    <color key="textColor" name="000000"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
-                                    <color key="tintColor" name="000000"/>
-                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="7">
-                                        <color key="titleColor" name="929292"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="6"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.92549026012420654" green="0.92549026012420654" blue="0.92549026012420654" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                </button>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    <connections>
+                                        <action selector="addSpotParking:" destination="-1" eventType="editingChanged" id="AtJ-95-oPS"/>
+                                    </connections>
+                                </textField>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="EPJ-aO-mfK">
@@ -250,9 +239,6 @@
         </namedColor>
         <namedColor name="3FBF66">
             <color red="0.24705880880355835" green="0.74901962280273438" blue="0.40000003576278687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="929292">
-            <color red="0.57254904508590698" green="0.57254904508590698" blue="0.57254904508590698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

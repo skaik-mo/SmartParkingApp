@@ -418,7 +418,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYg-iU-OWG">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgV-0x-UNX" customClass="GMSMapView">
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgV-0x-UNX" customClass="GMSMapView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
@@ -775,8 +775,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_Star"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="ic_StarSelected"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="setRatingAction:" destination="mPQ-Xn-p3J" eventType="touchUpInside" id="QyD-bn-N1a"/>
+                                    <action selector="setFavouriteAction:" destination="mPQ-Xn-p3J" eventType="touchUpInside" id="Fjt-zA-R9B"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -786,12 +789,16 @@
                     <connections>
                         <outlet property="bookNowButton" destination="gdw-8S-ZMb" id="kNR-5D-eOm"/>
                         <outlet property="calenderCollectionView" destination="LGz-zM-JUz" id="sHc-sb-RYQ"/>
+                        <outlet property="durationLabel" destination="V3z-Gc-81J" id="3Dd-IX-KUc"/>
+                        <outlet property="favouriteButton" destination="XFr-Bc-HBu" id="fI3-DX-Ia3"/>
                         <outlet property="mapView" destination="VgV-0x-UNX" id="6vf-CW-HRd"/>
                         <outlet property="monthTitle" destination="HXj-8d-6SU" id="fO8-ei-acu"/>
                         <outlet property="numberOfParking" destination="mX4-OP-kT5" id="Aqp-2k-hva"/>
                         <outlet property="parkingImage" destination="A0S-9w-BMD" id="ybb-Ou-eSk"/>
+                        <outlet property="parkingOwnerView" destination="yiR-if-eY9" id="I1o-Ex-Jov"/>
                         <outlet property="pricePerHourLabel" destination="exr-7y-nep" id="Qll-NC-VIl"/>
                         <outlet property="ratingView" destination="AmJ-88-igC" id="dpO-Kc-cPH"/>
+                        <outlet property="timeLabel" destination="2zx-lF-HeI" id="4Nb-sC-7WO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hq-ds-hOT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1069,7 +1076,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8H-Vd-USL">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wod-tU-eqN" customClass="GMSMapView">
+                                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wod-tU-eqN" customClass="GMSMapView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
@@ -1279,10 +1286,12 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <size key="freeformSize" width="375" height="1270"/>
                     <connections>
+                        <outlet property="bottomView" destination="Vp1-eW-zED" id="jBd-N3-lya"/>
                         <outlet property="cancelOrAcceptButton" destination="Xn5-mx-5cD" id="pr5-PZ-Ah7"/>
                         <outlet property="mapView" destination="Wod-tU-eqN" id="mCK-cC-FTk"/>
                         <outlet property="numberOfParking" destination="orP-lZ-sSZ" id="MKb-ht-VVo"/>
                         <outlet property="parkingImage" destination="SFi-nI-QUI" id="rrI-GZ-Ax9"/>
+                        <outlet property="parkingOwnerView" destination="IZ1-hC-Ty1" id="tGo-0c-FWS"/>
                         <outlet property="parkingStatusLabel" destination="9P3-d5-9gK" id="nfv-Xz-oOz"/>
                         <outlet property="ratingView" destination="ajc-uO-Kpo" id="XiG-oO-9cw"/>
                         <outlet property="rejectButton" destination="ARo-mh-4eB" id="pCa-2G-rjN"/>
@@ -1396,6 +1405,7 @@
     <resources>
         <image name="demo" width="1280" height="1280"/>
         <image name="ic_Star" width="23" height="22"/>
+        <image name="ic_StarSelected" width="21" height="20"/>
         <image name="ic_filter" width="15" height="15"/>
         <image name="ic_image" width="1005" height="480"/>
         <image name="ic_location" width="54" height="54"/>

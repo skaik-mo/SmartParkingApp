@@ -42,7 +42,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Ns1-sN-lSk">
                                                                 <rect key="frame" x="0.0" y="0.0" width="151" height="37.5"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demo" translatesAutoresizingMaskIntoConstraints="NO" id="iKh-pK-SO0">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="iKh-pK-SO0">
                                                                         <rect key="frame" x="0.0" y="3" width="32" height="32"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" secondItem="iKh-pK-SO0" secondAttribute="height" multiplier="1:1" id="4mo-ft-YbK"/>
@@ -158,7 +158,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="demo" width="1280" height="1280"/>
+        <image name="ic_placeholderPerson" width="95" height="95"/>
         <namedColor name="000000">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

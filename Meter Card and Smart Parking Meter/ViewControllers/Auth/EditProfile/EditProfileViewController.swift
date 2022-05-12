@@ -160,10 +160,10 @@ extension EditProfileViewController {
     private func save() {
         guard let _auth = self.getAuth() else { return }
         self.isEnableButton = false
-        AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: self.dataDrivingLicense, dataAuth: self.dataAuth) { error in
+        AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: self.dataDrivingLicense, dataAuth: self.dataAuth) { errorMessage in
             self.isEnableButton = true
-            if let _error = error {
-                self._showErrorAlert(message: _error.localizedDescription)
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
                 return
             }
             self.backAuth?(_auth)

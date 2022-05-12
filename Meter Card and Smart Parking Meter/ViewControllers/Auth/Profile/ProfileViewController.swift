@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
 
     var typeAuth: TypeAuth = .User {
         didSet {
-//            switchAuth()
+            switchAuth()
         }
     }
     var auth: AuthModel?
@@ -76,6 +76,7 @@ extension ProfileViewController {
 
         self.messageButton.handleButton = {
             let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
+            vc.auth = self.auth
             vc.typeView = .Messages
             vc._push()
         }
@@ -119,6 +120,7 @@ extension ProfileViewController {
             self.favoritesButton.isHidden = false
             self.favoritesButton.handleButton = {
                 let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
+                vc.auth = self.auth
                 vc.typeView = .Favorites
                 vc._push()
             }
@@ -128,25 +130,27 @@ extension ProfileViewController {
                 // My Bookings Action
                 debugPrint("My Bookings Action")
                 let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
+                vc.auth = self.auth
                 vc.typeView = .Bookings
                 vc._push()
             }
         case .Business:
-//            self.favoritesButton.isHidden = true
+            self.favoritesButton.isHidden = true
             self.myBookingsButton.titleLabel.text = "My Park"
             self.myBookingsButton.handleButton = {
                 // My Park Action
                 debugPrint("My Park Action")
                 let vc: MyParkingsViewController = MyParkingsViewController._instantiateVC(storyboard: self._businessStoryboard)
+                vc.auth = self.auth
                 vc._push()
             }
         }
     }
 
     private func logout() {
-        AuthManager.shared.logout { error in
-            if let _error = error {
-                self._showErrorAlert(message: _error.localizedDescription)
+        AuthManager.shared.logout { errorMessage in
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
             } else {
                 let vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
                 vc._rootPush()
