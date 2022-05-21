@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 class SignInViewController: UIViewController {
 
@@ -20,24 +19,9 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var AppleButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
 
-    var isEnableButton: Bool = true {
-        didSet {
-            self.goHomeButton.isEnabled = self.isEnableButton
-            self.AppleButton.isEnabled = self.isEnableButton
-            self.facebookButton.isEnabled = self.isEnableButton
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        setUpViewDidLoad()
     }
 
     @IBAction func goForgotPasswordAction(_ sender: Any) {
@@ -64,31 +48,20 @@ class SignInViewController: UIViewController {
 
 }
 
+// MARK: - ViewDidLoad
 extension SignInViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.emailText.keyboardType = .emailAddress
         self.passwordText.isPassword = true
 
         signUpButton._setAttributedString(rang: "Sign up", attributed: [NSAttributedString.Key.foregroundColor: UIColor.init(hexString: "3FBF66")])
-
-    }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
     }
 
 }
 
 extension SignInViewController {
+    
     private func checkData() -> Bool {
         if !self.emailText.text._isValidValue {
             self._showErrorAlert(message: "Enter email")
@@ -115,11 +88,9 @@ extension SignInViewController {
         switch auth.typeAuth {
         case .User:
             let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
-            vc.auth = auth
             vc._rootPush()
         case .Business:
             let vc: HomeBusinessViewController = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
-            vc.auth = auth
             vc._rootPush()
         case .none:
             break
@@ -128,36 +99,35 @@ extension SignInViewController {
 
     private func signIn() {
         guard let auth = getAuth() else { return }
-        self.isEnableButton = false
-        AuthManager.shared.signInByEmail(auth: auth) { auth, message in
+        AuthManager.shared.signInByEmail(auth: auth) { auth, errorMessage in
             if let _auth = auth {
                 self.clearData()
                 self.goHome(auth: _auth)
-            } else {
-                self._showErrorAlert(message: message)
+                return
             }
-            self.isEnableButton = true
-
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
+            }
         }
     }
 
     private func loginByFacebook() {
-        self.isEnableButton = false
         AuthManager.shared.signInByFacebook(vc: self) { auth, isRegister, message in
             if let _auth = auth {
                 self.clearData()
                 if let _isRegister = isRegister, _isRegister {
-                    self.isEnableButton = true
+                   // Complete info
                     let vc: SignUpViewController = SignUpViewController._instantiateVC(storyboard: self._authStoryboard)
                     vc.isCompletingInfo = true
-                    vc.auth = _auth
                     vc._rootPush()
                 } else {
                     self.goHome(auth: _auth)
                 }
                 return
             }
-            self._showErrorAlert(message: message)
+            if let _message = message {
+                self._showErrorAlert(message: _message)
+            }
         }
     }
 

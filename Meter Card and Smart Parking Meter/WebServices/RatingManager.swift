@@ -8,7 +8,6 @@
 import Foundation
 import FirebaseFirestore
 
-typealias ResultRatingsHandler = ((_ ratings: [RatingModel], _ message: String?) -> Void)?
 
 class RatingManager {
     static let shared = RatingManager()
@@ -16,11 +15,13 @@ class RatingManager {
     private let db = Firestore.firestore()
     private var ratingsFireStoreReference: CollectionReference?
 
+    typealias ResultRatingsHandler = ((_ ratings: [RatingModel], _ message: String?) -> Void)?
+
     private init() {
         self.ratingsFireStoreReference = db.collection("rating")
     }
 
-    func setParking(rating: RatingModel, parking: ParkingModel?, failure: FailureHandler) {
+    func setRating(rating: RatingModel, parking: ParkingModel?, failure: FailureHandler) {
         guard let _ratingsFireStoreReference = self.ratingsFireStoreReference, let userID = rating.userID, let parkingID = rating.parkingID else { return }
         let id = userID + parkingID
         _ratingsFireStoreReference.document(id).setData(rating.getDictionary()) { error in
@@ -73,7 +74,7 @@ class RatingManager {
             }
             var ratings: [RatingModel] = []
 
-            for rating in snapshot!.documents {
+            for rating in snapshot?.documents ?? [] {
                 if let _rating = RatingModel.init(dictionary: rating.data()) {
                     ratings.append(_rating)
                 }

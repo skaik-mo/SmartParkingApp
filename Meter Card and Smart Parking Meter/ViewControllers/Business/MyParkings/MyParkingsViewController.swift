@@ -14,28 +14,22 @@ class MyParkingsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    var parkings: [ParkingModel] = []
-    var auth: AuthModel?
-
-    var isShowEmptyData: Bool = false
+    private var parkings: [ParkingModel] = []
+    private var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
+        setUpViewDidLoad()
         setupData()
-        fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self._setTitleBackBarButton()
+        setUpViewWillAppear()
     }
-
 
     @IBAction func addParkingAction(sender: Any) {
         let vc: AddParkingViewController = AddParkingViewController._instantiateVC(storyboard: self._businessStoryboard)
-        vc.auth = self.auth
         vc.completionHandler = { parking in
             self.parkings.append(parking)
             self.collectionView.reloadData()
@@ -45,36 +39,35 @@ class MyParkingsViewController: UIViewController {
 
 }
 
+// MARK: - ViewDidLoad
 extension MyParkingsViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = "My Parkings"
+
+        self.auth = AuthManager.shared.getLocalAuth()
+
         setUpCollectionView()
-
     }
 
-    func localized() {
-
-    }
-
-    func fetchData() {
-
-    }
-
-    func setupData() {
+    private func setupData() {
         ParkingManager.shared.getParkingsByIdAuth(uid: self.auth?.id) { parkings, message in
-            self.isShowEmptyData = parkings.isEmpty
-            self.collectionView.reloadEmptyDataSet()
-            if !parkings.isEmpty {
-                self.parkings = parkings
-                self.collectionView.reloadData()
-                return
-            }
             if let _message = message, _message._isValidValue {
                 self._showErrorAlert(message: _message)
             }
-
+            self.parkings = parkings
+            self.collectionView.reloadData()
+            self.collectionView.reloadEmptyDataSet()
         }
+    }
+
+}
+
+// MARK: - ViewWillAppear
+extension MyParkingsViewController {
+
+    private func setUpViewWillAppear() {
+        self._setTitleBackBarButton()
     }
 
 }
@@ -84,12 +77,11 @@ extension MyParkingsViewController: UICollectionViewDelegate, UICollectionViewDa
     private func setUpCollectionView() {
         self.setUpEmptyDataView()
         self.collectionView._registerCell = ParkingCollectionViewCell.self
-        setUpCHTCollectionViewWaterfallLayout()
+        self.setUpCHTCollectionViewWaterfallLayout()
         self.collectionView.reloadData()
-
     }
 
-    func setUpCHTCollectionViewWaterfallLayout() {
+    private func setUpCHTCollectionViewWaterfallLayout() {
         let layout = CHTCollectionViewWaterfallLayout()
         layout.minimumColumnSpacing = 11
         layout.minimumInteritemSpacing = 11
@@ -112,7 +104,6 @@ extension MyParkingsViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc: SpotDetailsViewController = SpotDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
         vc.parking = self.parkings[indexPath.item]
-        vc.auth = self.auth
         vc._push()
     }
 
@@ -136,12 +127,14 @@ extension MyParkingsViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension MyParkingsViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     private func setUpEmptyDataView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
     }
 
     func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
-        return self.isShowEmptyData
+        return self.parkings.isEmpty
     }
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
@@ -155,5 +148,5 @@ extension MyParkingsViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         return NSAttributedString.init(string: "No Data Was Received", attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
     }
-    
+
 }

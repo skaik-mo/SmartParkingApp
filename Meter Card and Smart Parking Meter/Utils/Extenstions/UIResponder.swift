@@ -13,12 +13,12 @@ extension UIResponder {
         return String(describing: self)
     }
     
-    var _mainStoryboard: UIStoryboard {
-        return UIStoryboard.init(name: "Main", bundle: nil)
-    }
-    
     var _authStoryboard: UIStoryboard {
         return UIStoryboard.init(name: "Auth", bundle: nil)
+    }
+    
+    var _accountStoryboard: UIStoryboard {
+        return UIStoryboard.init(name: "Account", bundle: nil)
     }
     
     var _userStoryboard: UIStoryboard {

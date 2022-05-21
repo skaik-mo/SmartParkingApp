@@ -21,13 +21,12 @@ class ReceiverMessageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     func configerCell() {
         self.stackView._roundCorners(isTopLeft: true, isTopRight: true, isBottomLeft: true, radius: 10)
-        
-        if let _message = self.message?.message, let time = self.message?.time{
+        if let _message = self.message?.message, let sentDate = self.message?.sentDate {
             self.messageLabel.text = _message
-            self.timeLabel.text = time._stringTime
+            self.timeLabel.text = sentDate._stringTime
         }
     }
 

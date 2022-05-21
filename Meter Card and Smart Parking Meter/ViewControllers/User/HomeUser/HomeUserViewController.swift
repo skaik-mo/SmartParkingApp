@@ -19,28 +19,22 @@ class HomeUserViewController: UIViewController {
 
     @IBOutlet weak var parkingInfo: ParkingInfo!
 
-    var isShowParkingInfo = false {
+    private var isShowParkingInfo = false {
         didSet {
             self.switchComponents()
         }
     }
 
-    var locationManager = CLLocationManager()
-    var auth: AuthModel?
+    private var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
+        setUpViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.isShowParkingInfo = false
-        AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
-        setImage()
-        setUpMap()
-        showAlertExpiryTime()
+        setUpViewWillAppear()
     }
 
     @IBAction func filtersAction(_ sender: Any) {
@@ -50,65 +44,71 @@ class HomeUserViewController: UIViewController {
             self.setUpMap(filter: filter)
         }
         vc._presentVC()
-
     }
+
     @IBAction func currentLocationAction(_ sender: Any) {
-        GoogleMapManager.setLocations(locationManager: self.locationManager, mapView: self.mapView)
+        GoogleMapManager.setCurrentLocationsAndParkings(mapView: self.mapView)
     }
 
     @IBAction func profileAction(_ sender: Any) {
-        let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._authStoryboard)
-        vc.auth = auth
-        vc.backAuth = { auth in
-            self.auth = auth
-            self.setImage()
-        }
+        let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._accountStoryboard)
         vc._push()
     }
 
-
+    @IBAction func notificationAction(_ sender: Any) {
+        let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
+        vc.typeView = .Notifications
+        vc._push()
+    }
 }
 
+// MARK: - ViewDidLoad
 extension HomeUserViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = "Home"
+        auth = AuthManager.shared.getLocalAuth()
         switchComponents()
     }
 
-    func localized() {
-
+    private func switchComponents() {
+        self.parkingInfo.isHidden = !self.isShowParkingInfo
+        self.currentLocationButton.isHidden = self.isShowParkingInfo
     }
 
-    func showAlertExpiryTime() {
+}
+
+// MARK: - ViewWillAppear
+extension HomeUserViewController {
+
+    private func setUpViewWillAppear() {
+        self.isShowParkingInfo = false
+        AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
+        setImage()
+        setUpMap()
+        showAlertExpiryTime()
+    }
+    
+    private func setImage() {
+        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
+    }
+    
+    private func showAlertExpiryTime() {
         let expiryTime = 15
-        
         BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
-            if let _getExpiryTime = getExpiryTime , (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
+            if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
                 let vc: AlertViewController = AlertViewController._instantiateVC(storyboard: self._userStoryboard)
                 vc._presentVC()
             }
         }
     }
-
-    func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
-    }
-
-    func switchComponents() {
-        self.parkingInfo.isHidden = !self.isShowParkingInfo
-        self.currentLocationButton.isHidden = self.isShowParkingInfo
-    }
-
-
 }
 
 extension HomeUserViewController: GMSMapViewDelegate {
 
-    func setUpMap(filter: FilterModel? = nil) {
+    private func setUpMap(filter: FilterModel? = nil) {
         mapView.delegate = self
-        debugPrint("distance: \(filter?.distance) || Date from \(filter?.fromDate) , to \(filter?.toDate) || Time from \(filter?.fromTime) , to \(filter?.toTime)")
-        GoogleMapManager.initLoctionManager(locationManager: locationManager, mapView: mapView, filter: filter)
+        GoogleMapManager.initCurrentLocationsAndParkings(mapView: mapView, filter: filter)
     }
 
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
@@ -117,7 +117,7 @@ extension HomeUserViewController: GMSMapViewDelegate {
 
         GoogleMapManager.parkings.forEach { parking in
             if marker.position.latitude == parking.latitude, marker.position.longitude == parking.longitude, marker.title == parking.name {
-                self.parkingInfo.setUpView(parking: parking, auth: self.auth)
+                self.parkingInfo.setUpView(parking: parking)
             }
         }
         self.isShowParkingInfo = true
@@ -127,6 +127,5 @@ extension HomeUserViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         self.isShowParkingInfo = false
     }
-
 
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 class SignUpViewController: UIViewController {
 
@@ -23,46 +22,30 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var confirmPasswordText: CustomText!
     @IBOutlet weak var plateNumberText: CustomText!
     @IBOutlet weak var drivingLicenseText: CustomText!
-//    @IBOutlet weak var subView: UIView!
 
     @IBOutlet weak var goHomeButton: UIButton!
 
     @IBOutlet weak var backButton: UIButton!
-
-    var isEnableButton: Bool = true {
-        didSet {
-            self.goHomeButton.isEnabled = self.isEnableButton
-        }
-    }
 
     var isCompletingInfo: Bool = false {
         didSet {
             self.CompletingInfo()
         }
     }
-    var auth: AuthModel?
 
-    var data: Data?
+    private var data: Data?
 
-    var imagePicker = UIImagePickerController()
+    private var imagePicker = UIImagePickerController()
 
-    var typeAuth: TypeAuth = .User {
+    private var typeAuth: TypeAuth = .User {
         didSet {
             switchTypeAuth()
         }
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        setUpViewDidLoad()
     }
 
     @IBAction func goHomeScreenAction(_ sender: Any) {
@@ -71,10 +54,13 @@ class SignUpViewController: UIViewController {
 
 }
 
+// MARK: - ViewDidLoad
 extension SignUpViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = ""
+
+        self.typeAuth = .User
 
         self.emailText.keyboardType = .emailAddress
         self.passwordText.isPassword = true
@@ -85,62 +71,41 @@ extension SignUpViewController {
             self.addImage()
         }
 
-        switchTypeAuth()
-
         self.userButton.handleButton = {
             self.typeAuth = .User
-            debugPrint("userButton")
         }
         self.businessButton.handleButton = {
             self.typeAuth = .Business
-            debugPrint("businessButton")
         }
-    }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
     }
 
 }
 
-
 extension SignUpViewController {
+
     private func switchTypeAuth() {
         switch self.typeAuth {
         case .User:
-            self.plateNumberText.placeholder = "Plate Number"
             self.userButton.setUp(typeButton: .greenButton)
-
             self.businessButton.setUp(typeButton: .grayButtonWithBorder)
 
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                self.plateNumberText.placeholder = "Plate Number"
                 self.drivingLicenseText.alpha = 1
-//                self.subView.isHidden = false
             })
         case .Business:
-            self.plateNumberText.placeholder = "Mobile Number"
             self.userButton.setUp(typeButton: .grayButtonWithBorder)
-
             self.businessButton.setUp(typeButton: .greenButton)
 
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                self.plateNumberText.placeholder = "Mobile Number"
                 self.drivingLicenseText.alpha = 0
-//                self.subView.isHidden = true
-
             })
         }
     }
 
     private func CompletingInfo() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        DispatchQueue.main.async {
             self.accountLabel.text = "Complete information"
             self.descriptionLabel.text = ""
             self.nameText.isHidden = self.isCompletingInfo
@@ -201,7 +166,7 @@ extension SignUpViewController {
 
     private func getAuth() -> AuthModel? {
         guard self.checkData() else { return nil }
-        if self.isCompletingInfo, let _auth = auth {
+        if self.isCompletingInfo, let _auth = AuthManager.shared.getLocalAuth() {
             _auth.typeAuth = self.typeAuth
             _auth.plateNumber = self.plateNumberText.text
             return _auth
@@ -209,43 +174,36 @@ extension SignUpViewController {
         return .init(name: nameText.text, email: emailText.text, password: passwordText.text, plateNumber: plateNumberText.text, typeAuth: typeAuth)
     }
 
-    private func goHome(auth: AuthModel) {
+    private func goHome() {
         switch self.typeAuth {
         case .User:
             let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
-            vc.auth = auth
             vc._rootPush()
         case .Business:
             let vc: HomeBusinessViewController = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
-            vc.auth = auth
             vc._rootPush()
         }
     }
 
     private func signUp() {
         guard let _auth = getAuth() else { return }
-        isEnableButton = false
-        SVProgressHUD.show()
         if self.isCompletingInfo {
             AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: data) { errorMessage in
                 if let _errorMessage = errorMessage {
                     self._showErrorAlert(message: _errorMessage)
                 } else {
-                self.clearData()
-                self.goHome(auth: _auth)
+                    self.clearData()
+                    self.goHome()
                 }
-                SVProgressHUD.dismiss()
-                self.isEnableButton = true
             }
         } else {
-            AuthManager.shared.signUpByEmail(auth: _auth, data: data) { auth, message in
-                if let _auth = auth {
-                    self.clearData()
-                    self.goHome(auth: _auth)
-                } else {
-                self._showErrorAlert(message: message)
+            AuthManager.shared.signUpByEmail(auth: _auth, data: data) { auth, errorMessage in
+                if let _errorMessage = errorMessage {
+                    self._showErrorAlert(message: _errorMessage)
+                    return
                 }
-                self.isEnableButton = true
+                self.clearData()
+                self.goHome()
             }
         }
     }
@@ -254,7 +212,7 @@ extension SignUpViewController {
 
 extension SignUpViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    func addImage() {
+    private func addImage() {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
             imagePicker.delegate = self
             imagePicker.allowsEditing = false

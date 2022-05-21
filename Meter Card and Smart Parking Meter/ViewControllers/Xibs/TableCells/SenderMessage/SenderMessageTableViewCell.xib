@@ -26,7 +26,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Wvd-BJ-grY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demo" translatesAutoresizingMaskIntoConstraints="NO" id="Xfo-1Z-R9E">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="Xfo-1Z-R9E">
                                 <rect key="frame" x="16" y="8" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="lKP-r5-TAU"/>
@@ -112,6 +112,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="messageLabel" destination="mkr-3Z-S20" id="IrB-Zi-YXp"/>
+                <outlet property="senderImage" destination="Xfo-1Z-R9E" id="JhW-4V-ko1"/>
                 <outlet property="stackView" destination="RbS-oG-gE5" id="iRO-cf-Ovu"/>
                 <outlet property="timeLabel" destination="RAU-uR-SeS" id="rJO-od-k7S"/>
             </connections>
@@ -119,7 +120,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="demo" width="1280" height="1280"/>
+        <image name="ic_placeholderPerson" width="95" height="95"/>
         <namedColor name="000000">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

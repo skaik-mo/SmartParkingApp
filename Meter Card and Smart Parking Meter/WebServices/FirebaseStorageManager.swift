@@ -22,13 +22,13 @@ class FirebaseStorageManager {
 
         var urls: [String: URL] = [:]
         var uploadCount = 0
-        
+
         for data in values {
             if let value = data.value {
                 let riversRef = storage.reference().child(data.key)
                 let metadata = StorageMetadata()
                 metadata.contentType = "image/jpeg"
-                let uploadTask = riversRef.putData(value, metadata: metadata) { metadata, error in
+                _ = riversRef.putData(value, metadata: metadata) { metadata, error in
                     guard let _ = metadata else {
                         handler([:])
                         return
@@ -47,12 +47,7 @@ class FirebaseStorageManager {
                         }
                     }
                 }
-//                let _ = uploadTask.observe(.progress, handler: { snapshot in
-//                    let progress = Float(Float(snapshot.progress?.completedUnitCount ?? 0) / Float(snapshot.progress?.totalUnitCount ?? 1))
-//                    debugPrint(progress)
-//                    SVProgressHUD.showProgress(progress)
-//                })
-            } 
+            }
         }
     }
 

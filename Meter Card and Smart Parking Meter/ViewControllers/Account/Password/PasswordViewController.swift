@@ -15,52 +15,46 @@ class PasswordViewController: UIViewController {
     @IBOutlet weak var repeatPasswordView: CustomText!
 
     @IBOutlet weak var greenButton: GreenButton!
-    
-    var auth: AuthModel?
-    var backAuth: ((_ auth: AuthModel?) -> Void)?
+
+    private var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
+        setUpViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self._setTitleBackBarButton()
+        setUpViewWillAppear()
     }
 
 }
 
+// MARK: - ViewDidLoad
 extension PasswordViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = "Change Password"
+
+        self.auth = AuthManager.shared.getLocalAuth()
         
         self.currentPasswordView.isPassword = true
         self.newPasswordView.isPassword = true
         self.repeatPasswordView.isPassword = true
-        
+
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             self.save()
         }
     }
 
-    func localized() {
+}
+// MARK: - ViewWillAppear
+extension PasswordViewController {
 
+    private func setUpViewWillAppear() {
+        self._setTitleBackBarButton()
     }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
-    }
-
 }
 
 extension PasswordViewController {
@@ -78,16 +72,16 @@ extension PasswordViewController {
             self._showErrorAlert(message: "Enter repeat password")
             return false
         }
+        if self.auth?.password != currentPasswordView.text {
+            self._showErrorAlert(message: "The current password is incorrect")
+            return false
+        }
         if newPasswordView.text != repeatPasswordView.text {
             self._showErrorAlert(message: "New Password and Repeat Password do not match")
             return false
         }
         if newPasswordView.text == currentPasswordView.text {
             self._showErrorAlert(message: "The new password is the same as the old password")
-            return false
-        }
-        if self.auth?.password != currentPasswordView.text {
-            self._showErrorAlert(message: "The current password is incorrect")
             return false
         }
         return true
@@ -98,13 +92,13 @@ extension PasswordViewController {
         self.newPasswordView.text = ""
         self.repeatPasswordView.text = ""
     }
-    
+
     private func getAuth() -> AuthModel? {
-        guard let _auth = auth, self.checkData() else { return nil}
+        guard let _auth = auth, self.checkData() else { return nil }
         _auth.password = self.newPasswordView.text
         return _auth
     }
-    
+
     private func save() {
         guard let _auth = self.getAuth() else { return }
         AuthManager.shared.updatePassword(auth: _auth) { errorMessage in
@@ -113,9 +107,8 @@ extension PasswordViewController {
                 return
             }
             self.clearData()
-            self.backAuth?(self.auth)
             self._showAlertOKWithTitle(title: "Successful", message: "Your changes have been successfully saved!")
-            
+
         }
     }
 

@@ -12,53 +12,33 @@ class MainNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
-    }
+        setupViewDidLoad()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 
 }
 
+// MARK: - ViewDidLoad
 extension MainNavigationController {
 
-    func setupView() {
+    private func setupViewDidLoad() {
         AppDelegate.shared?.rootNavigationController = self
-
         setRoot()
         setProperties()
     }
 
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
-    }
-
 }
 
 extension MainNavigationController {
 
-    func setRoot() {
+    private func setRoot() {
         let auth = AuthManager.shared.getLocalAuth()
-        switch auth.typeAuth {
+        switch auth?.typeAuth {
         case .User:
             let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: self._userStoryboard)
-            vc.auth = auth
             vc._rootPush()
         case .Business:
             let vc: HomeBusinessViewController = HomeBusinessViewController._instantiateVC(storyboard: self._businessStoryboard)
-            vc.auth = auth
             vc._rootPush()
         case .none:
             let vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
@@ -66,7 +46,7 @@ extension MainNavigationController {
         }
     }
 
-    func setProperties() {
+    private func setProperties() {
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: "000000"._hexColor, NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .regular)]
 
         appearance.titleTextAttributes = titleTextAttributes
@@ -80,6 +60,7 @@ extension MainNavigationController {
         self.navigationBar.scrollEdgeAppearance = appearance
 
     }
+
     func setWhiteNavigation() {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
@@ -88,21 +69,3 @@ extension MainNavigationController {
     }
 
 }
-
-//
-//extension UIView {
-// var hairlineImageView: UIImageView? {
-//    return hairlineImageView(in: self)
-//}
-//
-//fileprivate func hairlineImageView(in view: UIView) -> UIImageView? {
-//    if let imageView = view as? UIImageView, imageView.bounds.height <= 1.0 {
-//        return imageView
-//    }
-//
-//    for subview in view.subviews {
-//        if let imageView = self.hairlineImageView(in: subview) { return imageView }
-//    }
-//    return nil
-//  }
-//}

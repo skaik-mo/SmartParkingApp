@@ -14,7 +14,7 @@ class GoogleMapManager {
 
     static var parkings: [ParkingModel] = []
 
-    static func initLoctionManager(locationManager: CLLocationManager?, mapView: GMSMapView, filter: FilterModel?) {
+    static func initCurrentLocationsAndParkings(mapView: GMSMapView, filter: FilterModel?) {
 
         ParkingManager.shared.getParkings(filter: filter) { parkings, message in
             if let _message = message, _message._isValidValue {
@@ -24,7 +24,7 @@ class GoogleMapManager {
                 return
             }
             self.parkings = parkings
-            self.setLocations(locationManager: locationManager, mapView: mapView)
+            self.setCurrentLocationsAndParkings(mapView: mapView)
         }
 
 //        self.parkings = [
@@ -38,9 +38,8 @@ class GoogleMapManager {
 
     }
 
-    static func setLocations(locationManager: CLLocationManager?, mapView: GMSMapView) {
-        guard let _locationManager = locationManager else { return }
-        _locationManager.requestWhenInUseAuthorization()
+    static func setCurrentLocationsAndParkings(mapView: GMSMapView) {
+        locationManager.requestWhenInUseAuthorization()
 
         mapView.clear()
 
@@ -48,7 +47,7 @@ class GoogleMapManager {
             setMarker(mapView: mapView, name: parking.name, latitude: parking.latitude, longitude: parking.longitude, icon: "ic_parking"._toImage)
         }
 
-        currentLocation(mapView: mapView, name: "current Location", coordinate: _locationManager.location?.coordinate, icon: "ic_currentMarker"._toImage)
+        currentLocation(mapView: mapView, name: "current Location", icon: "ic_currentMarker"._toImage)
     }
 
     static func initParkingLoction(parking: ParkingModel?, mapView: GMSMapView) {
@@ -56,10 +55,15 @@ class GoogleMapManager {
         moveCamera(mapView: mapView, latitude: parking?.latitude, longitude: parking?.longitude, zoom: 16)
     }
 
-    static func currentLocation(mapView: GMSMapView, name: String? = nil, coordinate: CLLocationCoordinate2D?, icon: UIImage? = nil, isMoveCamera: Bool? = true) {
-        setMarker(mapView: mapView, name: name, latitude: coordinate?.latitude, longitude: coordinate?.longitude, icon: icon)
+    static func currentLocation(mapView: GMSMapView, coordinate: CLLocationCoordinate2D? = nil, name: String? = nil, icon: UIImage? = nil, isMoveCamera: Bool? = true) {
+        locationManager.requestWhenInUseAuthorization()
+        var _coordinate = locationManager.location?.coordinate
+        if let coordinate = coordinate {
+            _coordinate = coordinate
+        }
+        setMarker(mapView: mapView, name: name, latitude: _coordinate?.latitude, longitude: _coordinate?.longitude, icon: icon)
         if isMoveCamera ?? false {
-            moveCamera(mapView: mapView, latitude: coordinate?.latitude, longitude: coordinate?.longitude)
+            moveCamera(mapView: mapView, latitude: _coordinate?.latitude, longitude: _coordinate?.longitude)
         }
     }
 
@@ -86,8 +90,7 @@ class GoogleMapManager {
     }
 
     static func getDistance(toLocation: CLLocation) -> Double {
-        let vc: HomeUserViewController = HomeUserViewController._instantiateVC(storyboard: HomeUserViewController()._userStoryboard)
-        let fromLocation = vc.locationManager.location
+        let fromLocation = locationManager.location
         if let _fromLocation = fromLocation {
             let distance = _fromLocation.distance(from: toLocation) / 1000
             return distance

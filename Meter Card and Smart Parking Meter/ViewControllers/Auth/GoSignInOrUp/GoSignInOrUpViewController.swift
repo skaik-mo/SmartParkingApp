@@ -12,49 +12,43 @@ import FirebaseAuth
 class GoSignInOrUpViewController: UIViewController {
 
     @IBOutlet weak var greenButton: GreenButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
+        self.setUpViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setUpViewWillAppear()
     }
-    
+
     @IBAction func goSignUpAction(_ sender: Any) {
         let vc: SignUpViewController = SignUpViewController._instantiateVC(storyboard: self._authStoryboard)
         vc._push()
     }
-    
+
 
 }
 
+// MARK: - ViewDidLoad
 extension GoSignInOrUpViewController {
 
-    func setupView() {
-        AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
+    private func setUpViewDidLoad() {
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             let vc: SignInViewController = SignInViewController._instantiateVC(storyboard: self._authStoryboard)
             vc._push()
         }
-        
     }
 
-    func localized() {
+}
 
-    }
+// MARK: - ViewWillAppear
+extension GoSignInOrUpViewController {
 
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
+    private func setUpViewWillAppear() {
+        AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
     }
 
 }

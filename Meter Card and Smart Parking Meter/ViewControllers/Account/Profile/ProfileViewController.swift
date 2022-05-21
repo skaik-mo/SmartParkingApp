@@ -28,25 +28,18 @@ class ProfileViewController: UIViewController {
             switchAuth()
         }
     }
-    var auth: AuthModel?
-    var backAuth: ((_ auth: AuthModel?) -> Void)?
+    private var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
+        setUpViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
-        self._setTitleBackBarButton()
+        setUpViewWillAppear()
         setupData()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        backAuth?(auth)
+        setImage()
     }
 
     @IBAction func logoutAction(_ sender: Any) {
@@ -54,62 +47,58 @@ class ProfileViewController: UIViewController {
     }
 }
 
+// MARK: - ViewDidLoad
 extension ProfileViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = "My Profile"
 
-        if let _typeAuht = auth?.typeAuth {
-            self.typeAuth = _typeAuht
-        }
-        
         self.editProfileButton.setUp(typeButton: .greenButton, corner: 22.5)
         self.editProfileButton.handleButton = {
-            let vc: EditProfileViewController = EditProfileViewController._instantiateVC(storyboard: self._authStoryboard)
-            vc.auth = self.auth
-            vc.backAuth = { getAuth in
-                self.auth = getAuth
-                self.setupData()
-            }
+            let vc: EditProfileViewController = EditProfileViewController._instantiateVC(storyboard: self._accountStoryboard)
             vc._push()
         }
 
         self.messageButton.handleButton = {
             let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
-            vc.auth = self.auth
             vc.typeView = .Messages
             vc._push()
+        }
+
+        self.changePasswordButton.handleButton = {
+            let vc: PasswordViewController = PasswordViewController._instantiateVC(storyboard: self._accountStoryboard)
+            vc._push()
+        }
+    }
+
+}
+
+// MARK: - ViewWillAppear
+extension ProfileViewController {
+
+    private func setUpViewWillAppear() {
+        AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
+        self._setTitleBackBarButton()
+
+        self.auth = AuthManager.shared.getLocalAuth()
+        if let _typeAuht = auth?.typeAuth {
+            self.typeAuth = _typeAuht
         }
 
         if let _isLoginBySocial = self.auth?.isLoginBySocial {
             self.changePasswordButton.isHidden = _isLoginBySocial
         }
-        self.changePasswordButton.handleButton = {
-            let vc: PasswordViewController = PasswordViewController._instantiateVC(storyboard: self._authStoryboard)
-            vc.auth = self.auth
-            vc.backAuth = { getAuth in
-                self.auth = getAuth
-//                self.setupData()
-            }
-            vc._push()
-        }
     }
 
-    func localized() {
-
-    }
-
-    func setupData() {
-        setImage()
+    private func setupData() {
         guard let _auth = self.auth else { return }
         self.ownerNameLabel.text = _auth.name
         self.emailLabel.text = _auth.email
     }
 
-    func setImage() {
+    private func setImage() {
         AuthManager.shared.setImage(authImage: self.authImage, urlImage: self.auth?.urlImage)
     }
-
 }
 
 extension ProfileViewController {
@@ -120,28 +109,22 @@ extension ProfileViewController {
             self.favoritesButton.isHidden = false
             self.favoritesButton.handleButton = {
                 let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
-                vc.auth = self.auth
                 vc.typeView = .Favorites
                 vc._push()
             }
 
             self.myBookingsButton.titleLabel.text = "My Bookings"
             self.myBookingsButton.handleButton = {
-                // My Bookings Action
-                debugPrint("My Bookings Action")
                 let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
-                vc.auth = self.auth
                 vc.typeView = .Bookings
                 vc._push()
             }
         case .Business:
             self.favoritesButton.isHidden = true
+
             self.myBookingsButton.titleLabel.text = "My Park"
             self.myBookingsButton.handleButton = {
-                // My Park Action
-                debugPrint("My Park Action")
                 let vc: MyParkingsViewController = MyParkingsViewController._instantiateVC(storyboard: self._businessStoryboard)
-                vc.auth = self.auth
                 vc._push()
             }
         }

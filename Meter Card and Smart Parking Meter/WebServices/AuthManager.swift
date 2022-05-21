@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import SVProgressHUD
-
 import FBSDKCoreKit
 import FBSDKLoginKit
 
@@ -16,31 +14,21 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
-typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool?, _ message: String?) -> Void)?
-typealias ResultHandler = ((_ auth: AuthModel?, _ message: String?) -> Void)?
-typealias ResultAllAuthHandler = ((_ users: [AuthModel], _ message: String?) -> Void)?
-typealias FailureHandler = ((_ errorMessage: String?) -> Void)?
-
 class AuthManager {
-
     static let shared = AuthManager()
 
     private let db = Firestore.firestore()
     private var usersFireStoreReference: CollectionReference?
 
+    private let userKey = "USER"
     private let idKey = "ID"
-    private let nameKey = "Name"
-    private let emailKey = "Email"
-    private let passwordKey = "Password"
-    private let typeAuthKey = "TypeAuth"
-    private let plateNumberKey = "PlateNumber"
-    private let urlImageKey = "URLImage"
-    private let urlLicenseKey = "URLLicense"
-    private let isLoginBySocialKey = "IsLoginBySocial"
-    private let favouritedParkingsIDsKey = "FavouritedParkingsIDs"
 
     private let loginManager = LoginManager()
 
+    typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool?, _ message: String?) -> Void)?
+    typealias ResultHandler = ((_ auth: AuthModel?, _ message: String?) -> Void)?
+    typealias ResultAllAuthHandler = ((_ users: [AuthModel], _ message: String?) -> Void)?
+    
 
     private init() {
         Auth.auth().useAppLanguage()
@@ -49,19 +37,20 @@ class AuthManager {
 
     func signUpByEmail(auth: AuthModel, data: Data?, result: ResultHandler) {
         guard let email = auth.email, let password = auth.password else { result?(nil, "The fields is empty."); return }
-        SVProgressHUD.showSVProgress()
+        Helper.showIndicator(true)
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let _error = error {
-                SVProgressHUD.dismiss()
+                Helper.dismissIndicator(true)
                 result?(nil, _error.localizedDescription)
                 return
             }
             auth.id = authResult?.user.uid
 
-            self.setAuth(auth: auth, dataDrivingLicense: data) { errorMessage in
+            self.setAuth(auth: auth, dataDrivingLicense: data, isShowIndicator: false) { errorMessage in
+                Helper.dismissIndicator(true)
                 if let _errorMessage = errorMessage {
                     // here should deleted user from Authentication and re-sign up again
-                    result?(nil, errorMessage)
+                    result?(nil, _errorMessage)
                     return
                 }
                 result?(auth, nil)
@@ -71,17 +60,17 @@ class AuthManager {
 
     func signInByEmail(auth: AuthModel, result: ResultHandler) {
         guard let email = auth.email, let password = auth.password else { result?(nil, "The fields is empty."); return }
-        SVProgressHUD.showSVProgress()
+        Helper.showIndicator(true)
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let _error = error {
-                SVProgressHUD.dismiss()
+                Helper.dismissIndicator(true)
                 result?(nil, _error.localizedDescription)
                 return
             }
             let id = authResult?.user.uid
 
             self.getAuth(id: id, password: auth.password) { auth, message in
-                SVProgressHUD.dismiss()
+                Helper.dismissIndicator(true)
                 if let _auth = auth {
                     // login and go home screen
                     self.saveAuth(auth: _auth)
@@ -106,8 +95,7 @@ class AuthManager {
     }
 
     private func reauthenticate(failure: FailureHandler) {
-        let auth = getLocalAuth()
-        guard let _email = auth.email, let _password = auth.password else { /*message error*/ return }
+        guard let auth = getLocalAuth(), let _email = auth.email, let _password = auth.password else { failure?("Empty data"); return }
         let credential = EmailAuthProvider.credential(withEmail: _email, password: _password)
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { auth, error in
             if let _error = error {
@@ -120,15 +108,15 @@ class AuthManager {
 
     func updatePassword(auth: AuthModel, failure: FailureHandler) {
         guard let password = auth.password else { return }
-        SVProgressHUD.showSVProgress()
+        Helper.showIndicator(true)
         self.reauthenticate { error in
             if let _error = error {
-                SVProgressHUD.dismiss()
+                Helper.dismissIndicator(true)
                 failure?(_error)
                 return
             }
             Auth.auth().currentUser?.updatePassword(to: password) { error in
-                SVProgressHUD.dismiss()
+                Helper.dismissIndicator(true)
                 if let _error = error {
                     failure?(_error.localizedDescription)
                     return
@@ -140,9 +128,9 @@ class AuthManager {
     }
 
     func resetPassword(email: String, failure: FailureHandler) {
-        SVProgressHUD.showSVProgress()
+        Helper.showIndicator(true)
         Auth.auth().sendPasswordReset(withEmail: email) { error in
-            SVProgressHUD.dismiss()
+            Helper.dismissIndicator(true)
             if let _error = error {
                 failure?(_error.localizedDescription)
                 return
@@ -175,10 +163,10 @@ class AuthManager {
 extension AuthManager {
 
     // Add Or Update Auth
-    func setAuth(auth: AuthModel, dataDrivingLicense: Data?, dataAuth: Data? = nil, failure: FailureHandler) {
-        guard let _usersFireStoreReference = self.usersFireStoreReference, let _id = auth.id, let _name = auth.name else { return }
+    func setAuth(auth: AuthModel?, dataDrivingLicense: Data? = nil, dataAuth: Data? = nil, isShowIndicator: Bool = true, failure: FailureHandler) {
+        guard let _usersFireStoreReference = self.usersFireStoreReference, let _auth = auth, let _id = _auth.id, let _name = _auth.name else { return }
 
-        SVProgressHUD.showSVProgress()
+        Helper.showIndicator(isShowIndicator)
         var data: [String: Data?] = [:]
         let authPath = "Auth/\(_id)/AuthImage/\(_name).jpg"
         let authDrivingLicense = "Auth/\(_id)/DrivingLicense/\(_name) driver's license.jpg"
@@ -192,26 +180,26 @@ extension AuthManager {
         FirebaseStorageManager.shared.uploadFile(data: data) { urls in
             for url in urls {
                 if url.key == authPath {
-                    auth.urlImage = url.value.absoluteString
+                    _auth.urlImage = url.value.absoluteString
                 } else if url.key == authDrivingLicense {
-                    auth.urlLicense = url.value.absoluteString
+                    _auth.urlLicense = url.value.absoluteString
                 }
             }
-            self.setEmail(email: auth.email) { error in
+            self.setEmail(email: _auth.email) { error in
                 if let _error = error {
                     // Email Update Failed
-                    SVProgressHUD.dismiss()
+                    Helper.dismissIndicator(isShowIndicator)
                     failure?(_error)
                     return
                 }
-                _usersFireStoreReference.document(_id).setData(auth.getDictionary()) { error in
-                    SVProgressHUD.dismiss()
+                _usersFireStoreReference.document(_id).setData(_auth.getDictionary()) { error in
+                    Helper.dismissIndicator(isShowIndicator)
                     if let _error = error {
                         failure?(_error.localizedDescription)
                         return
                     }
                     // Added Auth
-                    self.saveAuth(auth: auth)
+                    self.saveAuth(auth: _auth)
                     failure?(nil)
                 }
             }
@@ -225,14 +213,8 @@ extension AuthManager {
                 result?(nil, _error.localizedDescription)
                 return
             }
-            if let data = snapshot?.data() {
-                // exsist Auth
-                let _auth = AuthModel.init(id: _id, password: password, dictionary: data)
-                result?(_auth, nil)
-                return
-            }
-            result?(nil, "Auth desn't exsist!")
-
+            let _auth = AuthModel.init(id: _id, password: password, dictionary: snapshot?.data())
+            result?(_auth, nil)
         }
     }
 
@@ -245,7 +227,7 @@ extension AuthManager {
             }
             var users: [AuthModel] = []
 
-            for auth in snapshot!.documents {
+            for auth in snapshot?.documents ?? [] {
                 if let _auth = AuthModel.init(id: auth.documentID, dictionary: auth.data()) {
                     users.append(_auth)
                 }
@@ -255,14 +237,14 @@ extension AuthManager {
     }
 
     func setFavourite(parkingID id: String?, isFavourite: Bool?, failure: FailureHandler) {
-        guard let _id = id, let _isFavourite = isFavourite else { return }
-        let auth = self.getLocalAuth()
+        guard let auth = self.getLocalAuth(), let _id = id, let _isFavourite = isFavourite else { return }
+
         if let index = auth.favouritedParkingsIDs.firstIndex(of: _id), !_isFavourite {
             auth.favouritedParkingsIDs.remove(at: index)
         } else {
             auth.favouritedParkingsIDs.append(_id)
         }
-        setAuth(auth: auth, dataDrivingLicense: nil, dataAuth: nil) { error in
+        setAuth(auth: auth, isShowIndicator: false) { error in
             if let _error = error {
                 failure?(_error)
                 return
@@ -272,8 +254,7 @@ extension AuthManager {
     }
 
     func getFavourite(parkingID id: String?) -> Bool {
-        guard let _id = id else { return false }
-        let auth = self.getLocalAuth()
+        guard let auth = self.getLocalAuth(), let _id = id else { return false }
         return auth.favouritedParkingsIDs.contains(_id)
 
     }
@@ -298,17 +279,21 @@ extension AuthManager {
 extension AuthManager {
 
     private func saveAuth(auth: AuthModel) {
+        let data = try? JSONSerialization.data(withJSONObject: auth.getDictionary(), options: .fragmentsAllowed)
+        UserDefaults.standard.setValue(data, forKey: self.userKey)
         UserDefaults.standard.set(auth.id, forKey: self.idKey)
-        UserDefaults.standard.set(auth.name, forKey: self.nameKey)
-        UserDefaults.standard.set(auth.email, forKey: self.emailKey)
-        UserDefaults.standard.set(auth.password, forKey: self.passwordKey)
-        UserDefaults.standard.set(auth.typeAuth?.rawValue, forKey: self.typeAuthKey)
-        UserDefaults.standard.set(auth.plateNumber, forKey: self.plateNumberKey)
-        UserDefaults.standard.set(auth.urlImage, forKey: self.urlImageKey)
-        UserDefaults.standard.set(auth.urlLicense, forKey: self.urlLicenseKey)
-        UserDefaults.standard.set(auth.isLoginBySocial, forKey: self.isLoginBySocialKey)
-        UserDefaults.standard.set(auth.favouritedParkingsIDs, forKey: self.favouritedParkingsIDsKey)
         UserDefaults.standard.synchronize()
+    }
+
+    func getLocalAuth() -> AuthModel? {
+        let id = UserDefaults.standard.string(forKey: idKey)
+        let data = UserDefaults.standard.value(forKey: userKey) as? Data
+        if let _data = data {
+            let dictionary = try? JSONSerialization.jsonObject(with: _data, options: .fragmentsAllowed) as? [String: Any?]
+            let password = dictionary?["password"] as? String
+            return AuthModel.init(id: id, password: password, dictionary: dictionary)
+        }
+        return nil
     }
 
     private func clearLocalAuth() {
@@ -316,41 +301,20 @@ extension AuthManager {
             UserDefaults.standard.removePersistentDomain(forName: appDomain)
         }
     }
-
-    func getLocalAuth() -> AuthModel {
-        let id = UserDefaults.standard.string(forKey: self.idKey)
-        let name = UserDefaults.standard.string(forKey: self.nameKey)
-        let email = UserDefaults.standard.string(forKey: self.emailKey)
-        let password = UserDefaults.standard.string(forKey: self.passwordKey)
-        let typeAuth = UserDefaults.standard.value(forKey: self.typeAuthKey) as? Int
-        let plateNumber = UserDefaults.standard.string(forKey: self.plateNumberKey)
-        let urlImage = UserDefaults.standard.string(forKey: self.urlImageKey)
-        let urlLicense = UserDefaults.standard.string(forKey: self.urlLicenseKey)
-        let favouritedParkingsIDs = UserDefaults.standard.value(forKey: self.favouritedParkingsIDsKey) as? [String]
-        var isLoginBySocial = false
-
-        if let _isLoginBySocial = UserDefaults.standard.value(forKey: self.isLoginBySocialKey) as? Bool {
-            isLoginBySocial = _isLoginBySocial
-        }
-
-        return AuthModel.init(id: id, name: name, email: email, password: password, plateNumber: plateNumber, typeAuth: typeAuth?.getTypeAuth, urlImage: urlImage, urlLicense: urlLicense, isLoginBySocial: isLoginBySocial, favouritedParkingsIDs: favouritedParkingsIDs ?? [])
-    }
-
 }
 
 // MARK: - Sign in by facebook
 extension AuthManager {
 
-    func signInByFacebook(vc: UIViewController, result: ((_ auth: AuthModel?, _ isRegister: Bool?, _ message: String?) -> Void)?) {
+    func signInByFacebook(vc: UIViewController, result: Handler) {
         loginManager.logIn(permissions: [.publicProfile, .email, .userPhotos], viewController: vc) { loginResult in
             switch loginResult {
-
             case .success(granted: _, declined: _, token: let token):
+                Helper.showIndicator(true)
                 debugPrint("sign in by facebook success")
-                SVProgressHUD.showSVProgress()
                 self.getImageURL(token: token?.tokenString) { imageURL in
                     self.signInFacebookAccountToFirebase(urlImage: imageURL) { auth, isRegister, message in
-                        SVProgressHUD.dismiss()
+                        Helper.dismissIndicator(true)
                         result?(auth, isRegister, message)
                     }
                 }
@@ -372,24 +336,21 @@ extension AuthManager {
                 return
             }
             let id = auth?.user.uid
-            let authModel = AuthModel.init(id: id, name: auth?.user.displayName, email: auth?.user.email)
+            let authModel = AuthModel.init(id: id, name: auth?.user.displayName, email: auth?.user.email, isLoginBySocial: true, urlImage: urlImage)
 
-            self.getAuth(id: id, password: nil) { getAuth, message in
+            self.getAuth(id: id) { getAuth, message in
                 if let _message = message {
-                    // Unregistered
-                    if let _urlImage = urlImage {
-                        authModel.urlImage = _urlImage
-                    }
-                    authModel.isLoginBySocial = true
-                    result?(authModel, true, _message)
+                    result?(nil, false, _message)
                 } else {
-                    // Already registered
                     if let _getAuth = getAuth {
+                        // Already registered
                         _getAuth.isLoginBySocial = true
                         self.saveAuth(auth: _getAuth)
                         result?(_getAuth, false, nil)
                     } else {
-                        result?(nil, false, "error sign in by facebook")
+                        // Unregistered
+                        self.saveAuth(auth: authModel)
+                        result?(authModel, true, nil)
                     }
                 }
             }

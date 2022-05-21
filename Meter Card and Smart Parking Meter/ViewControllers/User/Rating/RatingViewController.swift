@@ -16,43 +16,27 @@ class RatingViewController: UIViewController {
     @IBOutlet weak var greenButton: GreenButton!
 
     var parking: ParkingModel?
-    var auth: AuthModel?
+    private var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        setUpViewDidLoad()
     }
 
 }
 
+// MARK: - ViewDidLoad
 extension RatingViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
+        self.auth = AuthManager.shared.getLocalAuth()
+
         ratingView.settings.fillMode = .full
 
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             self.addRating()
         }
-    }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
     }
 
 }
@@ -74,7 +58,7 @@ extension RatingViewController {
 
     private func addRating() {
         guard let _rating = getRating() else { return }
-        RatingManager.shared.setParking(rating: _rating, parking: self.parking) { errorMessage in
+        RatingManager.shared.setRating(rating: _rating, parking: self.parking) { errorMessage in
             if let _errorMessage = errorMessage {
                 self._showErrorAlert(message: _errorMessage)
                 return

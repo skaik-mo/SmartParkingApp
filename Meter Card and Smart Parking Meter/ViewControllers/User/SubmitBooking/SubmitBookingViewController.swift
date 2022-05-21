@@ -20,33 +20,29 @@ class SubmitBookingViewController: UIViewController {
     @IBOutlet weak var greenButton: GreenButton!
 
     var parking: ParkingModel?
-    var auth: AuthModel?
+    private var auth: AuthModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        setUpViewDidLoad()
     }
 
 }
 
+// MARK: - ViewDidLoad
 extension SubmitBookingViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
+        self.auth = AuthManager.shared.getLocalAuth()
+        
         var price = ""
         if let _price = parking?.price {
             price = "(\(_price)$)"
         }
         self.titleLabel.text = "Memorial Park \(price)"
 
-        self.selectNumberOfParking.typeParkingView = .fill
-        self.selectNumberOfParking.title.text = "Select Spot"
         self.selectNumberOfParking.title.textColor = "929292"._hexColor
+        self.selectNumberOfParking.setUpNumberOfParking(typeSpotButton: .selectedFill, title: "Select Spot", spots: self.parking?.spots)
 
         self.selectDate.selectionType = .date
         self.selectDate.fromImageView.isHidden = true
@@ -59,17 +55,7 @@ extension SubmitBookingViewController {
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             self.save()
-//            let vc: RatingViewController = RatingViewController._instantiateVC(storyboard: self._userStoryboard)
-//            vc._presentVC()
         }
-    }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-
     }
 
 }
@@ -91,16 +77,6 @@ extension SubmitBookingViewController {
             self._showErrorAlert(message: isTimeFieldsEmpty.errorMessage)
             return false
         }
-//        if let _parking = parking {
-//            if !(_parking.compareDate(fromDate: selectDate.fromText, toDate: selectDate.toText)) {
-//                self._showErrorAlert(message: "Time not available")
-//                return false
-//            }
-//            if !(_parking.compareTime(fromTime: selectTime.fromText, toTime: selectTime.toText)) {
-//                self._showErrorAlert(message: "Time not available")
-//                return false
-//            }
-//        }
         if !(self.auth?.id?._isValidValue ?? false) {
             self._showErrorAlert(message: "You must log out and try to log in again")
             return false
@@ -125,12 +101,3 @@ extension SubmitBookingViewController {
         }
     }
 }
-
-/*
-    date 1      date 2
-    same        same    true    true
-    after       after   true    false
-    before      before  false   true
-    before      after   false   false
-    after       before  true    true
- */

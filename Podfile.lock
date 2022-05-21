@@ -511,7 +511,7 @@ PODS:
   - SDWebImage (5.0.0):
     - SDWebImage/Core (= 5.0.0)
   - SDWebImage/Core (5.0.0)
-  - SVProgressHUD (2.2.5)
+  - SKActivityIndicatorView (1.0.0)
 
 DEPENDENCIES:
   - CHTCollectionViewWaterfallLayout
@@ -526,7 +526,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (= 6.5.4)
   - JTAppleCalendar (= 7.1)
   - SDWebImage (= 5.0)
-  - SVProgressHUD
+  - SKActivityIndicatorView (~> 1.0.0)
 
 SPEC REPOS:
   trunk:
@@ -560,7 +560,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SDWebImage
-    - SVProgressHUD
+    - SKActivityIndicatorView
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -593,8 +593,8 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SDWebImage: 5de80a0302de9e377e62f47d2fa1304efff0e55f
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SKActivityIndicatorView: 81c123380127ad497f9b57cd4d11347e40ab3427
 
-PODFILE CHECKSUM: 56dbca2bf8b261ad0c611974a5aefb0c58f186db
+PODFILE CHECKSUM: 29c4ef47d395eb1f6a87b8b246cad67486dce9f4
 
 COCOAPODS: 1.11.2

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Profile View Controller-->
+        <scene sceneID="mo1-fa-YgQ">
+            <objects>
+                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7sL-6I-bFX" customClass="ProfileViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mJN-nR-nGd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mbn-7P-eRf">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tup-WS-9Ds">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="254"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="h6v-sX-9Ea">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="254"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9GD-9q-mnh">
+                                                        <rect key="frame" x="87" y="0.0" width="240" height="27.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="doQ-PF-fEa">
+                                                        <rect key="frame" x="180.5" y="27.5" width="53" height="104"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="h9Q-gg-mff">
+                                                                <rect key="frame" x="1.5" y="0.0" width="50" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="h9Q-gg-mff" secondAttribute="height" multiplier="1:1" id="1Ma-Lf-Jaa"/>
+                                                                    <constraint firstAttribute="height" constant="50" id="F0Z-ES-dqO"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="25"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </imageView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="h2x-ic-zGs">
+                                                                <rect key="frame" x="0.0" y="62" width="53" height="42"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAk-zW-b8J">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="53" height="20"/>
+                                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                                                        <color key="textColor" name="000000"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email......" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SSZ-C9-Qlz">
+                                                                        <rect key="frame" x="0.0" y="26" width="53" height="16"/>
+                                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                                        <color key="textColor" red="0.3803921569" green="0.3803921569" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42B-Ec-s39">
+                                                        <rect key="frame" x="87" y="131.5" width="240" height="16.5"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZrV-bK-NHh" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                        <rect key="frame" x="122" y="148" width="170" height="45"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="170" id="bS7-c8-I7R"/>
+                                                            <constraint firstAttribute="height" constant="45" id="lLU-b6-7je"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Edit Profile"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2GR-X9-rwm">
+                                                        <rect key="frame" x="87" y="193" width="240" height="61"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="h6v-sX-9Ea" secondAttribute="trailing" id="8r6-ZM-g0y"/>
+                                            <constraint firstItem="h6v-sX-9Ea" firstAttribute="leading" secondItem="Tup-WS-9Ds" secondAttribute="leading" id="Qkq-UW-YZG"/>
+                                            <constraint firstItem="h6v-sX-9Ea" firstAttribute="top" secondItem="Tup-WS-9Ds" secondAttribute="top" id="g9z-4k-Ns6"/>
+                                            <constraint firstAttribute="bottom" secondItem="h6v-sX-9Ea" secondAttribute="bottom" id="ktH-nz-tKg"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0j-Ug-ymY">
+                                        <rect key="frame" x="0.0" y="254" width="414" height="24"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zUN-MM-CTR">
+                                        <rect key="frame" x="0.0" y="278" width="414" height="251"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwR-k4-9w5" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Messages"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSJ-tU-ffN" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="65" width="414" height="55.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Favorites"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fz7-5U-9hH" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="130.5" width="414" height="55"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="My Bookings"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z68-Ig-efE" customClass="ProfileButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="195.5" width="414" height="55.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Change Password"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jaw-kD-0Bp">
+                                        <rect key="frame" x="0.0" y="529" width="414" height="210"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uY-BQ-C67">
+                                        <rect key="frame" x="0.0" y="739" width="414" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="oyD-v8-V5J"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Log out">
+                                            <color key="titleColor" name="3FBF66"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="logoutAction:" destination="7sL-6I-bFX" eventType="touchUpInside" id="Oyg-F4-xNY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jua-h0-Pbe"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Jua-h0-Pbe" firstAttribute="bottom" secondItem="mbn-7P-eRf" secondAttribute="bottom" id="0GZ-dm-mpi"/>
+                            <constraint firstItem="T0j-Ug-ymY" firstAttribute="height" secondItem="mJN-nR-nGd" secondAttribute="height" multiplier="22/812" id="7O1-JA-OvJ"/>
+                            <constraint firstItem="mbn-7P-eRf" firstAttribute="leading" secondItem="Jua-h0-Pbe" secondAttribute="leading" id="7ce-Ye-Xig"/>
+                            <constraint firstItem="9GD-9q-mnh" firstAttribute="height" secondItem="mJN-nR-nGd" secondAttribute="height" multiplier="25/812" id="9Xr-qM-V7V"/>
+                            <constraint firstItem="Tup-WS-9Ds" firstAttribute="height" secondItem="mJN-nR-nGd" secondAttribute="height" multiplier="230/812" id="Jbb-cA-nfO"/>
+                            <constraint firstItem="42B-Ec-s39" firstAttribute="height" secondItem="mJN-nR-nGd" secondAttribute="height" multiplier="15/812" id="R6i-oz-yAx"/>
+                            <constraint firstItem="xwR-k4-9w5" firstAttribute="height" secondItem="mJN-nR-nGd" secondAttribute="height" multiplier="50/812" id="VNR-Ol-3wV"/>
+                            <constraint firstItem="mbn-7P-eRf" firstAttribute="top" secondItem="Jua-h0-Pbe" secondAttribute="top" id="aaC-HZ-ckT"/>
+                            <constraint firstItem="Jua-h0-Pbe" firstAttribute="trailing" secondItem="mbn-7P-eRf" secondAttribute="trailing" id="kQ3-Ft-Sdx"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="authImage" destination="h9Q-gg-mff" id="1B7-8Q-FVR"/>
+                        <outlet property="changePasswordButton" destination="Z68-Ig-efE" id="eFO-AG-SJt"/>
+                        <outlet property="editProfileButton" destination="ZrV-bK-NHh" id="SK3-tl-vig"/>
+                        <outlet property="emailLabel" destination="SSZ-C9-Qlz" id="74S-xk-GH0"/>
+                        <outlet property="favoritesButton" destination="WSJ-tU-ffN" id="a2g-9p-8db"/>
+                        <outlet property="messageButton" destination="xwR-k4-9w5" id="gNp-PR-okM"/>
+                        <outlet property="myBookingsButton" destination="Fz7-5U-9hH" id="wKW-4W-rr9"/>
+                        <outlet property="ownerNameLabel" destination="tAk-zW-b8J" id="prl-2Q-kof"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F0J-MS-SHL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6241" y="96"/>
+        </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="tMV-GF-RBI">
+            <objects>
+                <viewController storyboardIdentifier="EditProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gGs-Og-ULl" customClass="EditProfileViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7o6-2B-1bq" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ROU-82-apA">
+                                <rect key="frame" x="0.0" y="44" width="414" height="523"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bDa-Ql-8vS">
+                                        <rect key="frame" x="20" y="36" width="374" height="130"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EO6-II-hTG">
+                                                <rect key="frame" x="140" y="0.0" width="94" height="94"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQI-Q7-clt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="addAuthImageAction:" destination="gGs-Og-ULl" eventType="touchUpInside" id="gQf-md-zji"/>
+                                                        </connections>
+                                                    </button>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="2o1-wg-X2f">
+                                                        <rect key="frame" x="0.0" y="0.0" width="94" height="94"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="94" id="SuH-Hy-t4z"/>
+                                                            <constraint firstAttribute="width" secondItem="2o1-wg-X2f" secondAttribute="height" multiplier="1:1" id="hmC-Kv-Q7X"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="47"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="2o1-wg-X2f" secondAttribute="bottom" id="9Kg-rf-Yhb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gQI-Q7-clt" secondAttribute="bottom" id="CEF-oZ-kFM"/>
+                                                    <constraint firstItem="2o1-wg-X2f" firstAttribute="top" secondItem="EO6-II-hTG" secondAttribute="top" id="ShB-u8-pky"/>
+                                                    <constraint firstItem="2o1-wg-X2f" firstAttribute="leading" secondItem="EO6-II-hTG" secondAttribute="leading" id="W4v-1t-alb"/>
+                                                    <constraint firstItem="gQI-Q7-clt" firstAttribute="leading" secondItem="EO6-II-hTG" secondAttribute="leading" id="flI-oa-92H"/>
+                                                    <constraint firstAttribute="height" constant="94" id="gbn-cx-dh1"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2o1-wg-X2f" secondAttribute="trailing" id="h2W-OW-Osh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gQI-Q7-clt" secondAttribute="trailing" id="iag-GN-UQp"/>
+                                                    <constraint firstItem="gQI-Q7-clt" firstAttribute="top" secondItem="EO6-II-hTG" secondAttribute="top" id="wjb-nB-5UB"/>
+                                                    <constraint firstAttribute="width" secondItem="EO6-II-hTG" secondAttribute="height" multiplier="1:1" id="zDM-Qp-rYg"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="36" trailing="0.0"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="KAX-B1-PTR">
+                                        <rect key="frame" x="20" y="166" width="374" height="267"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wS-jR-bMZ" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="2Lc-Hy-Azi"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Name"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nC-o1-91H" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="74" width="374" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="syz-kk-yf4" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="148" width="374" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Plate Number"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wD-Pi-Odu" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="222" width="374" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Driving License"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TEn-Ct-M42">
+                                        <rect key="frame" x="20" y="433" width="374" height="43"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozE-YW-dt9" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="476" width="374" height="47"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="RBy-nd-fVO"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Save"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <directionalEdgeInsets key="directionalLayoutMargins" top="36" leading="20" bottom="0.0" trailing="20"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ff8-bb-wQb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ROU-82-apA" firstAttribute="top" secondItem="Ff8-bb-wQb" secondAttribute="top" id="50R-wQ-8v6"/>
+                            <constraint firstItem="TEn-Ct-M42" firstAttribute="height" secondItem="7o6-2B-1bq" secondAttribute="height" multiplier="39/812" id="IS0-WN-zAS"/>
+                            <constraint firstItem="Ff8-bb-wQb" firstAttribute="trailing" secondItem="ROU-82-apA" secondAttribute="trailing" id="dM1-Pr-NPh"/>
+                            <constraint firstItem="ROU-82-apA" firstAttribute="leading" secondItem="Ff8-bb-wQb" secondAttribute="leading" id="v1q-W4-x9p"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="authImage" destination="2o1-wg-X2f" id="b6x-Nk-TzO"/>
+                        <outlet property="drivingLicenseText" destination="4wD-Pi-Odu" id="2n6-cA-TK9"/>
+                        <outlet property="emailText" destination="2nC-o1-91H" id="6kc-2A-v9c"/>
+                        <outlet property="greenButton" destination="ozE-YW-dt9" id="1G2-NJ-Paq"/>
+                        <outlet property="nameText" destination="5wS-jR-bMZ" id="yLe-Yh-W3P"/>
+                        <outlet property="plateNumberText" destination="syz-kk-yf4" id="drW-zT-da6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="60U-wK-T0Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7019" y="94"/>
+        </scene>
+        <!--Password View Controller-->
+        <scene sceneID="h6O-Ot-yFB">
+            <objects>
+                <viewController storyboardIdentifier="PasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9ny-MC-wrC" customClass="PasswordViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZJM-LH-ddT" customClass="IQPreviousNextView" customModule="IQKeyboardManagerSwift">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jat-bo-dXh">
+                                <rect key="frame" x="0.0" y="44" width="414" height="311"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="41D-To-Mdx">
+                                        <rect key="frame" x="20" y="28" width="374" height="193"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKk-im-iOw" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="kCX-gs-JGy"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Current password"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cse-dM-bsi" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="74" width="374" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="New password"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRO-tM-WIR" customClass="CustomText" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="148" width="374" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Repeat password"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M7A-Zj-GI9">
+                                        <rect key="frame" x="20" y="221" width="374" height="43"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZA-Th-UTU" customClass="GreenButton" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="264" width="374" height="47"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="fRb-Ii-fAC"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="nameButton" value="Save"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <directionalEdgeInsets key="directionalLayoutMargins" top="28" leading="20" bottom="0.0" trailing="20"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vlQ-oU-IxV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vlQ-oU-IxV" firstAttribute="trailing" secondItem="Jat-bo-dXh" secondAttribute="trailing" id="Aqr-mw-oOW"/>
+                            <constraint firstItem="M7A-Zj-GI9" firstAttribute="height" secondItem="ZJM-LH-ddT" secondAttribute="height" multiplier="39/812" id="T3z-jr-38k"/>
+                            <constraint firstItem="Jat-bo-dXh" firstAttribute="top" secondItem="vlQ-oU-IxV" secondAttribute="top" id="mYc-wc-XuQ"/>
+                            <constraint firstItem="Jat-bo-dXh" firstAttribute="leading" secondItem="vlQ-oU-IxV" secondAttribute="leading" id="vHx-Cl-c29"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="currentPasswordView" destination="uKk-im-iOw" id="nwu-B2-QQG"/>
+                        <outlet property="greenButton" destination="7ZA-Th-UTU" id="OwQ-zJ-sp5"/>
+                        <outlet property="newPasswordView" destination="cse-dM-bsi" id="1Sj-IV-4CT"/>
+                        <outlet property="repeatPasswordView" destination="HRO-tM-WIR" id="RPI-76-67a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IkP-ZM-B7P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7790" y="96"/>
+        </scene>
+        <!--Message View Controller-->
+        <scene sceneID="vlf-vO-tjB">
+            <objects>
+                <viewController storyboardIdentifier="MessageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2vW-rw-qam" customClass="MessageViewController" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I7I-NW-HqD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aOA-NN-Ss1">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ahg-vv-CCb">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="2vW-rw-qam" id="Ixs-cs-XZk"/>
+                                            <outlet property="delegate" destination="2vW-rw-qam" id="Z01-Cg-pHc"/>
+                                        </connections>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaa-FH-6wc">
+                                        <rect key="frame" x="0.0" y="768" width="414" height="50"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uas-Lx-dER">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcD-xL-jU2">
+                                                        <rect key="frame" x="12" y="0.0" width="44" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="44" id="hSH-re-PUx"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="ic_camera2"/>
+                                                        <connections>
+                                                            <action selector="imageAction:" destination="2vW-rw-qam" eventType="touchUpInside" id="xs3-5G-ML5"/>
+                                                        </connections>
+                                                    </button>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write a message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dY-bl-a2i">
+                                                        <rect key="frame" x="68" y="0.0" width="278" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEW-sZ-7ax">
+                                                        <rect key="frame" x="358" y="0.0" width="44" height="50"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="44" id="ftc-rC-oFN"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="ic_send"/>
+                                                        <connections>
+                                                            <action selector="sendAction:" destination="2vW-rw-qam" eventType="touchUpInside" id="pNb-c9-mI6"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="12" bottom="0.0" trailing="12"/>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="OJ6-jo-i7r"/>
+                                            <constraint firstAttribute="trailing" secondItem="uas-Lx-dER" secondAttribute="trailing" id="a86-aH-0EH"/>
+                                            <constraint firstItem="uas-Lx-dER" firstAttribute="leading" secondItem="aaa-FH-6wc" secondAttribute="leading" id="khE-lX-wgQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="uas-Lx-dER" secondAttribute="bottom" id="lIK-ct-LHX"/>
+                                            <constraint firstItem="uas-Lx-dER" firstAttribute="top" secondItem="aaa-FH-6wc" secondAttribute="top" id="ybE-uW-bke"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="0.0" height="-5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.69999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" red="0.92941176469999998" green="0.94901960780000005" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2R6-Cm-YS6"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aOA-NN-Ss1" firstAttribute="bottom" secondItem="2R6-Cm-YS6" secondAttribute="bottom" id="P4y-4k-UMk"/>
+                            <constraint firstItem="2R6-Cm-YS6" firstAttribute="trailing" secondItem="aOA-NN-Ss1" secondAttribute="trailing" id="dK0-1p-emd"/>
+                            <constraint firstItem="aOA-NN-Ss1" firstAttribute="leading" secondItem="2R6-Cm-YS6" secondAttribute="leading" id="mKc-RK-l6d"/>
+                            <constraint firstItem="aOA-NN-Ss1" firstAttribute="top" secondItem="2R6-Cm-YS6" secondAttribute="top" id="nym-gx-bkm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="P4y-4k-UMk" id="TDY-pY-U9x"/>
+                        <outlet property="messageTextField" destination="5dY-bl-a2i" id="D3F-Nv-2mc"/>
+                        <outlet property="tableView" destination="Ahg-vv-CCb" id="VTz-kQ-WsK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TyQ-uF-hkQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8594" y="96"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_camera2" width="21" height="19"/>
+        <image name="ic_placeholderPerson" width="95" height="95"/>
+        <image name="ic_send" width="30" height="28"/>
+        <namedColor name="000000">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="3FBF66">
+            <color red="0.24705880880355835" green="0.74901962280273438" blue="0.40000003576278687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

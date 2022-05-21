@@ -11,47 +11,28 @@ import UIKit
 class ForgotPasswordViewController: UIViewController {
 
     @IBOutlet weak var emailText: CustomText!
-    
+
     @IBOutlet weak var greenButton: GreenButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        setUpViewDidLoad()
     }
 
 }
 
+// MARK: - ViewDidLoad
 extension ForgotPasswordViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = ""
         self.emailText.keyboardType = .emailAddress
-        
+
         self.greenButton.setUp(typeButton: .greenButton)
         self.greenButton.handleButton = {
             self.resetPassword()
         }
     }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
-    }
-
 }
 
 extension ForgotPasswordViewController {

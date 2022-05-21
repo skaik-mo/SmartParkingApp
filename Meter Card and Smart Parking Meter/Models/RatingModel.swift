@@ -8,17 +8,6 @@
 import Foundation
 
 class RatingModel {
-    /*
-     rating
-        - userID
-        - parkingID
-        - rating
-     get all rating for parking
-        - parkingID == parking.id
-            - sum rating
-            - count users
-     add rating in Parking ( sum)
-     */
     var userID: String?
     var parkingID: String?
     var rating: Double?

@@ -11,41 +11,22 @@ import UIKit
 class AlertViewController: UIViewController {
 
     @IBOutlet weak var greenButton: GreenButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
+        setUpViewDidLoad()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
+    
 }
 
+// MARK: - ViewDidLoad
 extension AlertViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.greenButton.setUp(typeButton: .greenButton)
         greenButton.handleButton = {
             self._dismissVC()
         }
     }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
-    }
-
 }
 

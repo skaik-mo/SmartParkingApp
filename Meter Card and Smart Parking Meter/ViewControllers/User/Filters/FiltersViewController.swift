@@ -21,20 +21,13 @@ class FiltersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        setUpViewDidLoad()
     }
     
     @IBAction func searchAction(_ sender: Any) {
-        debugPrint("slider: \(slider.value._toDouble) || Date from \(selectDate.fromText) , to \(selectDate.toText) || Time from \(selectTime.fromText) , to \(selectTime.toText)")
         let filter = FilterModel.init(distance: slider.value._toDouble, fromDate: self.selectDate.fromText, toDate: self.selectDate.toText, fromTime: self.selectTime.fromText, toTime: self.selectTime.toText)
         self.completionHandler?(filter)
+        self._dismissTopToBottom()
         self._dismissVC()
     }
     
@@ -46,9 +39,10 @@ class FiltersViewController: UIViewController {
 
 }
 
+// MARK: - ViewDidLoad
 extension FiltersViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = "Filters"
         
         self.topView._roundCorners(isBottomLeft: true, isBottomRight: true, radius: 5)
@@ -56,19 +50,6 @@ extension FiltersViewController {
         self.selectTime.selectionType = .time
         
     }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
-    }
-
 }
 
 

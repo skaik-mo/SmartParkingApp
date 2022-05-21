@@ -34,34 +34,35 @@ class BookingDetailsViewController: UIViewController {
 
     var booking: BookingModel?
     var parking: ParkingModel?
-    var auth: AuthModel?
-    var typeAuth: TypeAuth = .User
+
+    private var auth: AuthModel?
+    private var sender: AuthModel?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setUpViewDidLoad()
         setupData()
-        fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self._setTitleBackBarButton()
+        setUpViewWillAppear()
     }
 
 }
 
+// MARK: - ViewDidLoad
 extension BookingDetailsViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
+        self.auth = AuthManager.shared.getLocalAuth()
+
         switchAuth()
 
         GoogleMapManager.initParkingLoction(parking: parking, mapView: mapView)
 
         self.ratingView.setUpRating(parking: parking, space: 12)
-
-        self.numberOfParking.typeParkingView = .fill
-        self.numberOfParking.title.text = "Spot"
 
         self.selectDate.selectionType = .date
         self.selectDate.title.text = "Date"
@@ -74,40 +75,48 @@ extension BookingDetailsViewController {
         self.checkStatus()
     }
 
-    func setupData() {
+    private func setupData() {
         ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
 
-        self.numberOfParking.selectedSpot(spot: self.booking?.spot)
+        if let _booking = self.booking {
+            self.numberOfParking.setUpNumberOfParking(typeSpotButton: .unselectedfill, title: "Spot", spots: self.parking?.spots, selectedSpot: booking?.spot)
 
-        self.selectDate.setData(from: self.booking?.fromDate, to: self.booking?.toDate)
+            self.selectDate.setData(from: _booking.fromDate, to: _booking.toDate)
 
-        self.selectTime.setData(from: self.booking?.fromTime, to: self.booking?.toTime)
-    }
+            self.selectTime.setData(from: _booking.fromTime, to: _booking.toTime)
+        } else {
+            self.numberOfParking.setUpNumberOfParking(typeSpotButton: .border, title: "Spot", spots: self.parking?.spots)
 
-    func fetchData() {
+            self.selectDate.setData(from: self.parking?.fromDate, to: self.parking?.toDate)
 
+            self.selectTime.setData(from: self.parking?.fromTime, to: self.parking?.toTime)
+        }
     }
 
 }
 
+// MARK: - ViewWillAppear
+extension BookingDetailsViewController {
+    
+    private func setUpViewWillAppear() {
+        self._setTitleBackBarButton()
+    }
+}
 
 extension BookingDetailsViewController {
 
     private func switchAuth() {
-        switch self.typeAuth {
+        switch self.auth?.typeAuth {
         case .User:
-            self.title = "Booking Details"
+            let  isFavorite = booking == nil && parking != nil
+            self.title = isFavorite ? "Parking Details" : "Booking Details"
 
             self.parkingStatusLabel.isHidden = false
             self.setTitleStatus()
 
-            if let _uid = self.parking?.uid {
-                AuthManager.shared.getAuth(id: _uid) { auth, message in
-                    if let _auth = auth {
-                        self.parkingOwnerView.setUpView(parking: self.parking, auth: _auth)
-                    }
-                }
-            }
+            self.parkingOwnerView.setUpView(parking: self.parking, senderID: self.parking?.uid)
+
+
             self.rejectButton.isHidden = true
 
             self.cancelOrAcceptButton.setUp(typeButton: .greenButton, corner: 10)
@@ -123,13 +132,11 @@ extension BookingDetailsViewController {
             self.title = "Order Details"
             self.parkingStatusLabel.isHidden = true
 
-            self.parkingOwnerView.setUpView(parking: self.parking, auth: auth)
+            self.parkingOwnerView.setUpView(parking: self.parking, senderID: self.booking?.userID)
 
             self.rejectButton.isHidden = false
             self.rejectButton.setUp(typeButton: .redButton, corner: 5)
             self.rejectButton.handleButton = {
-                // Reject Action
-                debugPrint("Reject Action")
                 self.setStatus(status: .Rejected)
             }
 
@@ -141,6 +148,8 @@ extension BookingDetailsViewController {
                 debugPrint("Accept Action")
                 self.setStatus(status: .Accepted)
             }
+        case .none:
+            self._pop()
         }
     }
 

@@ -7,17 +7,17 @@
 
 import Foundation
 import FirebaseFirestore
-import SVProgressHUD
 
-typealias ResultBookingHandler = ((_ bookings: [BookingModel], _ message: String?) -> Void)?
-typealias CheckHandler = ((_ status: Bool, _ message: String?) -> Void)?
-typealias ResultMyBookingHandler = ((_ bookings: [BookingModel], _ parkings: [ParkingModel], _ users: [AuthModel], _ message: String?) -> Void)?
 
 class BookingManager {
     static let shared = BookingManager()
 
     private let db = Firestore.firestore()
     private var bookingsFireStoreReference: CollectionReference?
+
+    typealias ResultBookingHandler = ((_ bookings: [BookingModel], _ message: String?) -> Void)?
+    typealias CheckHandler = ((_ status: Bool, _ message: String?) -> Void)?
+    typealias ResultMyBookingHandler = ((_ bookings: [BookingModel], _ parkings: [ParkingModel], _ users: [AuthModel], _ message: String?) -> Void)?
 
     private init() {
         self.bookingsFireStoreReference = db.collection("bookings")
@@ -88,7 +88,7 @@ class BookingManager {
     }
 
     func getBookingByUserID(userID: String?, isShowProgress: Bool = true, result: ResultMyBookingHandler) {
-        self.getBookings(isShowProgress: false) { bookings, message in
+        self.getBookings(isShowIndicator: false) { bookings, message in
             self.makeBookingCompleted(bookings: bookings)
             let _bookings = bookings.filter({ $0.userID == userID })
             var _parkings: [ParkingModel] = []
@@ -96,7 +96,7 @@ class BookingManager {
                 result?([], [], [], message)
                 return
             }
-            ParkingManager.shared.getParkings(isShowProgress: isShowProgress) { parkings, message in
+            ParkingManager.shared.getParkings(isShowIndicator: isShowProgress) { parkings, message in
                 if let _message = message {
                     result?([], [], [], _message)
                     return
@@ -123,7 +123,7 @@ class BookingManager {
                 result?([], [], [], message)
                 return
             }
-            ParkingManager.shared.getParkings(isShowProgress: false) { parkings, message in
+            ParkingManager.shared.getParkings(isShowIndicator: false) { parkings, message in
                 _bookings.forEach { booking in
                     parkings.forEach { parking in
                         if parking.id == booking.parkingID, !_parkings.contains(where: { $0.id == parking.id }) {
@@ -174,22 +174,18 @@ class BookingManager {
         }
     }
 
-    private func getBookings(isShowProgress: Bool = true, result: ResultBookingHandler) {
+    private func getBookings(isShowIndicator: Bool = true, result: ResultBookingHandler) {
         guard let _bookingsFireStoreReference = self.bookingsFireStoreReference else { result?([], "Server Error"); return }
-        if isShowProgress {
-            SVProgressHUD.showSVProgress()
-        }
+        Helper.showIndicator(isShowIndicator)
         _bookingsFireStoreReference.getDocuments { snapshot, error in
-            if isShowProgress {
-                SVProgressHUD.dismiss()
-            }
+            Helper.dismissIndicator(isShowIndicator)
             if let _error = error {
                 result?([], _error.localizedDescription)
                 return
             }
             var bookings: [BookingModel] = []
 
-            for booking in snapshot!.documents {
+            for booking in snapshot?.documents ?? [] {
                 if let _booking = BookingModel.init(id: booking.documentID, dictionary: booking.data()) {
                     bookings.append(_booking)
                 }

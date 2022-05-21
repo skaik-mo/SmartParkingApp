@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SKActivityIndicatorView
 
 class Helper {
 
@@ -44,4 +45,17 @@ class Helper {
         }
         return false
     }
+
+    class func showIndicator(_ isShowIndicator: Bool) {
+        if isShowIndicator {
+            SKActivityIndicator.showIndicator()
+        }
+    }
+
+    class func dismissIndicator(_ isShowIndicator: Bool) {
+        if isShowIndicator {
+            SKActivityIndicator.dismissIndicator()
+        }
+    }
+
 }

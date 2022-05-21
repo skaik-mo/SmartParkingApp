@@ -15,72 +15,76 @@ class HomeBusinessViewController: UIViewController {
 
     @IBOutlet weak var authImage: UIImageView!
 
-    var auth: AuthModel?
-    var bookings: [BookingModel] = []
-    var parkings: [ParkingModel] = []
-    var users: [AuthModel] = []
-
-    var isShowEmptyData: Bool = false
+    private var auth: AuthModel?
+    private var bookings: [BookingModel] = []
+    private var parkings: [ParkingModel] = []
+    private var users: [AuthModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
+        setUpViewDidLoad()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
+        setUpViewWillAppear()
         setImage()
         setupData()
     }
 
     @IBAction func profileAction(_ sender: Any) {
-        let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._authStoryboard)
-        vc.auth = auth
-        vc.backAuth = { auth in
-            self.auth = auth
-            self.setImage()
-        }
+        let vc: ProfileViewController = ProfileViewController._instantiateVC(storyboard: self._accountStoryboard)
+        vc._push()
+    }
+
+    @IBAction func notificationAction(_ sender: Any) {
+        let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
+        vc.typeView = .Notifications
         vc._push()
     }
 }
 
+// MARK: - ViewDidLoad
 extension HomeBusinessViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = "Home"
-
         setUpTable()
-    }
-
-    func localized() {
-
-    }
-
-    func setupData() {
-        BookingManager.shared.getBookingByBusinessID(businessID: self.auth?.id) { bookings, parkings, users, _ in
-            self.isShowEmptyData = parkings.isEmpty
-            self.homeTableView.reloadEmptyDataSet()
-            
-            self.parkings = parkings
-            self.bookings = bookings
-            self.users = users
-            self.homeTableView.reloadData()
-        }
-    }
-
-    func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
     }
 
 }
 
+// MARK: - ViewWillAppear
+extension HomeBusinessViewController {
+
+    private func setUpViewWillAppear() {
+        AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
+        auth = AuthManager.shared.getLocalAuth()
+    }
+    
+    private func setupData() {
+        BookingManager.shared.getBookingByBusinessID(businessID: self.auth?.id) { bookings, parkings, users, _ in
+            self.parkings = parkings
+            self.bookings = bookings
+            self.users = users
+            self.homeTableView.reloadData()
+            self.homeTableView.reloadEmptyDataSet()
+        }
+    }
+    
+    private func setImage() {
+        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
+    }
+    
+}
+
 extension HomeBusinessViewController: UITableViewDelegate, UITableViewDataSource {
+    
     private func setUpTable() {
         self.homeTableView._registerCell = HomeTableViewCell.self
         self.setUpEmptyDataView()
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.bookings.count
     }
@@ -97,9 +101,7 @@ extension HomeBusinessViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc: BookingDetailsViewController = BookingDetailsViewController._instantiateVC(storyboard: self._userStoryboard)
-        vc.typeAuth = .Business
         vc.booking = bookings[indexPath.row]
-        vc.auth = BookingManager.shared.getUser(booking: self.bookings[indexPath.row], users: self.users)
         vc.parking = BookingManager.shared.getParking(booking: self.bookings[indexPath.row], parkings: self.parkings)
         vc._push()
     }
@@ -108,13 +110,14 @@ extension HomeBusinessViewController: UITableViewDelegate, UITableViewDataSource
 
 
 extension HomeBusinessViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+    
     private func setUpEmptyDataView() {
         homeTableView.emptyDataSetSource = self
         homeTableView.emptyDataSetDelegate = self
     }
 
     func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
-        return self.isShowEmptyData
+        return self.bookings.isEmpty
     }
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
@@ -128,6 +131,6 @@ extension HomeBusinessViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         return NSAttributedString.init(string: "No Data Was Received", attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
     }
-    
+
 }
 

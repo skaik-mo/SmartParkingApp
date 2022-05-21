@@ -7,11 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
-import SVProgressHUD
-import GoogleMaps
 import SDWebImage
-
-typealias ResultParkingsHandler = ((_ parkings: [ParkingModel], _ message: String?) -> Void)?
 
 class ParkingManager {
     static let shared = ParkingManager()
@@ -19,15 +15,15 @@ class ParkingManager {
     private let db = Firestore.firestore()
     private var parkingsFireStoreReference: CollectionReference?
 
+    typealias ResultParkingsHandler = ((_ parkings: [ParkingModel], _ message: String?) -> Void)?
+
     private init() {
         self.parkingsFireStoreReference = db.collection("parkings")
     }
 
-    func setParking(isShowProgress: Bool = true, parking: ParkingModel, dataParking: Data?, dataParkLicense: Data?, failure: FailureHandler) {
+    func setParking(isShowIndicator: Bool = true, parking: ParkingModel, dataParking: Data?, dataParkLicense: Data?, failure: FailureHandler) {
         guard let _parkingsFireStoreReference = self.parkingsFireStoreReference, let _id = parking.id, let _name = parking.name else { return }
-        if isShowProgress {
-            SVProgressHUD.showSVProgress()
-        }
+        Helper.showIndicator(isShowIndicator)
         let pathParkingImage = "Parking/\(_id)/ParkingImage/\(_name).jpg"
         let pathParkLicense = "Parking/\(_id)/ParkLicense/\(_name).jpg"
         var data: [String: Data] = [:]
@@ -46,9 +42,7 @@ class ParkingManager {
                 }
             }
             _parkingsFireStoreReference.document(_id).setData(parking.getDictionary()) { error in
-                if isShowProgress {
-                    SVProgressHUD.dismiss()
-                }
+                Helper.dismissIndicator(isShowIndicator)
                 if let _error = error {
                     failure?(_error.localizedDescription)
                     return
@@ -59,15 +53,11 @@ class ParkingManager {
         }
     }
 
-    func getParkings(isShowProgress: Bool = true, filter: FilterModel? = nil, result: ResultParkingsHandler) {
+    func getParkings(isShowIndicator: Bool = true, filter: FilterModel? = nil, result: ResultParkingsHandler) {
         guard let _parkingsFireStoreReference = self.parkingsFireStoreReference else { result?([], "Server Error"); return }
-        if isShowProgress {
-            SVProgressHUD.showSVProgress()
-        }
+        Helper.showIndicator(isShowIndicator)
         _parkingsFireStoreReference.getDocuments { snapshot, error in
-            if isShowProgress {
-                SVProgressHUD.dismiss()
-            }
+            Helper.dismissIndicator(isShowIndicator)
             if let _error = error {
                 result?([], _error.localizedDescription)
                 return
@@ -75,10 +65,10 @@ class ParkingManager {
             var parkings: [ParkingModel] = []
             var parkingsFilters: [ParkingModel] = []
 
-            for parking in snapshot!.documents {
+            for parking in snapshot?.documents ?? [] {
                 if let _parking = ParkingModel.init(id: parking.documentID, dictionary: parking.data()) {
                     if let _filter = filter {
-                        if _filter.compareDistance(latitude: _parking.latitude, longitude: _parking.longitude), _filter.compareDate(fromDate: _parking.fromDate, toDate: _parking.toDate), _filter.compareTime(fromTime: _parking.fromTime, toTime: _parking.toTime) {
+                        if _filter.compareDistance(latitude: _parking.latitude, longitude: _parking.longitude) || _filter.compareDate(fromDate: _parking.fromDate, toDate: _parking.toDate) || _filter.compareTime(fromTime: _parking.fromTime, toTime: _parking.toTime) {
                             parkingsFilters.append(_parking)
                         }
                     }
@@ -131,7 +121,7 @@ class ParkingManager {
     func setRating(parking: ParkingModel?, rating: Double, failure: FailureHandler) {
         guard let _parking = parking else { failure?("Error"); return }
         _parking.rating = rating
-        self.setParking(isShowProgress: false, parking: _parking, dataParking: nil, dataParkLicense: nil) { errorMessage in
+        self.setParking(isShowIndicator: false, parking: _parking, dataParking: nil, dataParkLicense: nil) { errorMessage in
             failure?(errorMessage)
         }
     }

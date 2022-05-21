@@ -16,6 +16,8 @@ class ParkingOwner: UIView {
     @IBOutlet weak var nameParkingOwnerLabel: UILabel!
     @IBOutlet weak var addressParkingOwnerLabel: UILabel!
 
+    private var sender: AuthModel?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureXib()
@@ -38,12 +40,36 @@ class ParkingOwner: UIView {
         contentView.layoutIfNeeded()
     }
 
-    func setUpView(parking: ParkingModel?, auth: AuthModel?) {
-        if let _auth = auth, let _parking = parking, let _parkingAddress = _parking.address {
-            AuthManager.shared.setImage(authImage: self.parkingOwnerImage, urlImage: _auth.urlImage)
-            self.nameParkingOwnerLabel.text = _auth.name
-            self.addressParkingOwnerLabel.text = _parkingAddress
+    func setUpView(parking: ParkingModel?, senderID: String?) {
+        AuthManager.shared.getAuth(id: senderID) { auth, message in
+            self.sender = auth
+            if let _sender = self.sender, let _parking = parking, let _parkingAddress = _parking.address {
+                AuthManager.shared.setImage(authImage: self.parkingOwnerImage, urlImage: _sender.urlImage)
+                self.nameParkingOwnerLabel.text = _sender.name
+                self.addressParkingOwnerLabel.text = _parkingAddress
+            }
         }
     }
 
+
+    @IBAction func messageAction(_ sender: Any) {
+        let vc: MessageViewController = MessageViewController._instantiateVC(storyboard: self._accountStoryboard)
+        vc.sender = self.sender
+        vc._push()
+    }
+
+    @IBAction func callAction(_ sender: Any) {
+        if let phoneNumber = self.sender?.plateNumber {
+            self.callNumber(phoneNumber: phoneNumber)
+        }
+    }
+
+    private func callNumber(phoneNumber: String) {
+        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
+            let application: UIApplication = UIApplication.shared
+            if application.canOpenURL(phoneCallURL) {
+                application.open(phoneCallURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
 }

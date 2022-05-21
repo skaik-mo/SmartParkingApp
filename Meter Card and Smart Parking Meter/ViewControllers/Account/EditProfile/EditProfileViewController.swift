@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 class EditProfileViewController: UIViewController {
 
@@ -20,44 +19,28 @@ class EditProfileViewController: UIViewController {
 
     @IBOutlet weak var greenButton: GreenButton!
 
-    var isEnableButton: Bool = true {
-        didSet {
-            self.greenButton.greenButton.isEnabled = self.isEnableButton
-        }
-    }
-
     var typeAuth: TypeAuth = .User {
         didSet {
             switchTypeAuth()
         }
     }
+    
+    private var auth: AuthModel?
+    private var isAuthImage: Bool?
+    private var dataAuth: Data?
+    private var dataDrivingLicense: Data?
 
-    var isLoginBySocial: Bool = false {
-        didSet {
-            loginBySocial()
-        }
-    }
-
-    var auth: AuthModel?
-
-    var backAuth: ((_ auth: AuthModel?) -> Void)?
-
-    var isAuthImage: Bool?
-    var dataAuth: Data?
-    var dataDrivingLicense: Data?
-
-    var imagePicker = UIImagePickerController()
+    private var imagePicker = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
+        setUpViewDidLoad()
+        setUpData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self._setTitleBackBarButton()
+        setUpViewWillAppear()
         setImage()
     }
 
@@ -67,20 +50,19 @@ class EditProfileViewController: UIViewController {
 
 }
 
+// MARK: - ViewDidLoad
 extension EditProfileViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
         self.title = "Edit Profile"
 
-
+        self.auth = AuthManager.shared.getLocalAuth()
 
         if let _typeAuth = self.auth?.typeAuth {
             self.typeAuth = _typeAuth
         }
 
-        if let _isLoginBySocial = self.auth?.isLoginBySocial {
-            self.isLoginBySocial = _isLoginBySocial
-        }
+        loginBySocial()
 
         self.emailText.keyboardType = .emailAddress
         self.plateNumberText.keyboardType = .phonePad
@@ -100,22 +82,14 @@ extension EditProfileViewController {
 
     }
 
-    func localized() {
-
-    }
-
-    func setupData() {
+    private func setUpData() {
         if let _name = auth?.name, let _email = auth?.email, let _plateNumber = auth?.plateNumber {
             self.nameText.text = _name
             self.emailText.text = _email
             self.plateNumberText.text = _plateNumber
         }
     }
-
-    func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
-    }
-
+    
     private func switchTypeAuth() {
         switch self.typeAuth {
         case .User:
@@ -128,8 +102,22 @@ extension EditProfileViewController {
     }
 
     private func loginBySocial() {
-        self.nameText.isUserInteractionEnabled = !self.isLoginBySocial
-        self.emailText.isUserInteractionEnabled = !self.isLoginBySocial
+        let isLoginBySocial = self.auth?.isLoginBySocial ?? true
+        self.nameText.isUserInteractionEnabled = !isLoginBySocial
+        self.emailText.isUserInteractionEnabled = !isLoginBySocial
+    }
+
+}
+
+// MARK: - viewWillAppear
+extension EditProfileViewController {
+    
+    private func setUpViewWillAppear() {
+        self._setTitleBackBarButton()
+    }
+    
+    private func setImage() {
+        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
     }
 
 }
@@ -149,24 +137,23 @@ extension EditProfileViewController {
             self._showErrorAlert(message: "Enter plate number")
             return false
         }
+        self.setAuth()
         return true
     }
 
-    private func getAuth() -> AuthModel? {
-        guard self.checkData() else { return nil }
-        return .init(id: auth?.id, name: self.nameText.text, email: self.emailText.text, password: auth?.password, plateNumber: self.plateNumberText.text, typeAuth: auth?.typeAuth, urlImage: auth?.urlImage, urlLicense: auth?.urlLicense, isLoginBySocial: self.isLoginBySocial)
+    private func setAuth() {
+        auth?.name =  self.nameText.text
+        auth?.email =  self.emailText.text
+        auth?.plateNumber =  self.plateNumberText.text
     }
 
     private func save() {
-        guard let _auth = self.getAuth() else { return }
-        self.isEnableButton = false
-        AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: self.dataDrivingLicense, dataAuth: self.dataAuth) { errorMessage in
-            self.isEnableButton = true
+        guard self.checkData() else { return }
+        AuthManager.shared.setAuth(auth: self.auth, dataDrivingLicense: self.dataDrivingLicense, dataAuth: self.dataAuth) { errorMessage in
             if let _errorMessage = errorMessage {
                 self._showErrorAlert(message: _errorMessage)
                 return
             }
-            self.backAuth?(_auth)
             self._showAlertOKWithTitle(title: "Successful", message: "Your changes have been successfully saved!")
         }
     }
@@ -175,7 +162,7 @@ extension EditProfileViewController {
 
 extension EditProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
-    func addImage(isAuthImage: Bool) {
+    private func addImage(isAuthImage: Bool) {
         self.isAuthImage = isAuthImage
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
             imagePicker.delegate = self

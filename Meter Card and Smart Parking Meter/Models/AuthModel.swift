@@ -24,8 +24,8 @@ class AuthModel {
     var urlLicense: String?
     var isLoginBySocial: Bool = false
     var favouritedParkingsIDs: [String]
-    
-    init(id: String? = nil, name: String? = nil, email: String?, password: String? = nil, plateNumber: String? = nil, typeAuth: TypeAuth? = .none, urlImage: String? = nil, urlLicense: String? = nil, isLoginBySocial: Bool = false, favouritedParkingsIDs: [String] = []) {
+
+    init(id: String? = nil, name: String? = nil, email: String?, password: String? = nil, plateNumber: String? = nil, typeAuth: TypeAuth? = .none, urlImage: String? = nil, urlLicense: String? = nil, isLoginBySocial: Bool? = false, favouritedParkingsIDs: [String] = []) {
         self.id = id
         self.name = name
         self.email = email
@@ -34,11 +34,23 @@ class AuthModel {
         self.typeAuth = typeAuth
         self.urlImage = urlImage
         self.urlLicense = urlLicense
-        self.isLoginBySocial = isLoginBySocial
+        self.isLoginBySocial = isLoginBySocial ?? false
         self.favouritedParkingsIDs = favouritedParkingsIDs
     }
 
-    init?(id: String?, password: String? = nil, dictionary: [String: Any]?) {
+    convenience init(name: String?, email: String?, password: String?, plateNumber: String?, typeAuth: TypeAuth?) {
+        self.init(id: nil, name: name, email: email, password: password, plateNumber: plateNumber, typeAuth: typeAuth, urlImage: nil, urlLicense: nil, isLoginBySocial: false, favouritedParkingsIDs: [])
+    }
+
+    convenience init(id: String?, name: String?, email: String?, isLoginBySocial: Bool, urlImage: String?) {
+        self.init(id: id, name: name, email: email, password: nil, plateNumber: nil, typeAuth: .none, urlImage: urlImage, urlLicense: nil, isLoginBySocial: isLoginBySocial, favouritedParkingsIDs: [])
+    }
+
+    convenience init(email: String?, password: String?) {
+        self.init(id: nil, name: nil, email: email, password: password, plateNumber: nil, typeAuth: .none, urlImage: nil, urlLicense: nil, isLoginBySocial: false, favouritedParkingsIDs: [])
+    }
+
+    init?(id: String?, password: String? = nil, dictionary: [String: Any?]?) {
         guard let _dictionary = dictionary, let _id = id else { return nil }
         self.id = _id
         self.name = _dictionary["name"] as? String
@@ -48,12 +60,12 @@ class AuthModel {
         self.typeAuth = _dictionary["typeAuth"] as? Int == 0 ? .User : .Business
         self.urlImage = _dictionary["urlImage"] as? String
         self.urlLicense = _dictionary["urlLicense"] as? String
+        self.isLoginBySocial = _dictionary["isLoginBySocial"] as? Bool ?? false
         self.favouritedParkingsIDs = _dictionary["favouritedParkingsIDs"] as? [String] ?? []
     }
 
     func getDictionary() -> [String: Any] {
         let dictionary: [String: Any?] = [
-//            "id": self.id,
             "name": self.name,
             "email": self.email,
             "password": self.password,
@@ -62,6 +74,7 @@ class AuthModel {
             "urlImage": self.urlImage,
             "urlLicense": self.urlLicense,
             "favouritedParkingsIDs": self.favouritedParkingsIDs,
+            "isLoginBySocial": self.isLoginBySocial,
         ]
         return dictionary as [String: Any]
     }

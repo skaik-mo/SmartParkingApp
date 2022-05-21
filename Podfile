@@ -21,7 +21,7 @@ pod 'Firebase/Storage'
 
 pod 'FBSDKLoginKit'
 
-pod 'SVProgressHUD'
+pod 'SKActivityIndicatorView', '~> 1.0.0'
 pod 'SDWebImage', '5.0'
 pod 'EmptyDataSet-Swift', '~> 5.0.0'
 end

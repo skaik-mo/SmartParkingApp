@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum TypeSpotButton {
+    case border
+    case selectedFill
+    case unselectedfill
+    case grayWithBorder
+}
+
 class NumberOfParking: UIView {
 
     @IBOutlet weak var contentView: UIView!
@@ -16,29 +23,12 @@ class NumberOfParking: UIView {
 
     @IBOutlet weak var numberOfParkingText: UITextField!
 
-    @IBOutlet weak var numberOfParkingStack: UIStackView!
-
-    @IBOutlet weak var p1Button: UIButton!
-    @IBOutlet weak var p2Button: UIButton!
-    @IBOutlet weak var p3Button: UIButton!
-    @IBOutlet weak var p4Button: UIButton!
-    @IBOutlet weak var p5Button: UIButton!
-    @IBOutlet weak var p6Button: UIButton!
-    @IBOutlet weak var p7Button: UIButton!
+    @IBOutlet weak var spotsCollectionView: UICollectionView!
 
     var selectedSpot: Int?
+    private var numberOfSpots: Int = 1
 
-    enum TypeParkingView {
-        case border
-        case fill
-        case grayWithBorder
-    }
-
-    var typeParkingView: TypeParkingView = .border {
-        didSet {
-            switchTypeParkingView()
-        }
-    }
+    private var typeSpotButton: TypeSpotButton = .border
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,150 +51,81 @@ class NumberOfParking: UIView {
         contentView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         contentView.layoutIfNeeded()
 
-    }
+        self.setUpCollectionView()
 
-    @IBAction func p1Action(_ sender: UIButton) {
-        selectedAction(button: sender)
-        selectedSpot = 1
-    }
-
-    @IBAction func p2Action(_ sender: UIButton) {
-        selectedAction(button: sender)
-        selectedSpot = 2
-    }
-
-    @IBAction func p3Action(_ sender: UIButton) {
-        selectedAction(button: sender)
-        selectedSpot = 3
-    }
-
-    @IBAction func p4Action(_ sender: UIButton) {
-        selectedAction(button: sender)
-        selectedSpot = 4
-    }
-
-    @IBAction func p5Action(_ sender: UIButton) {
-        selectedAction(button: sender)
-        selectedSpot = 5
-    }
-
-    @IBAction func p6Action(_ sender: UIButton) {
-        selectedAction(button: sender)
-        selectedSpot = 6
-    }
-
-    @IBAction func p7Action(_ sender: UIButton) {
-        selectedAction(button: sender)
-        selectedSpot = 7
     }
 
     @IBAction func addSpotParking(_ sender: Any) {
-//        self.numberOfParking()
+        self.addSpots()
     }
 
 }
 
+extension NumberOfParking: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func setUpNumberOfParking(typeSpotButton: TypeSpotButton, title: String, spots: Int?, selectedSpot: Int? = nil) {
+        self.typeSpotButton = typeSpotButton
+        self.title.text = title
+        if let _spots = spots {
+            self.numberOfSpots = _spots
+        }
+        if self.typeSpotButton == .unselectedfill, let spot = selectedSpot {
+            DispatchQueue.main.async {
+                self.spotsCollectionView.delegate?.collectionView?(self.spotsCollectionView, didSelectItemAt: IndexPath.init(item: spot, section: 0))
+            }
+
+        }
+    }
+
+    private func setUpCollectionView() {
+        self.spotsCollectionView._registerCell = SpotCollectionViewCell.self
+        // Why isn't dataSource working in the storyboard
+        spotsCollectionView.dataSource = self
+        spotsCollectionView.delegate = self
+        self.addSpots()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.numberOfSpots
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: SpotCollectionViewCell = self.spotsCollectionView._dequeueReusableCell(for: indexPath)
+        cell.numberOfSpot = indexPath.row
+        cell.typeSpotButton = self.typeSpotButton
+        cell.configerCell()
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if self.selectedSpot != indexPath.row {
+            if let cell = self.spotsCollectionView.cellForItem(at: indexPath) as? SpotCollectionViewCell, (cell.typeSpotButton == .selectedFill || cell.typeSpotButton == .unselectedfill) {
+                cell.selectedAction()
+            }
+            if let selected = self.selectedSpot, let cell = self.spotsCollectionView.cellForItem(at: IndexPath.init(item: selected, section: 0)) as? SpotCollectionViewCell, cell.typeSpotButton == .selectedFill {
+                cell.unSelectedAction()
+            }
+            self.selectedSpot = indexPath.row
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = 40
+        let width = height
+        return CGSize.init(width: width, height: height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 9
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+    }
+}
+
+
 extension NumberOfParking {
-
-//    private func numberOfParking() {
-//        let count = self.numberOfParkingText._getText._toInteger ?? 0
-//        if count != 0 {
-//            for i in 1..<count {
-//                let bu = UIButton.init(frame: self.p1Button.frame)
-//                bu.setTitle("P\(i + 1)", for: .normal)
-//                bu.backgroundColor = .yellow
-//                numberOfParkingStack.addArrangedSubview(bu)
-//                self.numberOfParkingStack.distribution = UIStackView.Distribution.fillEqually
-//
-//            }
-//        }
-//    }
-
-    private func switchTypeParkingView() {
-
-        switch self.typeParkingView {
-        case .border:
-            setBorderColor(color: "3FBF66"._hexColor)
-            setBackgroundColor(backgroundColor: .clear, tintColor: .black)
-            setEnable(isEnable: false)
-        case .fill:
-            setBorderColor(color: .clear)
-            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor: .black)
-            setEnable(isEnable: true)
-        case .grayWithBorder:
-            setBorderColor(color: "ECECEC"._hexColor)
-            setBackgroundColor(backgroundColor: .clear, tintColor: "929292"._hexColor)
-            setEnable(isEnable: false)
-        }
-
-    }
-
-    private func setBorderColor(color: UIColor) {
-        self.p1Button.borderColor = color
-        self.p2Button.borderColor = color
-        self.p3Button.borderColor = color
-        self.p4Button.borderColor = color
-        self.p5Button.borderColor = color
-        self.p6Button.borderColor = color
-        self.p7Button.borderColor = color
-
-    }
-
-    private func setBackgroundColor(backgroundColor: UIColor, tintColor: UIColor) {
-        self.p1Button.backgroundColor = backgroundColor
-        self.p1Button.tintColor = tintColor
-
-        self.p2Button.backgroundColor = backgroundColor
-        self.p2Button.tintColor = tintColor
-
-        self.p3Button.backgroundColor = backgroundColor
-        self.p3Button.tintColor = tintColor
-
-        self.p4Button.backgroundColor = backgroundColor
-        self.p4Button.tintColor = tintColor
-
-        self.p5Button.backgroundColor = backgroundColor
-        self.p5Button.tintColor = tintColor
-
-        self.p6Button.backgroundColor = backgroundColor
-        self.p6Button.tintColor = tintColor
-
-        self.p7Button.backgroundColor = backgroundColor
-        self.p7Button.tintColor = tintColor
-    }
-
-    private func selectedAction(button: UIButton) {
-        if typeParkingView == .fill {
-            setBackgroundColor(backgroundColor: "E5E5E5"._hexColor, tintColor: .black)
-            button.backgroundColor = "3FBF66"._hexColor
-            button.tintColor = .white
-        }
-    }
-
-    func selectedSpot(spot: Int?) {
-        guard let _spot = spot else { return }
-        if spot == 1 {
-            selectedAction(button: self.p1Button)
-        } else if spot == 2 {
-            selectedAction(button: self.p2Button)
-
-        } else if spot == 3 {
-            selectedAction(button: self.p3Button)
-
-        } else if spot == 4 {
-            selectedAction(button: self.p4Button)
-
-        } else if spot == 5 {
-            selectedAction(button: self.p5Button)
-
-        } else if spot == 6 {
-            selectedAction(button: self.p6Button)
-
-        } else if spot == 7 {
-            selectedAction(button: self.p7Button)
-        }
-        self.setEnable(isEnable: false)
-    }
 
     func checkNumberOfParkig() -> String? {
         if !self.numberOfParkingText.isHidden {
@@ -215,14 +136,10 @@ extension NumberOfParking {
         return nil
     }
 
-    private func setEnable(isEnable: Bool) {
-        p1Button.isUserInteractionEnabled = isEnable
-        p2Button.isUserInteractionEnabled = isEnable
-        p3Button.isUserInteractionEnabled = isEnable
-        p4Button.isUserInteractionEnabled = isEnable
-        p5Button.isUserInteractionEnabled = isEnable
-        p6Button.isUserInteractionEnabled = isEnable
-        p7Button.isUserInteractionEnabled = isEnable
+    private func addSpots() {
+        if let number = numberOfParkingText.text?._toInteger {
+            self.numberOfSpots = number
+            self.spotsCollectionView.reloadData()
+        }
     }
-
 }

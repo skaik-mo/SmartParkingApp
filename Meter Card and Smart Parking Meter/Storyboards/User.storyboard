@@ -346,7 +346,7 @@
                                 <rect key="frame" x="20" y="5.5" width="83" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demo" translatesAutoresizingMaskIntoConstraints="NO" id="hoR-Kb-f5a">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholderPerson" translatesAutoresizingMaskIntoConstraints="NO" id="hoR-Kb-f5a">
                                         <rect key="frame" x="0.0" y="1.5" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hoR-Kb-f5a" secondAttribute="height" multiplier="1:1" id="3hD-XC-Cct"/>
@@ -383,6 +383,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="ic_notifs"/>
+                                <connections>
+                                    <action selector="notificationAction:" destination="WZA-LM-PB5" eventType="touchUpInside" id="9Qx-ud-dd9"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -454,7 +457,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5wE-Yb-gw1">
                                                         <rect key="frame" x="0.0" y="287" width="375" height="810"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="A0S-9w-BMD">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderParking" translatesAutoresizingMaskIntoConstraints="NO" id="A0S-9w-BMD">
                                                                 <rect key="frame" x="20" y="4" width="335" height="160"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="160" id="Wqn-kw-rRa"/>
@@ -1112,7 +1115,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xeO-XG-V8Q">
                                                         <rect key="frame" x="0.0" y="287" width="375" height="535"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="SFi-nI-QUI">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderParking" translatesAutoresizingMaskIntoConstraints="NO" id="SFi-nI-QUI">
                                                                 <rect key="frame" x="20" y="4" width="335" height="160"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="160" id="hjJ-oU-Hzs"/>
@@ -1403,19 +1406,19 @@
         </scene>
     </scenes>
     <resources>
-        <image name="demo" width="1280" height="1280"/>
         <image name="ic_Star" width="23" height="22"/>
         <image name="ic_StarSelected" width="21" height="20"/>
         <image name="ic_filter" width="15" height="15"/>
-        <image name="ic_image" width="1005" height="480"/>
         <image name="ic_location" width="54" height="54"/>
         <image name="ic_nextArrow" width="22" height="22"/>
         <image name="ic_notifs" width="17" height="18"/>
+        <image name="ic_placeholderPerson" width="95" height="95"/>
         <image name="ic_previousArrow" width="22" height="22"/>
         <image name="ic_rating" width="18" height="18"/>
         <image name="ic_selectedRating" width="16" height="16"/>
         <image name="ic_shadowMap" width="375" height="287"/>
         <image name="ic_topShadow" width="375" height="174"/>
+        <image name="placeholderParking" width="1170" height="570"/>
         <namedColor name="000000">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

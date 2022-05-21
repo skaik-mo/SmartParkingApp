@@ -34,9 +34,9 @@ class SpotDetailsViewController: UIViewController {
     @IBOutlet weak var durationLabel: UILabel!
 
     var parking: ParkingModel?
-    var auth: AuthModel?
 
-    var selectedDates: [String] = []
+    private var auth: AuthModel?
+    private var selectedDates: [String] = []
 
     private var typeAuth: TypeAuth = .User {
         didSet {
@@ -46,22 +46,16 @@ class SpotDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        localized()
-        setupData()
-        fetchData()
+        setUpViewDidLoad()
         setImage()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        self._isHideNavigation = false
-        self._setTitleBackBarButton()
+        setUpViewWillAppear()
     }
 
     @IBAction func previousMonthAction(_ sender: Any) {
-//            calenderCollectionView.moveSection(_currentSection, toSection: _currentSection - 1)
         guard let _currentSection = self.calenderCollectionView.currentSection(), 0 < _currentSection else { return }
         moveSection(index: -1)
     }
@@ -75,12 +69,15 @@ class SpotDetailsViewController: UIViewController {
         setFavourite()
     }
 
-
 }
 
+// MARK: - ViewDidLoad
 extension SpotDetailsViewController {
 
-    func setupView() {
+    private func setUpViewDidLoad() {
+        GoogleMapManager.initParkingLoction(parking: parking, mapView: mapView)
+
+        self.auth = AuthManager.shared.getLocalAuth()
 
         if let _typeAuth = self.auth?.typeAuth {
             self.typeAuth = _typeAuth
@@ -94,64 +91,50 @@ extension SpotDetailsViewController {
 
         if let fromTime = self.parking?.fromTime, let toTime = self.parking?.toTime {
             self.timeLabel.text = "Time: \(fromTime) - \(toTime)"
-
-            let oldDate = fromTime._toTime
-            let newDate = toTime._toTime
-            if let _oldDate = oldDate, let _newDate = newDate {
-//                let elapsedTime = _newDate.timeIntervalSince(_oldDate)
-//                let hours = Int(elapsedTime / 60 / 60)
-//                let minutes = Int((Int(elapsedTime) - (hours * 60 * 60)) / 60)
+            if let _oldDate = fromTime._toTime, let _newDate = toTime._toTime {
                 let diffInMins = Calendar.current.dateComponents([.hour], from: _oldDate, to: _newDate).hour
                 self.durationLabel.text = "Duration: \(diffInMins ?? 0) hours per day"
             }
         }
 
-        GoogleMapManager.initParkingLoction(parking: parking, mapView: mapView)
-        if let _uid = self.parking?.uid {
-            AuthManager.shared.getAuth(id: _uid) { auth, message in
-                if let _auth = auth {
-                    self.parkingOwnerView.setUpView(parking: self.parking, auth: _auth)
-                }
-            }
-        }
-        setInfoParking()
-        numberOfParking.typeParkingView = .border
-        numberOfParking.title.text = "Available Spot"
+        self.parkingOwnerView.setUpView(parking: self.parking, senderID: self.parking?.uid)
+
+        self.setInfoParking()
+
+        self.numberOfParking.setUpNumberOfParking(typeSpotButton: .border, title: "Available Spot", spots: self.parking?.spots)
+
         self.ratingView.setUpRating(parking: parking, space: 12)
-        setCalenderCollectionView()
+
+        self.setCalenderCollectionView()
 
         self.bookNowButton.setUp(typeButton: .grayButton, corner: 8)
         self.bookNowButton.handleButton = {
             let vc: SubmitBookingViewController = SubmitBookingViewController._instantiateVC(storyboard: self._userStoryboard)
             vc.parking = self.parking
-            vc.auth = AuthManager.shared.getLocalAuth()
             vc._presentVC()
         }
 
         self.checkRating()
     }
 
-    func localized() {
-
-    }
-
-    func setupData() {
-
-    }
-
-    func fetchData() {
-
-    }
-
-    func setImage() {
+    private func setImage() {
         ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
     }
 
 }
 
+// MARK: - ViewWillAppear
+extension SpotDetailsViewController {
+
+    private func setUpViewWillAppear() {
+        self._isHideNavigation = false
+        self._setTitleBackBarButton()
+    }
+
+}
 
 extension SpotDetailsViewController {
-    func setInfoParking() {
+    private func setInfoParking() {
         ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
         setInfo(parking: parking)
     }
@@ -164,7 +147,7 @@ extension SpotDetailsViewController {
         self.pricePerHourLabel.text = price
     }
 
-    func setFavourite() {
+    private func setFavourite() {
         self.favouriteButton.isSelected.toggle()
         AuthManager.shared.setFavourite(parkingID: parking?.id, isFavourite: self.favouriteButton.isSelected) { errorMessage in
             if let _errorMessage = errorMessage {
@@ -174,13 +157,12 @@ extension SpotDetailsViewController {
     }
 
     // Check if the user has rated
-    func checkRating() {
+    private func checkRating() {
         RatingManager.shared.checkRating(userID: self.auth?.id) { isRating in
             if !isRating {
                 BookingManager.shared.getBookingByUserID(userID: self.auth?.id, isShowProgress: false) { bookings, parkings, users, message in
                     if bookings.contains(where: { ($0.parkingID == self.parking?.id && $0.status == .Completed) }) {
                         let vc: RatingViewController = RatingViewController._instantiateVC(storyboard: self._userStoryboard)
-                        vc.auth = self.auth
                         vc.parking = self.parking
                         vc._presentVC()
                     }
@@ -210,19 +192,19 @@ extension SpotDetailsViewController {
 }
 
 extension SpotDetailsViewController {
-    func setCalenderCollectionView() {
+    private func setCalenderCollectionView() {
         self.calenderCollectionView._registerCell = DateCell.self
         calenderCollectionView.scrollDirection = .horizontal
         calenderCollectionView.scrollingMode = .stopAtEachCalendarFrame
         calenderCollectionView.showsHorizontalScrollIndicator = false
 
         // Is this method correct to use ??!
-        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+        DispatchQueue.main.async {
             self.moveSection(index: self.calenderCollectionView.numberOfSections - 1)
         }
     }
 
-    func setTitleCalender(date: Date?) {
+    private func setTitleCalender(date: Date?) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         guard let _date = date, let _stringData = formatter.date(from: _date._stringData) else { return }
@@ -235,7 +217,7 @@ extension SpotDetailsViewController {
         self.monthTitle.text = "\(monthName) \(year)"
     }
 
-    func moveSection(index: Int) {
+    private func moveSection(index: Int) {
         let visibleItems: NSArray = self.calenderCollectionView.indexPathsForVisibleItems as NSArray
         let currentItem = visibleItems.object(at: 0) as? IndexPath
         if let _currentSection = currentItem?.section {
@@ -255,8 +237,6 @@ extension SpotDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCalen
         cell.cellState = cellState
         cell.selectedDates = selectedDates
         cell.configerCell()
-//        self.calendar(calendar, didScrollToDateSegmentWith: calendar.visibleDates())
-//        self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
         self.calendarDidScroll(calenderCollectionView)
 
         return cell
