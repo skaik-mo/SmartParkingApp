@@ -225,7 +225,7 @@ extension SignUpViewController: UINavigationControllerDelegate, UIImagePickerCon
 
         })
         let drivingLicenseImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        if let _data = drivingLicenseImage?.pngData() {
+        if let _data = drivingLicenseImage?.jpeg(.low) {
             self.drivingLicenseText.isSelectedText = true
             self.data = _data
         }

@@ -47,7 +47,7 @@ class BookingManager {
     }
 
     func isBookingTimeExpired(userID: String?, result: ((_ getExpiryTime: Int?) -> Void)?) {
-        self.getBookingByUserID(userID: userID, isShowProgress: false) { bookings, parkings, users, message in
+        self.getBookingByUserID(userID: userID, isShowIndicator: false) { bookings, parkings, users, message in
             let bookingsAccepted = bookings.filter({ ($0.status == .Accepted) && $0.toDate == Date()._stringData })
             var expiryTime: Int?
             bookingsAccepted.forEach { booking in
@@ -87,7 +87,7 @@ class BookingManager {
         }
     }
 
-    func getBookingByUserID(userID: String?, isShowProgress: Bool = true, result: ResultMyBookingHandler) {
+    func getBookingByUserID(userID: String?, isShowIndicator: Bool = true, result: ResultMyBookingHandler) {
         self.getBookings(isShowIndicator: false) { bookings, message in
             self.makeBookingCompleted(bookings: bookings)
             let _bookings = bookings.filter({ $0.userID == userID })
@@ -96,7 +96,7 @@ class BookingManager {
                 result?([], [], [], message)
                 return
             }
-            ParkingManager.shared.getParkings(isShowIndicator: isShowProgress) { parkings, message in
+            ParkingManager.shared.getParkings(isShowIndicator: isShowIndicator) { parkings, message in
                 if let _message = message {
                     result?([], [], [], _message)
                     return
@@ -113,8 +113,8 @@ class BookingManager {
         }
     }
 
-    func getBookingByBusinessID(businessID: String?, result: ResultMyBookingHandler) {
-        self.getBookings { bookings, message in
+    func getBookingByBusinessID(isShowIndicator: Bool = true, businessID: String?, result: ResultMyBookingHandler) {
+        self.getBookings(isShowIndicator: isShowIndicator) { bookings, message in
             self.makeBookingCompleted(bookings: bookings)
             var users: [AuthModel] = []
             let _bookings = bookings.filter({ $0.businessID == businessID })

@@ -26,6 +26,7 @@ class ParkingModel {
     var latitude: Double?
     var longitude: Double?
     var isPerDay: Bool?
+    var distance: Double = 0
 
     init(uid: String?, name: String?, parkingImageURL: String? = nil, parkLicenseimageURL: String? = nil, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, rating: Double? = nil, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
         self.uid = uid
@@ -43,12 +44,8 @@ class ParkingModel {
         self.latitude = latitude
         self.longitude = longitude
         self.isPerDay = isPerDay
-
-        if let _latitude = latitude, let _longitude = longitude {
-            GoogleMapManager.getPlaceAddressFrom(location: CLLocationCoordinate2D.init(latitude: _latitude, longitude: _longitude), completion: { address in
-                    self.address = address
-                })
-        }
+        self.setDistance()
+        self.setAddress()
     }
 
     convenience init(uid: String?, name: String?, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
@@ -73,6 +70,7 @@ class ParkingModel {
         self.longitude = _dictionary["longitude"] as? Double
         self.address = _dictionary["address"] as? String
         self.isPerDay = (_dictionary["isPerDay"] as? Int) == 0 ? true : false
+        self.setDistance()
     }
 
     func getDictionary() -> [String: Any] {
@@ -121,5 +119,21 @@ class ParkingModel {
             return (true, nil)
         }
     }
+    
+    private func setDistance() {
+        if let _latitude = self.latitude, let _longitude = self.longitude {
+            let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)
+            self.distance = GoogleMapManager.getDistance(toLocation: toLocation)
+        }
+    }
+    
+    private func setAddress() {
+        if let _latitude = latitude, let _longitude = longitude {
+            GoogleMapManager.getPlaceAddressFrom(location: CLLocationCoordinate2D.init(latitude: _latitude, longitude: _longitude), completion: { address in
+                    self.address = address
+                })
+        }
+    }
+    
 }
 

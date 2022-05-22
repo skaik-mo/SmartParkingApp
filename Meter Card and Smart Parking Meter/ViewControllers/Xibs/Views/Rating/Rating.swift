@@ -74,11 +74,9 @@ extension Rating {
     }
 
     private func setDistance(parking: ParkingModel?, isWithDistance: Bool) {
-        if let _latitude = parking?.latitude, let _longitude = parking?.longitude, isWithDistance {
+        if let _distance = parking?.distance, isWithDistance {
             self.middleView.isHidden = false
-            let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)
-            let distance = GoogleMapManager.getDistance(toLocation: toLocation)
-            self.distanceLabel.text = "\(distance._toString(number: 2))km Nearby"
+            self.distanceLabel.text = "\(_distance._toString(number: 2))km Nearby"
             return
         }
         self.middleView.isHidden = true

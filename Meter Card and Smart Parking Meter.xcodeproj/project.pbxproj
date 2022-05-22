@@ -29,6 +29,7 @@
 		E737110027EF572500D6FAC4 /* AddParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73710FF27EF572500D6FAC4 /* AddParkingViewController.swift */; };
 		E73CFBCA27E8A4DA000D03FE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73CFBC927E8A4DA000D03FE /* AlertViewController.swift */; };
 		E73CFBCD27E8A6A1000D03FE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73CFBCC27E8A6A1000D03FE /* ProfileViewController.swift */; };
+		E74391E7283ADBC700C0FDC8 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74391E6283ADBC700C0FDC8 /* UIImage.swift */; };
 		E7539B0428385E8F00DD3988 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7539B0328385E8F00DD3988 /* GlobalConstants.swift */; };
 		E7539B072838622A00DD3988 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7539B062838622A00DD3988 /* Account.storyboard */; };
 		E758B45427DF7345008931AD /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = E758B45327DF7345008931AD /* Float.swift */; };
@@ -57,7 +58,7 @@
 		E77F5FE327E0AFFD009B1AA2 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F5FE227E0AFFD009B1AA2 /* UICollectionView.swift */; };
 		E780C1112806E3930044E955 /* ParkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E780C1102806E3930044E955 /* ParkingManager.swift */; };
 		E780C1152806F13C0044E955 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */; };
-		E78AA32D2835203B00460654 /* SKActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AA32C2835203B00460654 /* SKActivityIndicator.swift */; };
+		E78AA32D2835203B00460654 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AA32C2835203B00460654 /* ActivityIndicator.swift */; };
 		E79A75B627E8DC7E005AAC92 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79A75B427E8DC7E005AAC92 /* ProfileButton.swift */; };
 		E79A75B727E8DC7E005AAC92 /* ProfileButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = E79A75B527E8DC7E005AAC92 /* ProfileButton.xib */; };
 		E79EA15E2822D9250018B596 /* BookingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79EA15D2822D9250018B596 /* BookingModel.swift */; };
@@ -153,6 +154,7 @@
 		E73710FF27EF572500D6FAC4 /* AddParkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParkingViewController.swift; sourceTree = "<group>"; };
 		E73CFBC927E8A4DA000D03FE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		E73CFBCC27E8A6A1000D03FE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E74391E6283ADBC700C0FDC8 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		E7539B0328385E8F00DD3988 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		E7539B062838622A00DD3988 /* Account.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		E758B45327DF7345008931AD /* Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
@@ -181,7 +183,7 @@
 		E77F5FE227E0AFFD009B1AA2 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		E780C1102806E3930044E955 /* ParkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingManager.swift; sourceTree = "<group>"; };
 		E780C1142806F13C0044E955 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
-		E78AA32C2835203B00460654 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
+		E78AA32C2835203B00460654 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		E79A75B427E8DC7E005AAC92 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		E79A75B527E8DC7E005AAC92 /* ProfileButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileButton.xib; sourceTree = "<group>"; };
 		E79EA15D2822D9250018B596 /* BookingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingModel.swift; sourceTree = "<group>"; };
@@ -688,7 +690,8 @@
 				E7CF568C27E9B16D001997CA /* UIKitHelpers.swift */,
 				E7CF569127E9B361001997CA /* UITableView.swift */,
 				E774641B2800CB3A0009EDAB /* Integer.swift */,
-				E78AA32C2835203B00460654 /* SKActivityIndicator.swift */,
+				E78AA32C2835203B00460654 /* ActivityIndicator.swift */,
+				E74391E6283ADBC700C0FDC8 /* UIImage.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -1032,7 +1035,7 @@
 				E722DFE127EB282800CD2C60 /* EditProfileViewController.swift in Sources */,
 				E73CFBCA27E8A4DA000D03FE /* AlertViewController.swift in Sources */,
 				E7A1847527DC314400D0921E /* HomeUserViewController.swift in Sources */,
-				E78AA32D2835203B00460654 /* SKActivityIndicator.swift in Sources */,
+				E78AA32D2835203B00460654 /* ActivityIndicator.swift in Sources */,
 				E77353CA27EB842C0065D34B /* UIViewEXForDatePicker.swift in Sources */,
 				E77F5FCD27E07E60009B1AA2 /* ParkingModel.swift in Sources */,
 				E776E24C27F87DBC00693300 /* AuthModel.swift in Sources */,
@@ -1074,6 +1077,7 @@
 				E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */,
 				E7BFE01427D604E800F80180 /* UIButton.swift in Sources */,
 				E720808227F1ADF600CBB775 /* ReceiverMessageTableViewCell.swift in Sources */,
+				E74391E7283ADBC700C0FDC8 /* UIImage.swift in Sources */,
 				E780C1112806E3930044E955 /* ParkingManager.swift in Sources */,
 				E71A6356282BDA8300EAD474 /* RatingModel.swift in Sources */,
 				E7BFE00A27D6026200F80180 /* UIResponder.swift in Sources */,

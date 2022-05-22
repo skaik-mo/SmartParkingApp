@@ -174,7 +174,7 @@ extension EditProfileViewController: UINavigationControllerDelegate, UIImagePick
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         self._dismissVC()
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        if let _data = image?.pngData() {
+        if let _data = image?.jpeg(.low) {
             if self.isAuthImage == true {
                 self.authImage.image = image
                 self.dataAuth = _data

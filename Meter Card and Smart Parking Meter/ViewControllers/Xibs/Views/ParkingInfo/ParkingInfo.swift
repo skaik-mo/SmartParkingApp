@@ -20,7 +20,7 @@ class ParkingInfo: UIView {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var perHourLabel: UILabel!
-    
+
     @IBOutlet weak var bookNowButton: GreenButton!
 
     override init(frame: CGRect) {
@@ -48,7 +48,7 @@ class ParkingInfo: UIView {
 }
 
 extension ParkingInfo {
-    
+
     func setUpView(parking: ParkingModel?) {
         ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
         self.bookNowButton.setUp(typeButton: .grayButton, corner: 8)
@@ -57,11 +57,11 @@ extension ParkingInfo {
             vc.parking = parking
             vc._push()
         }
-        
+
         self.ratingView.setUpRating(parking: parking, isWithDistance: false)
         guard let _parking = parking else { return }
         setInfo(parking: _parking)
-        setDistance(parking: _parking)
+        self.distanceLabel.text = "\(_parking.distance._toString(number: 2))km"
 
     }
 
@@ -69,14 +69,6 @@ extension ParkingInfo {
         if let _price = parking.price {
             self.perHourLabel.text = "Park Booking \(_price)$ Per \(parking.isPerDay ?? false ? "Day" : "Hour")"
             self.addressLabel.text = parking.address == nil ? "No Address" : parking.address
-        }
-    }
-
-    private func setDistance(parking: ParkingModel) {
-        if let _latitude = parking.latitude, let _longitude = parking.longitude {
-            let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)
-            let distance = GoogleMapManager.getDistance(toLocation: toLocation)
-            self.distanceLabel.text = "\(distance._toString(number: 2))km"
         }
     }
 }

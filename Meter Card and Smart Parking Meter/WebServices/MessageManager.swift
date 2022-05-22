@@ -55,10 +55,11 @@ class MessageManager {
         }
     }
 
-    func getAllMessagesToAuth(senderID: String?, result: ResultMessagesHandler) {
+    func getAllMessagesToAuth(isShowIndicator: Bool, senderID: String?, result: ResultMessagesHandler) {
         guard let _messagesFireStoreReference = self.messagesFireStoreReference else { result?([], "Server Error"); return }
-
+        Helper.showIndicator(isShowIndicator)
         _messagesFireStoreReference.getDocuments { snapshot, error in
+            Helper.dismissIndicator(isShowIndicator)
             if let _error = error {
                 result?([], _error.localizedDescription)
                 return

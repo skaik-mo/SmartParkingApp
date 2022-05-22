@@ -15,10 +15,13 @@ class HomeBusinessViewController: UIViewController {
 
     @IBOutlet weak var authImage: UIImageView!
 
+    private let refreshControl = UIRefreshControl.init()
+
     private var auth: AuthModel?
     private var bookings: [BookingModel] = []
     private var parkings: [ParkingModel] = []
     private var users: [AuthModel] = []
+    private var isEmptyData = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,7 @@ class HomeBusinessViewController: UIViewController {
         super.viewWillAppear(animated)
         setUpViewWillAppear()
         setImage()
-        setupData()
+        fetchData(isShowIndicator: true)
     }
 
     @IBAction func profileAction(_ sender: Any) {
@@ -61,30 +64,50 @@ extension HomeBusinessViewController {
         AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
         auth = AuthManager.shared.getLocalAuth()
     }
-    
-    private func setupData() {
+
+    private func fetchData(isShowIndicator: Bool, handlerDidFinishRequest: (() -> Void)? = nil) {
         BookingManager.shared.getBookingByBusinessID(businessID: self.auth?.id) { bookings, parkings, users, _ in
+            handlerDidFinishRequest?()
             self.parkings = parkings
             self.bookings = bookings
             self.users = users
             self.homeTableView.reloadData()
+            self.isEmptyData = self.bookings.isEmpty
             self.homeTableView.reloadEmptyDataSet()
         }
     }
-    
+
     private func setImage() {
         AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
     }
-    
+
+}
+
+extension HomeBusinessViewController {
+    private func setUpRefreshControl() {
+        self.refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        self.homeTableView.refreshControl = refreshControl
+    }
+
+    @objc private func pullToRefresh() {
+        self.parkings.removeAll()
+        self.bookings.removeAll()
+        self.users.removeAll()
+        self.homeTableView.reloadData()
+        self.fetchData(isShowIndicator: false) {
+            self.refreshControl.endRefreshing()
+        }
+    }
 }
 
 extension HomeBusinessViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     private func setUpTable() {
         self.homeTableView._registerCell = HomeTableViewCell.self
         self.setUpEmptyDataView()
+        self.setUpRefreshControl()
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.bookings.count
     }
@@ -110,14 +133,14 @@ extension HomeBusinessViewController: UITableViewDelegate, UITableViewDataSource
 
 
 extension HomeBusinessViewController: EmptyDataSetSource, EmptyDataSetDelegate {
-    
+
     private func setUpEmptyDataView() {
         homeTableView.emptyDataSetSource = self
         homeTableView.emptyDataSetDelegate = self
     }
 
     func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
-        return self.bookings.isEmpty
+        return self.isEmptyData
     }
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {

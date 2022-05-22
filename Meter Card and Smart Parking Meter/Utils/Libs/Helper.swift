@@ -7,6 +7,7 @@
 
 import Foundation
 import SKActivityIndicatorView
+import ProgressHUD
 
 class Helper {
 
@@ -48,13 +49,13 @@ class Helper {
 
     class func showIndicator(_ isShowIndicator: Bool) {
         if isShowIndicator {
-            SKActivityIndicator.showIndicator()
+            ProgressHUD.showIndicator()
         }
     }
 
     class func dismissIndicator(_ isShowIndicator: Bool) {
         if isShowIndicator {
-            SKActivityIndicator.dismissIndicator()
+            ProgressHUD.dismissIndicator()
         }
     }
 

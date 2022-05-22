@@ -160,7 +160,7 @@ extension SpotDetailsViewController {
     private func checkRating() {
         RatingManager.shared.checkRating(userID: self.auth?.id) { isRating in
             if !isRating {
-                BookingManager.shared.getBookingByUserID(userID: self.auth?.id, isShowProgress: false) { bookings, parkings, users, message in
+                BookingManager.shared.getBookingByUserID(userID: self.auth?.id, isShowIndicator: false) { bookings, parkings, users, message in
                     if bookings.contains(where: { ($0.parkingID == self.parking?.id && $0.status == .Completed) }) {
                         let vc: RatingViewController = RatingViewController._instantiateVC(storyboard: self._userStoryboard)
                         vc.parking = self.parking

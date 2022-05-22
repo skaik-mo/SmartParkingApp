@@ -222,7 +222,7 @@ extension AddParkingViewController: UINavigationControllerDelegate, UIImagePicke
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         self._dismissVC()
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        if let _data = image?.pngData() {
+        if let _data = image?.jpeg(.low) {
             if self.isParkingImage == true {
                 self.parkingImage.image = image
                 self.dataParking = _data

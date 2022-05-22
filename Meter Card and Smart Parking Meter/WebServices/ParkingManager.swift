@@ -24,8 +24,8 @@ class ParkingManager {
     func setParking(isShowIndicator: Bool = true, parking: ParkingModel, dataParking: Data?, dataParkLicense: Data?, failure: FailureHandler) {
         guard let _parkingsFireStoreReference = self.parkingsFireStoreReference, let _id = parking.id, let _name = parking.name else { return }
         Helper.showIndicator(isShowIndicator)
-        let pathParkingImage = "Parking/\(_id)/ParkingImage/\(_name).jpg"
-        let pathParkLicense = "Parking/\(_id)/ParkLicense/\(_name).jpg"
+        let pathParkingImage = "Parking/\(_id)/ParkingImage/\(_name).jpeg"
+        let pathParkLicense = "Parking/\(_id)/ParkLicense/\(_name).jpeg"
         var data: [String: Data] = [:]
         if let _dataParking = dataParking {
             data[pathParkingImage] = _dataParking
@@ -83,20 +83,20 @@ class ParkingManager {
         }
     }
 
-    func getParkingsByIdAuth(uid: String?, result: ResultParkingsHandler) {
+    func getParkingsByIdAuth(isShowIndicator: Bool = true, uid: String?, result: ResultParkingsHandler) {
         guard let _uid = uid else { result?([], "Error"); return }
-        self.getParkings { parkings, message in
+        self.getParkings(isShowIndicator: isShowIndicator) { parkings, message in
             let _parkings = parkings.filter({ $0.uid == _uid })
             result?(_parkings, message)
         }
     }
 
-    func getFavouritedParkings(id: String?, result: ResultParkingsHandler) {
-        guard let _id = id else { result?([], "Error"); return }
+    func getFavouritedParkings(isShowIndicator: Bool, result: ResultParkingsHandler) {
+        guard let _id = AuthManager.shared.getLocalAuth()?.id else { result?([], "Error"); return }
         var parkings: [ParkingModel] = []
         AuthManager.shared.getAuth(id: _id) { getAuth, message in
             if let _getAuth = getAuth, !_getAuth.favouritedParkingsIDs.isEmpty {
-                self.getParkings { getParkings, message in
+                self.getParkings(isShowIndicator: isShowIndicator) { getParkings, message in
                     if !getParkings.isEmpty {
                         _getAuth.favouritedParkingsIDs.forEach { parkingID in
                             getParkings.forEach { parking in
@@ -113,9 +113,9 @@ class ParkingManager {
             } else {
                 result?([], message)
             }
-            
+
         }
-       
+
     }
 
     func setRating(parking: ParkingModel?, rating: Double, failure: FailureHandler) {

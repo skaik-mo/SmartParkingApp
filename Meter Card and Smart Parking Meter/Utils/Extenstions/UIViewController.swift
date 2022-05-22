@@ -207,20 +207,6 @@ extension UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
-    func _sizeOfImageAt(url: URL) -> CGSize? {
-        // with CGImageSource we avoid loading the whole image into memory
-        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return nil }
-
-        let propertiesOptions = [kCGImageSourceShouldCache: false] as CFDictionary
-        guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, propertiesOptions) as? [CFString: Any] else { return nil }
-
-        if let width = properties[kCGImagePropertyPixelWidth] as? CGFloat, let height = properties[kCGImagePropertyPixelHeight] as? CGFloat {
-            return CGSize(width: (width * 2), height: (height * 2))
-        } else {
-            return nil
-        }
-    }
 
     @objc func _keyboardNotifications(notification: NSNotification) {
 

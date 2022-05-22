@@ -8,7 +8,6 @@ target 'Meter Card and Smart Parking Meter' do
   # Pods for Meter Card and Smart Parking Meter
 pod 'IQKeyboardManagerSwift', '6.5.4'
 pod 'GoogleMaps', '6.0.1'
-#pod 'MMBGoogleLocationPicker'
 #pod 'GooglePlaces', '6.0.0'
 pod 'JTAppleCalendar', '7.1'
 pod 'Cosmos', '23.0'
@@ -21,7 +20,7 @@ pod 'Firebase/Storage'
 
 pod 'FBSDKLoginKit'
 
-pod 'SKActivityIndicatorView', '~> 1.0.0'
+pod 'ProgressHUD'
 pod 'SDWebImage', '5.0'
 pod 'EmptyDataSet-Swift', '~> 5.0.0'
 end

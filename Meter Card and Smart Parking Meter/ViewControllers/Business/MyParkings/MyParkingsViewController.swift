@@ -14,13 +14,16 @@ class MyParkingsViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
+    private let refreshControl = UIRefreshControl.init()
+
     private var parkings: [ParkingModel] = []
     private var auth: AuthModel?
+    private var isEmptyData = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewDidLoad()
-        setupData()
+        fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -50,13 +53,16 @@ extension MyParkingsViewController {
         setUpCollectionView()
     }
 
-    private func setupData() {
-        ParkingManager.shared.getParkingsByIdAuth(uid: self.auth?.id) { parkings, message in
+    private func fetchData(isShowIndicator: Bool = true, handlerDidFinishRequest: (() -> Void)? = nil) {
+        ParkingManager.shared.getParkingsByIdAuth(isShowIndicator: isShowIndicator, uid: self.auth?.id) { parkings, message in
+            debugPrint("parking =>> \(parkings.count)")
+            handlerDidFinishRequest?()
             if let _message = message, _message._isValidValue {
                 self._showErrorAlert(message: _message)
             }
             self.parkings = parkings
             self.collectionView.reloadData()
+            self.isEmptyData = self.parkings.isEmpty
             self.collectionView.reloadEmptyDataSet()
         }
     }
@@ -72,22 +78,29 @@ extension MyParkingsViewController {
 
 }
 
-extension MyParkingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, CHTCollectionViewDelegateWaterfallLayout {
-
-    private func setUpCollectionView() {
-        self.setUpEmptyDataView()
-        self.collectionView._registerCell = ParkingCollectionViewCell.self
-        self.setUpCHTCollectionViewWaterfallLayout()
-        self.collectionView.reloadData()
+extension MyParkingsViewController {
+    private func setUpRefreshControl() {
+        self.refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        self.collectionView.refreshControl = refreshControl
     }
 
-    private func setUpCHTCollectionViewWaterfallLayout() {
-        let layout = CHTCollectionViewWaterfallLayout()
-        layout.minimumColumnSpacing = 11
-        layout.minimumInteritemSpacing = 11
+    @objc private func pullToRefresh() {
+        self.parkings.removeAll()
+        self.collectionView.reloadData()
+        self.fetchData(isShowIndicator: false) {
+            self.refreshControl.endRefreshing()
+        }
+    }
+}
 
-        collectionView.alwaysBounceVertical = true
-        collectionView.collectionViewLayout = layout
+extension MyParkingsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+    private func setUpCollectionView() {
+        self.collectionView._registerCell = ParkingCollectionViewCell.self
+        self.setUpEmptyDataView()
+        self.setUpCHTCollectionViewWaterfallLayout()
+        self.setUpRefreshControl()
+        self.collectionView.reloadData()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -107,11 +120,25 @@ extension MyParkingsViewController: UICollectionViewDelegate, UICollectionViewDa
         vc._push()
     }
 
-    //MARK: - CollectionView Waterfall Layout Delegate Methods (Required)
+}
+
+//MARK: - CollectionView Waterfall Layout
+extension MyParkingsViewController: CHTCollectionViewDelegateWaterfallLayout {
+
+    private func setUpCHTCollectionViewWaterfallLayout() {
+        let layout = CHTCollectionViewWaterfallLayout()
+        layout.minimumColumnSpacing = 11
+        layout.minimumInteritemSpacing = 11
+
+        collectionView.alwaysBounceVertical = true
+        collectionView.collectionViewLayout = layout
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let _parkingImageURL = parkings[indexPath.row].parkingImageURL, let url = URL.init(string: _parkingImageURL), let size = self._sizeOfImageAt(url: url) {
-            let height = size.height * 1.3
-            return CGSize.init(width: size.width, height: height)
+        if let _parkingImageURL = parkings[indexPath.row].parkingImageURL, let image = UIImage.init(url: URL.init(string: _parkingImageURL)) {
+            var size = image.size
+            size.height = size.height * 1.3
+            return size
         }
         if let size = "placeholderParking"._toImage?.size {
             return CGSize.init(width: size.width, height: (size.height * 2))
@@ -127,14 +154,12 @@ extension MyParkingsViewController: UICollectionViewDelegate, UICollectionViewDa
 
 extension MyParkingsViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     private func setUpEmptyDataView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
     }
 
     func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
-        return self.parkings.isEmpty
+        return self.isEmptyData
     }
 
     func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {

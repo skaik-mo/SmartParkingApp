@@ -168,8 +168,8 @@ extension AuthManager {
 
         Helper.showIndicator(isShowIndicator)
         var data: [String: Data?] = [:]
-        let authPath = "Auth/\(_id)/AuthImage/\(_name).jpg"
-        let authDrivingLicense = "Auth/\(_id)/DrivingLicense/\(_name) driver's license.jpg"
+        let authPath = "Auth/\(_id)/AuthImage/\(_name).jpeg"
+        let authDrivingLicense = "Auth/\(_id)/DrivingLicense/\(_name) driver's license.jpeg"
         if let _dataAuth = dataAuth {
             data[authPath] = _dataAuth
         }
