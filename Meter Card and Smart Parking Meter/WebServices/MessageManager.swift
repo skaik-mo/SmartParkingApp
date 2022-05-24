@@ -22,16 +22,26 @@ class MessageManager {
         self.messagesFireStoreReference = db.collection("messages")
     }
 
-    func setMessage(message: MessageModel?, failure: FailureHandler) {
-        guard let _messagesFireStoreReference = self.messagesFireStoreReference, let _message = message, let _id = _message.id else { failure?("Server Error"); return }
-
-        _messagesFireStoreReference.document(_id).setData(_message.getDictionary()) { error in
-            if let _error = error {
-                failure?(_error.localizedDescription)
-                return
+    func setMessage(message: MessageModel?, imageData: Data?, failure: FailureHandler) {
+        guard let _messagesFireStoreReference = self.messagesFireStoreReference, let _message = message, let _id = _message.id, let newMessage = _message.messages.last, let sentDate = newMessage?.sentDate else { failure?("Server Error"); return }
+        var data: [String: Data?] = [:]
+        let path = "Messages/\(_id)/image/\(sentDate).jpeg"
+        if let _imageData = imageData {
+            data[path] = _imageData
+        } 
+        FirebaseStorageManager.shared.uploadFile(data: data) { urls in
+            if let _ = imageData, urls.isEmpty { failure?("Error Internet"); return }
+            if urls.first?.key == path {
+                newMessage?.imageURL = urls.first?.value.absoluteString
             }
-            // Added Message
-            failure?(nil)
+            _messagesFireStoreReference.document(_id).setData(_message.getDictionary()) { error in
+                if let _error = error {
+                    failure?(_error.localizedDescription)
+                    return
+                }
+                // Added Message
+                failure?(nil)
+            }
         }
     }
 
@@ -72,7 +82,6 @@ class MessageManager {
                     messages.append(_message)
                 }
             }
-            
             result?(messages, nil)
         }
     }

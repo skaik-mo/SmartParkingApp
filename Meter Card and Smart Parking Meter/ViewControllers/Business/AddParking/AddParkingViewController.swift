@@ -37,9 +37,9 @@ class AddParkingViewController: UIViewController {
         }
     }
 
-//    private var locationManager = CLLocationManager()
-
     private var imagePicker = UIImagePickerController()
+    private var heightImage: CGFloat? = 0
+    private var widthImage: CGFloat? = 0
     private var dataParking: Data?
     private var dataParkLicense: Data?
     private var isParkingImage: Bool?
@@ -191,7 +191,7 @@ extension AddParkingViewController {
     private func getParking() -> ParkingModel? {
         guard self.checkData() else { return nil }
 
-        return .init(uid: self.auth?.id, name: self.parkingNameText._getText, fromDate: self.selectDate.fromText, toDate: selectDate.toText, fromTime: selectTime.fromText, toTime: selectTime.toText, price: priceText._getText, spots: self.numberOfParking.numberOfParkingText._getText._toInteger, latitude: self.coordinate?.latitude, longitude: self.coordinate?.longitude, isPerDay: self.isPerDay)
+        return .init(uid: self.auth?.id, name: self.parkingNameText._getText,height: self.heightImage, width: self.widthImage, fromDate: self.selectDate.fromText, toDate: selectDate.toText, fromTime: selectTime.fromText, toTime: selectTime.toText, price: priceText._getText, spots: self.numberOfParking.numberOfParkingText._getText._toInteger, latitude: self.coordinate?.latitude, longitude: self.coordinate?.longitude, isPerDay: self.isPerDay)
     }
 
     private func save() {
@@ -222,8 +222,10 @@ extension AddParkingViewController: UINavigationControllerDelegate, UIImagePicke
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         self._dismissVC()
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        if let _data = image?.jpeg(.low) {
+        if let _data = image?._jpeg(.low) {
             if self.isParkingImage == true {
+                self.heightImage = image?.size.height
+                self.widthImage = image?.size.width
                 self.parkingImage.image = image
                 self.dataParking = _data
             } else {

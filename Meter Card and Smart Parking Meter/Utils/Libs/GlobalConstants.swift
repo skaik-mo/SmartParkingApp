@@ -9,5 +9,4 @@ import Foundation
 import GoogleMaps
 
 var locationManager = CLLocationManager()
-
 typealias FailureHandler = ((_ errorMessage: String?) -> Void)?

@@ -148,7 +148,7 @@ extension UIViewController {
         alert._presentVC()
     }
 
-    func _showAlert(title: String?, message: String?, buttonTitle1: String = "OK", buttonTitle2: String = "Cancel", buttonAction1: @escaping (() -> Void), buttonAction2: @escaping (() -> Void)) {
+    func _showAlert(title: String?, message: String?, buttonTitle1: String = "OK", buttonTitle2: String = "Cancel", buttonAction1: @escaping (() -> Void), buttonAction2: (() -> Void)?) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
         let okayAction = UIAlertAction.init(title: buttonTitle1, style: .default) { action in
             debugPrint("Okay aciton is pressed")
@@ -156,7 +156,7 @@ extension UIViewController {
         }
         let cancelAction = UIAlertAction.init(title: buttonTitle2, style: .cancel) { action in
             debugPrint("Cancel aciton is pressed")
-            buttonAction2()
+            buttonAction2?()
         }
         alert.addAction(okayAction)
         alert.addAction(cancelAction)

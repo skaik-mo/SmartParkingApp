@@ -44,6 +44,7 @@
 		E77353CD27EBB0CC0065D34B /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77353CC27EBB0CC0065D34B /* Auth.storyboard */; };
 		E77353CF27EBB6680065D34B /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77353CE27EBB6680065D34B /* User.storyboard */; };
 		E77353D127EBB68B0065D34B /* Business.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77353D027EBB68B0065D34B /* Business.storyboard */; };
+		E774123B283CE0B90085E9E9 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774123A283CE0B90085E9E9 /* ZoomViewController.swift */; };
 		E774641C2800CB3A0009EDAB /* Integer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E774641B2800CB3A0009EDAB /* Integer.swift */; };
 		E776E24A27F8727100693300 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776E24927F8727100693300 /* AuthManager.swift */; };
 		E776E24C27F87DBC00693300 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776E24B27F87DBC00693300 /* AuthModel.swift */; };
@@ -66,6 +67,7 @@
 		E79EA1622822E52F0018B596 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79EA1612822E52F0018B596 /* Helper.swift */; };
 		E7A1847027DA057A00D0921E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A1846F27DA057A00D0921E /* SignUpViewController.swift */; };
 		E7A1847527DC314400D0921E /* HomeUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A1847427DC314400D0921E /* HomeUserViewController.swift */; };
+		E7B5953A283B84B60043AD46 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B59539283B84B60043AD46 /* UIImageView.swift */; };
 		E7B5F9C827DFAA2100FA5476 /* ThumbTextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F9C727DFAA2100FA5476 /* ThumbTextSlider.swift */; };
 		E7B5F9CA27DFF65000FA5476 /* GoogleMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B5F9C927DFF65000FA5476 /* GoogleMapManager.swift */; };
 		E7B7EBC227D8B7DE00E8665C /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B7EBC127D8B7DE00E8665C /* ForgotPasswordViewController.swift */; };
@@ -169,6 +171,7 @@
 		E77353CC27EBB0CC0065D34B /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		E77353CE27EBB6680065D34B /* User.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		E77353D027EBB68B0065D34B /* Business.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Business.storyboard; sourceTree = "<group>"; };
+		E774123A283CE0B90085E9E9 /* ZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewController.swift; sourceTree = "<group>"; };
 		E774641B2800CB3A0009EDAB /* Integer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Integer.swift; sourceTree = "<group>"; };
 		E776E24927F8727100693300 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		E776E24B27F87DBC00693300 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 		E79EA1612822E52F0018B596 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E7A1846F27DA057A00D0921E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E7A1847427DC314400D0921E /* HomeUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUserViewController.swift; sourceTree = "<group>"; };
+		E7B59539283B84B60043AD46 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		E7B5F9C727DFAA2100FA5476 /* ThumbTextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbTextSlider.swift; sourceTree = "<group>"; };
 		E7B5F9C927DFF65000FA5476 /* GoogleMapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapManager.swift; sourceTree = "<group>"; };
 		E7B7EBC127D8B7DE00E8665C /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -352,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				E720808527F1C5C300CBB775 /* MessageViewController.swift */,
+				E774123A283CE0B90085E9E9 /* ZoomViewController.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -692,6 +697,7 @@
 				E774641B2800CB3A0009EDAB /* Integer.swift */,
 				E78AA32C2835203B00460654 /* ActivityIndicator.swift */,
 				E74391E6283ADBC700C0FDC8 /* UIImage.swift */,
+				E7B59539283B84B60043AD46 /* UIImageView.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -1029,6 +1035,7 @@
 				E7CF568D27E9B16D001997CA /* UIKitHelpers.swift in Sources */,
 				E7BFE01F27D6122E00F80180 /* GreenButton.swift in Sources */,
 				E73CFBCD27E8A6A1000D03FE /* ProfileViewController.swift in Sources */,
+				E7B5953A283B84B60043AD46 /* UIImageView.swift in Sources */,
 				E7BFE03127D639B500F80180 /* UITextField.swift in Sources */,
 				E7000E7627EB498C0034A412 /* RatingViewController.swift in Sources */,
 				E7BFE00C27D6034600F80180 /* MainNavigationViewController.swift in Sources */,
@@ -1084,6 +1091,7 @@
 				E7F1FD9927E9FF4200FE55E7 /* Rating.swift in Sources */,
 				E7CF569027E9B22B001997CA /* TableViewController.swift in Sources */,
 				E79EA1602822DBFA0018B596 /* BookingManager.swift in Sources */,
+				E774123B283CE0B90085E9E9 /* ZoomViewController.swift in Sources */,
 				E7539B0428385E8F00DD3988 /* GlobalConstants.swift in Sources */,
 				E77F5FE027E0AC9C009B1AA2 /* DateCell.swift in Sources */,
 				E7BFDFED27D6003800F80180 /* SceneDelegate.swift in Sources */,

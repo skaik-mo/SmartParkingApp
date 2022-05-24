@@ -97,7 +97,7 @@ extension ProfileViewController {
     }
 
     private func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage, urlImage: self.auth?.urlImage)
+        self.authImage.fetchImage(auth?.urlImage)
     }
 }
 
@@ -131,14 +131,16 @@ extension ProfileViewController {
     }
 
     private func logout() {
-        AuthManager.shared.logout { errorMessage in
-            if let _errorMessage = errorMessage {
-                self._showErrorAlert(message: _errorMessage)
-            } else {
-                let vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
-                vc._rootPush()
+        self._showAlert(title: "Alert", message: "Are you sure you want to log out!!", buttonAction1: {
+            AuthManager.shared.logout { errorMessage in
+                if let _errorMessage = errorMessage {
+                    self._showErrorAlert(message: _errorMessage)
+                } else {
+                    let vc = GoSignInOrUpViewController._instantiateVC(storyboard: self._authStoryboard)
+                    vc._rootPush()
+                }
             }
-        }
+        }, buttonAction2: nil)
     }
 
 }

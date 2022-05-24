@@ -28,7 +28,7 @@ class AuthManager {
     typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool?, _ message: String?) -> Void)?
     typealias ResultHandler = ((_ auth: AuthModel?, _ message: String?) -> Void)?
     typealias ResultAllAuthHandler = ((_ users: [AuthModel], _ message: String?) -> Void)?
-    
+
 
     private init() {
         Auth.auth().useAppLanguage()
@@ -258,22 +258,8 @@ extension AuthManager {
         return auth.favouritedParkingsIDs.contains(_id)
 
     }
-
 }
 
-// MARK: - SetImage
-extension AuthManager {
-
-    func setImage(authImage: UIImageView, urlImage: String? = nil) {
-        var image = ""
-        if let _urlImage = urlImage {
-            image = _urlImage
-        }
-        let url = URL.init(string: image)
-        authImage.sd_setImage(with: url, placeholderImage: UIImage.init(named: "ic_placeholderPerson"), options: .queryMemoryData, completed: nil)
-    }
-
-}
 
 // MARK: - User Defualt
 extension AuthManager {

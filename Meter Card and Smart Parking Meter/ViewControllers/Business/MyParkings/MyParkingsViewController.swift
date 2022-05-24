@@ -23,7 +23,6 @@ class MyParkingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewDidLoad()
-        fetchData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +73,7 @@ extension MyParkingsViewController {
 
     private func setUpViewWillAppear() {
         self._setTitleBackBarButton()
+        self.fetchData()
     }
 
 }
@@ -135,15 +135,7 @@ extension MyParkingsViewController: CHTCollectionViewDelegateWaterfallLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let _parkingImageURL = parkings[indexPath.row].parkingImageURL, let image = UIImage.init(url: URL.init(string: _parkingImageURL)) {
-            var size = image.size
-            size.height = size.height * 1.3
-            return size
-        }
-        if let size = "placeholderParking"._toImage?.size {
-            return CGSize.init(width: size.width, height: (size.height * 2))
-        }
-        return CGSize.init(width: 0, height: 0)
+        return self.parkings[indexPath.row].getSizeImage()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetsFor section: Int) -> UIEdgeInsets {

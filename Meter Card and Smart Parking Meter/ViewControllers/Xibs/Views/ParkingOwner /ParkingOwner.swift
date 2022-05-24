@@ -44,7 +44,7 @@ class ParkingOwner: UIView {
         AuthManager.shared.getAuth(id: senderID) { auth, message in
             self.sender = auth
             if let _sender = self.sender, let _parking = parking, let _parkingAddress = _parking.address {
-                AuthManager.shared.setImage(authImage: self.parkingOwnerImage, urlImage: _sender.urlImage)
+                self.parkingOwnerImage.fetchImage(_sender.urlImage)
                 self.nameParkingOwnerLabel.text = _sender.name
                 self.addressParkingOwnerLabel.text = _parkingAddress
             }

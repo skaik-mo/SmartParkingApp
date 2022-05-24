@@ -26,18 +26,25 @@ class MessageTableViewCell: UITableViewCell {
     func configerCell() {
         self.getSender(message: self.message)
         if let lastMessage = message?.messages.last, let message = lastMessage?.message, let time = lastMessage?.sentDate?._stringTime {
-            self.lastMessageLabel.text = message
+            if message._isValidValue {
+                self.lastMessageLabel.text = message
+            } else {
+                self.lastMessageLabel.text = "Photo"
+            }
             self.timeMessageLabel.text = time
+        } else {
+            self.lastMessageLabel.text = ""
+            self.timeMessageLabel.text = ""
         }
     }
-    
+
     private func getSender(message: MessageModel?) {
         var senderID = message?.senderID
         if message?.senderID == AuthManager.shared.getLocalAuth()?.id {
             senderID = message?.receiverID
         }
         AuthManager.shared.getAuth(id: senderID) { auth, message in
-            AuthManager.shared.setImage(authImage: self.imageSendView, urlImage: auth?.urlImage)
+            self.imageSendView.fetchImage(auth?.urlImage)
             if let name = auth?.name {
                 self.nameSendLabel.text = name
             }

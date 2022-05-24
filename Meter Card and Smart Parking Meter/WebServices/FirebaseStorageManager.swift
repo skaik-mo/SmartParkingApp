@@ -29,10 +29,6 @@ class FirebaseStorageManager {
                 let metadata = StorageMetadata()
                 metadata.contentType = "image/jpeg"
                 _ = riversRef.putData(value, metadata: metadata) { metadata, error in
-                    guard let _ = metadata else {
-                        handler([:])
-                        return
-                    }
                     riversRef.downloadURL { (url, error) in
                         guard let downloadURL = url else {
                             handler([:])
@@ -40,7 +36,7 @@ class FirebaseStorageManager {
                         }
                         urls[data.key] = downloadURL
                         uploadCount += 1
-                        print("Number of images successfully uploaded: \(uploadCount)")
+                        debugPrint("Number of images successfully uploaded: \(uploadCount)")
                         if uploadCount == values.count {
                             debugPrint("All Images are uploaded successfully, uploadedImageUrlsArray: \(urls)")
                             handler(urls)

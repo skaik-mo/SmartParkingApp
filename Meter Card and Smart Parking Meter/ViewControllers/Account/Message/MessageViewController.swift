@@ -17,12 +17,26 @@ class MessageViewController: UIViewController {
 
     @IBOutlet weak var messageTextField: UITextField!
 
-//    @IBOutlet weak var imageButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var lodingImageStack: UIStackView!
+    @IBOutlet weak var lodingImageView: UIView!
+    @IBOutlet weak var lodingImage: UIImageView!
 
-    private var receiver: AuthModel?
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var imageButton: UIButton!
+
+    private var imagePicker = UIImagePickerController()
+
     var sender: AuthModel?
-
+    private var receiver: AuthModel?
     private var message: MessageModel?
+
+    private var isSendImage: Bool = false
+    private var isLoading: Bool = false {
+        didSet {
+            self.showOrHideLoading()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +56,11 @@ class MessageViewController: UIViewController {
     }
 
     @IBAction func imageAction(_ sender: Any) {
-
+        self.addImage()
     }
 
     @IBAction func sendAction(_ sender: Any) {
+        guard let _text = self.messageTextField.text, _text._isValidValue else { return }
         sendMessage()
     }
 
@@ -70,6 +85,7 @@ extension MessageViewController {
                 self._showErrorAlert(message: _errorMessage)
                 return
             }
+            self.message?.messages.removeAll()
             self.message = message
             self.tableView.reloadData()
             self.raiseTable()
@@ -89,27 +105,50 @@ extension MessageViewController {
 
 extension MessageViewController {
 
+    private func showOrHideLoading() {
+        self.sendButton.isEnabled = !self.isLoading
+        self.imageButton.isEnabled = !self.isLoading
+        if isSendImage {
+            self.loadingImageAnimation()
+            return
+        }
+        self.clearData()
+    }
+
     private func clearData() {
         self.messageTextField.text = ""
     }
 
-    private func sendMessage() {
-        guard let _text = self.messageTextField.text, _text._isValidValue else { return }
+    // Show Or Hide Loading Image by Animation
+    private func loadingImageAnimation() {
+        UIView.transition(with: self.lodingImageStack, duration: 1,
+            options: .transitionFlipFromRight,
+            animations: {
+                self.isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+                self.messageTextField.placeholder = self.isLoading ? "Loading..." : "write a message"
+                self.lodingImageStack.isHidden = !self.isLoading
+                self.lodingImage.isHidden = !self.isLoading
+                self.lodingImageView.isHidden = !self.isLoading
+                self.messageTextField.isUserInteractionEnabled = !self.isLoading
+            })
+    }
+
+    private func sendMessage(imageData: Data? = nil) {
 
         if self.message == nil {
             self.message = .init(senderID: self.sender?.id, receiverID: self.receiver?.id)
         }
-        let message = Message.init(message: _text, sentDate: Date(), sender: self.receiver?.id)
+        let message = Message.init(message: self.messageTextField.text, imageURL: nil, sentDate: Date(), sender: self.receiver?.id)
         self.message?.messages.append(message)
-        self.clearData()
 
-        if let count = self.message?.messages.count, (count - 1) >= 0 {
-            let last = IndexPath.init(item: count - 1, section: 0)
-            self.tableView.insertRows(at: [last], with: .bottom)
-            self.tableView.scrollToRow(at: last, at: .top, animated: true)
+        self.isLoading = true
+        MessageManager.shared.setMessage(message: self.message, imageData: imageData) { errorMessage in
+            self.isLoading = false
+            self.isSendImage = false
+            if let _errorMessage = errorMessage {
+                self._showErrorAlert(message: _errorMessage)
+            }
         }
-
-        MessageManager.shared.setMessage(message: self.message, failure: nil)
     }
 
     private func raiseTable() {
@@ -127,7 +166,7 @@ extension MessageViewController {
         // if Receiver
         return true
     }
-    
+
     private func getSender() {
         guard let _message = self.message, self.sender == nil else { return }
         var senderID = _message.senderID
@@ -140,6 +179,7 @@ extension MessageViewController {
     }
 }
 
+// MARK: - Keyboard
 extension MessageViewController {
 
     private func setKeyboard(_ isDistanceZero: Bool) {
@@ -176,6 +216,7 @@ extension MessageViewController {
 
 }
 
+// MARK: - TableView
 extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
 
     private func setUpTable() {
@@ -198,16 +239,41 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         if self.isReceiver(message: message) {
             let cell: ReceiverMessageTableViewCell = self.tableView._dequeueReusableCell()
             cell.message = message
+            cell.selectionStyle = .none
             cell.configerCell()
             return cell
         } else {
             let cell: SenderMessageTableViewCell = self.tableView._dequeueReusableCell()
             cell.message = message
+            cell.selectionStyle = .none
             cell.sender = self.sender
             cell.configerCell()
             return cell
         }
 
+    }
+
+}
+
+// MARK: - ImagePicker
+extension MessageViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+
+    private func addImage() {
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = false
+            imagePicker._presentVC()
+        }
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        self._dismissVC()
+        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        self.lodingImage.image = image
+        if let _data = image?._jpeg(.medium) {
+            self.isSendImage = true
+            self.sendMessage(imageData: _data)
+        }
     }
 
 }

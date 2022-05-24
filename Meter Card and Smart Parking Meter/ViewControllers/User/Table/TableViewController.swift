@@ -111,6 +111,7 @@ extension TableViewController {
     private func fetchDataMessages(isShowIndicator: Bool, handlerDidFinishRequest: (() -> Void)? = nil) {
         MessageManager.shared.getAllMessagesToAuth(isShowIndicator: isShowIndicator,senderID: self.auth?.id) { message, errorMessage in
             handlerDidFinishRequest?()
+            debugPrint("message: \(message.count)")
             if let _errorMessage = errorMessage {
                 self._showErrorAlert(message: _errorMessage)
             }

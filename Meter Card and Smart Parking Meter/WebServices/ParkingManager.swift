@@ -144,14 +144,4 @@ class ParkingManager {
 //        }
 //    }
 
-    func setImage(parkingImage: UIImageView, urlImage: String? = nil) {
-        var image = ""
-        if let _urlImage = urlImage {
-            image = _urlImage
-        }
-        let url = URL.init(string: image)
-        parkingImage.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholderParking"), options: .queryMemoryData, completed: nil)
-
-    }
-
 }

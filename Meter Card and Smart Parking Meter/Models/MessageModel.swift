@@ -59,11 +59,13 @@ class MessageModel {
 
 class Message {
     var message: String?
+    var imageURL: String?
     var sentDate: Date?
     var sender: String?
-
-    init(message: String?, sentDate: Date?, sender: String?) {
+    
+    init(message: String?, imageURL: String?, sentDate: Date?, sender: String?) {
         self.message = message
+        self.imageURL = imageURL
         self.sentDate = sentDate
         self.sender = sender
     }
@@ -71,6 +73,7 @@ class Message {
     init?(dictionary: [String: Any]?) {
         guard let _dictionary = dictionary else { return nil }
         self.message = _dictionary["message"] as? String
+        self.imageURL = _dictionary["imageURL"] as? String
         self.sentDate = (_dictionary["sentDate"] as? String)?._dateWithFormate(dataFormat: "yyyy-MM-dd h:mm:ss a")
         self.sender = _dictionary["sender"] as? String
     }
@@ -78,9 +81,15 @@ class Message {
     func getDictionary() -> [String: Any] {
         let dictionary: [String: Any?] = [
             "message": self.message,
+            "imageURL": self.imageURL,
             "sentDate": self.sentDate?._string(dataFormat: "yyyy-MM-dd h:mm:ss a"),
             "sender": self.sender
         ]
         return dictionary as [String: Any]
     }
 }
+
+//enum TypeMessage {
+//    case text(String?)
+//    case photo(String?)
+//}

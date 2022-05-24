@@ -22,9 +22,8 @@ class ParkingCollectionViewCell: UICollectionViewCell {
     }
 
     func configerCell() {
-        ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
+        self.parkingImage.fetchImage(parking?.parkingImageURL, "placeholderParking")
         self.ratingView.setUpRating(parking: parking, isWithDistance: false, space: 4)
-
     }
 
 }

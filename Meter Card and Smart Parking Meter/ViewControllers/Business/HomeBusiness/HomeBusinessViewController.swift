@@ -78,7 +78,7 @@ extension HomeBusinessViewController {
     }
 
     private func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
+        self.authImage.fetchImage(auth?.urlImage)
     }
 
 }

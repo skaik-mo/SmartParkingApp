@@ -23,8 +23,7 @@ class FavoriteTableViewCell: UITableViewCell {
     }
 
     func configerCell() {
-//        parking = Parking.init(title: "dc", image: nil, rating: 3.3, pricePerHour: nil, latitude: 1.222, longitude: 34.33)
-        ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
+        self.parkingImage.fetchImage(parking?.parkingImageURL, "placeholderParking")
         self.ratingView.setUpRating(parking: parking, space: 9)
     }
 

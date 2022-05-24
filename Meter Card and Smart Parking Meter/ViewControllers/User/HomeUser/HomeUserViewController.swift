@@ -90,7 +90,7 @@ extension HomeUserViewController {
     }
     
     private func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
+        self.authImage.fetchImage(auth?.urlImage)
     }
     
     private func showAlertExpiryTime() {

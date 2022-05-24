@@ -76,7 +76,7 @@ extension BookingDetailsViewController {
     }
 
     private func setupData() {
-        ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
+        self.parkingImage.fetchImage(parking?.parkingImageURL, "placeholderParking")
 
         if let _booking = self.booking {
             self.numberOfParking.setUpNumberOfParking(typeSpotButton: .unselectedfill, title: "Spot", spots: self.parking?.spots, selectedSpot: booking?.spot)

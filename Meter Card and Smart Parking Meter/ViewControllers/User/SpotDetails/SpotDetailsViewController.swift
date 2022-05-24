@@ -118,7 +118,7 @@ extension SpotDetailsViewController {
     }
 
     private func setImage() {
-        ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
+        self.parkingImage.fetchImage(parking?.parkingImageURL, "placeholderParking")
     }
 
 }
@@ -135,7 +135,7 @@ extension SpotDetailsViewController {
 
 extension SpotDetailsViewController {
     private func setInfoParking() {
-        ParkingManager.shared.setImage(parkingImage: self.parkingImage, urlImage: parking?.parkingImageURL)
+        self.parkingImage.fetchImage(parking?.parkingImageURL, "placeholderParking")
         setInfo(parking: parking)
     }
 

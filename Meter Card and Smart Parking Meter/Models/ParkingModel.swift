@@ -14,6 +14,8 @@ class ParkingModel {
     var id: String?
     var name: String?
     var parkingImageURL: String?
+    var height: CGFloat = 0
+    var width: CGFloat = 0
     var parkLicenseimageURL: String?
     var fromDate: String?
     var toDate: String?
@@ -28,11 +30,13 @@ class ParkingModel {
     var isPerDay: Bool?
     var distance: Double = 0
 
-    init(uid: String?, name: String?, parkingImageURL: String? = nil, parkLicenseimageURL: String? = nil, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, rating: Double? = nil, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
+    init(uid: String?, name: String?, parkingImageURL: String? = nil, height: CGFloat?, width: CGFloat?, parkLicenseimageURL: String? = nil, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, rating: Double? = nil, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
         self.uid = uid
         self.id = UUID().uuidString
         self.name = name
         self.parkingImageURL = parkingImageURL
+        self.height = height ?? 0
+        self.width = width ?? 0
         self.parkLicenseimageURL = parkLicenseimageURL
         self.fromDate = fromDate
         self.toDate = toDate
@@ -48,8 +52,8 @@ class ParkingModel {
         self.setAddress()
     }
 
-    convenience init(uid: String?, name: String?, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
-        self.init(uid: uid, name: name, parkingImageURL: nil, parkLicenseimageURL: nil, fromDate: fromDate, toDate: toDate, fromTime: fromTime, toTime: toTime, price: price, spots: spots, rating: nil, latitude: latitude, longitude: longitude, isPerDay: isPerDay)
+    convenience init(uid: String?, name: String?, height: CGFloat?, width: CGFloat?, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
+        self.init(uid: uid, name: name, parkingImageURL: nil, height: height, width: width, parkLicenseimageURL: nil, fromDate: fromDate, toDate: toDate, fromTime: fromTime, toTime: toTime, price: price, spots: spots, rating: nil, latitude: latitude, longitude: longitude, isPerDay: isPerDay)
     }
 
     init?(id: String?, dictionary: [String: Any]?) {
@@ -58,6 +62,8 @@ class ParkingModel {
         self.uid = _dictionary["uid"] as? String
         self.name = _dictionary["name"] as? String
         self.parkingImageURL = _dictionary["parkingImageURL"] as? String
+        self.height = _dictionary["height"] as? Double ?? 0
+        self.width = _dictionary["width"] as? Double ?? 0
         self.parkLicenseimageURL = _dictionary["parkLicenseimageURL"] as? String
         self.fromDate = _dictionary["fromDate"] as? String
         self.toDate = _dictionary["toDate"] as? String
@@ -78,6 +84,8 @@ class ParkingModel {
             "uid": self.uid,
             "name": self.name,
             "parkingImageURL": self.parkingImageURL,
+            "height": self.height,
+            "width": self.width,
             "parkLicenseimageURL": self.parkLicenseimageURL,
             "fromDate": self.fromDate,
             "toDate": self.toDate,
@@ -119,14 +127,14 @@ class ParkingModel {
             return (true, nil)
         }
     }
-    
+
     private func setDistance() {
         if let _latitude = self.latitude, let _longitude = self.longitude {
             let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)
             self.distance = GoogleMapManager.getDistance(toLocation: toLocation)
         }
     }
-    
+
     private func setAddress() {
         if let _latitude = latitude, let _longitude = longitude {
             GoogleMapManager.getPlaceAddressFrom(location: CLLocationCoordinate2D.init(latitude: _latitude, longitude: _longitude), completion: { address in
@@ -135,5 +143,9 @@ class ParkingModel {
         }
     }
     
+    func getSizeImage() -> CGSize {
+        return CGSize.init(width: self.width, height: self.height)
+    }
+
 }
 

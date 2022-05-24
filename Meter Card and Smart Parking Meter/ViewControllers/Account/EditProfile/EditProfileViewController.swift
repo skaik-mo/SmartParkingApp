@@ -117,7 +117,7 @@ extension EditProfileViewController {
     }
     
     private func setImage() {
-        AuthManager.shared.setImage(authImage: self.authImage, urlImage: auth?.urlImage)
+        self.authImage.fetchImage(auth?.urlImage)
     }
 
 }
@@ -174,7 +174,7 @@ extension EditProfileViewController: UINavigationControllerDelegate, UIImagePick
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         self._dismissVC()
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        if let _data = image?.jpeg(.low) {
+        if let _data = image?._jpeg(.low) {
             if self.isAuthImage == true {
                 self.authImage.image = image
                 self.dataAuth = _data

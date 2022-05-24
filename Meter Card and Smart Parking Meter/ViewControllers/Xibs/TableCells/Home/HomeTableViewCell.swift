@@ -38,7 +38,7 @@ class HomeTableViewCell: UITableViewCell {
     }
 
     func configerCell() {
-        AuthManager.shared.setImage(authImage: customerImage, urlImage: self.user?.urlImage)
+        self.customerImage.fetchImage(user?.urlImage)
         if let _booking = self.booking, let _parking = self.parking, let _price = _parking.price, let _user = user {
             self.customerNameLabel.text = _user.name
             self.parkingNameLabel.text = _parking.name
