@@ -354,7 +354,7 @@
                                                                                             <constraint firstAttribute="height" constant="40" id="DSx-uH-21f"/>
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <textInputTraits key="textInputTraits"/>
+                                                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                                                 <real key="value" value="1"/>

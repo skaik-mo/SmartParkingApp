@@ -85,10 +85,6 @@ extension SpotDetailsViewController {
 
         self.favouriteButton.isSelected = AuthManager.shared.getFavourite(parkingID: parking?.id)
 
-        if let startDate = self.parking?.fromDate, let endDate = self.parking?.toDate {
-            self.selectedDates = self.dates(from: startDate, to: endDate)
-        }
-
         if let fromTime = self.parking?.fromTime, let toTime = self.parking?.toTime {
             self.timeLabel.text = "Time: \(fromTime) - \(toTime)"
             if let _oldDate = fromTime._toTime, let _newDate = toTime._toTime {
@@ -111,6 +107,8 @@ extension SpotDetailsViewController {
         self.bookNowButton.handleButton = {
             let vc: SubmitBookingViewController = SubmitBookingViewController._instantiateVC(storyboard: self._userStoryboard)
             vc.parking = self.parking
+            vc.modalPresentationStyle = .custom
+            vc.modalTransitionStyle = .crossDissolve
             vc._presentVC()
         }
 
@@ -164,6 +162,8 @@ extension SpotDetailsViewController {
                     if bookings.contains(where: { ($0.parkingID == self.parking?.id && $0.status == .Completed) }) {
                         let vc: RatingViewController = RatingViewController._instantiateVC(storyboard: self._userStoryboard)
                         vc.parking = self.parking
+                        vc.modalPresentationStyle = .custom
+                        vc.modalTransitionStyle = .crossDissolve
                         vc._presentVC()
                     }
                 }
@@ -245,13 +245,16 @@ extension SpotDetailsViewController: JTAppleCalendarViewDataSource, JTAppleCalen
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM dd"
-        let endDate = Date()
-
-        if let _startDate = formatter.date(from: "2022 01 01") {
-            let startDate = _startDate
+        if let start = self.parking?.fromDate, let end = self.parking?.toDate, let startDate = start._toDate, let endDate = end._toDate {
+            self.selectedDates = self.dates(from: start, to: end)
             return ConfigurationParameters(startDate: startDate, endDate: endDate)
         }
-        return ConfigurationParameters(startDate: endDate, endDate: endDate)
+
+        var startDate = Date()
+        if let _startDate = formatter.date(from: "2022 01 01") {
+            startDate = _startDate
+        }
+        return ConfigurationParameters(startDate: startDate, endDate: Date())
     }
 
     func calendarDidScroll(_ calendar: JTAppleCalendarView) {

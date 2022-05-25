@@ -56,6 +56,7 @@ class GoogleMapManager {
     }
 
     static func currentLocation(mapView: GMSMapView, coordinate: CLLocationCoordinate2D? = nil, name: String? = nil, icon: UIImage? = nil, isMoveCamera: Bool? = true) {
+        locationManager.startUpdatingLocation()
         locationManager.requestWhenInUseAuthorization()
         var _coordinate = locationManager.location?.coordinate
         if let coordinate = coordinate {

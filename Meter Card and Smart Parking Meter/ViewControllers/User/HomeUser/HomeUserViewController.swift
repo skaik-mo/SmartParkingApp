@@ -98,6 +98,8 @@ extension HomeUserViewController {
         BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
             if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
                 let vc: AlertViewController = AlertViewController._instantiateVC(storyboard: self._userStoryboard)
+                vc.modalPresentationStyle = .custom
+                vc.modalTransitionStyle = .crossDissolve
                 vc._presentVC()
             }
         }

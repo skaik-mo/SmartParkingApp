@@ -63,15 +63,16 @@ class DateCell: JTAppleCell {
             self.setCornerRadius(letfCorner: 0, rightCorner: 0)
         }
 
-        if cellState?.date._stringData == selectedDates?.first {
+        if (cellState?.date._stringData == selectedDates?.first) && (cellState?.date._stringData == selectedDates?.last) {
+            self.setColorViews(leftColor: .clear, rightColor: .clear, centerColor: green, textColor: .white)
+        } else if cellState?.date._stringData == selectedDates?.first {
             if _index % 7 == 6 {
                 self.setColorViews(leftColor: .clear, rightColor: .clear, centerColor: green, textColor: .white)
 
             } else {
                 self.setColorViews(leftColor: .clear, rightColor: lightGreen, centerColor: green, textColor: .white)
             }
-        }
-        if cellState?.date._stringData == selectedDates?.last {
+        } else if cellState?.date._stringData == selectedDates?.last {
             if _index % 7 == 0 {
                 self.setColorViews(leftColor: .clear, rightColor: .clear, centerColor: green, textColor: .white)
             } else {

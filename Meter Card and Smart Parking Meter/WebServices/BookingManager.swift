@@ -71,17 +71,10 @@ class BookingManager {
                         // change status to completed
                         booking.status = .Completed
                         BookingManager.shared.setBooking(newBooking: booking, failure: nil)
-                        /*
-                         "MNrKBAhg7OkadXOogsBx"
-                         */
                     }
                 } else if _toDate._isBefore(date: dateNow) {
                     booking.status = .Completed
                     BookingManager.shared.setBooking(newBooking: booking, failure: nil)
-                    /*
-                     "9uv9fdlDDPnCJuwJ0Vk7"
-                     "RL3zuDhpezcv0LoFnr3H"
-                     */
                 }
             }
         }
@@ -238,12 +231,12 @@ class BookingManager {
     private func checkDate(booking: BookingModel, newBooking: BookingModel) -> Bool {
         guard let _fromDate = booking.fromDate?._toDate, let _toDate = booking.toDate?._toDate, let _newFromDate = newBooking.fromDate?._toDate, let _newToDate = newBooking.toDate?._toDate else { return false }
 
-        // if Reserved fromDate is after to selected fromDate and Reserved fromDate is after to selected toDate ==> true else false
+        // if Booking fromDate is after to selected fromDate and Booking fromDate is after to selected toDate ==> true else false
         if _fromDate._isAfter(date: _newFromDate) && _fromDate._isAfter(date: _newToDate) {
             // Date available
             return true
         }
-        // if Reserved toDate is before to selected fromDate and Reserved toDate is before to selected toDate ==> true else false
+        // if Booking toDate is before to selected fromDate and Booking toDate is before to selected toDate ==> true else false
             else if _toDate._isBefore(date: _newFromDate) && _toDate._isBefore(date: _newToDate) {
             // Date available
             return true
@@ -290,12 +283,12 @@ class BookingManager {
     private func checkTime(booking: BookingModel, newBooking: BookingModel) -> Bool {
         guard let _fromTime = booking.fromTime?._toTime, let _toTime = booking.toTime?._toTime, let _newFromTime = newBooking.fromTime?._toTime, let _newToTime = newBooking.toTime?._toTime else { return false }
 
-        // if Reserved fromTime is After to selected fromTime and Reserved fromTime is After or same to selected toTime ==> true else false
+        // if Booking fromTime is After to selected fromTime and Booking fromTime is After or same to selected toTime ==> true else false
         if (_fromTime._isAfter(date: _newFromTime)) && (_fromTime._isSame(date: _newToTime) || _fromTime._isAfter(date: _newToTime)) {
             // Time available
             return true
         }
-        // if Reserved toTime is before or same to selected fromTime and Reserved fromTime is before to selected toTime ==> true else false
+        // if Booking toTime is before or same to selected fromTime and Booking fromTime is before to selected toTime ==> true else false
             else if (_toTime._isSame(date: _newFromTime) || _toTime._isBefore(date: _newFromTime)) && (_toTime._isBefore(date: _newToTime)) {
             // Time available
             return true
