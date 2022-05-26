@@ -3,4 +3,86 @@
    uuid = "25129DA4-F0DA-45C4-A772-18E3C4EBF846"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DA392A9F-984B-492D-B85E-0ED8E585F7F2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meter Card and Smart Parking Meter/WebServices/GoogleMapManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DA392A9F-984B-492D-B85E-0ED8E585F7F2 - f4f722a2fbf585d0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Meter_Card_and_Smart_Parking_Meter.GoogleMapManager.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "Meter Card and Smart Parking Meter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammedskaik/Documents/iOS/Project/Final%20Project/Meter%20Card%20and%20Smart%20Parking%20Meter/Meter%20Card%20and%20Smart%20Parking%20Meter/WebServices/GoogleMapManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "106">
+               </Location>
+               <Location
+                  uuid = "DA392A9F-984B-492D-B85E-0ED8E585F7F2 - f4f722a2fbf585d0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Meter_Card_and_Smart_Parking_Meter.GoogleMapManager.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "Meter Card and Smart Parking Meter"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammedskaik/Documents/iOS/Project/Final%20Project/Meter%20Card%20and%20Smart%20Parking%20Meter/Meter%20Card%20and%20Smart%20Parking%20Meter/WebServices/GoogleMapManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "191">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B3DC339D-C5A6-4D0A-B585-D3B3B9BEEF6A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meter Card and Smart Parking Meter/WebServices/GoogleMapManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "setMarker(name:cordinate:icon:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9CF6CD88-317E-4588-8BB5-50E19A7313B0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Meter Card and Smart Parking Meter/WebServices/GoogleMapManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "currentLocation(mapView:coordinate:icon:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

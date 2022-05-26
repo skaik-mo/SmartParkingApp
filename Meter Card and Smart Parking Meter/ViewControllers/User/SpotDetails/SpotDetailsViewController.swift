@@ -75,7 +75,7 @@ class SpotDetailsViewController: UIViewController {
 extension SpotDetailsViewController {
 
     private func setUpViewDidLoad() {
-        GoogleMapManager.initParkingLoction(parking: parking, mapView: mapView)
+        GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking)
 
         self.auth = AuthManager.shared.getLocalAuth()
 

@@ -47,7 +47,7 @@ class HomeUserViewController: UIViewController {
     }
 
     @IBAction func currentLocationAction(_ sender: Any) {
-        GoogleMapManager.setCurrentLocationsAndParkings(mapView: self.mapView)
+        GoogleMapManager.shared.setCurrentLocationsAndParkings(mapView: self.mapView)
     }
 
     @IBAction func profileAction(_ sender: Any) {
@@ -110,14 +110,15 @@ extension HomeUserViewController: GMSMapViewDelegate {
 
     private func setUpMap(filter: FilterModel? = nil) {
         mapView.delegate = self
-        GoogleMapManager.initCurrentLocationsAndParkings(mapView: mapView, filter: filter)
+        GoogleMapManager.shared.initCurrentLocationsAndParkings(mapView: mapView, filter: filter)
     }
 
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        guard marker.position.latitude != locationManager.location?.coordinate.latitude,
-            marker.position.latitude != locationManager.location?.coordinate.latitude else { return false }
+        let location = GoogleMapManager.shared.locationManager
+        guard marker.position.latitude != location.location?.coordinate.latitude,
+            marker.position.latitude != location.location?.coordinate.latitude else { return false }
 
-        GoogleMapManager.parkings.forEach { parking in
+        GoogleMapManager.shared.parkings.forEach { parking in
             if marker.position.latitude == parking.latitude, marker.position.longitude == parking.longitude, marker.title == parking.name {
                 self.parkingInfo.setUpView(parking: parking)
             }

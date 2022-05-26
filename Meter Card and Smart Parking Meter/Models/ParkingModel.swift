@@ -131,13 +131,13 @@ class ParkingModel {
     private func setDistance() {
         if let _latitude = self.latitude, let _longitude = self.longitude {
             let toLocation = CLLocation.init(latitude: _latitude, longitude: _longitude)
-            self.distance = GoogleMapManager.getDistance(toLocation: toLocation)
+            self.distance = GoogleMapManager.shared.getDistance(toLocation: toLocation)
         }
     }
 
     private func setAddress() {
         if let _latitude = latitude, let _longitude = longitude {
-            GoogleMapManager.getPlaceAddressFrom(location: CLLocationCoordinate2D.init(latitude: _latitude, longitude: _longitude), completion: { address in
+            GoogleMapManager.shared.getPlaceAddressFrom(location: CLLocationCoordinate2D.init(latitude: _latitude, longitude: _longitude), completion: { address in
                     self.address = address
                 })
         }

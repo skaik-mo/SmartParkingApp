@@ -26,7 +26,7 @@ class FilterModel {
     // Is the chosen distance smaller or equal to the distance between the parking location and the user's location
     func compareDistance(latitude: Double?, longitude: Double?) -> Bool {
         guard let _distance = self.distance?._toString(number: 2), let _latitude = latitude, let _longitude = longitude else { return false }
-        if GoogleMapManager.getDistance(toLocation: CLLocation.init(latitude: _latitude, longitude: _longitude))._toString(number: 2) <= _distance {
+        if GoogleMapManager.shared.getDistance(toLocation: CLLocation.init(latitude: _latitude, longitude: _longitude))._toString(number: 2) <= _distance {
             return true
         }
         return false

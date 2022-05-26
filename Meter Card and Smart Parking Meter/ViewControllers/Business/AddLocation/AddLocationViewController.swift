@@ -14,7 +14,6 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var mapView: GMSMapView!
 
-//    private var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
 
     var handler: ((_ coordinate: CLLocationCoordinate2D?) -> Void)?
@@ -42,7 +41,7 @@ extension AddLocationViewController {
 
     private func setUpViewDidLoad() {
         self.mapView.delegate = self
-        GoogleMapManager.currentLocation(mapView: mapView)
+        GoogleMapManager.shared.currentLocation(mapView: mapView)
     }
 
 }
@@ -60,9 +59,8 @@ extension AddLocationViewController {
 extension AddLocationViewController: GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        self.mapView.clear()
         self.coordinate = position.target
-        GoogleMapManager.currentLocation(mapView: mapView, coordinate: position.target, isMoveCamera: false)
+        GoogleMapManager.shared.currentLocation(mapView: mapView, coordinate: self.coordinate)
     }
 
 }
