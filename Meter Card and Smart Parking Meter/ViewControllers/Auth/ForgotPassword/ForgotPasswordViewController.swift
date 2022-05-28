@@ -50,7 +50,7 @@ extension ForgotPasswordViewController {
 
     private func getEmail() -> String? {
         guard self.checkData() else { return nil }
-        return self.emailText.text
+        return self.emailText.text.lowercased()
     }
 
     private func goSignIn() {

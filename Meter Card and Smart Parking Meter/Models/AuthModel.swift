@@ -50,12 +50,12 @@ class AuthModel {
         self.init(id: nil, name: nil, email: email, password: password, plateNumber: nil, typeAuth: .none, urlImage: nil, urlLicense: nil, isLoginBySocial: false, favouritedParkingsIDs: [])
     }
 
-    init?(id: String?, password: String? = nil, dictionary: [String: Any?]?) {
+    init?(id: String?, dictionary: [String: Any?]?) {
         guard let _dictionary = dictionary, let _id = id else { return nil }
         self.id = _id
         self.name = _dictionary["name"] as? String
         self.email = _dictionary["email"] as? String
-        self.password = password
+        self.password = _dictionary["password"] as? String
         self.plateNumber = _dictionary["plateNumber"] as? String
         self.typeAuth = _dictionary["typeAuth"] as? Int == 0 ? .User : .Business
         self.urlImage = _dictionary["urlImage"] as? String

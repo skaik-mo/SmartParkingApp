@@ -23,8 +23,6 @@ class AuthManager {
     private let userKey = "USER"
     private let idKey = "ID"
 
-    private let loginManager = LoginManager()
-
     typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool?, _ message: String?) -> Void)?
     typealias ResultHandler = ((_ auth: AuthModel?, _ message: String?) -> Void)?
     typealias ResultAllAuthHandler = ((_ users: [AuthModel], _ message: String?) -> Void)?
@@ -69,10 +67,12 @@ class AuthManager {
             }
             let id = authResult?.user.uid
 
-            self.getAuth(id: id, password: auth.password) { auth, message in
+            self.getAuth(id: id) { auth, message in
                 Helper.dismissIndicator(true)
                 if let _auth = auth {
                     // login and go home screen
+                    _auth.email = email
+                    _auth.password = password
                     self.saveAuth(auth: _auth)
                     result?(_auth, message)
                 } else {
@@ -140,7 +140,7 @@ class AuthManager {
     }
 
     private func setEmail(email: String?, failure: FailureHandler) {
-        guard let _email = email, Auth.auth().currentUser?.email != _email else { failure?(nil); return }
+        guard let _email = email, Auth.auth().currentUser?.email != _email.lowercased() else { failure?(nil); return }
         debugPrint("email \(_email)")
         self.reauthenticate { error in
             if let _error = error {
@@ -164,12 +164,12 @@ extension AuthManager {
 
     // Add Or Update Auth
     func setAuth(auth: AuthModel?, dataDrivingLicense: Data? = nil, dataAuth: Data? = nil, isShowIndicator: Bool = true, failure: FailureHandler) {
-        guard let _usersFireStoreReference = self.usersFireStoreReference, let _auth = auth, let _id = _auth.id, let _name = _auth.name else { return }
+        guard let _usersFireStoreReference = self.usersFireStoreReference, let _auth = auth, let _id = _auth.id else { return }
 
         Helper.showIndicator(isShowIndicator)
         var data: [String: Data?] = [:]
-        let authPath = "Auth/\(_id)/AuthImage/\(_name).jpeg"
-        let authDrivingLicense = "Auth/\(_id)/DrivingLicense/\(_name) driver's license.jpeg"
+        let authPath = "Auth/\(_id)/AuthImage.jpeg"
+        let authDrivingLicense = "Auth/\(_id)/Driver's license.jpeg"
         if let _dataAuth = dataAuth {
             data[authPath] = _dataAuth
         }
@@ -206,14 +206,14 @@ extension AuthManager {
         }
     }
 
-    func getAuth(id: String?, password: String? = nil, result: ResultHandler) {
+    func getAuth(id: String?, result: ResultHandler) {
         guard let _usersFireStoreReference = self.usersFireStoreReference, let _id = id else { return }
         _usersFireStoreReference.document(_id).getDocument { snapshot, error in
             if let _error = error {
                 result?(nil, _error.localizedDescription)
                 return
             }
-            let _auth = AuthModel.init(id: _id, password: password, dictionary: snapshot?.data())
+            let _auth = AuthModel.init(id: _id, dictionary: snapshot?.data())
             result?(_auth, nil)
         }
     }
@@ -276,8 +276,7 @@ extension AuthManager {
         let data = UserDefaults.standard.value(forKey: userKey) as? Data
         if let _data = data {
             let dictionary = try? JSONSerialization.jsonObject(with: _data, options: .fragmentsAllowed) as? [String: Any?]
-            let password = dictionary?["password"] as? String
-            return AuthModel.init(id: id, password: password, dictionary: dictionary)
+            return AuthModel.init(id: id, dictionary: dictionary)
         }
         return nil
     }
@@ -293,6 +292,7 @@ extension AuthManager {
 extension AuthManager {
 
     func signInByFacebook(vc: UIViewController, result: Handler) {
+        let loginManager = LoginManager()
         loginManager.logIn(permissions: [.publicProfile, .email, .userPhotos], viewController: vc) { loginResult in
             switch loginResult {
             case .success(granted: _, declined: _, token: let token):
