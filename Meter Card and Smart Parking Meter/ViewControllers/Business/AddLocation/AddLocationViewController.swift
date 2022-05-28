@@ -60,7 +60,9 @@ extension AddLocationViewController: GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         self.coordinate = position.target
-        GoogleMapManager.shared.currentLocation(mapView: mapView, coordinate: self.coordinate)
+        debugPrint("change Location")
+        self.mapView.clear()
+        GoogleMapManager.shared.setMarker(name: "current Location", coordinate: coordinate)
     }
 
 }

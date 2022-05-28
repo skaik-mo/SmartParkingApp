@@ -60,7 +60,7 @@ extension BookingDetailsViewController {
 
         switchAuth()
 
-        GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking)
+        GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking, isMoveCamera: true)
 
         self.ratingView.setUpRating(parking: parking, space: 12)
 

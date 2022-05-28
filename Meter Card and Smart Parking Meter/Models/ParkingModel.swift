@@ -137,12 +137,12 @@ class ParkingModel {
 
     private func setAddress() {
         if let _latitude = latitude, let _longitude = longitude {
-            GoogleMapManager.shared.getPlaceAddressFrom(location: CLLocationCoordinate2D.init(latitude: _latitude, longitude: _longitude), completion: { address in
+            GoogleMapManager.shared.getPlaceAddressFrom(coordinate: CLLocationCoordinate2D.init(latitude: _latitude, longitude: _longitude), completion: { address in
                     self.address = address
                 })
         }
     }
-    
+
     func getSizeImage() -> CGSize {
         return CGSize.init(width: self.width, height: self.height)
     }
