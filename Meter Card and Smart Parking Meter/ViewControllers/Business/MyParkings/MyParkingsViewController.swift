@@ -46,9 +46,6 @@ extension MyParkingsViewController {
 
     private func setUpViewDidLoad() {
         self.title = "My Parkings"
-
-        self.auth = AuthManager.shared.getLocalAuth()
-
         setUpCollectionView()
     }
 
@@ -73,6 +70,7 @@ extension MyParkingsViewController {
 
     private func setUpViewWillAppear() {
         self._setTitleBackBarButton()
+        self.auth = AuthManager.shared.getLocalAuth()
         self.fetchData()
     }
 

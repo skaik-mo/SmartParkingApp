@@ -47,7 +47,10 @@ class HomeUserViewController: UIViewController {
     }
 
     @IBAction func currentLocationAction(_ sender: Any) {
-        GoogleMapManager.shared.setCurrentLocationsAndParkings(mapView: self.mapView)
+        GoogleMapManager.shared.currentLocation(mapView: mapView, icon: "ic_currentMarker"._toImage)
+        GoogleMapManager.shared.parkings.forEach { parking in
+            GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking)
+        }
     }
 
     @IBAction func profileAction(_ sender: Any) {
@@ -67,7 +70,6 @@ extension HomeUserViewController {
 
     private func setUpViewDidLoad() {
         self.title = "Home"
-        auth = AuthManager.shared.getLocalAuth()
         switchComponents()
     }
 
@@ -84,16 +86,18 @@ extension HomeUserViewController {
     private func setUpViewWillAppear() {
         self.isShowParkingInfo = false
         AppDelegate.shared?.rootNavigationController?.setTransparentNavigation()
+        auth = AuthManager.shared.getLocalAuth()
         setImage()
         setUpMap()
         showAlertExpiryTime()
     }
-    
+
     private func setImage() {
         self.authImage.fetchImage(auth?.urlImage)
     }
-    
+
     private func showAlertExpiryTime() {
+        guard GoogleMapManager.shared.hasLocationPermission else { return }
         let expiryTime = 15
         BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
             if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
@@ -118,12 +122,10 @@ extension HomeUserViewController: GMSMapViewDelegate {
         guard marker.position.latitude != location.location?.coordinate.latitude,
             marker.position.latitude != location.location?.coordinate.latitude else { return false }
 
-        GoogleMapManager.shared.parkings.forEach { parking in
-            if marker.position.latitude == parking.latitude, marker.position.longitude == parking.longitude, marker.title == parking.name {
-                self.parkingInfo.setUpView(parking: parking)
-            }
+        if let parking = GoogleMapManager.shared.parkings.first(where: { marker.position.latitude == $0.latitude && marker.position.longitude == $0.longitude && marker.title == $0.name }) {
+            self.parkingInfo.setUpView(parking: parking)
+            self.isShowParkingInfo = true
         }
-        self.isShowParkingInfo = true
         return true
     }
 

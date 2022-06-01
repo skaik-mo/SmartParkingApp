@@ -50,7 +50,6 @@ class TableViewController: UIViewController {
 extension TableViewController {
 
     private func setUpViewDidLoad() {
-        self.auth = AuthManager.shared.getLocalAuth()
         setUpTable()
     }
 
@@ -61,6 +60,7 @@ extension TableViewController {
     private func setUpViewWillAppear() {
         AppDelegate.shared?.rootNavigationController?.setWhiteNavigation()
         self._setTitleBackBarButton()
+        self.auth = AuthManager.shared.getLocalAuth()
     }
 
     private func fetchData(isShowIndicator: Bool, handlerDidFinishRequest: (() -> Void)? = nil) {

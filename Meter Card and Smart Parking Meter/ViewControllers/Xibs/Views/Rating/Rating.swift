@@ -74,7 +74,7 @@ extension Rating {
     }
 
     private func setDistance(parking: ParkingModel?, isWithDistance: Bool) {
-        if let _distance = parking?.distance, isWithDistance {
+        if let _distance = parking?.distance, isWithDistance, let typeAuth = AuthManager.shared.getLocalAuth()?.typeAuth, typeAuth == .User {
             self.middleView.isHidden = false
             self.distanceLabel.text = "\(_distance._toString(number: 2))km Nearby"
             return

@@ -33,6 +33,8 @@ class SpotDetailsViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
 
+    @IBOutlet weak var spaceView: UIView!
+    
     var parking: ParkingModel?
 
     private var auth: AuthModel?
@@ -76,12 +78,6 @@ extension SpotDetailsViewController {
 
     private func setUpViewDidLoad() {
         GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking, isMoveCamera: true)
-
-        self.auth = AuthManager.shared.getLocalAuth()
-
-        if let _typeAuth = self.auth?.typeAuth {
-            self.typeAuth = _typeAuth
-        }
 
         self.favouriteButton.isSelected = AuthManager.shared.getFavourite(parkingID: parking?.id)
 
@@ -127,6 +123,10 @@ extension SpotDetailsViewController {
     private func setUpViewWillAppear() {
         self._isHideNavigation = false
         self._setTitleBackBarButton()
+        self.auth = AuthManager.shared.getLocalAuth()
+        if let _typeAuth = self.auth?.typeAuth {
+            self.typeAuth = _typeAuth
+        }
     }
 
 }
@@ -182,11 +182,13 @@ extension SpotDetailsViewController {
             self.favouriteButton.isHidden = false
             self.bookNowButton.isHidden = false
             self.parkingOwnerView.isHidden = false
+            self.spaceView.isHidden = false
         case .Business:
             self.title = "Parking Details"
             self.favouriteButton.isHidden = true
             self.bookNowButton.isHidden = true
             self.parkingOwnerView.isHidden = true
+            self.spaceView.isHidden = true
         }
     }
 }

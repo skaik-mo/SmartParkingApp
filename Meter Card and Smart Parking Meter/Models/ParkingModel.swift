@@ -75,7 +75,7 @@ class ParkingModel {
         self.latitude = _dictionary["latitude"] as? Double
         self.longitude = _dictionary["longitude"] as? Double
         self.address = _dictionary["address"] as? String
-        self.isPerDay = (_dictionary["isPerDay"] as? Int) == 0 ? true : false
+        self.isPerDay = _dictionary["isPerDay"] as? Bool
         self.setDistance()
     }
 
@@ -97,7 +97,7 @@ class ParkingModel {
             "address": self.address,
             "latitude": self.latitude,
             "longitude": self.longitude,
-            "isPerDay": self.isPerDay ?? false ? 0 : 1,
+            "isPerDay": self.isPerDay,
         ]
         return dictionary as [String: Any]
     }

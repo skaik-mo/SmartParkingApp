@@ -22,7 +22,7 @@ class RatingManager {
     }
 
     func setRating(rating: RatingModel, parking: ParkingModel?, failure: FailureHandler) {
-        guard let _ratingsFireStoreReference = self.ratingsFireStoreReference, let userID = rating.userID, let parkingID = rating.parkingID else { return }
+        guard let _ratingsFireStoreReference = self.ratingsFireStoreReference, let userID = rating.userID, let parkingID = rating.parkingID, let parking = parking else { return }
         let id = userID + parkingID
         _ratingsFireStoreReference.document(id).setData(rating.getDictionary()) { error in
             if let _error = error {
@@ -36,7 +36,8 @@ class RatingManager {
                     return
                 }
                 let sum = self.sumRating(parkingID: parkingID, ratings: ratings)
-                ParkingManager.shared.setRating(parking: parking, rating: sum) { errorMessage in
+                parking.rating = sum
+                ParkingManager.shared.setParking(isShowIndicator: false, parking: parking) { errorMessage in
                     if let _errorMessage = errorMessage {
                         failure?(_errorMessage)
                         return
@@ -85,7 +86,7 @@ class RatingManager {
 
     func checkRating(userID: String?, result: ((_ isRating: Bool) -> Void)?) {
         self.getRatings { ratings, message in
-            let isRating = ratings.contains(where: {$0.userID == userID})
+            let isRating = ratings.contains(where: { $0.userID == userID })
             result?(isRating)
         }
     }

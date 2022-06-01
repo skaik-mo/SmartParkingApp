@@ -21,11 +21,11 @@ class ParkingManager {
         self.parkingsFireStoreReference = db.collection("parkings")
     }
 
-    func setParking(isShowIndicator: Bool = true, parking: ParkingModel, dataParking: Data?, dataParkLicense: Data?, failure: FailureHandler) {
-        guard let _parkingsFireStoreReference = self.parkingsFireStoreReference, let _id = parking.id, let _name = parking.name else { return }
+    func setParking(isShowIndicator: Bool = true, parking: ParkingModel, dataParking: Data? = nil, dataParkLicense: Data? = nil, failure: FailureHandler) {
+        guard let _parkingsFireStoreReference = self.parkingsFireStoreReference, let _id = parking.id else { return }
         Helper.showIndicator(isShowIndicator)
-        let pathParkingImage = "Parking/\(_id)/ParkingImage/\(_name).jpeg"
-        let pathParkLicense = "Parking/\(_id)/ParkLicense/\(_name).jpeg"
+        let pathParkingImage = "Parking/\(_id)/ParkingImage.jpeg"
+        let pathParkLicense = "Parking/\(_id)/ParkLicense.jpeg"
         var data: [String: Data] = [:]
         if let _dataParking = dataParking {
             data[pathParkingImage] = _dataParking
@@ -117,31 +117,5 @@ class ParkingManager {
         }
 
     }
-
-    func setRating(parking: ParkingModel?, rating: Double, failure: FailureHandler) {
-        guard let _parking = parking else { failure?("Error"); return }
-        _parking.rating = rating
-        self.setParking(isShowIndicator: false, parking: _parking, dataParking: nil, dataParkLicense: nil) { errorMessage in
-            failure?(errorMessage)
-        }
-    }
-//    func getParkingsByIDs(result: ResultParkingsHandler) {
-//        let auth = AuthManager.shared.getLocalAuth()
-//        var parkings: [ParkingModel] = []
-//        self.getParkings { getParkings, message in
-//            if !getParkings.isEmpty, !auth.favouritedParkingsIDs.isEmpty {
-//                auth.favouritedParkingsIDs.forEach { id in
-//                    getParkings.forEach { parking in
-//                        if parking.id == id {
-//                            parkings.append(parking)
-//                        }
-//                    }
-//                }
-//                result?(parkings, nil)
-//                return
-//            }
-//            result?([], message)
-//        }
-//    }
 
 }

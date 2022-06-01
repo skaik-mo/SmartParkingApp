@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.setUpFacebook(application, didFinishLaunchingWithOptions: launchOptions)
 
-        GMSServices.provideAPIKey(GoogleMapManager.shared.API_KEY)
+        GMSServices.provideAPIKey(GoogleMapManager.API_KEY)
 //        GMSPlacesClient.provideAPIKey(GoogleMapManager.API_KEY)
 
         return true

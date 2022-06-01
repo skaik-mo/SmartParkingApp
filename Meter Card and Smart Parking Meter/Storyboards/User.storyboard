@@ -801,6 +801,7 @@
                         <outlet property="parkingOwnerView" destination="yiR-if-eY9" id="I1o-Ex-Jov"/>
                         <outlet property="pricePerHourLabel" destination="exr-7y-nep" id="Qll-NC-VIl"/>
                         <outlet property="ratingView" destination="AmJ-88-igC" id="dpO-Kc-cPH"/>
+                        <outlet property="spaceView" destination="2ZZ-Vi-AiU" id="MUN-Yi-C1l"/>
                         <outlet property="timeLabel" destination="2zx-lF-HeI" id="4Nb-sC-7WO"/>
                     </connections>
                 </viewController>

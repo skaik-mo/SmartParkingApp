@@ -9,17 +9,29 @@ import Foundation
 import GoogleMaps
 import CoreLocation
 
-class GoogleMapManager: NSObject, CLLocationManagerDelegate {
+class GoogleMapManager: NSObject {
 
     static var shared = GoogleMapManager()
-    let API_KEY = "AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc"
+    static let API_KEY = "AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc"
     let locationManager = CLLocationManager()
-    private var mapView: GMSMapView!
-
     var parkings: [ParkingModel] = []
+    var hasLocationPermission = false
+
+    private var mapView: GMSMapView?
     private var location_icon: UIImage?
+    private var lastLlocation: CLLocation?
+    private var isSetCurrentLocation = false
+
+    private override init() {
+        super.init()
+        self.locationManager.delegate = self
+    }
 
     func initCurrentLocationsAndParkings(mapView: GMSMapView, filter: FilterModel?) {
+        self.mapView = mapView
+        guard self.hasLocationPermission else { return }
+        self.currentLocation(mapView: mapView, icon: "ic_currentMarker"._toImage)
+
         ParkingManager.shared.getParkings(filter: filter) { parkings, errorMessage in
             if let _errorMessage = errorMessage, _errorMessage._isValidValue {
                 if let vc = AppDelegate.shared?._topVC {
@@ -28,33 +40,20 @@ class GoogleMapManager: NSObject, CLLocationManagerDelegate {
                 return
             }
             self.parkings = parkings
-            self.setCurrentLocationsAndParkings(mapView: mapView)
-        }
-    }
 
-    func setCurrentLocationsAndParkings(mapView: GMSMapView) {
-        self.currentLocation(mapView: mapView, icon: "ic_currentMarker"._toImage)
-
-        self.parkings.forEach { parking in
-            setParkingLoction(mapView: mapView, parking: parking)
+            self.parkings.forEach { parking in
+                self.setParkingLoction(mapView: mapView, parking: parking)
+            }
         }
     }
 
     func currentLocation(mapView: GMSMapView, icon: UIImage? = nil) {
         location_icon = icon
         self.mapView = mapView
-        self.mapView.clear()
+        self.mapView?.clear()
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-        locationManager.delegate = self
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            debugPrint("update Location")
-            setCurrentLocation(coordinate: location.coordinate)
-        }
-        manager.stopUpdatingLocation()
+        self.isSetCurrentLocation = true
     }
 
     private func setCurrentLocation(coordinate: CLLocationCoordinate2D?) {
@@ -77,7 +76,7 @@ class GoogleMapManager: NSObject, CLLocationManagerDelegate {
         guard let coordinate = coordinate else { return }
 
         let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 14)
-        self.mapView.camera = camera
+        self.mapView?.camera = camera
     }
 
     func setMarker(name: String? = nil, coordinate: CLLocationCoordinate2D?, icon: UIImage? = nil) {
@@ -95,14 +94,12 @@ class GoogleMapManager: NSObject, CLLocationManagerDelegate {
     }
 
     func getDistance(toLocation: CLLocation) -> Double {
-        let fromLocation = locationManager.location
-        if let _fromLocation = fromLocation {
+        if let _fromLocation = self.lastLlocation {
             let distance = _fromLocation.distance(from: toLocation) / 1000
             return distance
         }
         return 0
     }
-
 
     func getPlaceAddressFrom(coordinate: CLLocationCoordinate2D?, completion: @escaping (_ address: String) -> Void) {
         guard let coordinate = coordinate else { return }
@@ -123,11 +120,56 @@ class GoogleMapManager: NSObject, CLLocationManagerDelegate {
 
 }
 
-//        self.parkings = [
-//            ParkingModel.init(uid: nil, name: "Prospect Garden", parkingImageURL: "demo", rating: 0, price: "11", latitude: 51.5125, longitude: -0.1395),
-//            ParkingModel.init(uid: nil, name: "City Square Gardens", parkingImageURL: "ic_image", rating: 1.1, price: "22.2", latitude: 51.5127, longitude: -0.135),
-//            ParkingModel.init(uid: nil, name: "Peace Gardens", parkingImageURL: "ic_image", rating: 2.2, price: "33.33", latitude: 51.5084, longitude: -0.136),
-//            ParkingModel.init(uid: nil, name: "Sea Breeze Meadows", parkingImageURL: "ic_image", rating: 3.3, price: "44", latitude: 51.5068, longitude: -0.1288),
-//            ParkingModel.init(uid: nil, name: "Red Tail Park", parkingImageURL: "ic_image", rating: 4.4, price: "55.555", latitude: 51.5163, longitude: -0.1391),
-//            ParkingModel.init(uid: nil, name: "My Parking", parkingImageURL: "demo", rating: 4.5, price: "90", latitude: 51.5068, longitude: -0.1338)
-//        ]
+extension GoogleMapManager: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.lastLlocation = locations.last
+        debugPrint("update Location \(self.lastLlocation)")
+        if isSetCurrentLocation {
+            setCurrentLocation(coordinate: self.lastLlocation?.coordinate)
+            self.isSetCurrentLocation = false
+        }
+        manager.stopUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        debugPrint("err \(error.localizedDescription)")
+    }
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            self.hasLocationPermission = false
+            manager.requestAlwaysAuthorization()
+            debugPrint("status notDetermined")
+            break
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+            self.hasLocationPermission = true
+            if let mapView = self.mapView {
+                initCurrentLocationsAndParkings(mapView: mapView, filter: nil)
+            }
+            debugPrint("status authorizedWhenInUse")
+            break
+        case .restricted, .denied:
+            debugPrint("status restricted or denied")
+            self.hasLocationPermission = false
+            self.showAlertIfDeniedOrRestricted()
+            break
+        @unknown default:
+            self.hasLocationPermission = false
+            break
+        }
+    }
+
+    private func showAlertIfDeniedOrRestricted() {
+        let vc = AppDelegate.shared?._topVC
+        vc?._showAlert(title: "You must allow an app to determine your location", message: "Go to Settings > Privacy > Location Services.", buttonAction1: {
+            guard let urlGeneral = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            UIApplication.shared.open(urlGeneral)
+        })
+    }
+
+}

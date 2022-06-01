@@ -1248,7 +1248,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Meter Card and Smart Parking Meter/SupprorttingFiles/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to camera";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to see your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Reason to access location background usage description";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Reason to access location usage description";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1285,7 +1286,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Meter Card and Smart Parking Meter/SupprorttingFiles/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to camera";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow access to see your location";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Reason to access location background usage description";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Reason to access location usage description";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

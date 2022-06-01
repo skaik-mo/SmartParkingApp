@@ -121,7 +121,7 @@ extension MessageViewController {
 
     // Show Or Hide Loading Image by Animation
     private func loadingImageAnimation() {
-        UIView.transition(with: self.lodingImageStack, duration: 1,
+        UIView.transition(with: self.lodingImageStack, duration: 0.5,
             options: .transitionFlipFromRight,
             animations: {
                 self.isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
@@ -261,7 +261,7 @@ extension MessageViewController: UINavigationControllerDelegate, UIImagePickerCo
     private func addImage() {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
             imagePicker.delegate = self
-            imagePicker.allowsEditing = false
+            imagePicker.allowsEditing = true
             imagePicker._presentVC()
         }
     }
