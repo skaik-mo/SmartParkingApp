@@ -99,14 +99,14 @@ extension HomeUserViewController {
     private func showAlertExpiryTime() {
         guard GoogleMapManager.shared.hasLocationPermission() else { return }
         let expiryTime = 15
-        BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
-            if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
-                let vc: AlertViewController = AlertViewController._instantiateVC(storyboard: self._userStoryboard)
-                vc.modalPresentationStyle = .custom
-                vc.modalTransitionStyle = .crossDissolve
-                vc._presentVC()
-            }
-        }
+//        BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
+//            if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
+//                let vc: AlertViewController = AlertViewController._instantiateVC(storyboard: self._userStoryboard)
+//                vc.modalPresentationStyle = .custom
+//                vc.modalTransitionStyle = .crossDissolve
+//                vc._presentVC()
+//            }
+//        }
     }
 }
 

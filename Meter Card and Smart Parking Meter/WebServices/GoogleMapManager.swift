@@ -18,8 +18,9 @@ class GoogleMapManager: NSObject {
 
     private var mapView: GMSMapView?
     private var location_icon: UIImage?
-    private var lastLlocation: CLLocation?
+    private var lastLocation: CLLocation?
     private var isSetCurrentLocation = false
+    private var isNotDetermined = false
 
     private override init() {
         super.init()
@@ -93,8 +94,8 @@ class GoogleMapManager: NSObject {
     }
 
     func getDistance(toLocation: CLLocation) -> Double {
-        debugPrint(self.lastLlocation)
-        if let _fromLocation = self.lastLlocation {
+        debugPrint("sdds \(self.lastLocation)")
+        if let _fromLocation = self.lastLocation {
             let distance = _fromLocation.distance(from: toLocation) / 1000
             return distance
         }
@@ -123,10 +124,10 @@ class GoogleMapManager: NSObject {
 extension GoogleMapManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.lastLlocation = locations.last
-        debugPrint("update Location \(self.lastLlocation)")
+        self.lastLocation = locations.last
+        debugPrint("update Location \(self.lastLocation)")
         if isSetCurrentLocation {
-            setCurrentLocation(coordinate: self.lastLlocation?.coordinate)
+            setCurrentLocation(coordinate: self.lastLocation?.coordinate)
             self.isSetCurrentLocation = false
         }
         manager.stopUpdatingLocation()
@@ -139,13 +140,15 @@ extension GoogleMapManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
+            self.isNotDetermined = true
             manager.requestWhenInUseAuthorization()
             debugPrint("status notDetermined")
             break
         case .authorizedWhenInUse, .authorizedAlways:
             manager.startUpdatingLocation()
-            if let mapView = self.mapView {
+            if let mapView = self.mapView, isNotDetermined {
                 initCurrentLocationsAndParkings(mapView: mapView, filter: nil)
+                self.isNotDetermined = false
             }
             debugPrint("status authorizedWhenInUse")
             break

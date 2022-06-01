@@ -17,6 +17,8 @@ class ParkingManager {
 
     typealias ResultParkingsHandler = ((_ parkings: [ParkingModel], _ message: String?) -> Void)?
 
+    var parkings: [ParkingModel] = []
+    
     private init() {
         self.parkingsFireStoreReference = db.collection("parkings")
     }
@@ -62,7 +64,6 @@ class ParkingManager {
                 result?([], _error.localizedDescription)
                 return
             }
-            var parkings: [ParkingModel] = []
             var parkingsFilters: [ParkingModel] = []
 
             for parking in snapshot?.documents ?? [] {
@@ -72,14 +73,14 @@ class ParkingManager {
                             parkingsFilters.append(_parking)
                         }
                     }
-                    parkings.append(_parking)
+                    self.parkings.append(_parking)
                 }
             }
 
             if !parkingsFilters.isEmpty {
-                parkings = parkingsFilters
+                self.parkings = parkingsFilters
             }
-            result?(parkings, nil)
+            result?(self.parkings, nil)
         }
     }
 
