@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 extension UIImageView {
-    func fetchImage(_ urlStr: String?, _ placeholder: String? = "ic_placeholderPerson") {
+    private func fetchImage(_ urlStr: String?, _ placeholder: String?) {
         if let url = urlStr, !url.isEmpty {
             self.sd_setImage(with: URL(string: url), placeholderImage: placeholder?._toImage,
                 options: .queryMemoryData, completed: nil)
@@ -18,9 +18,9 @@ extension UIImageView {
             image = placeholder?._toImage
         }
     }
-    
-    func fetchImageWithActivityIndicator(_ urlStr: String?, _ placeholder: String? = "ic_placeholderParking") {
-        sd_imageIndicator = SDWebImageActivityIndicator.whiteLarge
+
+    func fetchImageWithActivityIndicator(_ urlStr: String?, _ placeholder: String?) {
+        sd_imageIndicator = SDWebImageActivityIndicator.white
         self.fetchImage(urlStr, placeholder)
     }
 }

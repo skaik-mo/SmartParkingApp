@@ -97,7 +97,7 @@ extension ProfileViewController {
     }
 
     private func setImage() {
-        self.authImage.fetchImage(auth?.urlImage)
+        self.authImage.fetchImageWithActivityIndicator(auth?.urlImage, ic_placeholderPerson)
     }
 }
 

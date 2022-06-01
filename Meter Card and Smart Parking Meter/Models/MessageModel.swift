@@ -74,7 +74,7 @@ class Message {
         guard let _dictionary = dictionary else { return nil }
         self.message = _dictionary["message"] as? String
         self.imageURL = _dictionary["imageURL"] as? String
-        self.sentDate = (_dictionary["sentDate"] as? String)?._dateWithFormate(dataFormat: "yyyy-MM-dd h:mm:ss a")
+        self.sentDate = (_dictionary["sentDate"] as? String)?._dateWithFormate(dataFormat: dateAndTimeFormat)
         self.sender = _dictionary["sender"] as? String
     }
 
@@ -82,14 +82,9 @@ class Message {
         let dictionary: [String: Any?] = [
             "message": self.message,
             "imageURL": self.imageURL,
-            "sentDate": self.sentDate?._string(dataFormat: "yyyy-MM-dd h:mm:ss a"),
+            "sentDate": self.sentDate?._string(dataFormat: dateAndTimeFormat),
             "sender": self.sender
         ]
         return dictionary as [String: Any]
     }
 }
-
-//enum TypeMessage {
-//    case text(String?)
-//    case photo(String?)
-//}

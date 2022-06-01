@@ -138,17 +138,24 @@ extension SelectDateOrTime {
     private func showDateOrTime(handle: @escaping (_ value: String?) -> Void) {
         let alert = UIAlertController(style: .actionSheet, title: "Select \(selectionType.self)")
         let date = Date()._add(months: 2)
-        
+        var isSelectedValue = false
         if self.selectionType == .date {
             alert.addDatePicker(mode: .date, date: Date(), minimumDate: Date(), maximumDate: date) { date in
                 handle(date._stringData)
+                isSelectedValue = true
             }
         } else {
             alert.addDatePicker(mode: .time, date: Date(), minimumDate: Date()._add(days: -1), maximumDate: date) { time in
                 handle(time._stringTime)
+                isSelectedValue = true
             }
         }
-        alert.addAction(title: "OK", style: .cancel)
+        let okayAction = UIAlertAction.init(title: "OK", style: .cancel) { action in
+            if !isSelectedValue {
+                handle(self.selectionType == .date ? Date()._stringData: Date()._stringTime)
+            }
+        }
+        alert.addAction(okayAction)
         alert._show()
     }
 
@@ -170,7 +177,7 @@ extension SelectDateOrTime {
             return (true, "The final time must be greater than to the initial time.")
         }
     }
-    
+
     func isEmptyFields() -> (status: Bool, errorMessage: String?) {
         if fromText._isValidValue, toText._isValidValue {
             return checkDateOrTime()
@@ -183,9 +190,9 @@ extension SelectDateOrTime {
         self.fromLabel.text = _from
         self.toLabel.text = _to
         setEnable(isEnable: false)
-        
+
     }
-    
+
     private func setEnable(isEnable: Bool) {
         self.fromImageView.isUserInteractionEnabled = isEnable
         self.toImageView.isUserInteractionEnabled = isEnable

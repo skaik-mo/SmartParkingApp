@@ -157,11 +157,11 @@ extension MyParkingsViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     }
 
     func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-        return "ic_emptyData"._toImage
+        return ic_emptyData._toImage
     }
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString.init(string: "No Data Was Received", attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
+        return NSAttributedString.init(string: noData, attributes: [NSAttributedString.Key.font: fontMontserratRegular17 ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
     }
 
 }

@@ -21,7 +21,7 @@ class TableViewController: UIViewController {
 
     private var auth: AuthModel?
 
-    private var emptyTitle: String = "No Data Was Received"
+    private var emptyTitle: String = noData
     private var emptyDescription: String = ""
 
     enum TypeView {
@@ -111,7 +111,6 @@ extension TableViewController {
     private func fetchDataMessages(isShowIndicator: Bool, handlerDidFinishRequest: (() -> Void)? = nil) {
         MessageManager.shared.getAllMessagesToAuth(isShowIndicator: isShowIndicator,senderID: self.auth?.id) { message, errorMessage in
             handlerDidFinishRequest?()
-            debugPrint("message: \(message.count)")
             if let _errorMessage = errorMessage {
                 self._showErrorAlert(message: _errorMessage)
             }
@@ -234,7 +233,9 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
         case .Messages:
             let vc: MessageViewController = MessageViewController._instantiateVC(storyboard: self._accountStoryboard)
             let senderID = getSenderID(message: self.object[indexPath.row] as? MessageModel)
+            Helper.showIndicator(true)
             AuthManager.shared.getAuth(id: senderID) { auth, message in
+                Helper.dismissIndicator(true)
                 vc.sender = auth
                 vc._push()
             }
@@ -265,7 +266,6 @@ extension TableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     }
 
     func emptyDataSetShouldDisplay(_ scrollView: UIScrollView) -> Bool {
-//        return self.typeView == .Favorites ? self.parkings.isEmpty : self.object.isEmpty
         return self.isEmptyData
     }
 
@@ -274,15 +274,15 @@ extension TableViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     }
 
     func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-        return "ic_emptyData"._toImage
+        return ic_emptyData._toImage
     }
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString.init(string: self.emptyTitle, attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
+        return NSAttributedString.init(string: self.emptyTitle, attributes: [NSAttributedString.Key.font: fontMontserratRegular17 ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        NSAttributedString.init(string: self.emptyDescription, attributes: [NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)])
+        NSAttributedString.init(string: self.emptyDescription, attributes: [NSAttributedString.Key.font: fontMontserratRegular14 ?? UIFont.systemFont(ofSize: 14, weight: .bold)])
     }
 
 }

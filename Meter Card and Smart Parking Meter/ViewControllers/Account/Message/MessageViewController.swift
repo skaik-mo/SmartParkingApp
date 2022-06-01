@@ -71,7 +71,6 @@ extension MessageViewController {
 
     private func setUpViewDidLoad() {
         self.receiver = AuthManager.shared.getLocalAuth()
-        self.getSender()
 
         if let nameSender = sender?.name {
             self.title = nameSender
@@ -165,17 +164,6 @@ extension MessageViewController {
         }
         // if Receiver
         return true
-    }
-
-    private func getSender() {
-        guard let _message = self.message, self.sender == nil else { return }
-        var senderID = _message.senderID
-        if _message.senderID == self.receiver?.id {
-            senderID = _message.receiverID
-        }
-        AuthManager.shared.getAuth(id: senderID) { auth, message in
-            self.sender = auth
-        }
     }
 }
 

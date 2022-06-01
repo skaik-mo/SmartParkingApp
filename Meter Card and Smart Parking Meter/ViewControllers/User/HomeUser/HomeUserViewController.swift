@@ -47,7 +47,7 @@ class HomeUserViewController: UIViewController {
     }
 
     @IBAction func currentLocationAction(_ sender: Any) {
-        GoogleMapManager.shared.currentLocation(mapView: mapView, icon: "ic_currentMarker"._toImage)
+        GoogleMapManager.shared.currentLocation(mapView: mapView, icon: ic_currentMarker._toImage)
         GoogleMapManager.shared.parkings.forEach { parking in
             GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking)
         }
@@ -93,11 +93,11 @@ extension HomeUserViewController {
     }
 
     private func setImage() {
-        self.authImage.fetchImage(auth?.urlImage)
+        self.authImage.fetchImageWithActivityIndicator(auth?.urlImage, ic_placeholderPerson)
     }
 
     private func showAlertExpiryTime() {
-        guard GoogleMapManager.shared.hasLocationPermission else { return }
+        guard GoogleMapManager.shared.hasLocationPermission() else { return }
         let expiryTime = 15
         BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
             if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {

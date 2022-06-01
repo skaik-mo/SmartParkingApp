@@ -25,7 +25,7 @@ class AuthModel {
     var isLoginBySocial: Bool = false
     var favouritedParkingsIDs: [String]
 
-    init(id: String? = nil, name: String? = nil, email: String?, password: String? = nil, plateNumber: String? = nil, typeAuth: TypeAuth? = .none, urlImage: String? = nil, urlLicense: String? = nil, isLoginBySocial: Bool? = false, favouritedParkingsIDs: [String] = []) {
+    init(id: String?, name: String?, email: String?, password: String?, plateNumber: String?, typeAuth: TypeAuth?, urlImage: String?, urlLicense: String?, isLoginBySocial: Bool?, favouritedParkingsIDs: [String]) {
         self.id = id
         self.name = name
         self.email = email

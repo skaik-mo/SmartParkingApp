@@ -38,7 +38,7 @@ class HomeTableViewCell: UITableViewCell {
     }
 
     func configerCell() {
-        self.customerImage.fetchImage(user?.urlImage)
+        self.customerImage.fetchImageWithActivityIndicator(user?.urlImage, ic_placeholderPerson)
         if let _booking = self.booking, let _parking = self.parking, let _price = _parking.price, let _user = user {
             self.customerNameLabel.text = _user.name
             self.parkingNameLabel.text = _parking.name
@@ -59,14 +59,14 @@ extension HomeTableViewCell {
         }
 
         self.rejectButton.setUp(typeButton: .redButton, corner: 9)
-        self.rejectButton.greenButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 12)
+        self.rejectButton.greenButton.titleLabel?.font = fontMontserratRegular12
         self.rejectButton.handleButton = {
             self.setTitleClicked(status: .Rejected)
             self.isClicked = true
             self.setStatus(status: .Rejected)
         }
         self.acceptButton.setUp(typeButton: .greenButton, corner: 9)
-        self.acceptButton.greenButton.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 12)
+        self.acceptButton.greenButton.titleLabel?.font = fontMontserratRegular12
         self.acceptButton.greenButton.backgroundColor = "0D9F67"._hexColor
         self.acceptButton.handleButton = {
             self.setTitleClicked(status: .Accepted)
@@ -105,20 +105,5 @@ extension HomeTableViewCell {
             }
         }
     }
-
-//    private func setClicked() {
-//        UIView.animate(withDuration: 0.5) {
-//            switch self.isClicked {
-//            case true:
-//                self.parkingStatusLabel.alpha = 1
-//                self.rejectButton.greenButton.alpha = 0
-//                self.acceptButton.greenButton.alpha = 0
-//            case false:
-//                self.parkingStatusLabel.alpha = 0
-//                self.rejectButton.greenButton.alpha = 1
-//                self.acceptButton.greenButton.alpha = 1
-//            }
-//        }
-//    }
 
 }

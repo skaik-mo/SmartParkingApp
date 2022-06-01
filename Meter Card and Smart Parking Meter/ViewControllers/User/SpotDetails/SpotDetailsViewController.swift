@@ -112,7 +112,7 @@ extension SpotDetailsViewController {
     }
 
     private func setImage() {
-        self.parkingImage.fetchImage(parking?.parkingImageURL, "placeholderParking")
+        self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
     }
 
 }
@@ -133,7 +133,7 @@ extension SpotDetailsViewController {
 
 extension SpotDetailsViewController {
     private func setInfoParking() {
-        self.parkingImage.fetchImage(parking?.parkingImageURL, "placeholderParking")
+        self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
         setInfo(parking: parking)
     }
 
@@ -208,7 +208,7 @@ extension SpotDetailsViewController {
 
     private func setTitleCalender(date: Date?) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = dateFormat
         guard let _date = date, let _stringData = formatter.date(from: _date._stringData) else { return }
 
         let currentCalendar = Calendar.current

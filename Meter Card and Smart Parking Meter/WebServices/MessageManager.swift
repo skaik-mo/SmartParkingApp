@@ -28,7 +28,7 @@ class MessageManager {
         let path = "Messages/\(_id)/image/\(sentDate).jpeg"
         if let _imageData = imageData {
             data[path] = _imageData
-        } 
+        }
         FirebaseStorageManager.shared.uploadFile(data: data) { urls in
             if let _ = imageData, urls.isEmpty { failure?("Error Internet"); return }
             if urls.first?.key == path {
@@ -82,6 +82,12 @@ class MessageManager {
                     messages.append(_message)
                 }
             }
+            messages = messages.sorted(by: { previous, next in
+                if let previousLastMessage = previous.messages.last??.sentDate, let nextLastMessage = next.messages.last??.sentDate, previousLastMessage > nextLastMessage {
+                    return true
+                }
+                return false
+            })
             result?(messages, nil)
         }
     }

@@ -14,7 +14,7 @@ class ThumbTextSlider: UISlider {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = "5F5D70"._hexColor
-        label.font = UIFont.init(name: "Montserrat-Regular", size: 14)
+        label.font = fontMontserratRegular14
         label.adjustsFontSizeToFitWidth = true
         return label
     }()

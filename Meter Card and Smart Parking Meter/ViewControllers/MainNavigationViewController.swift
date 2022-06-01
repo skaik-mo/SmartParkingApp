@@ -47,7 +47,7 @@ extension MainNavigationController {
     }
 
     private func setProperties() {
-        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: "000000"._hexColor, NSAttributedString.Key.font: UIFont(name: "Montserrat-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .regular)]
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: "000000"._hexColor, NSAttributedString.Key.font: fontMontserratRegular17 ?? UIFont.systemFont(ofSize: 17, weight: .regular)]
 
         appearance.titleTextAttributes = titleTextAttributes
         setTransparentNavigation()

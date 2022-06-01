@@ -84,7 +84,7 @@ extension AddParkingViewController {
 
         self.auth = AuthManager.shared.getLocalAuth()
 
-        GoogleMapManager.shared.currentLocation(mapView: self.mapView, icon: "ic_pointLoaction"._toImage)
+        GoogleMapManager.shared.currentLocation(mapView: self.mapView, icon: ic_pointLoactionMarker._toImage)
 
         self.parkingNameText._placeholderColor = .black
 

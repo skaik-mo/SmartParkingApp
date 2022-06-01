@@ -15,7 +15,6 @@ class GoogleMapManager: NSObject {
     static let API_KEY = "AIzaSyDHfiMj-qKhR14M5zTnqjt3wUeMMTlmwjc"
     let locationManager = CLLocationManager()
     var parkings: [ParkingModel] = []
-    var hasLocationPermission = false
 
     private var mapView: GMSMapView?
     private var location_icon: UIImage?
@@ -29,8 +28,8 @@ class GoogleMapManager: NSObject {
 
     func initCurrentLocationsAndParkings(mapView: GMSMapView, filter: FilterModel?) {
         self.mapView = mapView
-        guard self.hasLocationPermission else { return }
-        self.currentLocation(mapView: mapView, icon: "ic_currentMarker"._toImage)
+        guard self.hasLocationPermission() else { return }
+        self.currentLocation(mapView: mapView, icon: ic_currentMarker._toImage)
 
         ParkingManager.shared.getParkings(filter: filter) { parkings, errorMessage in
             if let _errorMessage = errorMessage, _errorMessage._isValidValue {
@@ -66,7 +65,7 @@ class GoogleMapManager: NSObject {
 
         self.mapView = mapView
         let coordinate = CLLocationCoordinate2D.init(latitude: parking.latitude ?? 0, longitude: parking.longitude ?? 0)
-        setMarker(name: parking.name, coordinate: coordinate, icon: "ic_parking"._toImage)
+        setMarker(name: parking.name, coordinate: coordinate, icon: ic_parkingMarker._toImage)
         if isMoveCamera {
             moveCamera(coordinate: coordinate)
         }
@@ -94,6 +93,7 @@ class GoogleMapManager: NSObject {
     }
 
     func getDistance(toLocation: CLLocation) -> Double {
+        debugPrint(self.lastLlocation)
         if let _fromLocation = self.lastLlocation {
             let distance = _fromLocation.distance(from: toLocation) / 1000
             return distance
@@ -139,13 +139,11 @@ extension GoogleMapManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            self.hasLocationPermission = false
-            manager.requestAlwaysAuthorization()
+            manager.requestWhenInUseAuthorization()
             debugPrint("status notDetermined")
             break
         case .authorizedWhenInUse, .authorizedAlways:
             manager.startUpdatingLocation()
-            self.hasLocationPermission = true
             if let mapView = self.mapView {
                 initCurrentLocationsAndParkings(mapView: mapView, filter: nil)
             }
@@ -153,15 +151,27 @@ extension GoogleMapManager: CLLocationManagerDelegate {
             break
         case .restricted, .denied:
             debugPrint("status restricted or denied")
-            self.hasLocationPermission = false
             self.showAlertIfDeniedOrRestricted()
             break
         @unknown default:
-            self.hasLocationPermission = false
             break
         }
     }
 
+    func hasLocationPermission() -> Bool {
+        switch self.locationManager.authorizationStatus {
+        case .notDetermined:
+            return false
+        case .restricted, .denied:
+            self.showAlertIfDeniedOrRestricted()
+            return false
+        case .authorizedAlways, .authorizedWhenInUse:
+            return true
+        @unknown default:
+            return false
+        }
+    }
+    
     private func showAlertIfDeniedOrRestricted() {
         let vc = AppDelegate.shared?._topVC
         vc?._showAlert(title: "You must allow an app to determine your location", message: "Go to Settings > Privacy > Location Services.", buttonAction1: {

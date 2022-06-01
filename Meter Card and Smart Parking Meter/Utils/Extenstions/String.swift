@@ -63,11 +63,11 @@ extension String {
     }
 
     var _toDate: Date? {
-        return _dateWithFormate(dataFormat: "yyyy-MM-dd")
+        return _dateWithFormate(dataFormat: dateFormat)
     }
 
     var _toTime: Date? {
-        return _dateWithFormate(dataFormat: "hh:mm a")
+        return _dateWithFormate(dataFormat: timeFormat)
     }
 
     func _dateWithFormate(dataFormat: String, timeZone: String = TimeZone.current.identifier) -> Date? {

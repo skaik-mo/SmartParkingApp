@@ -30,30 +30,23 @@ class ParkingModel {
     var isPerDay: Bool?
     var distance: Double = 0
 
-    init(uid: String?, name: String?, parkingImageURL: String? = nil, height: CGFloat?, width: CGFloat?, parkLicenseimageURL: String? = nil, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, rating: Double? = nil, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
+    init(uid: String?, name: String?, height: CGFloat?, width: CGFloat?, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
         self.uid = uid
         self.id = UUID().uuidString
         self.name = name
-        self.parkingImageURL = parkingImageURL
         self.height = height ?? 0
         self.width = width ?? 0
-        self.parkLicenseimageURL = parkLicenseimageURL
         self.fromDate = fromDate
         self.toDate = toDate
         self.fromTime = fromTime
         self.toTime = toTime
         self.price = price
         self.spots = spots
-        self.rating = rating
         self.latitude = latitude
         self.longitude = longitude
         self.isPerDay = isPerDay
         self.setDistance()
         self.setAddress()
-    }
-
-    convenience init(uid: String?, name: String?, height: CGFloat?, width: CGFloat?, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?, price: String?, spots: Int?, latitude: Double? = nil, longitude: Double? = nil, isPerDay: Bool?) {
-        self.init(uid: uid, name: name, parkingImageURL: nil, height: height, width: width, parkLicenseimageURL: nil, fromDate: fromDate, toDate: toDate, fromTime: fromTime, toTime: toTime, price: price, spots: spots, rating: nil, latitude: latitude, longitude: longitude, isPerDay: isPerDay)
     }
 
     init?(id: String?, dictionary: [String: Any]?) {

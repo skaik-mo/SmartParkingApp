@@ -34,7 +34,7 @@ class ReceiverMessageTableViewCell: UITableViewCell {
             if let imageURL = self.message?.imageURL, imageURL._isValidValue {
                 self.messageImage._roundCorners(isTopLeft: true, isTopRight: true, isBottomLeft: true, radius: 6)
                 self.setData(false)
-                self.messageImage.fetchImageWithActivityIndicator(imageURL, "ic_placeholderImage")
+                self.messageImage.fetchImageWithActivityIndicator(imageURL, ic_placeholderImage)
 
             } else if let _message = self.message?.message, _message._isValidValue {
                 self.setData(true)

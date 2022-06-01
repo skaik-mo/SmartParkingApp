@@ -9,11 +9,11 @@ import Foundation
 
 extension Date {
     var _stringData: String {
-        return self._string(dataFormat: "yyyy-MM-dd")
+        return self._string(dataFormat: dateFormat)
     }
 
     var _stringTime: String {
-        return self._string(dataFormat: "h:mm a")
+        return self._string(dataFormat: timeFormat)
     }
     
     func _string(dataFormat: String, timeZone: String = TimeZone.current.identifier) -> String {

@@ -21,7 +21,7 @@ class ZoomViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
 
         scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 10.0//maximum zoom scale you want
+        scrollView.maximumZoomScale = 10.0
         scrollView.zoomScale = 1.0
 
         self.imageView.image = self.imageSelected
