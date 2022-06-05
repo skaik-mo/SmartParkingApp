@@ -66,7 +66,7 @@ class RatingManager {
 
 
     private func getRatings(result: ResultRatingsHandler) {
-        guard let _ratingsFireStoreReference = self.ratingsFireStoreReference else { result?([], "Server Error"); return }
+        guard let _ratingsFireStoreReference = self.ratingsFireStoreReference else { result?([], SERVER_ERROR_MESSAGE); return }
 
         _ratingsFireStoreReference.getDocuments { snapshot, error in
             if let _error = error {

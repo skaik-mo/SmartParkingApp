@@ -38,11 +38,9 @@ class HomeUserViewController: UIViewController {
     }
 
     @IBAction func filtersAction(_ sender: Any) {
-        self._presentTopToBottom()
         let vc: FiltersViewController = FiltersViewController._instantiateVC(storyboard: self._userStoryboard)
-        vc.completionHandler = { filter in
-            self.setUpMap(filter: filter)
-        }
+        vc.completionHandler = setUpMap
+        vc.modalTransitionStyle = .crossDissolve
         vc._presentVC()
     }
 
@@ -69,7 +67,7 @@ class HomeUserViewController: UIViewController {
 extension HomeUserViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "Home"
+        self.title = HOME_TITLE
         switchComponents()
     }
 
@@ -99,20 +97,20 @@ extension HomeUserViewController {
     private func showAlertExpiryTime() {
         guard GoogleMapManager.shared.hasLocationPermission() else { return }
         let expiryTime = 15
-//        BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
-//            if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
-//                let vc: AlertViewController = AlertViewController._instantiateVC(storyboard: self._userStoryboard)
-//                vc.modalPresentationStyle = .custom
-//                vc.modalTransitionStyle = .crossDissolve
-//                vc._presentVC()
-//            }
-//        }
+        BookingManager.shared.isBookingTimeExpired(userID: self.auth?.id) { getExpiryTime in
+            if let _getExpiryTime = getExpiryTime, (_getExpiryTime <= 0 && _getExpiryTime >= -expiryTime) {
+                let vc: AlertViewController = AlertViewController._instantiateVC(storyboard: self._userStoryboard)
+                vc.modalPresentationStyle = .custom
+                vc.modalTransitionStyle = .crossDissolve
+                vc._presentVC()
+            }
+        }
     }
 }
 
 extension HomeUserViewController: GMSMapViewDelegate {
 
-    private func setUpMap(filter: FilterModel? = nil) {
+    private func setUpMap(_ filter: FilterModel? = nil) {
         mapView.delegate = self
         GoogleMapManager.shared.initCurrentLocationsAndParkings(mapView: mapView, filter: filter)
     }

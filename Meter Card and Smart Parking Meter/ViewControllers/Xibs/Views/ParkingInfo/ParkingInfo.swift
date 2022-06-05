@@ -67,8 +67,8 @@ extension ParkingInfo {
 
     private func setInfo(parking: ParkingModel) {
         if let _price = parking.price {
-            self.perHourLabel.text = "Park Booking \(_price)$ Per \(parking.isPerDay ?? false ? "Day" : "Hour")"
-            self.addressLabel.text = parking.address == nil ? "No Address" : parking.address
+            self.perHourLabel.text = "Park Booking \(_price)$ Per \(parking.isPerDay ?? false ? DAY_TITLE: HOUR_TITLE)"
+            self.addressLabel.text = parking.address == nil ? NO_ADDRESS_TITLE: parking.address
         }
     }
 }

@@ -29,7 +29,7 @@ class MessageTableViewCell: UITableViewCell {
             if message._isValidValue {
                 self.lastMessageLabel.text = message
             } else {
-                self.lastMessageLabel.text = "Photo"
+                self.lastMessageLabel.text = PHOTO_TITLE
             }
             self.timeMessageLabel.text = time
         } else {

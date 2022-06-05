@@ -24,7 +24,7 @@ class EditProfileViewController: UIViewController {
             switchTypeAuth()
         }
     }
-    
+
     private var auth: AuthModel?
     private var isAuthImage: Bool?
     private var dataAuth: Data?
@@ -54,7 +54,7 @@ class EditProfileViewController: UIViewController {
 extension EditProfileViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "Edit Profile"
+        self.title = EDIT_PROFILE_TITLE
 
         self.auth = AuthManager.shared.getLocalAuth()
 
@@ -89,14 +89,14 @@ extension EditProfileViewController {
             self.plateNumberText.text = _plateNumber
         }
     }
-    
+
     private func switchTypeAuth() {
         switch self.typeAuth {
         case .User:
-            self.plateNumberText.placeholder = "Plate Number"
+            self.plateNumberText.placeholder = PALTE_NUMBER_TITLE
             self.drivingLicenseText.isHidden = false
         case .Business:
-            self.plateNumberText.placeholder = "Mobile Number"
+            self.plateNumberText.placeholder = MOBILE_NUMBER_TITLE
             self.drivingLicenseText.isHidden = true
         }
     }
@@ -111,11 +111,11 @@ extension EditProfileViewController {
 
 // MARK: - viewWillAppear
 extension EditProfileViewController {
-    
+
     private func setUpViewWillAppear() {
         self._setTitleBackBarButton()
     }
-    
+
     private func setImage() {
         self.authImage.fetchImageWithActivityIndicator(auth?.urlImage, ic_placeholderPerson)
     }
@@ -126,15 +126,15 @@ extension EditProfileViewController {
 
     private func checkData() -> Bool {
         if !self.nameText.text._isValidValue {
-            self._showErrorAlert(message: "Enter name")
+            self._showErrorAlert(message: ENTER_NAME_TITLE)
             return false
         }
         if !self.emailText.text._isValidValue {
-            self._showErrorAlert(message: "Enter email")
+            self._showErrorAlert(message: ENTER_EMAIL_TITLE)
             return false
         }
         if !self.plateNumberText.text._isValidValue {
-            self._showErrorAlert(message: "Enter plate number")
+            self._showErrorAlert(message: ENTER_PALTE_NUMBER_TITLE)
             return false
         }
         self.setAuth()
@@ -142,9 +142,9 @@ extension EditProfileViewController {
     }
 
     private func setAuth() {
-        auth?.name =  self.nameText.text
-        auth?.email =  self.emailText.text
-        auth?.plateNumber =  self.plateNumberText.text
+        auth?.name = self.nameText.text
+        auth?.email = self.emailText.text
+        auth?.plateNumber = self.plateNumberText.text
     }
 
     private func save() {
@@ -154,7 +154,7 @@ extension EditProfileViewController {
                 self._showErrorAlert(message: _errorMessage)
                 return
             }
-            self._showAlertOKWithTitle(title: "Successful", message: "Your changes have been successfully saved!")
+            self._showAlertOKWithTitle(title: SUCCESSFUL_MESSAGE, message: CHANGES_SUCCESSFUL_SAVED_MESSAGE)
         }
     }
 
@@ -178,10 +178,10 @@ extension EditProfileViewController: UINavigationControllerDelegate, UIImagePick
             if self.isAuthImage == true {
                 self.authImage.image = image
                 self.dataAuth = _data
-            } else {
-                self.drivingLicenseText.isSelectedText = true
-                self.dataDrivingLicense = _data
+                return
             }
+            self.drivingLicenseText.isSelectedText = true
+            self.dataDrivingLicense = _data
         }
     }
 

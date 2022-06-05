@@ -23,7 +23,7 @@ class AuthManager {
     private let userKey = "USER"
     private let idKey = "ID"
 
-    typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool?, _ message: String?) -> Void)?
+    typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool, _ message: String?) -> Void)?
     typealias ResultHandler = ((_ auth: AuthModel?, _ message: String?) -> Void)?
     typealias ResultAllAuthHandler = ((_ users: [AuthModel], _ message: String?) -> Void)?
 
@@ -34,7 +34,7 @@ class AuthManager {
     }
 
     func signUpByEmail(auth: AuthModel, data: Data?, result: ResultHandler) {
-        guard let email = auth.email, let password = auth.password else { result?(nil, "The fields is empty."); return }
+        guard let email = auth.email, let password = auth.password else { result?(nil, EMPTY_FIELDS_MESSAGE); return }
         Helper.showIndicator(true)
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let _error = error {
@@ -57,7 +57,7 @@ class AuthManager {
     }
 
     func signInByEmail(auth: AuthModel, result: ResultHandler) {
-        guard let email = auth.email, let password = auth.password else { result?(nil, "The fields is empty."); return }
+        guard let email = auth.email, let password = auth.password else { result?(nil, EMPTY_FIELDS_MESSAGE); return }
         Helper.showIndicator(true)
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let _error = error {
@@ -95,7 +95,7 @@ class AuthManager {
     }
 
     private func reauthenticate(failure: FailureHandler) {
-        guard let auth = getLocalAuth(), let _email = auth.email, let _password = auth.password else { failure?("Empty data"); return }
+        guard let auth = getLocalAuth(), let _email = auth.email, let _password = auth.password else { failure?(EMPTY_FIELDS_MESSAGE); return }
         let credential = EmailAuthProvider.credential(withEmail: _email, password: _password)
         Auth.auth().currentUser?.reauthenticate(with: credential, completion: { auth, error in
             if let _error = error {
@@ -305,10 +305,10 @@ extension AuthManager {
                     }
                 }
             case .cancelled:
-                result?(nil, nil, nil)
+                result?(nil, false, nil)
                 break
             case .failed(let error):
-                result?(nil, nil, error.localizedDescription)
+                result?(nil, false, error.localizedDescription)
             }
         }
     }
@@ -330,7 +330,7 @@ extension AuthManager {
                 } else {
                     if let _getAuth = getAuth {
                         // Already registered
-                        _getAuth.isLoginBySocial = true
+                        //_getAuth.isLoginBySocial = true || no need, already saved as a social
                         self.saveAuth(auth: _getAuth)
                         result?(_getAuth, false, nil)
                     } else {

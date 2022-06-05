@@ -45,13 +45,12 @@ class MyParkingsViewController: UIViewController {
 extension MyParkingsViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "My Parkings"
+        self.title = MY_PARKINGS_TITLE
         setUpCollectionView()
     }
 
     private func fetchData(isShowIndicator: Bool = true, handlerDidFinishRequest: (() -> Void)? = nil) {
         ParkingManager.shared.getParkingsByIdAuth(isShowIndicator: isShowIndicator, uid: self.auth?.id) { parkings, message in
-            debugPrint("parking =>> \(parkings.count)")
             handlerDidFinishRequest?()
             if let _message = message, _message._isValidValue {
                 self._showErrorAlert(message: _message)
@@ -161,7 +160,7 @@ extension MyParkingsViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     }
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString.init(string: noData, attributes: [NSAttributedString.Key.font: fontMontserratRegular17 ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
+        return NSAttributedString.init(string: NO_DATA_MESSAGE, attributes: [NSAttributedString.Key.font: fontMontserratRegular17 ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
     }
 
 }

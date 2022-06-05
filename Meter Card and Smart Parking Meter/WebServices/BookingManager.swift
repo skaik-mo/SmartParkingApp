@@ -32,8 +32,6 @@ class BookingManager {
             }
             failure?(nil)
         }
-
-
     }
 
     func getUser(booking: BookingModel?, users: [AuthModel]) -> AuthModel? {
@@ -49,15 +47,14 @@ class BookingManager {
     func isBookingTimeExpired(userID: String?, result: ((_ getExpiryTime: Int?) -> Void)?) {
         self.getBookingByUserID(userID: userID, isShowIndicator: false) { bookings, parkings, users, message in
             let bookingsAccepted = bookings.filter({ ($0.status == .Accepted) && $0.toDate == Date()._stringData })
-            var expiryTime: Int?
-            bookingsAccepted.forEach { booking in
+            for booking in bookingsAccepted {
                 if let from = booking.toTime?._toTime, let to = Date()._stringTime._toTime {
                     let diffInMins = Calendar.current.dateComponents([.minute], from: from, to: to).minute
-                    expiryTime = diffInMins
-//                    return // Why don't work
+                    result?(diffInMins)
+                    return
                 }
             }
-            result?(expiryTime)
+            result?(nil)
         }
     }
 
@@ -143,11 +140,13 @@ class BookingManager {
     }
 
     func addBooking(parking: ParkingModel?, newBooking: BookingModel, failure: FailureHandler) {
-        self.checkBooking(parking: parking, newBooking: newBooking) { status, message in
+        guard let _parking = parking else { failure?(ERROR_MESSAGE); return }
+        self.checkBooking(parking: _parking, newBooking: newBooking) { status, message in
             if status {
                 self.setBooking(newBooking: newBooking) { errorMessage in
                     failure?(errorMessage)
                 }
+                return
             }
             // error
             failure?(message)
@@ -163,12 +162,11 @@ class BookingManager {
             }
             // Added Booking
             failure?(nil)
-            return
         }
     }
 
     private func getBookings(isShowIndicator: Bool = true, result: ResultBookingHandler) {
-        guard let _bookingsFireStoreReference = self.bookingsFireStoreReference else { result?([], "Server Error"); return }
+        guard let _bookingsFireStoreReference = self.bookingsFireStoreReference else { result?([], SERVER_ERROR_MESSAGE); return }
         Helper.showIndicator(isShowIndicator)
         _bookingsFireStoreReference.getDocuments { snapshot, error in
             Helper.dismissIndicator(isShowIndicator)
@@ -187,45 +185,45 @@ class BookingManager {
         }
     }
 
-    private func checkBooking(parking: ParkingModel?, newBooking: BookingModel, result: CheckHandler) {
-        guard let _parking = parking else { result?(false, "Error trying to choose another parking"); return }
-        let isAvailableDateAndTime = _parking.isAvailableDateAndTime(booking: newBooking)
-        if isAvailableDateAndTime.status {
+    private func checkBooking(parking: ParkingModel, newBooking: BookingModel, result: CheckHandler) {
+        let isAvailableDateOrTime = parking.isAvailableDateOrTime(booking: newBooking)
+        if isAvailableDateOrTime.status {
             self.getBookings { bookings, message in
                 let parkingBookings = bookings.filter({ $0.parkingID == newBooking.parkingID })
                 if parkingBookings.isEmpty {
                     // Add Booking
                     result?(true, nil)
-                } else {
-                    // Parking bookings on available date
-                    let parkingBookingsAvailableDate = parkingBookings.filter({ _parking.isAvailableDateAndTime(booking: $0).status })
-                    if parkingBookingsAvailableDate.isEmpty {
-                        // Add Booking
-                        result?(true, nil)
-                    } else {
-                        // Filter bookings for a parking spot
-                        let spotBookings = parkingBookingsAvailableDate.filter({ $0.spot == newBooking.spot })
-                        if spotBookings.isEmpty {
-                            // Add Booking
-                            result?(true, nil)
-                        } else {
-                            if _parking.isPerDay ?? false {
-                                self.checkBookingWhenPerDay(spotBookings: spotBookings, newBooking: newBooking) { status, message in
-                                    result?(status, message)
-                                }
-                            } else {
-                                // is per hour
-                                self.checkBookingWhenPerHour(spotBookings: spotBookings, newBooking: newBooking) { status, message in
-                                    result?(status, message)
-                                }
-                            }
-                        }
+                    return
+                }
+                // Parking bookings on available date
+                let parkingBookingsAvailableDate = parkingBookings.filter({ parking.isAvailableDateOrTime(booking: $0).status })
+                if parkingBookingsAvailableDate.isEmpty {
+                    // Add Booking
+                    result?(true, nil)
+                    return
+                }
+                // Filter bookings for a parking spot
+                let spotBookings = parkingBookingsAvailableDate.filter({ $0.spot == newBooking.spot })
+                if spotBookings.isEmpty {
+                    // Add Booking
+                    result?(true, nil)
+                    return
+                }
+                if parking.isPerDay ?? false {
+                    self.checkBookingWhenPerDay(spotBookings: spotBookings, newBooking: newBooking) { status, message in
+                        result?(status, message)
                     }
+                    return
+                }
+                // is per hour
+                self.checkBookingWhenPerHour(spotBookings: spotBookings, newBooking: newBooking) { status, message in
+                    result?(status, message)
                 }
             }
-        } else {
-            result?(isAvailableDateAndTime.status, isAvailableDateAndTime.message)
+            return
         }
+        //error Parking is not available for a date or time
+        result?(isAvailableDateOrTime.status, isAvailableDateOrTime.message)
     }
 
     private func checkDate(booking: BookingModel, newBooking: BookingModel) -> Bool {
@@ -237,47 +235,34 @@ class BookingManager {
             return true
         }
         // if Booking toDate is before to selected fromDate and Booking toDate is before to selected toDate ==> true else false
-            else if _toDate._isBefore(date: _newFromDate) && _toDate._isBefore(date: _newToDate) {
+        if _toDate._isBefore(date: _newFromDate) && _toDate._isBefore(date: _newToDate) {
             // Date available
             return true
-        } else {
-            return false
         }
+        return false
     }
 
     private func checkBookingWhenPerDay(spotBookings: [BookingModel], newBooking: BookingModel, result: CheckHandler) {
-        var isAvailableDate = true
-        spotBookings.forEach { booking in
+        for booking in spotBookings {
             if !self.checkDate(booking: booking, newBooking: newBooking) {
-                // Date not available
-                isAvailableDate = false
+                result?(false, DATE_NOT_AVAILABLE_MESSAGE)
+                return
             }
         }
-        if isAvailableDate {
-            // add booking if parking per day
-            result?(true, nil)
-        } else {
-            // Date not available
-            result?(false, "Date not available")
-        }
+        // add booking if parking per day
+        result?(true, nil)
     }
 
     private func checkBookingWhenPerHour(spotBookings: [BookingModel], newBooking: BookingModel, result: CheckHandler) {
         let dateBookins = spotBookings.filter({ !(self.checkDate(booking: $0, newBooking: newBooking)) })
-        var isAvailableTime = true
-        dateBookins.forEach { booking in
+        for booking in dateBookins {
             if !self.checkTime(booking: booking, newBooking: newBooking) {
-                // Time not available
-                isAvailableTime = false
+                result?(false, TIME_NOT_AVAILABLE_MESSAGE)
+                return
             }
         }
-        if isAvailableTime {
-            // add booking if parking per Hour
-            result?(true, nil)
-        } else {
-            // Time not available
-            result?(false, "Time not available")
-        }
+        // add booking if parking per Hour
+        result?(true, nil)
     }
 
     private func checkTime(booking: BookingModel, newBooking: BookingModel) -> Bool {
@@ -289,13 +274,12 @@ class BookingManager {
             return true
         }
         // if Booking toTime is before or same to selected fromTime and Booking fromTime is before to selected toTime ==> true else false
-            else if (_toTime._isSame(date: _newFromTime) || _toTime._isBefore(date: _newFromTime)) && (_toTime._isBefore(date: _newToTime)) {
+        if (_toTime._isSame(date: _newFromTime) || _toTime._isBefore(date: _newFromTime)) && (_toTime._isBefore(date: _newToTime)) {
             // Time available
             return true
-        } else {
-            // Time not available
-            return false
         }
+        // Time not available
+        return false
     }
 
 }

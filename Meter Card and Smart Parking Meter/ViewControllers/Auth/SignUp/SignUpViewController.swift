@@ -90,7 +90,7 @@ extension SignUpViewController {
             self.businessButton.setUp(typeButton: .grayButtonWithBorder)
 
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
-                self.plateNumberText.placeholder = "Plate Number"
+                self.plateNumberText.placeholder = PALTE_NUMBER_TITLE
                 self.drivingLicenseText.alpha = 1
             })
         case .Business:
@@ -98,7 +98,7 @@ extension SignUpViewController {
             self.businessButton.setUp(typeButton: .greenButton)
 
             UIView.animate(withDuration: 0.5, animations: { () -> Void in
-                self.plateNumberText.placeholder = "Mobile Number"
+                self.plateNumberText.placeholder = MOBILE_NUMBER_TITLE
                 self.drivingLicenseText.alpha = 0
             })
         }
@@ -106,7 +106,7 @@ extension SignUpViewController {
 
     private func CompletingInfo() {
         DispatchQueue.main.async {
-            self.accountLabel.text = "Complete information"
+            self.accountLabel.text = COMPLETE_INFO_TITLE
             self.descriptionLabel.text = ""
             self.nameText.isHidden = self.isCompletingInfo
             self.emailText.isHidden = self.isCompletingInfo
@@ -123,33 +123,33 @@ extension SignUpViewController {
     private func checkData() -> Bool {
         if !self.isCompletingInfo {
             if !self.nameText.text._isValidValue {
-                self._showErrorAlert(message: "Enter name")
+                self._showErrorAlert(message: ENTER_NAME_TITLE)
                 return false
             }
             if !self.emailText.text._isValidValue {
-                self._showErrorAlert(message: "Enter email")
+                self._showErrorAlert(message: ENTER_EMAIL_TITLE)
                 return false
             }
             if !self.passwordText.text._isValidValue {
-                self._showErrorAlert(message: "Enter password")
+                self._showErrorAlert(message: ENTER_PASSWORD_MESSAGE)
                 return false
             }
             if !self.confirmPasswordText.text._isValidValue {
-                self._showErrorAlert(message: "Enter confirm password")
+                self._showErrorAlert(message: ENTER_CONFIRM_PASSWORD_MESSAGE)
                 return false
             }
             if passwordText.text != confirmPasswordText.text {
-                self._showErrorAlert(message: "Password and confirmation do not match")
+                self._showErrorAlert(message: DO_NOT_MATCH_CONFIRMATION_PASSWORD_MESSAGE)
                 return false
             }
         }
         if !self.plateNumberText.text._isValidValue {
-            let field = self.typeAuth == .User ? "plate number" : "mobile number"
+            let field = self.typeAuth == .User ? PALTE_NUMBER_TITLE: MOBILE_NUMBER_TITLE
             self._showErrorAlert(message: "Enter \(field)")
             return false
         }
         if !self.drivingLicenseText.isSelectedText, self.typeAuth == .User {
-            self._showErrorAlert(message: "Enter driving license")
+            self._showErrorAlert(message: ENTER_DRIVING_LICENSE_MESSAGE)
             return false
         }
         return true
@@ -191,10 +191,10 @@ extension SignUpViewController {
             AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: data) { errorMessage in
                 if let _errorMessage = errorMessage {
                     self._showErrorAlert(message: _errorMessage)
-                } else {
-                    self.clearData()
-                    self.goHome()
+                    return
                 }
+                self.clearData()
+                self.goHome()
             }
         } else {
             AuthManager.shared.signUpByEmail(auth: _auth, data: data) { auth, errorMessage in

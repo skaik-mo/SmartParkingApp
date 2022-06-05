@@ -130,7 +130,7 @@ extension NumberOfParking {
     func checkNumberOfParkig() -> String? {
         if !self.numberOfParkingText.isHidden {
             if self.numberOfParkingText._getText._toInteger ?? 0 <= 0 {
-                return "Enter the number of spots"
+                return ENTER_NUMBER_SPOTS_MESSAGE
             }
         }
         return nil

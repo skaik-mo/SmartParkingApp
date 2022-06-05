@@ -55,20 +55,20 @@ extension SignInViewController {
         self.emailText.keyboardType = .emailAddress
         self.passwordText.isPassword = true
 
-        signUpButton._setAttributedString(rang: "Sign up", attributed: [NSAttributedString.Key.foregroundColor: UIColor.init(hexString: "3FBF66")])
+        signUpButton._setAttributedString(rang: SIGN_UP_TITLE, attributed: [NSAttributedString.Key.foregroundColor: UIColor.init(hexString: "3FBF66")])
     }
 
 }
 
 extension SignInViewController {
-    
+
     private func checkData() -> Bool {
         if !self.emailText.text._isValidValue {
-            self._showErrorAlert(message: "Enter email")
+            self._showErrorAlert(message: ENTER_EMAIL_TITLE)
             return false
         }
         if !self.passwordText.text._isValidValue {
-            self._showErrorAlert(message: "Enter password")
+            self._showErrorAlert(message: ENTER_PASSWORD_MESSAGE)
             return false
         }
         return true
@@ -114,9 +114,8 @@ extension SignInViewController {
     private func loginByFacebook() {
         AuthManager.shared.signInByFacebook(vc: self) { auth, isRegister, message in
             if let _auth = auth {
-                self.clearData()
-                if let _isRegister = isRegister, _isRegister {
-                   // Complete info
+                if isRegister {
+                    // Complete info
                     let vc: SignUpViewController = SignUpViewController._instantiateVC(storyboard: self._authStoryboard)
                     vc.isCompletingInfo = true
                     vc._rootPush()

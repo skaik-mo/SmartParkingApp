@@ -51,7 +51,7 @@ class HomeBusinessViewController: UIViewController {
 extension HomeBusinessViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "Home"
+        self.title = HOME_TITLE
         setUpTable()
     }
 
@@ -152,7 +152,7 @@ extension HomeBusinessViewController: EmptyDataSetSource, EmptyDataSetDelegate {
     }
 
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString.init(string: noData, attributes: [NSAttributedString.Key.font: fontMontserratRegular17 ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
+        return NSAttributedString.init(string: NO_DATA_MESSAGE, attributes: [NSAttributedString.Key.font: fontMontserratRegular17 ?? UIFont.systemFont(ofSize: 17, weight: .bold)])
     }
 
 }

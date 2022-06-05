@@ -100,6 +100,7 @@
 		E7C0C90B27EE3CDE00C83AAE /* ParkingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0C90927EE3CDE00C83AAE /* ParkingCollectionViewCell.swift */; };
 		E7C0C90C27EE3CDE00C83AAE /* ParkingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C0C90A27EE3CDE00C83AAE /* ParkingCollectionViewCell.xib */; };
 		E7C43C56280FB97800C62638 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAE60F456883E3347357305 /* Pods_Meter_Card_and_Smart_Parking_Meter.framework */; };
+		E7CBE9BE284C9A2D002D111C /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CBE9BD284C9A2D002D111C /* Strings.swift */; };
 		E7CF568A27E9AFE3001997CA /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF568827E9AFE3001997CA /* MessageTableViewCell.swift */; };
 		E7CF568B27E9AFE3001997CA /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CF568927E9AFE3001997CA /* MessageTableViewCell.xib */; };
 		E7CF568D27E9B16D001997CA /* UIKitHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CF568C27E9B16D001997CA /* UIKitHelpers.swift */; };
@@ -228,6 +229,7 @@
 		E7C0C90627EE09D000C83AAE /* HomeBusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBusinessViewController.swift; sourceTree = "<group>"; };
 		E7C0C90927EE3CDE00C83AAE /* ParkingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingCollectionViewCell.swift; sourceTree = "<group>"; };
 		E7C0C90A27EE3CDE00C83AAE /* ParkingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParkingCollectionViewCell.xib; sourceTree = "<group>"; };
+		E7CBE9BD284C9A2D002D111C /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		E7CF568827E9AFE3001997CA /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		E7CF568927E9AFE3001997CA /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		E7CF568C27E9B16D001997CA /* UIKitHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitHelpers.swift; sourceTree = "<group>"; };
@@ -458,8 +460,6 @@
 			isa = PBXGroup;
 			children = (
 				E77353CB27EB845C0065D34B /*  AlertsAndPickers */,
-				E79EA1612822E52F0018B596 /* Helper.swift */,
-				E7539B0328385E8F00DD3988 /* GlobalConstants.swift */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -669,6 +669,9 @@
 		E7BFE00227D6013400F80180 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E79EA1612822E52F0018B596 /* Helper.swift */,
+				E7CBE9BD284C9A2D002D111C /* Strings.swift */,
+				E7539B0328385E8F00DD3988 /* GlobalConstants.swift */,
 				E7B5F9C627DFAA0300FA5476 /* Designable */,
 				E7BFE00327D6013B00F80180 /* Extenstions */,
 				E77353C427EB801D0065D34B /* Libs */,
@@ -1057,6 +1060,7 @@
 				E79A75B627E8DC7E005AAC92 /* ProfileButton.swift in Sources */,
 				E7BFDFEB27D6003800F80180 /* AppDelegate.swift in Sources */,
 				E7F1FD9427E9D32300FE55E7 /* FavoriteTableViewCell.swift in Sources */,
+				E7CBE9BE284C9A2D002D111C /* Strings.swift in Sources */,
 				E7BFE00627D6017C00F80180 /* UIViewController.swift in Sources */,
 				E708599927DF4588000FCE7B /* SelectDateOrTime.swift in Sources */,
 				E76627C527E85ECF00848233 /* AlertPicker.swift in Sources */,

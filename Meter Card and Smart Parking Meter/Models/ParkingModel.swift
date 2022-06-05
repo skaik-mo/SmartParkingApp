@@ -103,15 +103,15 @@ class ParkingModel {
         return Helper.compareTime(fromTime1: self.fromTime, toTime1: self.toTime, fromTime2: from, toTime2: to)
     }
 
-    func isAvailableDateAndTime(booking: BookingModel) -> (status: Bool, message: String?) {
+    func isAvailableDateOrTime(booking: BookingModel) -> (status: Bool, message: String?) {
         if !self.compareDate(fromDate: booking.fromDate, toDate: booking.toDate) {
-            var message = "Date not available"
+            var message = DATE_NOT_AVAILABLE_MESSAGE
             if let _from = self.fromDate, let _to = self.toDate {
                 message = "Date available between \(_from) to \(_to)"
             }
             return (false, message)
         } else if !self.compareTime(fromTime: booking.fromTime, toTime: booking.toTime) {
-            var message = "Time not available"
+            var message = TIME_NOT_AVAILABLE_MESSAGE
             if let _from = self.fromTime, let _to = self.toTime {
                 message = "Time available between \(_from) to \(_to)"
             }

@@ -45,7 +45,7 @@ extension RatingViewController {
 
     private func checkData() -> Bool {
         if (!(self.auth?.id?._isValidValue ?? false) || !(self.parking?.id?._isValidValue ?? false)) {
-            self._showErrorAlert(message: "error")
+            self._showErrorAlert(message: ERROR_MESSAGE)
             return false
         }
         return true

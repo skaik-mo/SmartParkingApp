@@ -11,31 +11,27 @@ import UIKit
 class FiltersViewController: UIViewController {
 
     @IBOutlet weak var slider: ThumbTextSlider!
-    
+
     @IBOutlet weak var selectDate: SelectDateOrTime!
     @IBOutlet weak var selectTime: SelectDateOrTime!
-    
+
     @IBOutlet weak var topView: UIView!
-    
+
     var completionHandler: ((FilterModel?) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewDidLoad()
     }
-    
+
     @IBAction func searchAction(_ sender: Any) {
-        let filter = FilterModel.init(distance: slider.value._toDouble, fromDate: self.selectDate.fromText, toDate: self.selectDate.toText, fromTime: self.selectTime.fromText, toTime: self.selectTime.toText)
-        self.completionHandler?(filter)
-        self._dismissTopToBottom()
-        self._dismissVC()
+        self.search()
     }
-    
+
     @IBAction func dismissViewAction(_ sender: Any) {
-        self._dismissTopToBottom()
         self._dismissVC()
     }
-    
+
 
 }
 
@@ -43,13 +39,31 @@ class FiltersViewController: UIViewController {
 extension FiltersViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "Filters"
-        
+        self.title = FILTERS_TITLE
+
         self.topView._roundCorners(isBottomLeft: true, isBottomRight: true, radius: 5)
         self.selectDate.selectionType = .date
         self.selectTime.selectionType = .time
-        
+
     }
 }
 
+extension FiltersViewController {
+
+    private func checkData() -> Bool {
+        if selectDate.isEmptyFields().status || selectTime.isEmptyFields().status {
+            self._showErrorAlert(message: ENTER_DATE_AND_TIME_MESSAGE)
+            return false
+        }
+        return true
+    }
+
+    private func search() {
+        guard self.checkData() else { return }
+        let filter = FilterModel.init(distance: slider.value._toDouble, fromDate: self.selectDate.fromText, toDate: self.selectDate.toText, fromTime: self.selectTime.fromText, toTime: self.selectTime.toText)
+        self.completionHandler?(filter)
+        self._dismissVC()
+    }
+
+}
 

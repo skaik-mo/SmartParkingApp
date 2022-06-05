@@ -23,14 +23,14 @@ class MessageManager {
     }
 
     func setMessage(message: MessageModel?, imageData: Data?, failure: FailureHandler) {
-        guard let _messagesFireStoreReference = self.messagesFireStoreReference, let _message = message, let _id = _message.id, let newMessage = _message.messages.last, let sentDate = newMessage?.sentDate else { failure?("Server Error"); return }
+        guard let _messagesFireStoreReference = self.messagesFireStoreReference, let _message = message, let _id = _message.id, let newMessage = _message.messages.last, let sentDate = newMessage?.sentDate else { failure?(SERVER_ERROR_MESSAGE); return }
         var data: [String: Data?] = [:]
         let path = "Messages/\(_id)/image/\(sentDate).jpeg"
         if let _imageData = imageData {
             data[path] = _imageData
         }
         FirebaseStorageManager.shared.uploadFile(data: data) { urls in
-            if let _ = imageData, urls.isEmpty { failure?("Error Internet"); return }
+            if let _ = imageData, urls.isEmpty { failure?(INTERNET_ERROR_MESSAGE); return }
             if urls.first?.key == path {
                 newMessage?.imageURL = urls.first?.value.absoluteString
             }
@@ -46,7 +46,7 @@ class MessageManager {
     }
 
     func getMessage(senderID: String?, receiverID: String?, result: ResultMessageHandler) {
-        guard let _messagesFireStoreReference = self.messagesFireStoreReference else { result?(nil, "Server Error"); return }
+        guard let _messagesFireStoreReference = self.messagesFireStoreReference else { result?(nil, SERVER_ERROR_MESSAGE); return }
 
         _messagesFireStoreReference.addSnapshotListener { snapshot, error in
             if let _error = error {
@@ -66,7 +66,7 @@ class MessageManager {
     }
 
     func getAllMessagesToAuth(isShowIndicator: Bool, senderID: String?, result: ResultMessagesHandler) {
-        guard let _messagesFireStoreReference = self.messagesFireStoreReference else { result?([], "Server Error"); return }
+        guard let _messagesFireStoreReference = self.messagesFireStoreReference else { result?([], SERVER_ERROR_MESSAGE); return }
         Helper.showIndicator(isShowIndicator)
         _messagesFireStoreReference.getDocuments { snapshot, error in
             Helper.dismissIndicator(isShowIndicator)

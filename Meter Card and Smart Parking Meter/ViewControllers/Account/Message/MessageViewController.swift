@@ -124,7 +124,7 @@ extension MessageViewController {
             options: .transitionFlipFromRight,
             animations: {
                 self.isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
-                self.messageTextField.placeholder = self.isLoading ? "Loading..." : "write a message"
+                self.messageTextField.placeholder = self.isLoading ? LOAFING_MESSAGE : write_MESSAGE
                 self.lodingImageStack.isHidden = !self.isLoading
                 self.lodingImage.isHidden = !self.isLoading
                 self.lodingImageView.isHidden = !self.isLoading

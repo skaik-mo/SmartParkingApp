@@ -26,5 +26,7 @@ let ic_currentMarker = "ic_currentMarker"
 let ic_parkingMarker = "ic_parking"
 let ic_pointLoactionMarker = "ic_pointLoaction"
 
-let noData = "No Data Was Received"
+let ic_calendar = "ic_calendar"
+let ic_clock = "ic_clock"
+
 let ic_emptyData = "ic_emptyData"

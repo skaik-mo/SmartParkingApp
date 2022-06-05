@@ -42,7 +42,7 @@ extension SubmitBookingViewController {
         self.titleLabel.text = "Memorial Park \(price)"
 
         self.selectNumberOfParking.title.textColor = "929292"._hexColor
-        self.selectNumberOfParking.setUpNumberOfParking(typeSpotButton: .selectedFill, title: "Select Spot", spots: self.parking?.spots)
+        self.selectNumberOfParking.setUpNumberOfParking(typeSpotButton: .selectedFill, title: SELECT_SPOT_TITLE, spots: self.parking?.spots)
 
         self.selectDate.selectionType = .date
         self.selectDate.fromImageView.isHidden = true
@@ -66,7 +66,7 @@ extension SubmitBookingViewController {
         let isTimeFieldsEmpty = self.selectTime.isEmptyFields()
 
         if self.selectNumberOfParking.selectedSpot == nil {
-            self._showErrorAlert(message: "Select Spot")
+            self._showErrorAlert(message: SELECT_SPOT_TITLE)
             return false
         }
         if isDateFieldsEmpty.status {
@@ -78,7 +78,7 @@ extension SubmitBookingViewController {
             return false
         }
         if !(self.auth?.id?._isValidValue ?? false) {
-            self._showErrorAlert(message: "You must log out and try to log in again")
+            self._showErrorAlert(message: TRY_LOGIN_MESSAGE)
             return false
         }
         return true

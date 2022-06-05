@@ -83,7 +83,7 @@
                                                                 <color key="textColor" name="929292"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="k0O-hN-m5N" customClass="ThumbTextSlider" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
+                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="k0O-hN-m5N" customClass="ThumbTextSlider" customModule="Meter_Card_and_Smart_Parking_Meter" customModuleProvider="target">
                                                                 <rect key="frame" x="-2" y="31.5" width="378" height="31"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <color key="tintColor" name="000000"/>

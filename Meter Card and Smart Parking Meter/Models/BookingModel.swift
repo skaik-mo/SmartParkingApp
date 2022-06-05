@@ -30,13 +30,13 @@ enum BookinsStatus: Int {
     func getStringStatus() -> (text: String, color: UIColor) {
         switch self {
         case .Pending:
-            return ("Pending", "616161"._hexColor)
+            return (PENDING_TITLE, "616161"._hexColor)
         case .Accepted:
-            return ("Accepted", "0D9F67"._hexColor)
+            return (ACCEPTED_TITLE, "0D9F67"._hexColor)
         case .Rejected:
-            return ("Rejected", "D6243A"._hexColor)
+            return (REJECTED_TITLE, "D6243A"._hexColor)
         case .Completed:
-            return ("Completed", "616161"._hexColor)
+            return (COMPLETED_TITLE, "616161"._hexColor)
         }
     }
 }

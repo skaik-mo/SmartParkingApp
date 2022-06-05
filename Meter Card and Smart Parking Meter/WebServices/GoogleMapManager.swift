@@ -94,7 +94,6 @@ class GoogleMapManager: NSObject {
     }
 
     func getDistance(toLocation: CLLocation) -> Double {
-        debugPrint("sdds \(self.lastLocation)")
         if let _fromLocation = self.lastLocation {
             let distance = _fromLocation.distance(from: toLocation) / 1000
             return distance
@@ -125,7 +124,6 @@ extension GoogleMapManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.lastLocation = locations.last
-        debugPrint("update Location \(self.lastLocation)")
         if isSetCurrentLocation {
             setCurrentLocation(coordinate: self.lastLocation?.coordinate)
             self.isSetCurrentLocation = false
@@ -142,7 +140,6 @@ extension GoogleMapManager: CLLocationManagerDelegate {
         case .notDetermined:
             self.isNotDetermined = true
             manager.requestWhenInUseAuthorization()
-            debugPrint("status notDetermined")
             break
         case .authorizedWhenInUse, .authorizedAlways:
             manager.startUpdatingLocation()
@@ -150,10 +147,8 @@ extension GoogleMapManager: CLLocationManagerDelegate {
                 initCurrentLocationsAndParkings(mapView: mapView, filter: nil)
                 self.isNotDetermined = false
             }
-            debugPrint("status authorizedWhenInUse")
             break
         case .restricted, .denied:
-            debugPrint("status restricted or denied")
             self.showAlertIfDeniedOrRestricted()
             break
         @unknown default:
@@ -177,7 +172,7 @@ extension GoogleMapManager: CLLocationManagerDelegate {
     
     private func showAlertIfDeniedOrRestricted() {
         let vc = AppDelegate.shared?._topVC
-        vc?._showAlert(title: "You must allow an app to determine your location", message: "Go to Settings > Privacy > Location Services.", buttonAction1: {
+        vc?._showAlert(title: DETERMINE_LOCATION_TITLE, message: LOCATION_PRIVACY_SETTINGS_MESSAGE, buttonAction1: {
             guard let urlGeneral = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }

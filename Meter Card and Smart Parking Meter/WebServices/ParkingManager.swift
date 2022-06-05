@@ -17,8 +17,6 @@ class ParkingManager {
 
     typealias ResultParkingsHandler = ((_ parkings: [ParkingModel], _ message: String?) -> Void)?
 
-    var parkings: [ParkingModel] = []
-    
     private init() {
         self.parkingsFireStoreReference = db.collection("parkings")
     }
@@ -56,7 +54,7 @@ class ParkingManager {
     }
 
     func getParkings(isShowIndicator: Bool = true, filter: FilterModel? = nil, result: ResultParkingsHandler) {
-        guard let _parkingsFireStoreReference = self.parkingsFireStoreReference else { result?([], "Server Error"); return }
+        guard let _parkingsFireStoreReference = self.parkingsFireStoreReference else { result?([], SERVER_ERROR_MESSAGE); return }
         Helper.showIndicator(isShowIndicator)
         _parkingsFireStoreReference.getDocuments { snapshot, error in
             Helper.dismissIndicator(isShowIndicator)
@@ -65,27 +63,30 @@ class ParkingManager {
                 return
             }
             var parkingsFilters: [ParkingModel] = []
+            var parkings: [ParkingModel] = []
 
             for parking in snapshot?.documents ?? [] {
                 if let _parking = ParkingModel.init(id: parking.documentID, dictionary: parking.data()) {
                     if let _filter = filter {
-                        if _filter.compareDistance(latitude: _parking.latitude, longitude: _parking.longitude) || _filter.compareDate(fromDate: _parking.fromDate, toDate: _parking.toDate) || _filter.compareTime(fromTime: _parking.fromTime, toTime: _parking.toTime) {
-                            parkingsFilters.append(_parking)
+                        if _filter.compareDate(fromDate: _parking.fromDate, toDate: _parking.toDate) && _filter.compareTime(fromTime: _parking.fromTime, toTime: _parking.toTime) {
+                            if _filter.compareDistance(latitude: _parking.latitude, longitude: _parking.longitude) {
+                                parkingsFilters.append(_parking)
+                            }
                         }
                     }
-                    self.parkings.append(_parking)
+                    parkings.append(_parking)
                 }
             }
 
             if !parkingsFilters.isEmpty {
-                self.parkings = parkingsFilters
+                parkings = parkingsFilters
             }
-            result?(self.parkings, nil)
+            result?(parkings, nil)
         }
     }
 
     func getParkingsByIdAuth(isShowIndicator: Bool = true, uid: String?, result: ResultParkingsHandler) {
-        guard let _uid = uid else { result?([], "Error"); return }
+        guard let _uid = uid else { result?([], ERROR_MESSAGE); return }
         self.getParkings(isShowIndicator: isShowIndicator) { parkings, message in
             let _parkings = parkings.filter({ $0.uid == _uid })
             result?(_parkings, message)
@@ -93,7 +94,7 @@ class ParkingManager {
     }
 
     func getFavouritedParkings(isShowIndicator: Bool, result: ResultParkingsHandler) {
-        guard let _id = AuthManager.shared.getLocalAuth()?.id else { result?([], "Error"); return }
+        guard let _id = AuthManager.shared.getLocalAuth()?.id else { result?([], ERROR_MESSAGE); return }
         var parkings: [ParkingModel] = []
         AuthManager.shared.getAuth(id: _id) { getAuth, message in
             if let _getAuth = getAuth, !_getAuth.favouritedParkingsIDs.isEmpty {

@@ -93,7 +93,7 @@ extension SpotDetailsViewController {
 
         self.setInfoParking()
 
-        self.numberOfParking.setUpNumberOfParking(typeSpotButton: .border, title: "Available Spot", spots: self.parking?.spots)
+        self.numberOfParking.setUpNumberOfParking(typeSpotButton: .border, title: AVAILABLE_SPOT_TITLE, spots: self.parking?.spots)
 
         self.ratingView.setUpRating(parking: parking, space: 12)
 
@@ -140,7 +140,7 @@ extension SpotDetailsViewController {
     private func setInfo(parking: ParkingModel?) {
         var price = ""
         if let _price = parking?.price {
-            price = "\(_price)$ Per \(self.parking?.isPerDay ?? false ? "Day" : "Hour")"
+            price = "\(_price)$ Per \(self.parking?.isPerDay ?? false ? DAY_TITLE : HOUR_TITLE)"
         }
         self.pricePerHourLabel.text = price
     }
@@ -178,13 +178,13 @@ extension SpotDetailsViewController {
     private func switchAuth() {
         switch self.typeAuth {
         case .User:
-            self.title = "Spot Details"
+            self.title = SPOT_DELTAILS_TITLE
             self.favouriteButton.isHidden = false
             self.bookNowButton.isHidden = false
             self.parkingOwnerView.isHidden = false
             self.spaceView.isHidden = false
         case .Business:
-            self.title = "Parking Details"
+            self.title = PARKING_DETAILS_TITLE
             self.favouriteButton.isHidden = true
             self.bookNowButton.isHidden = true
             self.parkingOwnerView.isHidden = true

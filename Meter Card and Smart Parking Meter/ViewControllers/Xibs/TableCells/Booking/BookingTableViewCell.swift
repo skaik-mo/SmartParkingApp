@@ -47,22 +47,22 @@ extension BookingTableViewCell {
             return
         }
         self.parkingPriceLabel.text = ""
-        self.parkingAddressLabel.text = "No Address"
+        self.parkingAddressLabel.text = NO_ADDRESS_TITLE
     }
 
     private func setParkingStatus() {
         switch self.typeBookingStatus {
         case .Completed:
-            self.parkingStatusLabel.text = "Completed"
+            self.parkingStatusLabel.text = COMPLETED_TITLE
             self.parkingStatusLabel.textColor = "616161"._hexColor
         case .Pending:
-            self.parkingStatusLabel.text = "Pending"
+            self.parkingStatusLabel.text = PENDING_TITLE
             self.parkingStatusLabel.textColor = "616161"._hexColor
         case .Accepted:
-            self.parkingStatusLabel.text = "Accepted"
+            self.parkingStatusLabel.text = ACCEPTED_TITLE
             self.parkingStatusLabel.textColor = "0D9F67"._hexColor
         case .Rejected:
-            self.parkingStatusLabel.text = "Rejected"
+            self.parkingStatusLabel.text = REJECTED_TITLE
             self.parkingStatusLabel.textColor = "D6243A"._hexColor
         }
 

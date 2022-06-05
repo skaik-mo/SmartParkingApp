@@ -65,11 +65,11 @@ extension BookingDetailsViewController {
         self.ratingView.setUpRating(parking: parking, space: 12)
 
         self.selectDate.selectionType = .date
-        self.selectDate.title.text = "Date"
+        self.selectDate.title.text = DATE_TITLE
         self.selectDate.isHiddenIcons = true
 
         self.selectTime.selectionType = .time
-        self.selectTime.title.text = "Time"
+        self.selectTime.title.text = TIME_TITLE
         self.selectTime.isHiddenIcons = true
 
         self.checkStatus()
@@ -79,13 +79,13 @@ extension BookingDetailsViewController {
         self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
 
         if let _booking = self.booking {
-            self.numberOfParking.setUpNumberOfParking(typeSpotButton: .unselectedfill, title: "Spot", spots: self.parking?.spots, selectedSpot: booking?.spot)
+            self.numberOfParking.setUpNumberOfParking(typeSpotButton: .unselectedfill, title: SPOT_TITLE, spots: self.parking?.spots, selectedSpot: booking?.spot)
 
             self.selectDate.setData(from: _booking.fromDate, to: _booking.toDate)
 
             self.selectTime.setData(from: _booking.fromTime, to: _booking.toTime)
         } else {
-            self.numberOfParking.setUpNumberOfParking(typeSpotButton: .border, title: "Spot", spots: self.parking?.spots)
+            self.numberOfParking.setUpNumberOfParking(typeSpotButton: .border, title: SPOT_TITLE, spots: self.parking?.spots)
 
             self.selectDate.setData(from: self.parking?.fromDate, to: self.parking?.toDate)
 
@@ -109,7 +109,7 @@ extension BookingDetailsViewController {
         switch self.auth?.typeAuth {
         case .User:
             let  isFavorite = booking == nil && parking != nil
-            self.title = isFavorite ? "Parking Details" : "Booking Details"
+            self.title = isFavorite ? PARKING_DETAILS_TITLE : BOOKING_DETAILS_TITLE
 
             self.parkingStatusLabel.isHidden = false
             self.setTitleStatus()
@@ -120,16 +120,15 @@ extension BookingDetailsViewController {
             self.rejectButton.isHidden = true
 
             self.cancelOrAcceptButton.setUp(typeButton: .greenButton, corner: 10)
-            self.cancelOrAcceptButton.greenButton.setTitle("Cancel", for: .normal)
+            self.cancelOrAcceptButton.greenButton.setTitle(CANCEL_TITLE, for: .normal)
 
             self.cancelOrAcceptButton.handleButton = {
                 // Cancel Action
-                debugPrint("Cancel Action")
                 self.deleteBookings()
             }
 
         case .Business:
-            self.title = "Order Details"
+            self.title = ORDER_DETAILS_TITLE
             self.parkingStatusLabel.isHidden = true
 
             self.parkingOwnerView.setUpView(parking: self.parking, senderID: self.booking?.userID)
@@ -141,11 +140,10 @@ extension BookingDetailsViewController {
             }
 
             self.cancelOrAcceptButton.setUp(typeButton: .greenButton, corner: 8)
-            self.cancelOrAcceptButton.greenButton.setTitle("Accept", for: .normal)
+            self.cancelOrAcceptButton.greenButton.setTitle(ACCEPT_TITLE, for: .normal)
 
             self.cancelOrAcceptButton.handleButton = {
                 // Accept Action
-                debugPrint("Accept Action")
                 self.setStatus(status: .Accepted)
             }
         case .none:
@@ -156,19 +154,19 @@ extension BookingDetailsViewController {
     private func setTitleStatus() {
         switch self.booking?.status {
         case .Pending:
-            self.parkingStatusLabel.text = "Pending"
+            self.parkingStatusLabel.text = PENDING_TITLE
             self.parkingStatusLabel.textColor = "616161"._hexColor
             break
         case .Completed:
-            self.parkingStatusLabel.text = "Completed"
+            self.parkingStatusLabel.text = COMPLETED_TITLE
             self.parkingStatusLabel.textColor = "616161"._hexColor
             break
         case .Accepted:
-            self.parkingStatusLabel.text = "Accepted"
+            self.parkingStatusLabel.text = ACCEPTED_TITLE
             self.parkingStatusLabel.textColor = "0D9F67"._hexColor
             break
         case .Rejected:
-            self.parkingStatusLabel.text = "Rejected"
+            self.parkingStatusLabel.text = REJECTED_TITLE
             self.parkingStatusLabel.textColor = "D6243A"._hexColor
             break
         case .none:

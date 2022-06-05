@@ -21,7 +21,7 @@ class TableViewController: UIViewController {
 
     private var auth: AuthModel?
 
-    private var emptyTitle: String = noData
+    private var emptyTitle: String = NO_DATA_MESSAGE
     private var emptyDescription: String = ""
 
     enum TypeView {
@@ -104,7 +104,7 @@ extension TableViewController {
 extension TableViewController {
 
     private func setUpMessages() {
-        self.title = "Messages"
+        self.title = MESSAGES_TITLE
         self.view.backgroundColor = .white
     }
 
@@ -117,14 +117,14 @@ extension TableViewController {
             self.object = message
             self.tableView.reloadData()
             self.isEmptyData = self.object.isEmpty
-            self.emptyTitle = "No Messages Yet!"
-            self.emptyDescription = "Please contact with your friends to see messages"
+            self.emptyTitle = NO_MESSAGES_TITLE
+            self.emptyDescription = EMPTY_DESCRIPTION_MESSAGES_TITLE
             self.tableView.reloadEmptyDataSet()
         }
     }
 
     private func setUpFavorites() {
-        self.title = "Favorites"
+        self.title = FAVOURITES_TITLE
         self.view.backgroundColor = .white
     }
 
@@ -142,7 +142,7 @@ extension TableViewController {
     }
 
     private func setUpMyBookings() {
-        self.title = "My Bookings"
+        self.title = MY_BOOKINGS_TITLE
         self.view.backgroundColor = "F9F9FC"._hexColor
     }
 
@@ -161,13 +161,13 @@ extension TableViewController {
     }
 
     private func setUpNotifications() {
-        self.title = "Notifications"
+        self.title = NOTIFICATIONS_TITLE
         self.view.backgroundColor = .white
     }
 
     private func setupDataNotifications() {
-        self.emptyTitle = "No Notifications!"
-        self.emptyDescription = "Please do more activates to \nsee notifications"
+        self.emptyTitle = NO_NOTIFICATIONS_TITLE
+        self.emptyDescription = EMPTY_DESCRIPTION_NOTIFICATIONS_TITLE
         self.tableView.reloadEmptyDataSet()
     }
 

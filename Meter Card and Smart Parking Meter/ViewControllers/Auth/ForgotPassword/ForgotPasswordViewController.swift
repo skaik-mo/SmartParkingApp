@@ -38,7 +38,7 @@ extension ForgotPasswordViewController {
 extension ForgotPasswordViewController {
     private func checkData() -> Bool {
         if !self.emailText.text._isValidValue {
-            self._showErrorAlert(message: "Enter email")
+            self._showErrorAlert(message: ENTER_EMAIL_TITLE)
             return false
         }
         return true
@@ -64,7 +64,7 @@ extension ForgotPasswordViewController {
                 self._showErrorAlert(message: _errorMessage)
             } else {
                 self.clearData()
-                self._showAlert(title: "Your password reset email has been sent!", message: "We have sent a password reset email to your email address:\n\(email).\nPlease check your inbox to continue.") {
+                self._showAlert(title: RESET_PASSWORD_TITLE, message: "We have sent a password reset email to your email address:\n\(email).\nPlease check your inbox to continue.") {
                     self.goSignIn()
                 }
             }

@@ -123,15 +123,15 @@ extension SelectDateOrTime {
     }
 
     private func setDate() {
-        self.title.text = "Select the appropriate date"
-        fromImageView.image = "ic_calendar"._toImage
-        toImageView.image = "ic_calendar"._toImage
+        self.title.text = SELECT_APPROPRIATE_DTAE_MESSAGE
+        fromImageView.image = ic_calendar._toImage
+        toImageView.image = ic_calendar._toImage
     }
 
     private func setTime() {
-        self.title.text = "Select the appropriate Time"
-        fromImageView.image = "ic_clock"._toImage
-        toImageView.image = "ic_clock"._toImage
+        self.title.text = SELECT_APPROPRIATE_TIME_MESSAGE
+        fromImageView.image = ic_clock._toImage
+        toImageView.image = ic_clock._toImage
 
     }
 
@@ -167,14 +167,14 @@ extension SelectDateOrTime {
                     return (false, nil)
                 }
             }
-            return (true, "The final date must be greater than or equal to the initial date.")
+            return (true, FINAL_DATA_ERROR_MESSAGE)
         case .time:
             if let from = self.fromText._toTime, let to = self.toText._toTime {
                 if from._isBefore(date: to) {
                     return (false, nil)
                 }
             }
-            return (true, "The final time must be greater than to the initial time.")
+            return (true, FINAL_TIME_ERROR_MESSAGE)
         }
     }
 

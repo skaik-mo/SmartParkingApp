@@ -51,7 +51,7 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "My Profile"
+        self.title = MY_PROFILE_TITLE
 
         self.editProfileButton.setUp(typeButton: .greenButton, corner: 22.5)
         self.editProfileButton.handleButton = {
@@ -113,7 +113,7 @@ extension ProfileViewController {
                 vc._push()
             }
 
-            self.myBookingsButton.titleLabel.text = "My Bookings"
+            self.myBookingsButton.titleLabel.text = MY_BOOKINGS_TITLE
             self.myBookingsButton.handleButton = {
                 let vc: TableViewController = TableViewController._instantiateVC(storyboard: self._userStoryboard)
                 vc.typeView = .Bookings
@@ -122,7 +122,7 @@ extension ProfileViewController {
         case .Business:
             self.favoritesButton.isHidden = true
 
-            self.myBookingsButton.titleLabel.text = "My Park"
+            self.myBookingsButton.titleLabel.text = MY_PARK_TITLE
             self.myBookingsButton.handleButton = {
                 let vc: MyParkingsViewController = MyParkingsViewController._instantiateVC(storyboard: self._businessStoryboard)
                 vc._push()
@@ -131,7 +131,7 @@ extension ProfileViewController {
     }
 
     private func logout() {
-        self._showAlert(title: "Alert", message: "Are you sure you want to log out!!", buttonAction1: {
+        self._showAlert(title: ALERT_TITLE, message: CONFIRM_LOGOUT_MESSAGE, buttonAction1: {
             AuthManager.shared.logout { errorMessage in
                 if let _errorMessage = errorMessage {
                     self._showErrorAlert(message: _errorMessage)

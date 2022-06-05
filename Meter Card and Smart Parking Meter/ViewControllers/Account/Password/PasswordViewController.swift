@@ -34,7 +34,7 @@ class PasswordViewController: UIViewController {
 extension PasswordViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "Change Password"
+        self.title = CHANGE_PASSWORD_TITLE
 
         self.auth = AuthManager.shared.getLocalAuth()
         
@@ -61,27 +61,27 @@ extension PasswordViewController {
 
     private func checkData() -> Bool {
         if !self.currentPasswordView.text._isValidValue {
-            self._showErrorAlert(message: "Enter current password")
+            self._showErrorAlert(message: ENTER_CURRENT_PASSWORD_MESSAGE)
             return false
         }
         if !self.newPasswordView.text._isValidValue {
-            self._showErrorAlert(message: "Enter new password")
+            self._showErrorAlert(message: ENTER_NEW_PASSWORD_MESSAGE)
             return false
         }
         if !self.repeatPasswordView.text._isValidValue {
-            self._showErrorAlert(message: "Enter repeat password")
+            self._showErrorAlert(message: ENTER_REPEAT_PASSWORD_MESSAGE)
             return false
         }
         if self.auth?.password != currentPasswordView.text {
-            self._showErrorAlert(message: "The current password is incorrect")
+            self._showErrorAlert(message: INCORRECT_CURRENT_PASSWORD_MESSAGE)
             return false
         }
         if newPasswordView.text != repeatPasswordView.text {
-            self._showErrorAlert(message: "New Password and Repeat Password do not match")
+            self._showErrorAlert(message: DO_NOT_MATCH_REPEAT_PASSWORD_MESSAGE)
             return false
         }
         if newPasswordView.text == currentPasswordView.text {
-            self._showErrorAlert(message: "The new password is the same as the old password")
+            self._showErrorAlert(message: NEW_PASSWORD_SAME_OLD_MESSAGE)
             return false
         }
         return true
@@ -107,8 +107,7 @@ extension PasswordViewController {
                 return
             }
             self.clearData()
-            self._showAlertOKWithTitle(title: "Successful", message: "Your changes have been successfully saved!")
-
+            self._showAlertOKWithTitle(title: SUCCESSFUL_MESSAGE, message: CHANGES_SUCCESSFUL_SAVED_MESSAGE)
         }
     }
 

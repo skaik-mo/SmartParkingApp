@@ -80,7 +80,7 @@ class AddParkingViewController: UIViewController {
 extension AddParkingViewController {
 
     private func setUpViewDidLoad() {
-        self.title = "Add new Parking"
+        self.title = ADD_NEW_PARKING_TITLE
 
         self.auth = AuthManager.shared.getLocalAuth()
 
@@ -89,21 +89,21 @@ extension AddParkingViewController {
         self.parkingNameText._placeholderColor = .black
 
         self.selectDate.selectionType = .date
-        self.selectDate.title.text = "Availability:"
+        self.selectDate.title.text = AVAILABILITY_TITLE
         self.selectDate.title.textColor = .black
         self.selectDate.isHiddenIcons = true
         self.selectDate.fromImageView.isHidden = false
-        self.selectDate.fromLabel.text = "Date From"
+        self.selectDate.fromLabel.text = DATE_FROM_TITLE
 
 
         self.selectTime.selectionType = .time
         self.selectTime.title.isHidden = true
         self.selectTime.isHiddenIcons = true
         self.selectTime.fromImageView.isHidden = false
-        self.selectTime.fromLabel.text = "Time From"
+        self.selectTime.fromLabel.text = TIME_FROM_TITLE
 
         numberOfParking.numberOfParkingText.isHidden = false
-        self.numberOfParking.setUpNumberOfParking(typeSpotButton: .grayWithBorder, title: "Spots", spots: 1)
+        self.numberOfParking.setUpNumberOfParking(typeSpotButton: .grayWithBorder, title: SPOTS_TITLE, spots: 1)
 
         self.isPerDay = false
 
@@ -150,11 +150,11 @@ extension AddParkingViewController {
         let isTimeFieldsEmpty = self.selectTime.isEmptyFields()
 
         if !parkingNameText._getText._isValidValue {
-            self._showErrorAlert(message: "Enter parking name")
+            self._showErrorAlert(message: ENTER_PARKING_NAME_MESSAGE)
             return false
         }
         if self.dataParking == nil {
-            self._showErrorAlert(message: "Enter parking image")
+            self._showErrorAlert(message: ENTER_PARKING_IMAGE_MESSAGE)
             return false
         }
         if isDateFieldsEmpty.status {
@@ -166,11 +166,11 @@ extension AddParkingViewController {
             return false
         }
         if !priceText._getText._isValidValue {
-            self._showErrorAlert(message: "Enter price")
+            self._showErrorAlert(message: ENTER_PRICE_MESSAGE)
             return false
         }
         if coordinate == nil {
-            self._showErrorAlert(message: "Click on map and add location")
+            self._showErrorAlert(message: ADD_LOCATION_MESSAGE)
             return false
         }
         if let message = self.numberOfParking.checkNumberOfParkig() {
@@ -178,11 +178,11 @@ extension AddParkingViewController {
             return false
         }
         if self.dataParkLicense == nil {
-            self._showErrorAlert(message: "Enter park license")
+            self._showErrorAlert(message: ENTER_LICENSE_MESSAGE)
             return false
         }
         if !(self.auth?.id?._isValidValue ?? false), !(self.auth?.name?._isValidValue ?? false), !(self.auth?.plateNumber?._isValidValue ?? false) {
-            self._showErrorAlert(message: "You must log out and try to log in again")
+            self._showErrorAlert(message: TRY_LOGIN_MESSAGE)
             return false
         }
         return true
