@@ -32,15 +32,18 @@ class GoogleMapManager: NSObject {
         guard self.hasLocationPermission() else { return }
         self.currentLocation(mapView: mapView, icon: ic_currentMarker._toImage)
 
-        ParkingManager.shared.getParkings(filter: filter) { parkings, errorMessage in
+        ParkingManager.shared.getParkings() { parkings, errorMessage in
             if let _errorMessage = errorMessage, _errorMessage._isValidValue {
                 if let vc = AppDelegate.shared?._topVC {
                     vc._showErrorAlert(message: _errorMessage)
                 }
                 return
             }
-            self.parkings = parkings
-
+            if let _filter = filter, !(_filter.distance == 0 && _filter.fromDate == nil) {
+                self.parkings = _filter.getParkings(parkings)
+            } else {
+                self.parkings = parkings
+            }
             self.parkings.forEach { parking in
                 self.setParkingLoction(mapView: mapView, parking: parking)
             }
@@ -169,7 +172,7 @@ extension GoogleMapManager: CLLocationManagerDelegate {
             return false
         }
     }
-    
+
     private func showAlertIfDeniedOrRestricted() {
         let vc = AppDelegate.shared?._topVC
         vc?._showAlert(title: DETERMINE_LOCATION_TITLE, message: LOCATION_PRIVACY_SETTINGS_MESSAGE, buttonAction1: {

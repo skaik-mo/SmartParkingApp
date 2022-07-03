@@ -77,6 +77,11 @@ class SpotDetailsViewController: UIViewController {
 extension SpotDetailsViewController {
 
     private func setUpViewDidLoad() {
+        self.auth = AuthManager.shared.getLocalAuth()
+        if let _typeAuth = self.auth?.typeAuth {
+            self.typeAuth = _typeAuth
+        }
+        
         GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking, isMoveCamera: true)
 
         self.favouriteButton.isSelected = AuthManager.shared.getFavourite(parkingID: parking?.id)
@@ -123,10 +128,6 @@ extension SpotDetailsViewController {
     private func setUpViewWillAppear() {
         self._isHideNavigation = false
         self._setTitleBackBarButton()
-        self.auth = AuthManager.shared.getLocalAuth()
-        if let _typeAuth = self.auth?.typeAuth {
-            self.typeAuth = _typeAuth
-        }
     }
 
 }

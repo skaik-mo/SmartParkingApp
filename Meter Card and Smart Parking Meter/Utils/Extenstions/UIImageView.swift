@@ -20,7 +20,9 @@ extension UIImageView {
     }
 
     func fetchImageWithActivityIndicator(_ urlStr: String?, _ placeholder: String?) {
-        sd_imageIndicator = SDWebImageActivityIndicator.white
+        if let _ = urlStr {
+            sd_imageIndicator = SDWebImageActivityIndicator.white
+        }
         self.fetchImage(urlStr, placeholder)
     }
 }

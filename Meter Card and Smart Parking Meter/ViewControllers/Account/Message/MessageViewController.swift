@@ -256,7 +256,7 @@ extension MessageViewController: UINavigationControllerDelegate, UIImagePickerCo
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         self._dismissVC()
-        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         self.lodingImage.image = image
         if let _data = image?._jpeg(.medium) {
             self.isSendImage = true

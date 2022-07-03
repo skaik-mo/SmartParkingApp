@@ -23,4 +23,6 @@ pod 'FBSDKLoginKit'
 pod 'ProgressHUD'
 pod 'SDWebImage', '5.0'
 pod 'EmptyDataSet-Swift', '~> 5.0.0'
+pod 'Presentr'
+
 end

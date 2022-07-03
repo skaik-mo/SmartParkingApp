@@ -15,9 +15,9 @@ class FiltersViewController: UIViewController {
     @IBOutlet weak var selectDate: SelectDateOrTime!
     @IBOutlet weak var selectTime: SelectDateOrTime!
 
-    @IBOutlet weak var topView: UIView!
-
     var completionHandler: ((FilterModel?) -> Void)?
+
+    let filter = FilterModel.init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,6 @@ extension FiltersViewController {
     private func setUpViewDidLoad() {
         self.title = FILTERS_TITLE
 
-        self.topView._roundCorners(isBottomLeft: true, isBottomRight: true, radius: 5)
         self.selectDate.selectionType = .date
         self.selectTime.selectionType = .time
 
@@ -50,17 +49,22 @@ extension FiltersViewController {
 
 extension FiltersViewController {
 
-    private func checkData() -> Bool {
-        if selectDate.isEmptyFields().status || selectTime.isEmptyFields().status {
-            self._showErrorAlert(message: ENTER_DATE_AND_TIME_MESSAGE)
-            return false
+    private func setDateAndTime() {
+        let isEmptyDate = selectDate.isEmptyFields()
+        let isEmptyTime = selectTime.isEmptyFields()
+
+        if isEmptyDate.status == false && isEmptyTime.status == false {
+            self.filter.fromDate = self.selectDate.fromText
+            self.filter.toDate = self.selectDate.toText
+            self.filter.fromTime = self.selectTime.fromText
+            self.filter.toTime = self.selectTime.toText
         }
-        return true
+//        Date And Time is empty
     }
 
     private func search() {
-        guard self.checkData() else { return }
-        let filter = FilterModel.init(distance: slider.value._toDouble, fromDate: self.selectDate.fromText, toDate: self.selectDate.toText, fromTime: self.selectTime.fromText, toTime: self.selectTime.toText)
+        self.filter.distance = self.slider.value._toDouble
+        self.setDateAndTime()
         self.completionHandler?(filter)
         self._dismissVC()
     }

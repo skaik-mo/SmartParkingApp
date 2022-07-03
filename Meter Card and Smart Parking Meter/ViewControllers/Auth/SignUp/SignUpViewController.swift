@@ -27,7 +27,7 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var backButton: UIButton!
 
-    var isCompletingInfo: Bool = false {
+    var isNewUser: Bool = false {
         didSet {
             self.CompletingInfo()
         }
@@ -108,11 +108,11 @@ extension SignUpViewController {
         DispatchQueue.main.async {
             self.accountLabel.text = COMPLETE_INFO_TITLE
             self.descriptionLabel.text = ""
-            self.nameText.isHidden = self.isCompletingInfo
-            self.emailText.isHidden = self.isCompletingInfo
-            self.passwordText.isHidden = self.isCompletingInfo
-            self.confirmPasswordText.isHidden = self.isCompletingInfo
-            self.backButton.isHidden = self.isCompletingInfo
+            self.nameText.isHidden = self.isNewUser
+            self.emailText.isHidden = self.isNewUser
+            self.passwordText.isHidden = self.isNewUser
+            self.confirmPasswordText.isHidden = self.isNewUser
+            self.backButton.isHidden = self.isNewUser
         }
     }
 
@@ -121,7 +121,7 @@ extension SignUpViewController {
 extension SignUpViewController {
 
     private func checkData() -> Bool {
-        if !self.isCompletingInfo {
+        if !self.isNewUser {
             if !self.nameText.text._isValidValue {
                 self._showErrorAlert(message: ENTER_NAME_TITLE)
                 return false
@@ -166,7 +166,7 @@ extension SignUpViewController {
 
     private func getAuth() -> AuthModel? {
         guard self.checkData() else { return nil }
-        if self.isCompletingInfo, let _auth = AuthManager.shared.getLocalAuth() {
+        if self.isNewUser, let _auth = AuthManager.shared.getLocalAuth() {
             _auth.typeAuth = self.typeAuth
             _auth.plateNumber = self.plateNumberText.text
             return _auth
@@ -187,7 +187,7 @@ extension SignUpViewController {
 
     private func signUp() {
         guard let _auth = getAuth() else { return }
-        if self.isCompletingInfo {
+        if self.isNewUser {
             AuthManager.shared.setAuth(auth: _auth, dataDrivingLicense: data) { errorMessage in
                 if let _errorMessage = errorMessage {
                     self._showErrorAlert(message: _errorMessage)

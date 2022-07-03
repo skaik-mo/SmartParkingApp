@@ -9,22 +9,17 @@ import Foundation
 import GoogleMaps
 
 class FilterModel {
-    var distance: Double
+    var distance: Double = 0
     var fromDate: String?
     var toDate: String?
     var fromTime: String?
     var toTime: String?
 
-    init(distance: Double, fromDate: String?, toDate: String?, fromTime: String?, toTime: String?) {
-        self.distance = distance
-        self.fromDate = fromDate
-        self.toDate = toDate
-        self.fromTime = fromTime
-        self.toTime = toTime
+    init() {
     }
 
     // Is the chosen distance smaller or equal to the distance between the parking location and the user's location
-    func compareDistance(latitude: Double?, longitude: Double?) -> Bool {
+    private func compareDistance(latitude: Double?, longitude: Double?) -> Bool {
         guard let _latitude = latitude, let _longitude = longitude else { return false }
         if GoogleMapManager.shared.getDistance(toLocation: CLLocation.init(latitude: _latitude, longitude: _longitude))._toString(number: 2) <= self.distance._toString(number: 2) {
             return true
@@ -32,22 +27,34 @@ class FilterModel {
         return false
     }
 
-    func compareDate(fromDate from: String?, toDate to: String?) -> Bool {
-//        return Helper.compareDate(fromDate1: self.fromDate, toDate1: self.toDate, fromDate2: from, toDate2: to)
-        guard let _fromDate1 = fromDate?._toDate, let _fromDate2 = from?._toDate, let _toDate1 = toDate?._toDate, let _toDate2 = to?._toDate else { return false }
-       if  (_fromDate1._isAfter(date: _fromDate2) || _fromDate1._isSame(date: _fromDate2)), (_toDate1._isBefore(date: _toDate2) || _toDate1._isSame(date: _toDate2)) {
-            return true
-        }
-        return false
+    private func compareDate(fromDate from: String?, toDate to: String?) -> Bool {
+        return Helper.compareDate(fromDate1: from, toDate1: to, fromDate2: self.fromDate, toDate2: self.toDate)
     }
 
-    func compareTime(fromTime from: String?, toTime to: String?) -> Bool {
-//        return Helper.compareTime(fromTime1: self.fromTime, toTime1: self.toTime, fromTime2: from, toTime2: to)
-        guard let _fromTime1 = fromTime?._toTime, let _fromTime2 = from?._toTime, let _toTime1 = toTime?._toTime, let _toTime2 = to?._toTime else { return false }
-        if (_fromTime1._isAfter(date: _fromTime2) || _fromTime1._isSame(date: _fromTime2)), (_toTime1._isBefore(date: _toTime2) || _toTime1._isSame(date: _toTime2)) {
-            return true
+    private func compareTime(fromTime from: String?, toTime to: String?) -> Bool {
+        return Helper.compareTime(fromTime1: from, toTime1: to, fromTime2: self.fromTime, toTime2: self.toTime)
+    }
+
+    func getParkings(_ parkings: [ParkingModel]) -> [ParkingModel] {
+        if self.distance > 0 {
+            let filtersDistance = parkings.filter { parking in
+                return self.compareDistance(latitude: parking.latitude, longitude: parking.longitude)
+            }
+            if let _filtersDateAndTime = filtersDateAndTime(filtersDistance) {
+                return _filtersDateAndTime
+            }
+            return filtersDistance
         }
-        return false
+        return self.filtersDateAndTime(parkings) ?? []
+    }
+
+    private func filtersDateAndTime(_ parkings: [ParkingModel]) -> [ParkingModel]? {
+        if self.fromDate != nil {
+            return parkings.filter { parking in
+                return self.compareDate(fromDate: parking.fromDate, toDate: parking.toDate) && self.compareTime(fromTime: parking.fromTime, toTime: parking.toTime)
+            }
+        }
+        return nil
     }
 
 }

@@ -109,7 +109,7 @@ extension TableViewController {
     }
 
     private func fetchDataMessages(isShowIndicator: Bool, handlerDidFinishRequest: (() -> Void)? = nil) {
-        MessageManager.shared.getAllMessagesToAuth(isShowIndicator: isShowIndicator,senderID: self.auth?.id) { message, errorMessage in
+        MessageManager.shared.getAllMessagesToAuth(isShowIndicator: isShowIndicator, senderID: self.auth?.id) { message, errorMessage in
             handlerDidFinishRequest?()
             if let _errorMessage = errorMessage {
                 self._showErrorAlert(message: _errorMessage)
@@ -231,15 +231,11 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch self.typeView {
         case .Messages:
-            let vc: MessageViewController = MessageViewController._instantiateVC(storyboard: self._accountStoryboard)
-            let senderID = getSenderID(message: self.object[indexPath.row] as? MessageModel)
-            Helper.showIndicator(true)
-            AuthManager.shared.getAuth(id: senderID) { auth, message in
-                Helper.dismissIndicator(true)
-                vc.sender = auth
+            if let cell = tableView.cellForRow(at: indexPath) as? MessageTableViewCell {
+                let vc: MessageViewController = MessageViewController._instantiateVC(storyboard: self._accountStoryboard)
+                vc.sender = cell.sender
                 vc._push()
             }
-
         case .Favorites:
             let cell = tableView.cellForRow(at: indexPath) as? FavoriteTableViewCell
             let vc: BookingDetailsViewController = BookingDetailsViewController._instantiateVC(storyboard: self._userStoryboard)

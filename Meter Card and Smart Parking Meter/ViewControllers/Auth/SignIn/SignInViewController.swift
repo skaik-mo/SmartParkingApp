@@ -112,12 +112,12 @@ extension SignInViewController {
     }
 
     private func loginByFacebook() {
-        AuthManager.shared.signInByFacebook(vc: self) { auth, isRegister, message in
+        AuthManager.shared.signInByFacebook(vc: self) { auth, isNewUser, message in
             if let _auth = auth {
-                if isRegister {
+                if isNewUser {
                     // Complete info
                     let vc: SignUpViewController = SignUpViewController._instantiateVC(storyboard: self._authStoryboard)
-                    vc.isCompletingInfo = true
+                    vc.isNewUser = true
                     vc._rootPush()
                 } else {
                     self.goHome(auth: _auth)

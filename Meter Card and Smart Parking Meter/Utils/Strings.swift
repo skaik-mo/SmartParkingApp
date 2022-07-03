@@ -142,5 +142,3 @@ let FINAL_TIME_ERROR_MESSAGE = "The final time must be greater than to the initi
 // NumberOfParking
 let ENTER_NUMBER_SPOTS_MESSAGE = "Enter the number of spots"
 
-// FiltersViewController
-let ENTER_DATE_AND_TIME_MESSAGE = "Enter Date And Time"

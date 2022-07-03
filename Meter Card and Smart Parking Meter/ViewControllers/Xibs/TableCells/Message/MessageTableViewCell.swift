@@ -17,7 +17,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var timeMessageLabel: UILabel!
 
     var message: MessageModel?
-
+    var sender: AuthModel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,6 +45,7 @@ class MessageTableViewCell: UITableViewCell {
             senderID = message?.receiverID
         }
         AuthManager.shared.getAuth(id: senderID) { auth, message in
+            self.sender = auth
             self.imageSendView.fetchImageWithActivityIndicator(auth?.urlImage, ic_placeholderPerson)
             if let name = auth?.name {
                 self.nameSendLabel.text = name

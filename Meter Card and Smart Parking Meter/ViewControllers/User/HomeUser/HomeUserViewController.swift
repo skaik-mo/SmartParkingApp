@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import Presentr
 
 class HomeUserViewController: UIViewController {
 
@@ -25,6 +26,21 @@ class HomeUserViewController: UIViewController {
         }
     }
 
+    let presenter: Presentr = {
+        let width = ModalSize.full
+        let height = ModalSize.half
+        let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: 0))
+        let customType = PresentationType.custom(width: width, height: height, center: center)
+
+        let customPresenter = Presentr(presentationType: customType)
+        customPresenter.transitionType = .coverVerticalFromTop
+        customPresenter.dismissTransitionType = .coverVerticalFromTop
+        customPresenter.roundCorners = true
+        customPresenter.cornerRadius = 5
+        customPresenter.backgroundTap = .dismiss
+        return customPresenter
+    }()
+
     private var auth: AuthModel?
 
     override func viewDidLoad() {
@@ -40,8 +56,7 @@ class HomeUserViewController: UIViewController {
     @IBAction func filtersAction(_ sender: Any) {
         let vc: FiltersViewController = FiltersViewController._instantiateVC(storyboard: self._userStoryboard)
         vc.completionHandler = setUpMap
-        vc.modalTransitionStyle = .crossDissolve
-        vc._presentVC()
+        customPresentViewController(presenter, viewController: vc, animated: true, completion: nil)
     }
 
     @IBAction func currentLocationAction(_ sender: Any) {

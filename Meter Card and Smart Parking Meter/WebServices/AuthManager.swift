@@ -23,7 +23,7 @@ class AuthManager {
     private let userKey = "USER"
     private let idKey = "ID"
 
-    typealias Handler = ((_ auth: AuthModel?, _ isRegister: Bool, _ message: String?) -> Void)?
+    typealias Handler = ((_ auth: AuthModel?, _ isNewUser: Bool, _ message: String?) -> Void)?
     typealias ResultHandler = ((_ auth: AuthModel?, _ message: String?) -> Void)?
     typealias ResultAllAuthHandler = ((_ users: [AuthModel], _ message: String?) -> Void)?
 
@@ -299,9 +299,9 @@ extension AuthManager {
                 Helper.showIndicator(true)
                 debugPrint("sign in by facebook success")
                 self.getImageURL(token: token?.tokenString) { imageURL in
-                    self.signInFacebookAccountToFirebase(urlImage: imageURL) { auth, isRegister, message in
+                    self.signInFacebookAccountToFirebase(urlImage: imageURL) { auth, isNewUser, message in
                         Helper.dismissIndicator(true)
-                        result?(auth, isRegister, message)
+                        result?(auth, isNewUser, message)
                     }
                 }
             case .cancelled:

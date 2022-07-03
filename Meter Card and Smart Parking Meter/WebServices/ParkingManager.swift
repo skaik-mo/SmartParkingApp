@@ -53,7 +53,7 @@ class ParkingManager {
         }
     }
 
-    func getParkings(isShowIndicator: Bool = true, filter: FilterModel? = nil, result: ResultParkingsHandler) {
+    func getParkings(isShowIndicator: Bool = true, result: ResultParkingsHandler) {
         guard let _parkingsFireStoreReference = self.parkingsFireStoreReference else { result?([], SERVER_ERROR_MESSAGE); return }
         Helper.showIndicator(isShowIndicator)
         _parkingsFireStoreReference.getDocuments { snapshot, error in
@@ -62,24 +62,12 @@ class ParkingManager {
                 result?([], _error.localizedDescription)
                 return
             }
-            var parkingsFilters: [ParkingModel] = []
             var parkings: [ParkingModel] = []
 
             for parking in snapshot?.documents ?? [] {
                 if let _parking = ParkingModel.init(id: parking.documentID, dictionary: parking.data()) {
-                    if let _filter = filter {
-                        if _filter.compareDate(fromDate: _parking.fromDate, toDate: _parking.toDate) && _filter.compareTime(fromTime: _parking.fromTime, toTime: _parking.toTime) {
-                            if _filter.compareDistance(latitude: _parking.latitude, longitude: _parking.longitude) {
-                                parkingsFilters.append(_parking)
-                            }
-                        }
-                    }
                     parkings.append(_parking)
                 }
-            }
-
-            if !parkingsFilters.isEmpty {
-                parkings = parkingsFilters
             }
             result?(parkings, nil)
         }
