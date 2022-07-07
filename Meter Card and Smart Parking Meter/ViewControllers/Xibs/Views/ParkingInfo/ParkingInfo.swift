@@ -50,7 +50,7 @@ class ParkingInfo: UIView {
 extension ParkingInfo {
 
     func setUpView(parking: ParkingModel?) {
-        self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
+        self.parkingImage.fetchImage(parking?.parkingImageURL)
         self.bookNowButton.setUp(typeButton: .grayButton, corner: 8)
         self.bookNowButton.handleButton = {
             let vc: SpotDetailsViewController = SpotDetailsViewController._instantiateVC(storyboard: self._userStoryboard)

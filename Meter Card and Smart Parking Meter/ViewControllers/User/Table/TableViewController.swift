@@ -147,16 +147,31 @@ extension TableViewController {
     }
 
     private func fetchDataMyBookings(isShowIndicator: Bool, handlerDidFinishRequest: (() -> Void)? = nil) {
-        BookingManager.shared.getBookingByUserID(userID: self.auth?.id, isShowIndicator: isShowIndicator) { bookings, parkings, _, message in
+        BookingManager.shared.getBookingByUserID1(userID: self.auth?.id) { bookings, message in
             handlerDidFinishRequest?()
             if let _message = message {
                 self._showErrorAlert(message: _message)
+                return
             }
-            self.parkings = parkings
-            self.object = bookings
-            self.tableView.reloadData()
-            self.isEmptyData = self.object.isEmpty
-            self.tableView.reloadEmptyDataSet()
+            ParkingManager.shared.getParkings(isShowIndicator: isShowIndicator) { parkings, message in
+                if let _message = message {
+                    self._showErrorAlert(message: _message)
+                    return
+                }
+                var _parkings: [ParkingModel] = []
+                bookings.forEach { booking in
+                    parkings.forEach { parking in
+                        if parking.id == booking.parkingID, !_parkings.contains(where: { $0.id == parking.id }) {
+                            _parkings.append(parking)
+                        }
+                    }
+                }
+                self.parkings = parkings
+                self.object = bookings
+                self.tableView.reloadData()
+                self.isEmptyData = self.object.isEmpty
+                self.tableView.reloadEmptyDataSet()
+            }
         }
     }
 

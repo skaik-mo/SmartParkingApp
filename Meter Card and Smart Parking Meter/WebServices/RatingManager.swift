@@ -18,7 +18,7 @@ class RatingManager {
     typealias ResultRatingsHandler = ((_ ratings: [RatingModel], _ message: String?) -> Void)?
 
     private init() {
-        self.ratingsFireStoreReference = db.collection("rating")
+        self.ratingsFireStoreReference = db.collection("ratings")
     }
 
     func setRating(rating: RatingModel, parking: ParkingModel?, failure: FailureHandler) {

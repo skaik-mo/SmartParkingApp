@@ -280,7 +280,7 @@
                                                 <rect key="frame" x="125.66666666666666" y="0.0" width="84" height="35.666666666666664"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCR-4e-hBE">
-                                                <rect key="frame" x="37.333333333333343" y="48.666666666666657" width="260.66666666666663" height="41.666666666666657"/>
+                                                <rect key="frame" x="37.666666666666657" y="48.666666666666657" width="260" height="41.666666666666657"/>
                                                 <string key="text">Meter Card and Smart Parking
 Meter</string>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>

@@ -34,7 +34,7 @@ class SpotDetailsViewController: UIViewController {
     @IBOutlet weak var durationLabel: UILabel!
 
     @IBOutlet weak var spaceView: UIView!
-    
+
     var parking: ParkingModel?
 
     private var auth: AuthModel?
@@ -81,7 +81,7 @@ extension SpotDetailsViewController {
         if let _typeAuth = self.auth?.typeAuth {
             self.typeAuth = _typeAuth
         }
-        
+
         GoogleMapManager.shared.setParkingLoction(mapView: mapView, parking: parking, isMoveCamera: true)
 
         self.favouriteButton.isSelected = AuthManager.shared.getFavourite(parkingID: parking?.id)
@@ -117,7 +117,7 @@ extension SpotDetailsViewController {
     }
 
     private func setImage() {
-        self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
+        self.parkingImage.fetchImage(parking?.parkingImageURL)
     }
 
 }
@@ -134,14 +134,14 @@ extension SpotDetailsViewController {
 
 extension SpotDetailsViewController {
     private func setInfoParking() {
-        self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
+        self.parkingImage.fetchImage(parking?.parkingImageURL)
         setInfo(parking: parking)
     }
 
     private func setInfo(parking: ParkingModel?) {
         var price = ""
         if let _price = parking?.price {
-            price = "\(_price)$ Per \(self.parking?.isPerDay ?? false ? DAY_TITLE : HOUR_TITLE)"
+            price = "\(_price)$ Per \(self.parking?.isPerDay ?? false ? DAY_TITLE: HOUR_TITLE)"
         }
         self.pricePerHourLabel.text = price
     }
@@ -159,7 +159,7 @@ extension SpotDetailsViewController {
     private func checkRating() {
         RatingManager.shared.checkRating(userID: self.auth?.id) { isRating in
             if !isRating {
-                BookingManager.shared.getBookingByUserID(userID: self.auth?.id, isShowIndicator: false) { bookings, parkings, users, message in
+                BookingManager.shared.getBookingByUserID1(userID: self.auth?.id) { bookings, message in
                     if bookings.contains(where: { ($0.parkingID == self.parking?.id && $0.status == .Completed) }) {
                         let vc: RatingViewController = RatingViewController._instantiateVC(storyboard: self._userStoryboard)
                         vc.parking = self.parking

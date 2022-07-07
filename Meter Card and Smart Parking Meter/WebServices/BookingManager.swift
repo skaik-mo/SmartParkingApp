@@ -45,7 +45,7 @@ class BookingManager {
     }
 
     func isBookingTimeExpired(userID: String?, result: ((_ getExpiryTime: Int?) -> Void)?) {
-        self.getBookingByUserID(userID: userID, isShowIndicator: false) { bookings, parkings, users, message in
+        self.getBookingByUserID1(userID: userID) { bookings, message in
             let bookingsAccepted = bookings.filter({ ($0.status == .Accepted) && $0.toDate == Date()._stringData })
             for booking in bookingsAccepted {
                 if let from = booking.toTime?._toTime, let to = Date()._stringTime._toTime {
@@ -64,7 +64,7 @@ class BookingManager {
             if let from = booking.toTime?._toTime, let to = Date()._stringTime._toTime, let _toDate = booking.toDate?._toDate, let dateNow = Date()._stringData._toDate, booking.status == .Accepted {
                 if _toDate._isSame(date: dateNow) {
                     let diffInMins = Calendar.current.dateComponents([.minute], from: from, to: to).minute
-                    if let _diffInMins = diffInMins, _diffInMins >= 0 {
+                    if let _diffInMins = diffInMins, _diffInMins >= 60 {
                         // change status to completed
                         booking.status = .Completed
                         BookingManager.shared.setBooking(newBooking: booking, failure: nil)
@@ -77,29 +77,15 @@ class BookingManager {
         }
     }
 
-    func getBookingByUserID(userID: String?, isShowIndicator: Bool = true, result: ResultMyBookingHandler) {
+    func getBookingByUserID1(userID: String?, result: ResultBookingHandler) {
         self.getBookings(isShowIndicator: false) { bookings, message in
-            self.makeBookingCompleted(bookings: bookings)
-            let _bookings = bookings.filter({ $0.userID == userID })
-            var _parkings: [ParkingModel] = []
-            if _bookings.isEmpty {
-                result?([], [], [], message)
+            if let _message = message {
+                result?([], _message)
                 return
             }
-            ParkingManager.shared.getParkings(isShowIndicator: isShowIndicator) { parkings, message in
-                if let _message = message {
-                    result?([], [], [], _message)
-                    return
-                }
-                _bookings.forEach { booking in
-                    parkings.forEach { parking in
-                        if parking.id == booking.parkingID, !_parkings.contains(where: { $0.id == parking.id }) {
-                            _parkings.append(parking)
-                        }
-                    }
-                }
-                result?(_bookings, _parkings, [], message)
-            }
+            let _bookings = bookings.filter({ $0.userID == userID })
+            self.makeBookingCompleted(bookings: bookings)
+            result?(_bookings, nil)
         }
     }
 

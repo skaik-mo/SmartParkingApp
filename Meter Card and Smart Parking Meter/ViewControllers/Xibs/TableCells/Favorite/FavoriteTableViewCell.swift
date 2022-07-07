@@ -23,7 +23,7 @@ class FavoriteTableViewCell: UITableViewCell {
     }
 
     func configerCell() {
-        self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
+        self.parkingImage.fetchImage(parking?.parkingImageURL)
         self.ratingView.setUpRating(parking: parking, space: 9)
     }
 

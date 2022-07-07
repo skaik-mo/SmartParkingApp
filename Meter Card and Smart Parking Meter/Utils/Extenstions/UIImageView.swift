@@ -10,19 +10,15 @@ import UIKit
 import SDWebImage
 
 extension UIImageView {
-    private func fetchImage(_ urlStr: String?, _ placeholder: String?) {
+    func fetchImage(_ urlStr: String?, _ placeholder: String? = ic_noParkingImage, _ withActivityIndicator: Bool = true) {
         if let url = urlStr, !url.isEmpty {
-            self.sd_setImage(with: URL(string: url), placeholderImage: placeholder?._toImage,
-                options: .queryMemoryData, completed: nil)
+            if withActivityIndicator {
+                sd_imageIndicator = SDWebImageActivityIndicator.white
+            }
+            self.sd_setImage(with: URL(string: url), placeholderImage: placeholder?._toImage, options: .queryMemoryData, completed: nil)
         } else {
             image = placeholder?._toImage
         }
     }
 
-    func fetchImageWithActivityIndicator(_ urlStr: String?, _ placeholder: String?) {
-        if let _ = urlStr {
-            sd_imageIndicator = SDWebImageActivityIndicator.white
-        }
-        self.fetchImage(urlStr, placeholder)
-    }
 }

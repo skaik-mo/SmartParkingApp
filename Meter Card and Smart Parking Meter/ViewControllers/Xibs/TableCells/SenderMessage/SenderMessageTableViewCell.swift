@@ -31,13 +31,13 @@ class SenderMessageTableViewCell: UITableViewCell {
         
         self.stackView._roundCorners(isTopLeft: true, isTopRight: true, isBottomRight: true, radius: 10)
 
-        self.senderImage.fetchImageWithActivityIndicator(sender?.urlImage, ic_placeholderPerson)
+        self.senderImage.fetchImage(sender?.urlImage, ic_placeholderPerson)
 
         if let sentDate = self.message?.sentDate {
             if let imageURL = self.message?.imageURL, imageURL._isValidValue {
                 self.messageImage._roundCorners(isTopLeft: true, isTopRight: true, isBottomRight: true, radius: 6)
                 self.setData(false)
-                self.messageImage.fetchImageWithActivityIndicator(imageURL, ic_placeholderImage)
+                self.messageImage.fetchImage(imageURL, ic_placeholderImage)
 
             } else if let _message = self.message?.message, _message._isValidValue {
                 self.setData(true)

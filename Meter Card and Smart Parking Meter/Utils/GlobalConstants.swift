@@ -20,7 +20,8 @@ let fontMontserratRegular12 = UIFont(name: "Montserrat-Regular", size: 12)
 
 let ic_placeholderPerson = "ic_placeholderPerson"
 let ic_placeholderImage = "ic_placeholderImage"
-let ic_placeholderParking = "placeholderParking"
+//let ic_placeholderParking = "placeholderParking"
+let ic_noParkingImage = "ic_noParkingImage"
 
 let ic_currentMarker = "ic_currentMarker"
 let ic_parkingMarker = "ic_parking"

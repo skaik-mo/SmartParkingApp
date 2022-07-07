@@ -46,7 +46,7 @@ class MessageTableViewCell: UITableViewCell {
         }
         AuthManager.shared.getAuth(id: senderID) { auth, message in
             self.sender = auth
-            self.imageSendView.fetchImageWithActivityIndicator(auth?.urlImage, ic_placeholderPerson)
+            self.imageSendView.fetchImage(auth?.urlImage, ic_placeholderPerson)
             if let name = auth?.name {
                 self.nameSendLabel.text = name
             }

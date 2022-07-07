@@ -331,6 +331,7 @@ extension AuthManager {
                     if let _getAuth = getAuth {
                         // Already registered
                         //_getAuth.isLoginBySocial = true || no need, already saved as a social
+                        _getAuth.urlImage = urlImage
                         self.saveAuth(auth: _getAuth)
                         result?(_getAuth, false, nil)
                     } else {

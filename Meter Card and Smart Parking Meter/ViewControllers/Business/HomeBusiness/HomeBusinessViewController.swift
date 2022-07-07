@@ -78,7 +78,7 @@ extension HomeBusinessViewController {
     }
 
     private func setImage() {
-        self.authImage.fetchImageWithActivityIndicator(auth?.urlImage, ic_placeholderPerson)
+        self.authImage.fetchImage(auth?.urlImage, ic_placeholderPerson)
     }
 
 }

@@ -38,7 +38,7 @@ class HomeTableViewCell: UITableViewCell {
     }
 
     func configerCell() {
-        self.customerImage.fetchImageWithActivityIndicator(user?.urlImage, ic_placeholderPerson)
+        self.customerImage.fetchImage(user?.urlImage, ic_placeholderPerson)
         if let _booking = self.booking, let _parking = self.parking, let _price = _parking.price, let _user = user {
             self.customerNameLabel.text = _user.name
             self.parkingNameLabel.text = _parking.name

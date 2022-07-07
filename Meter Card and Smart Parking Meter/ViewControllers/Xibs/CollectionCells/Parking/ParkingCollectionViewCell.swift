@@ -22,7 +22,7 @@ class ParkingCollectionViewCell: UICollectionViewCell {
     }
 
     func configerCell() {
-        self.parkingImage.fetchImageWithActivityIndicator(parking?.parkingImageURL, ic_placeholderParking)
+        self.parkingImage.fetchImage(parking?.parkingImageURL)
         self.ratingView.setUpRating(parking: parking, isWithDistance: false, space: 4)
     }
 
