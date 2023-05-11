@@ -88,6 +88,11 @@ class AuthManager {
         do {
             try firebaseAuth.signOut()
             clearLocalAuth()
+            let loginManager = LoginManager()
+            loginManager.logOut()
+            AccessToken.current = nil
+            Profile.current = nil
+            
             failure?(nil)
         } catch let error as NSError {
             failure?(error.localizedDescription)
